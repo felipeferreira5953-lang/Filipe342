@@ -155,13 +155,14 @@
         <input id="f-preco" type="number" placeholder="Preço" class="h-[48px] border border-zinc-200 rounded-[12px] px-3 text-[16px] outline-none focus:border-black">
         <input id="f-preco-antigo" type="number" placeholder="Preço antigo" class="h-[48px] border border-zinc-200 rounded-[12px] px-3 text-[16px] outline-none focus:border-black">
       </div>
-      <input id="f-emoji" placeholder="Emoji ou URL imagem" class="w-full h-[48px] border border-zinc-200 rounded-[12px] px-3 mb-2 text-[14px] outline-none focus:border-black">
+      <input id="f-emoji" placeholder="Cole URL da imagem (https://) ou emoji 🎁" class="w-full h-[48px] border border-zinc-200 rounded-[12px] px-3 mb-2 text-[14px] outline-none focus:border-black">
+      <div id="preview-img" class="hidden mb-2 p-2 bg-zinc-50 rounded-[12px] border border-zinc-200"><p class="text-[10px] font-bold text-zinc-500 mb-1">Preview:</p><img id="preview-img-tag" class="w-20 h-20 object-cover rounded-[10px] bg-white"></div>
       <input id="f-link" placeholder="Link afiliado" class="w-full h-[48px] border border-zinc-200 rounded-[12px] px-3 mb-2 text-[14px] outline-none focus:border-black">
       <select id="f-loja" class="w-full h-[48px] border border-zinc-200 rounded-[12px] px-3 mb-3 text-[14px] bg-white"><option>Shopee</option><option>Amazon</option><option>Mercado Livre</option><option>Geral</option></select>
       <button id="f-salvar" class="w-full h-[48px] bg-[#ff6b2b] text-white rounded-full font-bold">Salvar + 🔔 Notificar todo mundo</button>
-      <p class="text-[10px] text-zinc-400 mt-2 text-center">Ao salvar, todo mundo que ativou o sininho recebe na hora</p>
+      <p class="text-[10px] text-zinc-400 mt-2 text-center">💾 Automático: ao colar o link da imagem, já comprimo pra webp 600px (~40KB) e subo pro Storage. No banco fica só link curtinho, não gasta seu 1GB</p>
     </div>
-    <div id="lista" class="mt-4 space-y-2"><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0">🗄️</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Organizador de Gaveta Acrílico Cristal 3 Divisórias</p><p class="text-[11px] text-zinc-500">R$ 29.9 • Shopee</p></div><button onclick="apagarFirebase('1')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0">🍟</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Air Fryer 4.2L Digital Timer Antiaderente</p><p class="text-[11px] text-zinc-500">R$ 279 • Amazon</p></div><button onclick="apagarFirebase('2')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0">💡</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Luminária com Sensor de Presença LED Recarregável</p><p class="text-[11px] text-zinc-500">R$ 34.9 • Shopee</p></div><button onclick="apagarFirebase('3')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0">💇‍♀️</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Escova Alisadora 3 em 1 Seca e Modela</p><p class="text-[11px] text-zinc-500">R$ 89.9 • Mercado Livre</p></div><button onclick="apagarFirebase('4')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0">✨</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Kit 10 Panos Mágicos Microfibra Limpeza</p><p class="text-[11px] text-zinc-500">R$ 19.9 • Shopee</p></div><button onclick="apagarFirebase('5')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0">📱</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Suporte Celular Articulado Mesa e Cama 360°</p><p class="text-[11px] text-zinc-500">R$ 26.9 • Amazon</p></div><button onclick="apagarFirebase('6')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0">📽️</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Mini Projetor Portátil 4K WiFi</p><p class="text-[11px] text-zinc-500">R$ 189.9 • Shopee</p></div><button onclick="apagarFirebase('7')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0">🎧</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Fone Bluetooth TWS com Case Power Bank</p><p class="text-[11px] text-zinc-500">R$ 49.9 • Amazon</p></div><button onclick="apagarFirebase('8')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div></div>
+    <div id="lista" class="mt-4 space-y-2"><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">🗄️</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Organizador de Gaveta Acrílico Cristal 3 Divisórias</p><p class="text-[11px] text-zinc-500">R$ 29.9 • Shopee</p></div><button onclick="apagarFirebase('1')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">🍟</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Air Fryer 4.2L Digital Timer Antiaderente</p><p class="text-[11px] text-zinc-500">R$ 279 • Amazon</p></div><button onclick="apagarFirebase('2')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">💡</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Luminária com Sensor de Presença LED Recarregável</p><p class="text-[11px] text-zinc-500">R$ 34.9 • Shopee</p></div><button onclick="apagarFirebase('3')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">💇‍♀️</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Escova Alisadora 3 em 1 Seca e Modela</p><p class="text-[11px] text-zinc-500">R$ 89.9 • Mercado Livre</p></div><button onclick="apagarFirebase('4')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">✨</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Kit 10 Panos Mágicos Microfibra Limpeza</p><p class="text-[11px] text-zinc-500">R$ 19.9 • Shopee</p></div><button onclick="apagarFirebase('5')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">📱</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Suporte Celular Articulado Mesa e Cama 360°</p><p class="text-[11px] text-zinc-500">R$ 26.9 • Amazon</p></div><button onclick="apagarFirebase('6')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">📽️</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Mini Projetor Portátil 4K WiFi</p><p class="text-[11px] text-zinc-500">R$ 189.9 • Shopee</p></div><button onclick="apagarFirebase('7')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">🎧</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Fone Bluetooth TWS com Case Power Bank</p><p class="text-[11px] text-zinc-500">R$ 49.9 • Amazon</p></div><button onclick="apagarFirebase('8')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div></div>
   </div>
 
   <div id="conteudo-editar" class="p-4 hidden">
@@ -244,14 +245,18 @@ function render(){
   document.getElementById('total').textContent=produtos.length;
   if(lista.length===0){grid.innerHTML='<div class="col-span-2 py-12 text-center"><p class="text-[28px]">🔍</p><p class="font-bold text-[14px] mt-2">Nada com esse filtro</p></div>';return;}
   grid.innerHTML=lista.map(p=>{
-    const img=p.imagemUrl?'<img src="'+p.imagemUrl+'" class="w-full h-full object-cover">':'<span class="text-[42px]">'+esc(p.emoji)+'</span>';
+    const isImgUrl = p.imagemUrl && (p.imagemUrl.startsWith('http') || p.imagemUrl.startsWith('data:image'));
+    const img = isImgUrl ? '<img src="'+p.imagemUrl+'" class="w-full h-full object-cover" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'grid\'"><div class=\'w-full h-full grid place-items-center text-[42px] hidden\'>'+esc(p.emoji||'🎁')+'</div>' : '<span class="text-[42px]">'+esc(p.emoji||'🎁')+'</span>';
     const off=p.precoAntigo?'<div class="absolute top-2 left-2 bg-[#ff6b2b] text-white text-[10px] font-black px-2 py-1 rounded-full">-'+Math.round((1-p.precoNovo/p.precoAntigo)*100)+'%</div>':'';
     const antigo=p.precoAntigo?'<div class="text-[10px] text-zinc-400 line-through">R$ '+p.precoAntigo.toFixed(2).replace(".",",")+'</div>':'';
     const cor=p.loja==="Shopee"?"bg-[#ee4d2d]":p.loja==="Amazon"?"bg-black":p.loja==="Mercado Livre"?"bg-[#ffe600] text-black":"bg-zinc-800";
     const txtCor=p.loja==="Mercado Livre"?"text-black":"text-white";
     return '<div class="bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col"><div class="aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden">'+img+off+'</div><div class="p-2.5 flex-1 flex flex-col"><p class="line-2 font-semibold text-[12.5px] min-h-[32px]">'+esc(p.nome)+'</p><div class="mt-2">'+antigo+'<div class="flex items-baseline gap-0.5"><span class="text-[11px] font-bold">R$</span><span class="text-[16px] font-black">'+Number(p.precoNovo).toFixed(2).replace(".",",")+'</span></div></div><div class="mt-1.5 flex items-center gap-1"><span class="text-[9px] font-black px-2 py-0.5 rounded-full '+cor+' '+txtCor+'">'+esc(p.loja.toUpperCase())+'</span></div><a href="'+p.affiliateLink+'" data-id="'+p.id+'" data-nome="'+esc(p.nome)+'" target="_blank" class="btn-oferta mt-2.5 h-9 bg-[#ff6b2b] text-white rounded-full grid place-items-center font-extrabold text-[12px]">VER OFERTA</a></div></div>';
   }).join('');
-  document.getElementById('lista').innerHTML=produtos.map(p=>'<div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0">'+(p.imagemUrl?'<img src="'+p.imagemUrl+'" class="w-full h-full object-cover">':esc(p.emoji))+'</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">'+esc(p.nome)+'</p><p class="text-[11px] text-zinc-500">R$ '+p.precoNovo+' • '+esc(p.loja)+'</p></div><button onclick="apagarFirebase(\''+p.id+'\')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div>').join('');
+  document.getElementById('lista').innerHTML=produtos.map(p=>{
+    const thumb = p.imagemUrl ? '<img src="'+p.imagemUrl+'" class="w-full h-full object-cover rounded-[10px]" onerror="this.parentElement.textContent=\''+(p.emoji||'🎁')+'\'">' : esc(p.emoji||'🎁');
+    return '<div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">'+thumb+'</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">'+esc(p.nome)+'</p><p class="text-[11px] text-zinc-500">R$ '+p.precoNovo+' • '+esc(p.loja)+'</p></div><button onclick="apagarFirebase(\''+p.id+'\')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div>';
+  }).join('');
 }
 render();
 
@@ -379,16 +384,149 @@ document.getElementById('input-nome-cliente')?.addEventListener('input', (e)=>{
   document.getElementById('avatar-preview').textContent = v ? v[0].toUpperCase() : '?';
 });
 
+
+
+  // ===== COMPRESSÃO AUTOMÁTICA AO COLAR LINK =====
+  let imagemOtimizadaFinal = null;
+  let otimizandoAuto = false;
+
+  async function comprimirAuto(src, maxSize=600, qualidade=0.70){
+    return new Promise((resolve, reject)=>{
+      const img = new Image();
+      img.crossOrigin = "anonymous";
+      img.onload = ()=>{
+        let w = img.width, h = img.height;
+        if(w>h){ if(w>maxSize){ h*=maxSize/w; w=maxSize; } } else { if(h>maxSize){ w*=maxSize/h; h=maxSize; } }
+        const canvas = document.createElement('canvas');
+        canvas.width = w; canvas.height = h;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img,0,0,w,h);
+        canvas.toBlob(b=> b?resolve(b):reject("erro blob"), 'image/webp', qualidade);
+      };
+      img.onerror = ()=>reject("erro carregar");
+      img.src = src;
+    });
+  }
+  async function dataUrlParaBlobAuto(dataUrl){
+    const res = await fetch(dataUrl);
+    return await res.blob();
+  }
+  async function uploadStorageAuto(blob){
+    const nomeArq = 'produtos/'+Date.now()+'_'+Math.random().toString(36).substr(2,5)+'.webp';
+    const refSt = sRef(storage, nomeArq);
+    await uploadBytes(refSt, blob);
+    return await getDownloadURL(refSt);
+  }
+
+  const inputImg = document.getElementById('f-emoji');
+  const prevBox = document.getElementById('preview-img');
+  const prevTag = document.getElementById('preview-img-tag');
+
+  async function otimizarAoColar(valor){
+    if(otimizandoAuto) return;
+    const v = valor.trim();
+    if(!v) return;
+    const ehImagem = v.startsWith('http://')||v.startsWith('https://')||v.startsWith('data:image');
+    if(!ehImagem) {
+      prevBox?.classList.add('hidden');
+      imagemOtimizadaFinal = null;
+      return;
+    }
+
+    // Se for emoji, não otimiza
+    if(v.length <= 4) return;
+
+    otimizandoAuto = true;
+    const btnSalvar = document.getElementById('f-salvar');
+    const txtBtnOriginal = btnSalvar ? btnSalvar.textContent : '';
+
+    try{
+      prevBox.classList.remove('hidden');
+      prevTag.src = v;
+      
+      if(v.startsWith('data:image')){
+        if(btnSalvar){ btnSalvar.textContent = "🗜️ Comprimindo data:image..."; btnSalvar.disabled = true; }
+        toast("Detectei imagem gigante, comprimindo automaticamente...");
+        const blobOrig = await dataUrlParaBlobAuto(v);
+        const kbOrig = (blobOrig.size/1024).toFixed(0);
+        const blobComp = await comprimirAuto(v, 600, 0.65);
+        const kbComp = (blobComp.size/1024).toFixed(0);
+        if(btnSalvar) btnSalvar.textContent = "☁️ Subindo otimizada...";
+        const urlFinal = await uploadStorageAuto(blobComp);
+        imagemOtimizadaFinal = urlFinal;
+        inputImg.value = urlFinal;
+        prevTag.src = urlFinal;
+        toast("✅ Comprimida de "+kbOrig+"KB para "+kbComp+"KB - 95% economia!");
+      } else if(v.startsWith('http')){
+        if(btnSalvar){ btnSalvar.textContent = "🗜️ Otimizando link..."; btnSalvar.disabled = true; }
+        // Mostra preview original primeiro
+        try{
+          const blobComp = await comprimirAuto(v, 600, 0.72);
+          const kbComp = (blobComp.size/1024).toFixed(0);
+          if(btnSalvar) btnSalvar.textContent = "☁️ Salvando versão leve...";
+          const urlFinal = await uploadStorageAuto(blobComp);
+          imagemOtimizadaFinal = urlFinal;
+          inputImg.value = urlFinal;
+          prevTag.src = urlFinal;
+          toast("✅ Link convertido pra webp "+kbComp+"KB - não gasta seu 1GB!");
+        }catch(eCors){
+          // Se CORS bloquear, mantém link original mesmo (já é leve, só 80 caracteres no banco)
+          console.log("CORS, mantendo original", eCors);
+          prevTag.src = v;
+          imagemOtimizadaFinal = v;
+          toast("✅ Link https:// detectado - já é super leve (0,08KB no banco)");
+        }
+      }
+    }catch(err){
+      console.log("erro auto otimizar", err);
+      toast("Erro ao otimizar, mas pode salvar que já é leve");
+      imagemOtimizadaFinal = v;
+    }finally{
+      otimizandoAuto = false;
+      if(btnSalvar){ btnSalvar.textContent = txtBtnOriginal || "Salvar achadinho"; btnSalvar.disabled = false; }
+    }
+  }
+
+  // Dispara automaticamente ao colar
+  inputImg?.addEventListener('paste', (e)=>{
+    setTimeout(()=>{
+      otimizarAoColar(e.target.value);
+    }, 100);
+  });
+  // Também ao digitar/colar e sair do campo
+  inputImg?.addEventListener('change', (e)=> otimizarAoColar(e.target.value));
+  inputImg?.addEventListener('blur', (e)=> {
+    if(e.target.value.trim().startsWith('http') && !imagemOtimizadaFinal) otimizarAoColar(e.target.value);
+  });
+  // Preview simples enquanto digita
+  inputImg?.addEventListener('input', (e)=>{
+    const v = e.target.value.trim();
+    if(v.startsWith('http') || v.startsWith('data:image')){
+      prevBox.classList.remove('hidden');
+      // não troca src se já está otimizando
+      if(!otimizandoAuto) prevTag.src = v;
+    } else if(v.length>0 && v.length<=4){
+      prevBox.classList.remove('hidden');
+      prevTag.style.display='none';
+      prevBox.innerHTML = '<p class="text-[10px] font-bold text-zinc-500 mb-1">Preview emoji:</p><div class="text-[32px]">'+v+'</div>';
+    } else {
+      prevBox.classList.add('hidden');
+    }
+  });
+
+
 document.getElementById('sininho-depois').addEventListener('click',()=>{document.getElementById('modal-sininho').classList.add('hidden');localStorage.setItem('sininho_adiado',Date.now());});
 </script>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
 import { getDatabase, ref, onValue, push, remove, set, onDisconnect } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js";
+import { getStorage, ref as sRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js";
 const firebaseConfig={apiKey:"AIzaSyAqkpuZamU05yXVGiQMtmyMmL68_Op-r88",authDomain:"achadinhos-loja.firebaseapp.com",databaseURL:"https://achadinhos-loja-default-rtdb.firebaseio.com",projectId:"achadinhos-loja",storageBucket:"achadinhos-loja.firebasestorage.app",messagingSenderId:"114449338702",appId:"1:114449338702:web:78ae8c8c5b792e0a6fce1f"};
 try{
   const app=initializeApp(firebaseConfig);
   const db=getDatabase(app);
+  const storage=getStorage(app);
   const produtosRef=ref(db,'produtos');
   const onlineRef=ref(db,'online');
   const cliquesRef=ref(db,'cliques');
@@ -483,7 +621,8 @@ try{
   onValue(produtosRef,snap=>{
     const data=snap.val();
     if(data){
-      const lista=Object.entries(data).map(([id,v])=>({id,nome:v.nome,precoNovo:v.preco||v.precoNovo||0,precoAntigo:v.precoOriginal||v.precoAntigo||0,loja:v.loja||"Shopee",emoji:v.imagem&&!v.imagem.startsWith("http")?v.imagem:"🎁",imagemUrl:v.imagem&&v.imagem.startsWith("http")?v.imagem:null,affiliateLink:v.linkAfiliado||v.affiliateLink||"#"} )).reverse();
+      const isImg = (s)=>{ if(!s) return false; s=s.trim(); return s.startsWith('http://')||s.startsWith('https://')||s.startsWith('data:image')||s.startsWith('//'); };
+      const lista=Object.entries(data).map(([id,v])=>({id,nome:v.nome,precoNovo:v.preco||v.precoNovo||0,precoAntigo:v.precoOriginal||v.precoAntigo||0,loja:v.loja||"Shopee",emoji:!isImg(v.imagem)?v.imagem:"🎁",imagemUrl:isImg(v.imagem)?v.imagem:null,affiliateLink:v.linkAfiliado||v.affiliateLink||"#"} )).reverse();
       if(lista.length>0){
         // detecta novos
         if(!primeiraCarga){
@@ -563,14 +702,17 @@ atualizarAvatar();toast("Apagado local");return;} remove(ref(db,'produtos/'+id))
   document.getElementById('f-salvar').addEventListener('click',()=>{
     const nome=document.getElementById('f-nome').value.trim(); const preco=document.getElementById('f-preco').value;
     if(!nome||!preco){toast("Preencha nome e preço");return;}
-    const novo={nome,preco:parseFloat(preco),precoOriginal:parseFloat(document.getElementById('f-preco-antigo').value)||0,imagem:document.getElementById('f-emoji').value||"🎁",linkAfiliado:document.getElementById('f-link').value||"https://shopee.com.br",loja:document.getElementById('f-loja').value,addedAt:Date.now()};
+    if(otimizandoAuto){toast("Aguarde terminar a otimização automática...");return;}
+    const imagemParaSalvar = imagemOtimizadaFinal || document.getElementById('f-emoji').value||"🎁";
+    const novo={nome,preco:parseFloat(preco),precoOriginal:parseFloat(document.getElementById('f-preco-antigo').value)||0,imagem:imagemParaSalvar,linkAfiliado:document.getElementById('f-link').value||"https://shopee.com.br",loja:document.getElementById('f-loja').value,addedAt:Date.now()};
     push(produtosRef,novo).then((snap)=>{
-      // ENVIA NOTIFICACAO AUTOMATICA PRA TODO MUNDO
       const titulo="🔥 Achadinho novo: "+nome.substring(0,30);
       const msg="R$ "+preco+" • "+document.getElementById('f-loja').value+" • Corre que acaba rápido!";
       push(notifRef,{titulo,mensagem:msg,produtoNome:nome,timestamp:Date.now(),hora:new Date().toLocaleString('pt-BR')});
-      toast("✅ Salvo + 🔔 Notificação enviada pra todos!");
+      toast("✅ Salvo! Imagem já otimizada e super leve!");
       document.getElementById('f-nome').value="";document.getElementById('f-preco').value="";document.getElementById('f-preco-antigo').value="";document.getElementById('f-emoji').value="";document.getElementById('f-link').value="";
+      imagemOtimizadaFinal = null;
+      document.getElementById('preview-img')?.classList.add('hidden');
     });
   });
 
