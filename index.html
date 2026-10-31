@@ -27,14 +27,10 @@
 </style><br>
 <meta charset="UTF-8"><br>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><br>
-<title>Achadinhos - ADM Ao Vivo</title><br>
+<title>Achadinhos - Notificação Automática</title><br>
 <script src="https://cdn.tailwindcss.com"></script><br>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800;900&amp;display=swap" rel="stylesheet"><br>
-<style><br>
-  *{font-family:Inter,sans-serif; -webkit-tap-highlight-color: transparent;}<br>
-  .scroll-hide::-webkit-scrollbar{display:none}<br>
-  .line-2{display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden}<br>
-</style><br>
+<style>*{font-family:Inter,sans-serif;-webkit-tap-highlight-color:transparent}.scroll-hide::-webkit-scrollbar{display:none}.line-2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}</style><br>
 </head><br>
 <body class="bg-white antialiased"></p>
 
@@ -42,19 +38,16 @@
   <div class="flex items-center justify-between px-4 h-[56px]"><br>
     <div id="logo" class="flex items-center gap-2 cursor-pointer select-none"><br>
       <div class="w-8 h-8 rounded-[10px] bg-black text-white grid place-items-center font-black text-[16px]">A</div><br>
-      <b class="text-[18px] tracking-tight text-black">ACHADINHOS</b><br>
-      <span class="text-[9px] font-black bg-[#ffe600] text-black px-2 py-0.5 rounded-full ml-1">MOBILE</span><br>
-      <span class="hidden md:inline-flex ml-2 text-[10px] bg-emerald-500 text-white px-2 py-0.5 rounded-full animate-pulse">● AO VIVO</span><br>
+      <b id="nome-loja" class="text-[18px] tracking-tight text-black">ACHADINHOS</b><br>
+      <span id="tag-loja" class="text-[9px] font-black bg-[#ffe600] text-black px-2 py-0.5 rounded-full ml-1">MOBILE</span><br>
     </div><br>
     <div class="flex items-center gap-2 ml-auto"><br>
-      <button id="bell-notif" class="relative w-9 h-9 rounded-full bg-[#f5f5f5] border border-zinc-200 grid place-items-center text-[16px]">🔔<span id="bell-badge" class="hidden absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white"></span></button><br>
+      <button id="btn-cliente" class="w-9 h-9 rounded-full bg-black text-white grid place-items-center font-bold text-[14px] border border-black">?</button><br>
+      <button id="bell-notif" class="relative w-9 h-9 rounded-full bg-[#f5f5f5] border border-zinc-200 grid place-items-center text-[16px]">🔔<span id="bell-dot" class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-white animate-pulse"></span></button><br>
     </div><br>
   </div><br>
   <div class="px-4 pb-3"><br>
-    <div class="relative"><br>
-      <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-[16px]">🔎</span><br>
-      <input id="busca" placeholder="Buscar achadinhos..." class="w-full h-[44px] pl-10 pr-4 rounded-full bg-[#f5f5f5] border border-zinc-200 text-[14px] text-black placeholder:text-zinc-500 outline-none focus:bg-white focus:border-black"><br>
-    </div><br>
+    <div class="relative"><span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-[16px]">🔎</span><input id="busca" placeholder="Buscar achadinhos..." class="w-full h-[44px] pl-10 pr-4 rounded-full bg-[#f5f5f5] border border-zinc-200 text-[14px] text-black placeholder:text-zinc-500 outline-none focus:bg-white focus:border-black"></div><br>
   </div><br>
   <div class="flex gap-2 px-4 pb-3 overflow-x-auto scroll-hide"><br>
     <button data-cat="Todas" class="cat shrink-0 h-8 px-4 rounded-full text-[13px] font-bold bg-black text-white">Todas</button><br>
@@ -66,11 +59,12 @@
 </header></p>
 
 <div class="px-3 pt-3">
-  <div class="rounded-[20px] bg-black text-white p-4 relative overflow-hidden">
-    <div class="absolute -right-6 -top-6 w-[140px] h-[140px] bg-[#ff6b2b] rounded-full"></div>
+  <div id="banner-fundo" class="rounded-[20px] bg-black text-white p-4 relative overflow-hidden">
+    <div id="banner-bola" class="absolute -right-6 -top-6 w-[140px] h-[140px] bg-[#ff6b2b] rounded-full"></div>
     <div class="relative z-10">
-      <div class="inline-flex items-center gap-1.5 bg-white/10 rounded-full px-2.5 py-1 text-[10px] font-bold tracking-widest">🔥 FIREBASE • PAINEL ADM AO VIVO</div>
-      <h1 class="text-[22px] leading-[1.05] font-black mt-2.5 tracking-tight">Achadinhos que<br><span class="text-[#ff6b2b]">valem cada centavo</span></h1>
+      <div id="banner-badge" class="inline-flex items-center gap-1.5 bg-white/10 rounded-full px-2.5 py-1 text-[10px] font-bold tracking-widest">🔥 NOVO • SININHO AUTOMÁTICO</div>
+      <p id="saudacao-cliente" class="text-[12px] mt-2 text-white/80 hidden">Olá, <span id="nome-cliente-banner" class="font-bold text-white">Visitante</span> 👋</p>
+      <h1 class="text-[22px] leading-[1.05] font-black mt-1 tracking-tight"><span id="banner-t1">Achadinhos que</span><br><span id="banner-t2" class="text-[#ff6b2b]">valem cada centavo</span></h1>
       <div class="mt-3 flex items-center gap-2">
         <span class="text-[11px] bg-white text-black px-2.5 py-1 rounded-full font-bold" id="contador-top">8 achados</span>
         <span class="text-[11px] text-emerald-400">● <span id="online-top">0 on-line</span></span>
@@ -82,324 +76,589 @@
 <p><main class="px-3 py-4 max-w-[480px] mx-auto w-full"><br>
   <div class="flex items-center justify-between mb-3"><br>
     <h2 class="font-black text-[16px] text-black">Vitrine • <span id="contador" class="text-[#ff6b2b]">8</span></h2><br>
-    <span class="text-[10px] text-zinc-400">Toque 5x no A para ADM</span><br>
+    <span class="text-[10px] text-zinc-400">5x no A = ADM</span><br>
   </div><br>
-  <div id="grid" class="grid grid-cols-2 gap-2.5"><div class="bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col"><div class="aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden"><span class="text-[42px]">🗄️</span><div class="absolute top-2 left-2 bg-[#ff6b2b] text-white text-[10px] font-black px-2 py-1 rounded-full">-49%</div></div><div class="p-2.5 flex-1 flex flex-col"><p class="line-2 font-semibold text-[12.5px] min-h-[32px]">Organizador de Gaveta Acrílico Cristal 3 Divisórias</p><div class="mt-2"><div class="text-[10px] text-zinc-400 line-through">R\( 59,00&lt;/div&gt;&lt;div class=&quot;flex items-baseline gap-0.5&quot;&gt;&lt;span class=&quot;text-[11px] font-bold&quot;&gt;R\)</span><span class="text-[16px] font-black tracking-tight">29,90</span></div></div><div class="mt-1.5 flex items-center gap-1"><span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-[#ee4d2d] text-white">SHOPEE</span></div><a href="https://shopee.com.br" data-id="1" data-nome="Organizador de Gaveta Acrílico Cristal 3 Divisórias" target="_blank" class="btn-oferta mt-2.5 h-9 bg-[#ff6b2b] text-white rounded-full grid place-items-center font-extrabold text-[12px]">VER OFERTA</a></div></div><div class="bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col"><div class="aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden"><span class="text-[42px]">🍟</span><div class="absolute top-2 left-2 bg-[#ff6b2b] text-white text-[10px] font-black px-2 py-1 rounded-full">-30%</div></div><div class="p-2.5 flex-1 flex flex-col"><p class="line-2 font-semibold text-[12.5px] min-h-[32px]">Air Fryer 4.2L Digital Timer Antiaderente</p><div class="mt-2"><div class="text-[10px] text-zinc-400 line-through">R\( 399,00&lt;/div&gt;&lt;div class=&quot;flex items-baseline gap-0.5&quot;&gt;&lt;span class=&quot;text-[11px] font-bold&quot;&gt;R\)</span><span class="text-[16px] font-black tracking-tight">279,00</span></div></div><div class="mt-1.5 flex items-center gap-1"><span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-black text-white">AMAZON</span></div><a href="https://amazon.com.br" data-id="2" data-nome="Air Fryer 4.2L Digital Timer Antiaderente" target="_blank" class="btn-oferta mt-2.5 h-9 bg-[#ff6b2b] text-white rounded-full grid place-items-center font-extrabold text-[12px]">VER OFERTA</a></div></div><div class="bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col"><div class="aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden"><span class="text-[42px]">💡</span></div><div class="p-2.5 flex-1 flex flex-col"><p class="line-2 font-semibold text-[12.5px] min-h-[32px]">Luminária com Sensor de Presença LED Recarregável</p><div class="mt-2"><div class="flex items-baseline gap-0.5"><span class="text-[11px] font-bold">R\(&lt;/span&gt;&lt;span class=&quot;text-[16px] font-black tracking-tight&quot;&gt;34,90&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;mt-1.5 flex items-center gap-1&quot;&gt;&lt;span class=&quot;text-[9px] font-black px-2 py-0.5 rounded-full bg-[#ee4d2d] text-white&quot;&gt;SHOPEE&lt;/span&gt;&lt;/div&gt;&lt;a href=&quot;https://shopee.com.br&quot; data-id=&quot;3&quot; data-nome=&quot;Luminária com Sensor de Presença LED Recarregável&quot; target=&quot;_blank&quot; class=&quot;btn-oferta mt-2.5 h-9 bg-[#ff6b2b] text-white rounded-full grid place-items-center font-extrabold text-[12px]&quot;&gt;VER OFERTA&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col&quot;&gt;&lt;div class=&quot;aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden&quot;&gt;&lt;span class=&quot;text-[42px]&quot;&gt;💇‍♀️&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;p-2.5 flex-1 flex flex-col&quot;&gt;&lt;p class=&quot;line-2 font-semibold text-[12.5px] min-h-[32px]&quot;&gt;Escova Alisadora 3 em 1 Seca e Modela&lt;/p&gt;&lt;div class=&quot;mt-2&quot;&gt;&lt;div class=&quot;flex items-baseline gap-0.5&quot;&gt;&lt;span class=&quot;text-[11px] font-bold&quot;&gt;R\)</span><span class="text-[16px] font-black tracking-tight">89,90</span></div></div><div class="mt-1.5 flex items-center gap-1"><span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-[#ffe600] text-black text-black">MERCADO LIVRE</span></div><a href="https://mercadolivre.com.br" data-id="4" data-nome="Escova Alisadora 3 em 1 Seca e Modela" target="_blank" class="btn-oferta mt-2.5 h-9 bg-[#ff6b2b] text-white rounded-full grid place-items-center font-extrabold text-[12px]">VER OFERTA</a></div></div><div class="bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col"><div class="aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden"><span class="text-[42px]">✨</span></div><div class="p-2.5 flex-1 flex flex-col"><p class="line-2 font-semibold text-[12.5px] min-h-[32px]">Kit 10 Panos Mágicos Microfibra Limpeza</p><div class="mt-2"><div class="flex items-baseline gap-0.5"><span class="text-[11px] font-bold">R\(&lt;/span&gt;&lt;span class=&quot;text-[16px] font-black tracking-tight&quot;&gt;19,90&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;mt-1.5 flex items-center gap-1&quot;&gt;&lt;span class=&quot;text-[9px] font-black px-2 py-0.5 rounded-full bg-[#ee4d2d] text-white&quot;&gt;SHOPEE&lt;/span&gt;&lt;/div&gt;&lt;a href=&quot;https://shopee.com.br&quot; data-id=&quot;5&quot; data-nome=&quot;Kit 10 Panos Mágicos Microfibra Limpeza&quot; target=&quot;_blank&quot; class=&quot;btn-oferta mt-2.5 h-9 bg-[#ff6b2b] text-white rounded-full grid place-items-center font-extrabold text-[12px]&quot;&gt;VER OFERTA&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col&quot;&gt;&lt;div class=&quot;aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden&quot;&gt;&lt;span class=&quot;text-[42px]&quot;&gt;📱&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;p-2.5 flex-1 flex flex-col&quot;&gt;&lt;p class=&quot;line-2 font-semibold text-[12.5px] min-h-[32px]&quot;&gt;Suporte Celular Articulado Mesa e Cama 360°&lt;/p&gt;&lt;div class=&quot;mt-2&quot;&gt;&lt;div class=&quot;flex items-baseline gap-0.5&quot;&gt;&lt;span class=&quot;text-[11px] font-bold&quot;&gt;R\)</span><span class="text-[16px] font-black tracking-tight">26,90</span></div></div><div class="mt-1.5 flex items-center gap-1"><span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-black text-white">AMAZON</span></div><a href="https://amazon.com.br" data-id="6" data-nome="Suporte Celular Articulado Mesa e Cama 360°" target="_blank" class="btn-oferta mt-2.5 h-9 bg-[#ff6b2b] text-white rounded-full grid place-items-center font-extrabold text-[12px]">VER OFERTA</a></div></div><div class="bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col"><div class="aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden"><span class="text-[42px]">📽️</span><div class="absolute top-2 left-2 bg-[#ff6b2b] text-white text-[10px] font-black px-2 py-1 rounded-full">-36%</div></div><div class="p-2.5 flex-1 flex flex-col"><p class="line-2 font-semibold text-[12.5px] min-h-[32px]">Mini Projetor Portátil 4K WiFi</p><div class="mt-2"><div class="text-[10px] text-zinc-400 line-through">R\( 299,00&lt;/div&gt;&lt;div class=&quot;flex items-baseline gap-0.5&quot;&gt;&lt;span class=&quot;text-[11px] font-bold&quot;&gt;R\)</span><span class="text-[16px] font-black tracking-tight">189,90</span></div></div><div class="mt-1.5 flex items-center gap-1"><span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-[#ee4d2d] text-white">SHOPEE</span></div><a href="https://shopee.com.br" data-id="7" data-nome="Mini Projetor Portátil 4K WiFi" target="_blank" class="btn-oferta mt-2.5 h-9 bg-[#ff6b2b] text-white rounded-full grid place-items-center font-extrabold text-[12px]">VER OFERTA</a></div></div><div class="bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col"><div class="aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden"><span class="text-[42px]">🎧</span></div><div class="p-2.5 flex-1 flex flex-col"><p class="line-2 font-semibold text-[12.5px] min-h-[32px]">Fone Bluetooth TWS com Case Power Bank</p><div class="mt-2"><div class="flex items-baseline gap-0.5"><span class="text-[11px] font-bold">R$</span><span class="text-[16px] font-black tracking-tight">49,90</span></div></div><div class="mt-1.5 flex items-center gap-1"><span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-black text-white">AMAZON</span></div><a href="https://amazon.com.br" data-id="8" data-nome="Fone Bluetooth TWS com Case Power Bank" target="_blank" class="btn-oferta mt-2.5 h-9 bg-[#ff6b2b] text-white rounded-full grid place-items-center font-extrabold text-[12px]">VER OFERTA</a></div></div></div><br>
+  <div id="grid" class="grid grid-cols-2 gap-2.5"><div class="bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col"><div class="aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden"><span class="text-[42px]">🗄️</span><div class="absolute top-2 left-2 bg-[#ff6b2b] text-white text-[10px] font-black px-2 py-1 rounded-full">-49%</div></div><div class="p-2.5 flex-1 flex flex-col"><p class="line-2 font-semibold text-[12.5px] min-h-[32px]">Organizador de Gaveta Acrílico Cristal 3 Divisórias</p><div class="mt-2"><div class="text-[10px] text-zinc-400 line-through">R\( 59,00&lt;/div&gt;&lt;div class=&quot;flex items-baseline gap-0.5&quot;&gt;&lt;span class=&quot;text-[11px] font-bold&quot;&gt;R\)</span><span class="text-[16px] font-black">29,90</span></div></div><div class="mt-1.5 flex items-center gap-1"><span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-[#ee4d2d] text-white">SHOPEE</span></div><a href="https://shopee.com.br" data-id="1" data-nome="Organizador de Gaveta Acrílico Cristal 3 Divisórias" target="_blank" class="btn-oferta mt-2.5 h-9 bg-[#ff6b2b] text-white rounded-full grid place-items-center font-extrabold text-[12px]">VER OFERTA</a></div></div><div class="bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col"><div class="aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden"><span class="text-[42px]">🍟</span><div class="absolute top-2 left-2 bg-[#ff6b2b] text-white text-[10px] font-black px-2 py-1 rounded-full">-30%</div></div><div class="p-2.5 flex-1 flex flex-col"><p class="line-2 font-semibold text-[12.5px] min-h-[32px]">Air Fryer 4.2L Digital Timer Antiaderente</p><div class="mt-2"><div class="text-[10px] text-zinc-400 line-through">R\( 399,00&lt;/div&gt;&lt;div class=&quot;flex items-baseline gap-0.5&quot;&gt;&lt;span class=&quot;text-[11px] font-bold&quot;&gt;R\)</span><span class="text-[16px] font-black">279,00</span></div></div><div class="mt-1.5 flex items-center gap-1"><span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-black text-white">AMAZON</span></div><a href="https://amazon.com.br" data-id="2" data-nome="Air Fryer 4.2L Digital Timer Antiaderente" target="_blank" class="btn-oferta mt-2.5 h-9 bg-[#ff6b2b] text-white rounded-full grid place-items-center font-extrabold text-[12px]">VER OFERTA</a></div></div><div class="bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col"><div class="aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden"><span class="text-[42px]">💡</span></div><div class="p-2.5 flex-1 flex flex-col"><p class="line-2 font-semibold text-[12.5px] min-h-[32px]">Luminária com Sensor de Presença LED Recarregável</p><div class="mt-2"><div class="flex items-baseline gap-0.5"><span class="text-[11px] font-bold">R\(&lt;/span&gt;&lt;span class=&quot;text-[16px] font-black&quot;&gt;34,90&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;mt-1.5 flex items-center gap-1&quot;&gt;&lt;span class=&quot;text-[9px] font-black px-2 py-0.5 rounded-full bg-[#ee4d2d] text-white&quot;&gt;SHOPEE&lt;/span&gt;&lt;/div&gt;&lt;a href=&quot;https://shopee.com.br&quot; data-id=&quot;3&quot; data-nome=&quot;Luminária com Sensor de Presença LED Recarregável&quot; target=&quot;_blank&quot; class=&quot;btn-oferta mt-2.5 h-9 bg-[#ff6b2b] text-white rounded-full grid place-items-center font-extrabold text-[12px]&quot;&gt;VER OFERTA&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col&quot;&gt;&lt;div class=&quot;aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden&quot;&gt;&lt;span class=&quot;text-[42px]&quot;&gt;💇‍♀️&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;p-2.5 flex-1 flex flex-col&quot;&gt;&lt;p class=&quot;line-2 font-semibold text-[12.5px] min-h-[32px]&quot;&gt;Escova Alisadora 3 em 1 Seca e Modela&lt;/p&gt;&lt;div class=&quot;mt-2&quot;&gt;&lt;div class=&quot;flex items-baseline gap-0.5&quot;&gt;&lt;span class=&quot;text-[11px] font-bold&quot;&gt;R\)</span><span class="text-[16px] font-black">89,90</span></div></div><div class="mt-1.5 flex items-center gap-1"><span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-[#ffe600] text-black text-black">MERCADO LIVRE</span></div><a href="https://mercadolivre.com.br" data-id="4" data-nome="Escova Alisadora 3 em 1 Seca e Modela" target="_blank" class="btn-oferta mt-2.5 h-9 bg-[#ff6b2b] text-white rounded-full grid place-items-center font-extrabold text-[12px]">VER OFERTA</a></div></div><div class="bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col"><div class="aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden"><span class="text-[42px]">✨</span></div><div class="p-2.5 flex-1 flex flex-col"><p class="line-2 font-semibold text-[12.5px] min-h-[32px]">Kit 10 Panos Mágicos Microfibra Limpeza</p><div class="mt-2"><div class="flex items-baseline gap-0.5"><span class="text-[11px] font-bold">R\(&lt;/span&gt;&lt;span class=&quot;text-[16px] font-black&quot;&gt;19,90&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;mt-1.5 flex items-center gap-1&quot;&gt;&lt;span class=&quot;text-[9px] font-black px-2 py-0.5 rounded-full bg-[#ee4d2d] text-white&quot;&gt;SHOPEE&lt;/span&gt;&lt;/div&gt;&lt;a href=&quot;https://shopee.com.br&quot; data-id=&quot;5&quot; data-nome=&quot;Kit 10 Panos Mágicos Microfibra Limpeza&quot; target=&quot;_blank&quot; class=&quot;btn-oferta mt-2.5 h-9 bg-[#ff6b2b] text-white rounded-full grid place-items-center font-extrabold text-[12px]&quot;&gt;VER OFERTA&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col&quot;&gt;&lt;div class=&quot;aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden&quot;&gt;&lt;span class=&quot;text-[42px]&quot;&gt;📱&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;p-2.5 flex-1 flex flex-col&quot;&gt;&lt;p class=&quot;line-2 font-semibold text-[12.5px] min-h-[32px]&quot;&gt;Suporte Celular Articulado Mesa e Cama 360°&lt;/p&gt;&lt;div class=&quot;mt-2&quot;&gt;&lt;div class=&quot;flex items-baseline gap-0.5&quot;&gt;&lt;span class=&quot;text-[11px] font-bold&quot;&gt;R\)</span><span class="text-[16px] font-black">26,90</span></div></div><div class="mt-1.5 flex items-center gap-1"><span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-black text-white">AMAZON</span></div><a href="https://amazon.com.br" data-id="6" data-nome="Suporte Celular Articulado Mesa e Cama 360°" target="_blank" class="btn-oferta mt-2.5 h-9 bg-[#ff6b2b] text-white rounded-full grid place-items-center font-extrabold text-[12px]">VER OFERTA</a></div></div><div class="bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col"><div class="aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden"><span class="text-[42px]">📽️</span><div class="absolute top-2 left-2 bg-[#ff6b2b] text-white text-[10px] font-black px-2 py-1 rounded-full">-36%</div></div><div class="p-2.5 flex-1 flex flex-col"><p class="line-2 font-semibold text-[12.5px] min-h-[32px]">Mini Projetor Portátil 4K WiFi</p><div class="mt-2"><div class="text-[10px] text-zinc-400 line-through">R\( 299,00&lt;/div&gt;&lt;div class=&quot;flex items-baseline gap-0.5&quot;&gt;&lt;span class=&quot;text-[11px] font-bold&quot;&gt;R\)</span><span class="text-[16px] font-black">189,90</span></div></div><div class="mt-1.5 flex items-center gap-1"><span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-[#ee4d2d] text-white">SHOPEE</span></div><a href="https://shopee.com.br" data-id="7" data-nome="Mini Projetor Portátil 4K WiFi" target="_blank" class="btn-oferta mt-2.5 h-9 bg-[#ff6b2b] text-white rounded-full grid place-items-center font-extrabold text-[12px]">VER OFERTA</a></div></div><div class="bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col"><div class="aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden"><span class="text-[42px]">🎧</span></div><div class="p-2.5 flex-1 flex flex-col"><p class="line-2 font-semibold text-[12.5px] min-h-[32px]">Fone Bluetooth TWS com Case Power Bank</p><div class="mt-2"><div class="flex items-baseline gap-0.5"><span class="text-[11px] font-bold">R$</span><span class="text-[16px] font-black">49,90</span></div></div><div class="mt-1.5 flex items-center gap-1"><span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-black text-white">AMAZON</span></div><a href="https://amazon.com.br" data-id="8" data-nome="Fone Bluetooth TWS com Case Power Bank" target="_blank" class="btn-oferta mt-2.5 h-9 bg-[#ff6b2b] text-white rounded-full grid place-items-center font-extrabold text-[12px]">VER OFERTA</a></div></div></div><br>
   <div class="mt-8 p-4 rounded-[16px] bg-[#f8f8f8] border border-zinc-100 text-center"><br>
-    <p class="font-black text-[13px] text-black">ACHADINHOS OFICIAL 🛒</p><br>
-    <p class="text-[11px] text-zinc-500 mt-1">Zap: 81 99802-8998 • Bonito-PE</p><br>
-    <p class="text-[10px] text-zinc-400 mt-2">Sem botão Entrar • ADM secreto 5x no A</p><br>
+    <p id="rodape-titulo" class="font-black text-[13px] text-black">ACHADINHOS OFICIAL 🛒</p><br>
+    <p id="rodape-zap" class="text-[11px] text-zinc-500 mt-1">Zap: 81 99802-8998 • Bonito-PE</p><br>
+    <p class="text-[10px] text-zinc-400 mt-2">🔔 Sininho automático ao entrar</p><br>
   </div><br>
 </main></p>
 
 <div id="toast" class="fixed bottom-[20px] left-1/2 -translate-x-1/2 bg-black text-white px-5 py-3 rounded-full text-[13px] font-bold shadow-2xl hidden z-[60] max-w-[90%] text-center"></div>
 
-<!-- MODAL SENHA ADM -->
+<!-- MODAL SININHO AUTOMATICO AO ENTRAR -->
+
+<div id="modal-sininho" class="fixed inset-0 z-[80] bg-black/60 hidden">
+  <div class="absolute bottom-0 left-0 right-0 bg-white rounded-t-[28px] p-6 max-w-[480px] mx-auto animate-[slideUp_0.3s]">
+    <div class="w-10 h-1 bg-zinc-200 rounded-full mx-auto mb-5"></div>
+    <div class="text-center">
+      <div class="w-16 h-16 bg-[#ffe600] rounded-full grid place-items-center text-[32px] mx-auto mb-3">🔔</div>
+      <b class="text-[18px] text-black">Ativar sininho de ofertas?</b>
+      <p class="text-[13px] text-zinc-500 mt-2 leading-[1.4]">Receba na hora quando eu adicionar achadinho novo! Não perca nenhuma oferta.</p>
+      <div class="flex gap-2 mt-5">
+        <button id="sininho-depois" class="flex-1 h-[48px] border border-zinc-200 rounded-full font-bold text-[14px] text-black">Depois</button>
+        <button id="sininho-ativar" class="flex-1 h-[48px] bg-black text-white rounded-full font-bold text-[14px]">🔔 Ativar agora</button>
+      </div>
+      <p class="text-[10px] text-zinc-400 mt-3">Você pode desativar quando quiser no sininho do topo</p>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL CONFIG CLIENTE - NOME -->
+
+<div id="modal-cliente" class="fixed inset-0 z-[85] bg-black/60 hidden">
+  <div class="absolute inset-0" id="modal-cliente-bg"></div>
+  <div class="absolute bottom-0 left-0 right-0 bg-white rounded-t-[28px] p-6 max-w-[480px] mx-auto">
+    <div class="w-10 h-1 bg-zinc-200 rounded-full mx-auto mb-5"></div>
+    <div class="text-center">
+      <div class="w-16 h-16 bg-black text-white rounded-full grid place-items-center text-[28px] font-black mx-auto mb-3" id="avatar-preview">?</div>
+      <b class="text-[18px] text-black">Como quer ser chamada?</b>
+      <p class="text-[13px] text-zinc-500 mt-1">Salva seu nome e aparece personalizado pra você</p>
+      <input id="input-nome-cliente" placeholder="Digite seu nome, ex: Ana" class="mt-5 w-full h-[48px] border border-zinc-200 rounded-[14px] px-4 text-[16px] outline-none focus:border-black text-center font-bold">
+      <button id="salvar-nome-cliente" class="mt-4 w-full h-[48px] bg-black text-white rounded-full font-bold text-[15px]">💾 Salvar meu nome</button>
+      <button id="fechar-cliente" class="mt-2 w-full h-[44px] border border-zinc-200 rounded-full font-bold text-[14px]">Fechar</button>
+      <p class="text-[10px] text-zinc-400 mt-3">Fica salvo só no seu celular • Você pode mudar quando quiser</p>
+    </div>
+  </div>
+</div>
 
 <div id="modal" class="fixed inset-0 z-50 bg-black/50 hidden">
   <div class="absolute inset-0" id="modal-bg"></div>
   <div class="absolute bottom-0 left-0 right-0 bg-white rounded-t-[24px] p-6 max-w-[480px] mx-auto">
     <div class="w-10 h-1 bg-zinc-200 rounded-full mx-auto mb-4"></div>
-    <b class="text-[16px] text-black">Painel ADM Secreto 🔒</b>
-    <p class="text-[12px] text-zinc-500 mt-1">Toque 5x no A • Sem botão Entrar pra cliente</p>
-    <input id="senha" type="password" placeholder="Senha ADM" class="mt-4 w-full h-[48px] border border-zinc-200 rounded-[14px] px-4 text-[16px] outline-none focus:border-black">
-    <button id="entrar" class="mt-3 w-full h-[48px] bg-black text-white rounded-full font-bold text-[15px]">Entrar no ADM</button>
-    <button id="fechar" class="mt-2 w-full h-[48px] border border-zinc-200 rounded-full font-bold text-[14px]">Fechar</button>
+    <b class="text-[16px]">ADM Secreto 🔒</b>
+    <input id="senha" type="password" placeholder="Senha" class="mt-4 w-full h-[48px] border border-zinc-200 rounded-[14px] px-4 text-[16px] outline-none focus:border-black">
+    <button id="entrar" class="mt-3 w-full h-[48px] bg-black text-white rounded-full font-bold">Entrar</button>
+    <button id="fechar" class="mt-2 w-full h-[48px] border border-zinc-200 rounded-full font-bold">Fechar</button>
   </div>
 </div>
 
-<!-- PAINEL ADM COMPLETO -->
-
 <div id="painel" class="fixed inset-0 z-50 bg-[#fafafa] hidden overflow-auto">
   <div class="sticky top-0 bg-white border-b border-zinc-100 px-4 h-[56px] flex items-center justify-between z-10">
-    <div><b class="text-[16px] text-black">ADM • Ao Vivo 🔴</b><p class="text-[11px] text-zinc-500"><span id="online-painel">0 on-line</span> • <span id="total">8</span></p></div>
+    <div><b class="text-[16px]">ADM • Notificação Automática 🔔</b><p class="text-[11px] text-zinc-500"><span id="online-painel">0 on-line</span> • <span id="total">8</span> produtos • <span id="inscritos-total">0 inscritos</span></p></div>
     <button id="fechar-painel" class="w-10 h-10 rounded-full bg-zinc-100 grid place-items-center font-bold">✕</button>
   </div>
-  
-  <!-- ABAS -->
   <div class="px-4 py-3 flex gap-2 bg-white border-b border-zinc-100 sticky top-[56px] z-10">
-    <button id="aba-produtos" class="flex-1 h-10 rounded-full bg-black text-white font-bold text-[13px]">📦 Produtos</button>
-    <button id="aba-aovivo" class="flex-1 h-10 rounded-full bg-white border border-zinc-200 font-bold text-[13px]">🔴 Ao Vivo</button>
+    <button id="aba-produtos" class="flex-1 h-9 rounded-full bg-black text-white font-bold text-[11px]">📦 Produtos</button>
+    <button id="aba-editar" class="flex-1 h-9 rounded-full bg-white border border-zinc-200 font-bold text-[11px]">🎨 Loja</button>
+    <button id="aba-aovivo" class="flex-1 h-9 rounded-full bg-white border border-zinc-200 font-bold text-[11px]">🔴 Ao Vivo</button>
+    <button id="aba-notif" class="flex-1 h-9 rounded-full bg-white border border-zinc-200 font-bold text-[11px]">🔔 Sininho</button>
   </div>
 
-  <!-- CONTEUDO PRODUTOS -->
   <div id="conteudo-produtos" class="p-4">
     <div class="bg-white border border-zinc-200 rounded-[16px] p-4">
-      <p class="font-bold text-[14px] mb-3">➕ Adicionar - grava pra sempre</p>
-      <input id="f-nome" placeholder="Nome do produto" class="w-full h-[48px] border border-zinc-200 rounded-[12px] px-3 mb-2 text-[16px] outline-none focus:border-black">
+      <p class="font-bold text-[14px] mb-3">➕ Adicionar produto + notifica todos</p>
+      <input id="f-nome" placeholder="Nome" class="w-full h-[48px] border border-zinc-200 rounded-[12px] px-3 mb-2 text-[16px] outline-none focus:border-black">
       <div class="grid grid-cols-2 gap-2 mb-2">
-        <input id="f-preco" type="number" placeholder="Preço 29.90" class="h-[48px] border border-zinc-200 rounded-[12px] px-3 text-[16px] outline-none focus:border-black">
+        <input id="f-preco" type="number" placeholder="Preço" class="h-[48px] border border-zinc-200 rounded-[12px] px-3 text-[16px] outline-none focus:border-black">
         <input id="f-preco-antigo" type="number" placeholder="Preço antigo" class="h-[48px] border border-zinc-200 rounded-[12px] px-3 text-[16px] outline-none focus:border-black">
       </div>
-      <input id="f-emoji" placeholder="Emoji 🗄️ ou URL imagem" class="w-full h-[48px] border border-zinc-200 rounded-[12px] px-3 mb-2 text-[14px] outline-none focus:border-black">
+      <input id="f-emoji" placeholder="Emoji ou URL imagem" class="w-full h-[48px] border border-zinc-200 rounded-[12px] px-3 mb-2 text-[14px] outline-none focus:border-black">
       <input id="f-link" placeholder="Link afiliado" class="w-full h-[48px] border border-zinc-200 rounded-[12px] px-3 mb-2 text-[14px] outline-none focus:border-black">
       <select id="f-loja" class="w-full h-[48px] border border-zinc-200 rounded-[12px] px-3 mb-3 text-[14px] bg-white"><option>Shopee</option><option>Amazon</option><option>Mercado Livre</option><option>Geral</option></select>
-      <button id="f-salvar" class="w-full h-[48px] bg-[#ff6b2b] text-white rounded-full font-bold">Salvar no Firebase 🔥</button>
+      <button id="f-salvar" class="w-full h-[48px] bg-[#ff6b2b] text-white rounded-full font-bold">Salvar + 🔔 Notificar todo mundo</button>
+      <p class="text-[10px] text-zinc-400 mt-2 text-center">Ao salvar, todo mundo que ativou o sininho recebe na hora</p>
     </div>
     <div id="lista" class="mt-4 space-y-2"><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0">🗄️</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Organizador de Gaveta Acrílico Cristal 3 Divisórias</p><p class="text-[11px] text-zinc-500">R$ 29.9 • Shopee</p></div><button onclick="apagarFirebase('1')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0">🍟</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Air Fryer 4.2L Digital Timer Antiaderente</p><p class="text-[11px] text-zinc-500">R$ 279 • Amazon</p></div><button onclick="apagarFirebase('2')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0">💡</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Luminária com Sensor de Presença LED Recarregável</p><p class="text-[11px] text-zinc-500">R$ 34.9 • Shopee</p></div><button onclick="apagarFirebase('3')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0">💇‍♀️</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Escova Alisadora 3 em 1 Seca e Modela</p><p class="text-[11px] text-zinc-500">R$ 89.9 • Mercado Livre</p></div><button onclick="apagarFirebase('4')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0">✨</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Kit 10 Panos Mágicos Microfibra Limpeza</p><p class="text-[11px] text-zinc-500">R$ 19.9 • Shopee</p></div><button onclick="apagarFirebase('5')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0">📱</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Suporte Celular Articulado Mesa e Cama 360°</p><p class="text-[11px] text-zinc-500">R$ 26.9 • Amazon</p></div><button onclick="apagarFirebase('6')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0">📽️</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Mini Projetor Portátil 4K WiFi</p><p class="text-[11px] text-zinc-500">R$ 189.9 • Shopee</p></div><button onclick="apagarFirebase('7')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0">🎧</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Fone Bluetooth TWS com Case Power Bank</p><p class="text-[11px] text-zinc-500">R$ 49.9 • Amazon</p></div><button onclick="apagarFirebase('8')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div></div>
   </div>
 
-  <!-- CONTEUDO AO VIVO -->
-  <div id="conteudo-aovivo" class="p-4 hidden">
-    <!-- CARDS RESUMO -->
-    <div class="grid grid-cols-2 gap-3 mb-4">
-      <div class="bg-white border border-zinc-200 rounded-[16px] p-4">
-        <p class="text-[11px] text-zinc-500 font-bold">ON-LINE AGORA</p>
-        <p class="text-[28px] font-black mt-1" id="card-online">0</p>
-        <p class="text-[11px] text-emerald-600 mt-1">● ao vivo</p>
-      </div>
-      <div class="bg-white border border-zinc-200 rounded-[16px] p-4">
-        <p class="text-[11px] text-zinc-500 font-bold">CLIQUES HOJE</p>
-        <p class="text-[28px] font-black mt-1" id="card-cliques">0</p>
-        <p class="text-[11px] text-zinc-500 mt-1" id="card-total-geral">0 total</p>
-      </div>
-    </div>
-
-    <div class="bg-white border border-zinc-200 rounded-[16px] p-4 mb-4">
-      <p class="font-bold text-[13px] mb-3">👁️ Quem está on-line agora</p>
-      <div id="lista-online" class="space-y-2 max-h-[200px] overflow-auto text-[12px]">
-        <p class="text-zinc-400 text-[12px]">Ninguém on-line ainda...</p>
-      </div>
-    </div>
-
+  <div id="conteudo-editar" class="p-4 hidden">
     <div class="bg-white border border-zinc-200 rounded-[16px] p-4">
-      <div class="flex items-center justify-between mb-3">
-        <p class="font-bold text-[13px]">🖱️ Quem clicou no link (ao vivo)</p>
-        <button id="limpar-cliques" class="text-[11px] text-red-600 font-bold">Limpar</button>
+      <p class="font-bold text-[14px] mb-4">🎨 Editar loja ao vivo</p>
+      <label class="text-[11px] font-bold text-zinc-600">NOME</label><input id="edit-nome" class="w-full h-[44px] border border-zinc-200 rounded-[12px] px-3 mb-3 text-[14px] outline-none focus:border-black">
+      <label class="text-[11px] font-bold text-zinc-600">TAG</label><input id="edit-tag" class="w-full h-[44px] border border-zinc-200 rounded-[12px] px-3 mb-3 text-[14px] outline-none focus:border-black">
+      <label class="text-[11px] font-bold text-zinc-600">BADGE BANNER</label><input id="edit-badge" class="w-full h-[44px] border border-zinc-200 rounded-[12px] px-3 mb-3 text-[14px] outline-none focus:border-black">
+      <label class="text-[11px] font-bold text-zinc-600">TITULO LINHA 1</label><input id="edit-t1" class="w-full h-[44px] border border-zinc-200 rounded-[12px] px-3 mb-3 text-[14px] outline-none focus:border-black">
+      <label class="text-[11px] font-bold text-zinc-600">TITULO LINHA 2 LARANJA</label><input id="edit-t2" class="w-full h-[44px] border border-zinc-200 rounded-[12px] px-3 mb-3 text-[14px] outline-none focus:border-black">
+      <label class="text-[11px] font-bold text-zinc-600">COR DESTAQUE</label><div class="flex gap-2 mb-3"><input id="edit-cor" type="color" value="#ff6b2b" class="w-14 h-[44px] rounded-[12px] border border-zinc-200 p-1"><input id="edit-cor-txt" class="flex-1 h-[44px] border border-zinc-200 rounded-[12px] px-3 text-[14px] outline-none"></div>
+      <label class="text-[11px] font-bold text-zinc-600">RODAPÉ TITULO</label><input id="edit-rodape-titulo" class="w-full h-[44px] border border-zinc-200 rounded-[12px] px-3 mb-3 text-[14px] outline-none focus:border-black">
+      <label class="text-[11px] font-bold text-zinc-600">RODAPÉ ZAP</label><input id="edit-rodape-zap" class="w-full h-[44px] border border-zinc-200 rounded-[12px] px-3 mb-4 text-[14px] outline-none focus:border-black">
+      <button id="edit-salvar" class="w-full h-[48px] bg-black text-white rounded-full font-bold">💾 Salvar ao vivo</button>
+    </div>
+  </div>
+
+  <div id="conteudo-aovivo" class="p-4 hidden">
+    <div class="grid grid-cols-2 gap-3 mb-4">
+      <div class="bg-white border border-zinc-200 rounded-[16px] p-4"><p class="text-[11px] text-zinc-500 font-bold">ON-LINE</p><p class="text-[28px] font-black" id="card-online">0</p></div>
+      <div class="bg-white border border-zinc-200 rounded-[16px] p-4"><p class="text-[11px] text-zinc-500 font-bold">CLIQUES HOJE</p><p class="text-[28px] font-black" id="card-cliques">0</p><p class="text-[11px] text-zinc-500" id="card-total-geral">0 total</p></div>
+    </div>
+    <div class="bg-white border border-zinc-200 rounded-[16px] p-4 mb-4"><p class="font-bold text-[13px] mb-3">👁️ On-line agora</p><div id="lista-online" class="space-y-2 max-h-[200px] overflow-auto text-[12px]"><p class="text-zinc-400">Ninguém...</p></div></div>
+    <div class="bg-white border border-zinc-200 rounded-[16px] p-4"><div class="flex justify-between mb-3"><p class="font-bold text-[13px]">🖱️ Cliques</p><button id="limpar-cliques" class="text-[11px] text-red-600 font-bold">Limpar</button></div><div id="lista-cliques" class="space-y-2 max-h-[300px] overflow-auto"><p class="text-zinc-400 text-[12px]">Nenhum clique...</p></div></div>
+  </div>
+
+  <div id="conteudo-notif" class="p-4 hidden">
+    <div class="bg-white border border-zinc-200 rounded-[16px] p-4 mb-4">
+      <p class="font-bold text-[14px] mb-1">🔔 Sininho automático</p>
+      <p class="text-[11px] text-zinc-500 mb-4">Quem ativou recebe notificação quando você adiciona produto novo</p>
+      <div class="grid grid-cols-3 gap-2 mb-4 text-center">
+        <div class="bg-zinc-50 rounded-[12px] p-3"><p class="text-[20px] font-black" id="card-inscritos">0</p><p class="text-[10px] text-zinc-500">Inscritos</p></div>
+        <div class="bg-zinc-50 rounded-[12px] p-3"><p class="text-[20px] font-black" id="card-notif-enviadas">0</p><p class="text-[10px] text-zinc-500">Enviadas</p></div>
+        <div class="bg-zinc-50 rounded-[12px] p-3"><p class="text-[20px] font-black text-emerald-600" id="card-permissao">-</p><p class="text-[10px] text-zinc-500">Permissão</p></div>
       </div>
-      <div id="lista-cliques" class="space-y-2 max-h-[400px] overflow-auto">
-        <p class="text-zinc-400 text-[12px]">Nenhum clique ainda...</p>
-      </div>
+      <input id="notif-titulo" class="w-full h-[44px] border border-zinc-200 rounded-[12px] px-3 mb-2 text-[14px]" value="🔥 Achadinho novo na loja!">
+      <textarea id="notif-msg" rows="3" class="w-full border border-zinc-200 rounded-[12px] px-3 py-3 text-[14px] resize-none">Temos ofertas novas te esperando! Corre que acaba rápido!</textarea>
+      <button id="notif-enviar-todos" class="w-full h-[48px] bg-black text-white rounded-full font-bold mt-3">📢 Enviar notificação pra todo mundo agora</button>
+      <button id="notif-testar" class="w-full h-[44px] border border-zinc-200 rounded-full font-bold mt-2">👁️ Testar sininho em mim</button>
+    </div>
+    <div class="bg-white border border-zinc-200 rounded-[16px] p-4 mb-4">
+      <p class="font-bold text-[13px] mb-3">👥 Quem ativou o sininho</p>
+      <div id="lista-inscritos" class="space-y-2 max-h-[200px] overflow-auto text-[12px]"><p class="text-zinc-400">Ninguém ativou ainda...</p></div>
+    </div>
+    <div class="bg-white border border-zinc-200 rounded-[16px] p-4 mb-4">
+      <p class="font-bold text-[13px] mb-3">👤 Clientes que salvaram nome</p>
+      <div id="lista-clientes-nomes" class="space-y-2 max-h-[200px] overflow-auto text-[12px]"><p class="text-zinc-400">Ninguém salvou nome ainda...</p></div>
+    </div>
+    <div class="bg-white border border-zinc-200 rounded-[16px] p-4">
+      <p class="font-bold text-[13px] mb-3">📜 Histórico enviadas</p>
+      <div id="historico-notif" class="space-y-2 max-h-[200px] overflow-auto"></div>
     </div>
   </div>
 </div>
 
 <div id="modal-notif" class="fixed inset-0 z-[70] bg-black/50 hidden">
   <div class="absolute inset-0" id="modal-notif-bg"></div>
-  <div class="absolute bottom-0 left-0 right-0 bg-white rounded-t-[24px] p-6 max-w-[480px] mx-auto max-h-[85vh] overflow-auto">
-    <div class="w-10 h-1 bg-zinc-200 rounded-full mx-auto mb-4"></div>
-    <b class="text-[16px]">🔔 Notificações</b>
-    <div class="space-y-3 mt-4">
-      <input id="notif-titulo" class="w-full h-[48px] border border-zinc-200 rounded-[12px] px-4 text-[14px] outline-none" value="🔥 Achadinho novo!">
-      <textarea id="notif-msg" rows="3" class="w-full border border-zinc-200 rounded-[12px] px-4 py-3 text-[14px] outline-none resize-none">Temos ofertas novas!</textarea>
-      <button id="notif-enviar-todos" class="w-full h-[48px] bg-[#ff6b2b] text-white rounded-full font-bold">📢 Enviar para todos on-line</button>
-      <button id="fechar-notif" class="w-full h-[48px] border border-zinc-200 rounded-full font-bold">Fechar</button>
-    </div>
-    <div id="historico-notif" class="mt-4 space-y-2"></div>
-  </div>
+  <div class="absolute bottom-0 left-0 right-0 bg-white rounded-t-[24px] p-6 max-w-[480px] mx-auto"><div class="w-10 h-1 bg-zinc-200 rounded-full mx-auto mb-4"></div><b>🔔 Notificações</b><div class="space-y-3 mt-4"><input id="notif-titulo-2" class="w-full h-[48px] border border-zinc-200 rounded-[12px] px-4 text-[14px]" value="🔥 Achadinho novo!"><textarea id="notif-msg-2" rows="3" class="w-full border border-zinc-200 rounded-[12px] px-4 py-3 text-[14px] resize-none">Temos ofertas novas!</textarea><button id="notif-enviar-todos-2" class="w-full h-[48px] bg-[#ff6b2b] text-white rounded-full font-bold">📢 Enviar pra todos</button><button id="fechar-notif" class="w-full h-[48px] border border-zinc-200 rounded-full font-bold">Fechar</button></div><div id="historico-notif-2" class="mt-4 space-y-2"></div></div>
 </div>
 
 <script>
-const Ev = [
-  {id:"1", nome:"Organizador de Gaveta Acrílico Cristal 3 Divisórias", precoNovo:29.9, precoAntigo:59, loja:"Shopee", emoji:"🗄️", affiliateLink:"https://shopee.com.br"},
-  {id:"2", nome:"Air Fryer 4.2L Digital Timer Antiaderente", precoNovo:279, precoAntigo:399, loja:"Amazon", emoji:"🍟", affiliateLink:"https://amazon.com.br"},
-  {id:"3", nome:"Luminária com Sensor de Presença LED Recarregável", precoNovo:34.9, loja:"Shopee", emoji:"💡", affiliateLink:"https://shopee.com.br"},
-  {id:"4", nome:"Escova Alisadora 3 em 1 Seca e Modela", precoNovo:89.9, loja:"Mercado Livre", emoji:"💇‍♀️", affiliateLink:"https://mercadolivre.com.br"},
-  {id:"5", nome:"Kit 10 Panos Mágicos Microfibra Limpeza", precoNovo:19.9, loja:"Shopee", emoji:"✨", affiliateLink:"https://shopee.com.br"},
-  {id:"6", nome:"Suporte Celular Articulado Mesa e Cama 360°", precoNovo:26.9, loja:"Amazon", emoji:"📱", affiliateLink:"https://amazon.com.br"},
-  {id:"7", nome:"Mini Projetor Portátil 4K WiFi", precoNovo:189.9, precoAntigo:299, loja:"Shopee", emoji:"📽️", affiliateLink:"https://shopee.com.br"},
-  {id:"8", nome:"Fone Bluetooth TWS com Case Power Bank", precoNovo:49.9, loja:"Amazon", emoji:"🎧", affiliateLink:"https://amazon.com.br"}
+const Ev=[
+{id:"1",nome:"Organizador de Gaveta Acrílico Cristal 3 Divisórias",precoNovo:29.9,precoAntigo:59,loja:"Shopee",emoji:"🗄️",affiliateLink:"https://shopee.com.br"},
+{id:"2",nome:"Air Fryer 4.2L Digital Timer Antiaderente",precoNovo:279,precoAntigo:399,loja:"Amazon",emoji:"🍟",affiliateLink:"https://amazon.com.br"},
+{id:"3",nome:"Luminária com Sensor de Presença LED Recarregável",precoNovo:34.9,loja:"Shopee",emoji:"💡",affiliateLink:"https://shopee.com.br"},
+{id:"4",nome:"Escova Alisadora 3 em 1 Seca e Modela",precoNovo:89.9,loja:"Mercado Livre",emoji:"💇‍♀️",affiliateLink:"https://mercadolivre.com.br"},
+{id:"5",nome:"Kit 10 Panos Mágicos Microfibra Limpeza",precoNovo:19.9,loja:"Shopee",emoji:"✨",affiliateLink:"https://shopee.com.br"},
+{id:"6",nome:"Suporte Celular Articulado Mesa e Cama 360°",precoNovo:26.9,loja:"Amazon",emoji:"📱",affiliateLink:"https://amazon.com.br"},
+{id:"7",nome:"Mini Projetor Portátil 4K WiFi",precoNovo:189.9,precoAntigo:299,loja:"Shopee",emoji:"📽️",affiliateLink:"https://shopee.com.br"},
+{id:"8",nome:"Fone Bluetooth TWS com Case Power Bank",precoNovo:49.9,loja:"Amazon",emoji:"🎧",affiliateLink:"https://amazon.com.br"}
 ];
-let produtos=[...Ev];
-let filtroCat="Todas";
-let busca="";
-function toast(m){ const el=document.getElementById('toast'); el.textContent=m; el.classList.remove('hidden'); setTimeout(()=>el.classList.add('hidden'),3000); }
-function esc(s){ const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+let produtos=[...Ev]; let filtroCat="Todas"; let busca="";
+function toast(m){const el=document.getElementById('toast');el.textContent=m;el.classList.remove('hidden');setTimeout(()=>el.classList.add('hidden'),3000);}
+function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
 function render(){
   const grid=document.getElementById('grid');
-  let lista=produtos.filter(p=> p.nome.toLowerCase().includes(busca.toLowerCase()) && (filtroCat==="Todas"||p.loja===filtroCat));
+  let lista=produtos.filter(p=>p.nome.toLowerCase().includes(busca.toLowerCase())&&(filtroCat==="Todas"||p.loja===filtroCat));
   document.getElementById('contador').textContent=lista.length;
   document.getElementById('contador-top').textContent=produtos.length+" achados";
   document.getElementById('total').textContent=produtos.length;
-  if(lista.length===0){ grid.innerHTML='<div class="col-span-2 py-12 text-center"><p class="text-[28px]">🔍</p><p class="font-bold text-[14px] mt-2">Nada com esse filtro - adicione no ADM</p></div>'; return; }
+  if(lista.length===0){grid.innerHTML='<div class="col-span-2 py-12 text-center"><p class="text-[28px]">🔍</p><p class="font-bold text-[14px] mt-2">Nada com esse filtro</p></div>';return;}
   grid.innerHTML=lista.map(p=>{
-    const img = p.imagemUrl ? '<img src="'+p.imagemUrl+'" class="w-full h-full object-cover">' : '<span class="text-[42px]">'+esc(p.emoji)+'</span>';
-    const off = p.precoAntigo ? '<div class="absolute top-2 left-2 bg-[#ff6b2b] text-white text-[10px] font-black px-2 py-1 rounded-full">-'+Math.round((1-p.precoNovo/p.precoAntigo)*100)+'%</div>' : '';
-    const antigo = p.precoAntigo ? '<div class="text-[10px] text-zinc-400 line-through">R$ '+p.precoAntigo.toFixed(2).replace(".",",")+'</div>' : '';
-    const cor = p.loja==="Shopee" ? "bg-[#ee4d2d]" : p.loja==="Amazon" ? "bg-black" : p.loja==="Mercado Livre" ? "bg-[#ffe600] text-black" : "bg-zinc-800";
-    const txtCor = p.loja==="Mercado Livre" ? "text-black" : "text-white";
-    return '<div class="bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col"><div class="aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden">'+img+off+'</div><div class="p-2.5 flex-1 flex flex-col"><p class="line-2 font-semibold text-[12.5px] min-h-[32px]">'+esc(p.nome)+'</p><div class="mt-2">'+antigo+'<div class="flex items-baseline gap-0.5"><span class="text-[11px] font-bold">R$</span><span class="text-[16px] font-black tracking-tight">'+Number(p.precoNovo).toFixed(2).replace(".",",")+'</span></div></div><div class="mt-1.5 flex items-center gap-1"><span class="text-[9px] font-black px-2 py-0.5 rounded-full '+cor+' '+txtCor+'">'+esc(p.loja.toUpperCase())+'</span></div><a href="'+p.affiliateLink+'" data-id="'+p.id+'" data-nome="'+esc(p.nome)+'" target="_blank" class="btn-oferta mt-2.5 h-9 bg-[#ff6b2b] text-white rounded-full grid place-items-center font-extrabold text-[12px]">VER OFERTA</a></div></div>';
+    const img=p.imagemUrl?'<img src="'+p.imagemUrl+'" class="w-full h-full object-cover">':'<span class="text-[42px]">'+esc(p.emoji)+'</span>';
+    const off=p.precoAntigo?'<div class="absolute top-2 left-2 bg-[#ff6b2b] text-white text-[10px] font-black px-2 py-1 rounded-full">-'+Math.round((1-p.precoNovo/p.precoAntigo)*100)+'%</div>':'';
+    const antigo=p.precoAntigo?'<div class="text-[10px] text-zinc-400 line-through">R$ '+p.precoAntigo.toFixed(2).replace(".",",")+'</div>':'';
+    const cor=p.loja==="Shopee"?"bg-[#ee4d2d]":p.loja==="Amazon"?"bg-black":p.loja==="Mercado Livre"?"bg-[#ffe600] text-black":"bg-zinc-800";
+    const txtCor=p.loja==="Mercado Livre"?"text-black":"text-white";
+    return '<div class="bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col"><div class="aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden">'+img+off+'</div><div class="p-2.5 flex-1 flex flex-col"><p class="line-2 font-semibold text-[12.5px] min-h-[32px]">'+esc(p.nome)+'</p><div class="mt-2">'+antigo+'<div class="flex items-baseline gap-0.5"><span class="text-[11px] font-bold">R$</span><span class="text-[16px] font-black">'+Number(p.precoNovo).toFixed(2).replace(".",",")+'</span></div></div><div class="mt-1.5 flex items-center gap-1"><span class="text-[9px] font-black px-2 py-0.5 rounded-full '+cor+' '+txtCor+'">'+esc(p.loja.toUpperCase())+'</span></div><a href="'+p.affiliateLink+'" data-id="'+p.id+'" data-nome="'+esc(p.nome)+'" target="_blank" class="btn-oferta mt-2.5 h-9 bg-[#ff6b2b] text-white rounded-full grid place-items-center font-extrabold text-[12px]">VER OFERTA</a></div></div>';
   }).join('');
   document.getElementById('lista').innerHTML=produtos.map(p=>'<div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0">'+(p.imagemUrl?'<img src="'+p.imagemUrl+'" class="w-full h-full object-cover">':esc(p.emoji))+'</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">'+esc(p.nome)+'</p><p class="text-[11px] text-zinc-500">R$ '+p.precoNovo+' • '+esc(p.loja)+'</p></div><button onclick="apagarFirebase(\''+p.id+'\')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div>').join('');
 }
 render();
-document.getElementById('busca').addEventListener('input', e=>{ busca=e.target.value; render(); });
+
+// CLIENTE CONFIG - NOME
+let nomeCliente = localStorage.getItem('cliente_nome') || '';
+function atualizarAvatar(){
+  const btn = document.getElementById('btn-cliente');
+  const avatarPrev = document.getElementById('avatar-preview');
+  const saudacao = document.getElementById('saudacao-cliente');
+  const nomeBanner = document.getElementById('nome-cliente-banner');
+  if(!btn) return;
+  if(nomeCliente && nomeCliente.trim()){
+    const inicial = nomeCliente.trim()[0].toUpperCase();
+    btn.textContent = inicial;
+    btn.classList.remove('bg-black','text-white');
+    btn.classList.add('bg-[#ffe600]','text-black');
+    if(avatarPrev) avatarPrev.textContent = inicial;
+    if(saudacao){ saudacao.classList.remove('hidden'); if(nomeBanner) nomeBanner.textContent = nomeCliente; }
+  } else {
+    btn.textContent = '?';
+    btn.classList.add('bg-black','text-white');
+    btn.classList.remove('bg-[#ffe600]','text-black');
+    if(avatarPrev) avatarPrev.textContent = '?';
+    if(saudacao) saudacao.classList.add('hidden');
+  }
+}
+window.atualizarAvatarGlobal = function(nome){ nomeCliente = nome; atualizarAvatar(); };
+
+atualizarAvatar();
+document.getElementById('busca').addEventListener('input',e=>{busca=e.target.value;render();
+
+// CLIENTE CONFIG - NOME
+let nomeCliente = localStorage.getItem('cliente_nome') || '';
+function atualizarAvatar(){
+  const btn = document.getElementById('btn-cliente');
+  const avatarPrev = document.getElementById('avatar-preview');
+  const saudacao = document.getElementById('saudacao-cliente');
+  const nomeBanner = document.getElementById('nome-cliente-banner');
+  if(!btn) return;
+  if(nomeCliente && nomeCliente.trim()){
+    const inicial = nomeCliente.trim()[0].toUpperCase();
+    btn.textContent = inicial;
+    btn.classList.remove('bg-black','text-white');
+    btn.classList.add('bg-[#ffe600]','text-black');
+    if(avatarPrev) avatarPrev.textContent = inicial;
+    if(saudacao){ saudacao.classList.remove('hidden'); if(nomeBanner) nomeBanner.textContent = nomeCliente; }
+  } else {
+    btn.textContent = '?';
+    btn.classList.add('bg-black','text-white');
+    btn.classList.remove('bg-[#ffe600]','text-black');
+    if(avatarPrev) avatarPrev.textContent = '?';
+    if(saudacao) saudacao.classList.add('hidden');
+  }
+}
+window.atualizarAvatarGlobal = function(nome){ nomeCliente = nome; atualizarAvatar(); };
+
+atualizarAvatar();});
 document.querySelectorAll('.cat').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
+  btn.addEventListener('click',()=>{
     document.querySelectorAll('.cat').forEach(b=>b.className="cat shrink-0 h-8 px-4 rounded-full text-[13px] font-bold bg-white border border-zinc-200 text-black");
-    btn.className="cat shrink-0 h-8 px-4 rounded-full text-[13px] font-bold bg-black text-white";
-    filtroCat=btn.dataset.cat; render();
+    btn.className="cat shrink-0 h-8 px-4 rounded-full text-[13px] font-bold bg-black text-white"; filtroCat=btn.dataset.cat; render();
+
+// CLIENTE CONFIG - NOME
+let nomeCliente = localStorage.getItem('cliente_nome') || '';
+function atualizarAvatar(){
+  const btn = document.getElementById('btn-cliente');
+  const avatarPrev = document.getElementById('avatar-preview');
+  const saudacao = document.getElementById('saudacao-cliente');
+  const nomeBanner = document.getElementById('nome-cliente-banner');
+  if(!btn) return;
+  if(nomeCliente && nomeCliente.trim()){
+    const inicial = nomeCliente.trim()[0].toUpperCase();
+    btn.textContent = inicial;
+    btn.classList.remove('bg-black','text-white');
+    btn.classList.add('bg-[#ffe600]','text-black');
+    if(avatarPrev) avatarPrev.textContent = inicial;
+    if(saudacao){ saudacao.classList.remove('hidden'); if(nomeBanner) nomeBanner.textContent = nomeCliente; }
+  } else {
+    btn.textContent = '?';
+    btn.classList.add('bg-black','text-white');
+    btn.classList.remove('bg-[#ffe600]','text-black');
+    if(avatarPrev) avatarPrev.textContent = '?';
+    if(saudacao) saudacao.classList.add('hidden');
+  }
+}
+window.atualizarAvatarGlobal = function(nome){ nomeCliente = nome; atualizarAvatar(); };
+
+atualizarAvatar();
   });
 });
 let clicks=[];
-document.getElementById('logo').addEventListener('click', ()=>{
-  clicks=[...clicks, Date.now()].filter(t=>Date.now()-t<3000);
-  if(clicks.length>=5){ clicks=[]; document.getElementById('modal').classList.remove('hidden'); }
-});
-document.getElementById('fechar').addEventListener('click', ()=>{ document.getElementById('modal').classList.add('hidden'); });
-document.getElementById('modal-bg').addEventListener('click', ()=>{ document.getElementById('modal').classList.add('hidden'); });
-document.getElementById('entrar').addEventListener('click', ()=>{
+document.getElementById('logo').addEventListener('click',()=>{clicks=[...clicks,Date.now()].filter(t=>Date.now()-t<3000);if(clicks.length>=5){clicks=[];document.getElementById('modal').classList.remove('hidden');}});
+document.getElementById('fechar').addEventListener('click',()=>document.getElementById('modal').classList.add('hidden'));
+document.getElementById('modal-bg').addEventListener('click',()=>document.getElementById('modal').classList.add('hidden'));
+document.getElementById('entrar').addEventListener('click',()=>{
   const s=document.getElementById('senha').value;
-  if(s==="1234"||s==="felipe123"){ document.getElementById('modal').classList.add('hidden'); document.getElementById('painel').classList.remove('hidden'); toast("ADM ao vivo ✅"); }
+  if(s==="1234"||s==="felipe123"){document.getElementById('modal').classList.add('hidden');document.getElementById('painel').classList.remove('hidden');toast("ADM 🔔");}
   else toast("Senha incorreta");
 });
-document.getElementById('fechar-painel').addEventListener('click', ()=>document.getElementById('painel').classList.add('hidden'));
-document.getElementById('aba-produtos').addEventListener('click', ()=>{
-  document.getElementById('conteudo-produtos').classList.remove('hidden');
-  document.getElementById('conteudo-aovivo').classList.add('hidden');
-  document.getElementById('aba-produtos').className="flex-1 h-10 rounded-full bg-black text-white font-bold text-[13px]";
-  document.getElementById('aba-aovivo').className="flex-1 h-10 rounded-full bg-white border border-zinc-200 font-bold text-[13px]";
+document.getElementById('fechar-painel').addEventListener('click',()=>document.getElementById('painel').classList.add('hidden'));
+function showTab(tab){
+  ['produtos','editar','aovivo','notif'].forEach(t=>{document.getElementById('conteudo-'+t).classList.add('hidden');document.getElementById('aba-'+t).className="flex-1 h-9 rounded-full bg-white border border-zinc-200 font-bold text-[11px]";});
+  document.getElementById('conteudo-'+tab).classList.remove('hidden');
+  document.getElementById('aba-'+tab).className="flex-1 h-9 rounded-full bg-black text-white font-bold text-[11px]";
+}
+document.getElementById('aba-produtos').addEventListener('click',()=>showTab('produtos'));
+document.getElementById('aba-editar').addEventListener('click',()=>showTab('editar'));
+document.getElementById('aba-aovivo').addEventListener('click',()=>showTab('aovivo'));
+document.getElementById('aba-notif').addEventListener('click',()=>showTab('notif'));
+document.getElementById('bell-notif').addEventListener('click',()=>document.getElementById('modal-notif').classList.remove('hidden'));
+document.getElementById('fechar-notif').addEventListener('click',()=>document.getElementById('modal-notif').classList.add('hidden'));
+document.getElementById('modal-notif-bg').addEventListener('click',()=>document.getElementById('modal-notif').classList.add('hidden'));
+document.getElementById('edit-cor').addEventListener('input',e=>{document.getElementById('edit-cor-txt').value=e.target.value;});
+document.getElementById('edit-cor-txt').addEventListener('input',e=>{document.getElementById('edit-cor').value=e.target.value;});
+
+document.getElementById('btn-cliente')?.addEventListener('click', ()=>{
+  document.getElementById('input-nome-cliente').value = nomeCliente;
+  document.getElementById('modal-cliente').classList.remove('hidden');
+  document.getElementById('avatar-preview').textContent = nomeCliente ? nomeCliente[0].toUpperCase() : '?';
 });
-document.getElementById('aba-aovivo').addEventListener('click', ()=>{
-  document.getElementById('conteudo-produtos').classList.add('hidden');
-  document.getElementById('conteudo-aovivo').classList.remove('hidden');
-  document.getElementById('aba-aovivo').className="flex-1 h-10 rounded-full bg-black text-white font-bold text-[13px]";
-  document.getElementById('aba-produtos').className="flex-1 h-10 rounded-full bg-white border border-zinc-200 font-bold text-[13px]";
+document.getElementById('fechar-cliente')?.addEventListener('click', ()=>document.getElementById('modal-cliente').classList.add('hidden'));
+document.getElementById('modal-cliente-bg')?.addEventListener('click', ()=>document.getElementById('modal-cliente').classList.add('hidden'));
+document.getElementById('input-nome-cliente')?.addEventListener('input', (e)=>{
+  const v = e.target.value.trim();
+  document.getElementById('avatar-preview').textContent = v ? v[0].toUpperCase() : '?';
 });
-document.getElementById('bell-notif').addEventListener('click', ()=>{ document.getElementById('modal-notif').classList.remove('hidden'); });
-document.getElementById('fechar-notif').addEventListener('click', ()=>{ document.getElementById('modal-notif').classList.add('hidden'); });
-document.getElementById('modal-notif-bg').addEventListener('click', ()=>{ document.getElementById('modal-notif').classList.add('hidden'); });
-document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ document.getElementById('modal-notif').classList.add('hidden'); document.getElementById('modal').classList.add('hidden'); }});
+
+document.getElementById('sininho-depois').addEventListener('click',()=>{document.getElementById('modal-sininho').classList.add('hidden');localStorage.setItem('sininho_adiado',Date.now());});
 </script>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
 import { getDatabase, ref, onValue, push, remove, set, onDisconnect } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js";
-const firebaseConfig = {
-  apiKey: "AIzaSyAqkpuZamU05yXVGiQMtmyMmL68_Op-r88",
-  authDomain: "achadinhos-loja.firebaseapp.com",
-  databaseURL: "https://achadinhos-loja-default-rtdb.firebaseio.com",
-  projectId: "achadinhos-loja",
-  storageBucket: "achadinhos-loja.firebasestorage.app",
-  messagingSenderId: "114449338702",
-  appId: "1:114449338702:web:78ae8c8c5b792e0a6fce1f"
-};
+const firebaseConfig={apiKey:"AIzaSyAqkpuZamU05yXVGiQMtmyMmL68_Op-r88",authDomain:"achadinhos-loja.firebaseapp.com",databaseURL:"https://achadinhos-loja-default-rtdb.firebaseio.com",projectId:"achadinhos-loja",storageBucket:"achadinhos-loja.firebasestorage.app",messagingSenderId:"114449338702",appId:"1:114449338702:web:78ae8c8c5b792e0a6fce1f"};
 try{
   const app=initializeApp(firebaseConfig);
   const db=getDatabase(app);
   const produtosRef=ref(db,'produtos');
   const onlineRef=ref(db,'online');
   const cliquesRef=ref(db,'cliques');
+  const configRef=ref(db,'config/loja');
+  const notifRef=ref(db,'notificacoes');
+  const inscritosRef=ref(db,'inscritos_sininho');
 
-  // VISITANTE ID
-  let visitorId = localStorage.getItem('achadinhos_visitor');
-  if(!visitorId){ visitorId='vis_'+Math.random().toString(36).substr(2,9); localStorage.setItem('achadinhos_visitor', visitorId); }
-  
-  // PRESENCA AO VIVO
-  const meuOnlineRef = ref(db, 'online/'+visitorId);
-  function atualizaPresenca(){
-    set(meuOnlineRef, {
-      id: visitorId,
-      online: true,
-      ts: Date.now(),
-      ua: navigator.userAgent.substring(0,120),
-      hora: new Date().toLocaleTimeString('pt-BR')
+  let visitorId=localStorage.getItem('achadinhos_visitor');
+  if(!visitorId){visitorId='vis_'+Math.random().toString(36).substr(2,9);localStorage.setItem('achadinhos_visitor',visitorId);}
+  let nomeClienteLocal = localStorage.getItem('cliente_nome') || '';
+  const clientesRef = ref(db,'clientes');
+  const meuClienteRef = ref(db,'clientes/'+visitorId);
+  const meuOnlineRef=ref(db,'online/'+visitorId);
+  function atualizaPresenca(){set(meuOnlineRef,{id:visitorId,online:true,ts:Date.now(),ua:navigator.userAgent.substring(0,120),hora:new Date().toLocaleTimeString('pt-BR')});}
+  atualizaPresenca(); setInterval(atualizaPresenca,30000); onDisconnect(meuOnlineRef).remove();
+
+  // SININHO AUTOMATICO AO ENTRAR
+  function mostrarSininhoAuto(){
+    const permissao=Notification.permission;
+    const jaAtivou=localStorage.getItem('sininho_ativado');
+    const adiado=localStorage.getItem('sininho_adiado');
+    const tempoAdiado=adiado?Date.now()-parseInt(adiado):Infinity;
+    if(permissao!=='default') return;
+    if(jaAtivou) return;
+    if(tempoAdiado< 24*60*60*1000) return; // 24h
+    setTimeout(()=>{document.getElementById('modal-sininho').classList.remove('hidden');}, 2500);
+  }
+  mostrarSininhoAuto();
+
+  function ativarSininho(){
+    if(!('Notification' in window)){toast("Seu navegador não suporta notificação");return;}
+    Notification.requestPermission().then(perm=>{
+      document.getElementById('modal-sininho').classList.add('hidden');
+      if(perm==='granted'){
+        localStorage.setItem('sininho_ativado','1');
+        document.getElementById('bell-dot').classList.add('hidden');
+        set(inscritosRef,{}); // garante node
+        set(ref(db,'inscritos_sininho/'+visitorId),{id:visitorId,ts:Date.now(),hora:new Date().toLocaleString('pt-BR'),ua:navigator.userAgent.substring(0,80)});
+        toast("🔔 Sininho ativado! Você vai receber ofertas!");
+        new Notification("🔔 Sininho ativado!",{body:"Você vai receber achadinhos novos na hora!"});
+        document.getElementById('card-permissao').textContent="Ativo ✅";
+      } else {
+        toast("Sininho não ativado");
+        document.getElementById('card-permissao').textContent="Bloqueado ❌";
+      }
     });
   }
-  atualizaPresenca();
-  setInterval(atualizaPresenca, 30000);
-  onDisconnect(meuOnlineRef).remove();
-  window.addEventListener('beforeunload', ()=>{ remove(meuOnlineRef); });
+  document.getElementById('sininho-ativar').addEventListener('click',ativarSininho);
+  
+  // SALVAR NOME CLIENTE
+  function salvarNomeClienteFirebase(nome){
+    if(!nome) return;
+    set(meuClienteRef,{id:visitorId,nome:nome,ts:Date.now(),hora:new Date().toLocaleString('pt-BR'),ua:navigator.userAgent.substring(0,80),sininho: Notification.permission});
+    set(meuOnlineRef,{id:visitorId,nome:nome,online:true,ts:Date.now(),ua:navigator.userAgent.substring(0,120),hora:new Date().toLocaleTimeString('pt-BR')});
+  }
+  document.getElementById('salvar-nome-cliente').addEventListener('click',()=>{
+    const nome = document.getElementById('input-nome-cliente').value.trim();
+    if(!nome){toast("Digite seu nome");return;}
+    if(nome.length<2){toast("Nome muito curto");return;}
+    localStorage.setItem('cliente_nome', nome);
+    nomeClienteLocal = nome;
+    if(window.atualizarAvatarGlobal) window.atualizarAvatarGlobal(nome);
+    const btn = document.getElementById('btn-cliente');
+    if(btn){ btn.textContent = nome[0].toUpperCase(); btn.classList.remove('bg-black','text-white'); btn.classList.add('bg-[#ffe600]','text-black'); }
+    const saud = document.getElementById('saudacao-cliente');
+    const nomeB = document.getElementById('nome-cliente-banner');
+    if(saud && nomeB){ saud.classList.remove('hidden'); nomeB.textContent = nome; }
+    salvarNomeClienteFirebase(nome);
+    document.getElementById('modal-cliente').classList.add('hidden');
+    toast("✅ Olá, "+nome+"! Nome salvo");
+  });
+  if(nomeClienteLocal){ setTimeout(()=>salvarNomeClienteFirebase(nomeClienteLocal), 1000); }
 
-  // PRODUTOS AO VIVO
-  onValue(produtosRef, (snap)=>{
-    const data=snap.val();
-    if(data){
-      const lista=Object.entries(data).map(([id,v])=>({
-        id, nome:v.nome, precoNovo:v.preco||v.precoNovo||0, precoAntigo:v.precoOriginal||v.precoAntigo||0,
-        loja:v.loja||"Shopee", emoji:v.imagem&&!v.imagem.startsWith("http")?v.imagem:"🎁",
-        imagemUrl:v.imagem&&v.imagem.startsWith("http")?v.imagem:null,
-        affiliateLink:v.linkAfiliado||v.affiliateLink||"#"
-      })).reverse();
-      if(lista.length>0){ produtos=lista; render(); }
+  onValue(clientesRef, snap=>{
+    const data=snap.val()||{};
+    const lista=Object.values(data).reverse().slice(0,50);
+    const listaClientesDiv = document.getElementById('lista-clientes-nomes');
+    if(listaClientesDiv){
+      if(lista.length===0) listaClientesDiv.innerHTML='<p class="text-zinc-400">Ninguém salvou nome ainda...</p>';
+      else listaClientesDiv.innerHTML=lista.map(c=>'<div class="flex justify-between p-2 bg-zinc-50 rounded-[10px]"><div><p class="font-bold text-[11px]">👤 '+(c.nome||'Sem nome')+' • '+c.id.substring(0,6)+'...</p><p class="text-[10px] text-zinc-500">'+c.hora+'</p></div><span class="text-[10px] '+(c.sininho==='granted'?'text-emerald-600':'text-zinc-400')+'">'+(c.sininho==='granted'?'🔔':'')+'</span></div>').join('');
     }
   });
 
-  window.apagarFirebase=(id)=>{
-    if(!confirm("Apagar definitivo do Firebase?")) return;
-    if(id && id.length <= 2){ produtos=produtos.filter(p=>p.id!==id); render(); toast("Apagado local"); return; }
-    remove(ref(db,'produtos/'+id)).then(()=>toast("✅ Apagado!"));
-  };
-  window.apagar = window.apagarFirebase;
-
-  document.getElementById('f-salvar').addEventListener('click', ()=>{
-    const nome=document.getElementById('f-nome').value.trim();
-    const preco=document.getElementById('f-preco').value;
-    if(!nome||!preco){ toast("Preencha nome e preço"); return; }
-    const novo={ nome, preco:parseFloat(preco), precoOriginal:parseFloat(document.getElementById('f-preco-antigo').value)||0, imagem:document.getElementById('f-emoji').value||"🎁", linkAfiliado:document.getElementById('f-link').value||"https://shopee.com.br", loja:document.getElementById('f-loja').value, addedAt:Date.now() };
-    push(produtosRef, novo).then(()=>{ toast("✅ Salvo!"); document.getElementById('f-nome').value=""; document.getElementById('f-preco').value=""; document.getElementById('f-preco-antigo').value=""; document.getElementById('f-emoji').value=""; document.getElementById('f-link').value=""; });
+  document.getElementById('notif-testar').addEventListener('click',()=>{
+    if(Notification.permission!=='granted'){Notification.requestPermission().then(p=>{if(p==='granted') new Notification("🔔 Teste",{body:"Sininho funcionando!"}); else toast("Permita notificações");});}
+    else new Notification("🔔 Teste",{body:"Sininho funcionando! Quando adicionar produto novo, chega pra todo mundo!"});
   });
 
-  // ONLINE AO VIVO
-  onValue(onlineRef, (snap)=>{
-    const data=snap.val()||{};
-    const lista=Object.values(data);
-    const agora=Date.now();
-    const recentes=lista.filter(v=> agora - v.ts < 120000); // 2 minutos
+  // PRODUTOS + DETECTA NOVO PRODUTO PARA NOTIFICAR TODOS
+  let produtosAnteriores=new Set();
+  let primeiraCarga=true;
+  onValue(produtosRef,snap=>{
+    const data=snap.val();
+    if(data){
+      const lista=Object.entries(data).map(([id,v])=>({id,nome:v.nome,precoNovo:v.preco||v.precoNovo||0,precoAntigo:v.precoOriginal||v.precoAntigo||0,loja:v.loja||"Shopee",emoji:v.imagem&&!v.imagem.startsWith("http")?v.imagem:"🎁",imagemUrl:v.imagem&&v.imagem.startsWith("http")?v.imagem:null,affiliateLink:v.linkAfiliado||v.affiliateLink||"#"} )).reverse();
+      if(lista.length>0){
+        // detecta novos
+        if(!primeiraCarga){
+          lista.forEach(p=>{
+            if(!produtosAnteriores.has(p.id)){
+              // NOVO PRODUTO DETECTADO
+              if(Notification.permission==='granted'){
+                try{ new Notification("🔥 Achadinho novo!",{body:p.nome.substring(0,60)+" - R$ "+p.precoNovo, icon:"https://cdn-icons-png.flaticon.com/512/263/263142.png"}); }catch(e){}
+              }
+            }
+          });
+        }
+        produtos=lista;
+        produtosAnteriores=new Set(lista.map(p=>p.id));
+        render();
+
+// CLIENTE CONFIG - NOME
+let nomeCliente = localStorage.getItem('cliente_nome') || '';
+function atualizarAvatar(){
+  const btn = document.getElementById('btn-cliente');
+  const avatarPrev = document.getElementById('avatar-preview');
+  const saudacao = document.getElementById('saudacao-cliente');
+  const nomeBanner = document.getElementById('nome-cliente-banner');
+  if(!btn) return;
+  if(nomeCliente && nomeCliente.trim()){
+    const inicial = nomeCliente.trim()[0].toUpperCase();
+    btn.textContent = inicial;
+    btn.classList.remove('bg-black','text-white');
+    btn.classList.add('bg-[#ffe600]','text-black');
+    if(avatarPrev) avatarPrev.textContent = inicial;
+    if(saudacao){ saudacao.classList.remove('hidden'); if(nomeBanner) nomeBanner.textContent = nomeCliente; }
+  } else {
+    btn.textContent = '?';
+    btn.classList.add('bg-black','text-white');
+    btn.classList.remove('bg-[#ffe600]','text-black');
+    if(avatarPrev) avatarPrev.textContent = '?';
+    if(saudacao) saudacao.classList.add('hidden');
+  }
+}
+window.atualizarAvatarGlobal = function(nome){ nomeCliente = nome; atualizarAvatar(); };
+
+atualizarAvatar();
+        primeiraCarga=false;
+      }
+    }
+  });
+  window.apagarFirebase=(id)=>{if(!confirm("Apagar definitivo?"))return;if(id&&id.length<=2){produtos=produtos.filter(p=>p.id!==id);render();
+
+// CLIENTE CONFIG - NOME
+let nomeCliente = localStorage.getItem('cliente_nome') || '';
+function atualizarAvatar(){
+  const btn = document.getElementById('btn-cliente');
+  const avatarPrev = document.getElementById('avatar-preview');
+  const saudacao = document.getElementById('saudacao-cliente');
+  const nomeBanner = document.getElementById('nome-cliente-banner');
+  if(!btn) return;
+  if(nomeCliente && nomeCliente.trim()){
+    const inicial = nomeCliente.trim()[0].toUpperCase();
+    btn.textContent = inicial;
+    btn.classList.remove('bg-black','text-white');
+    btn.classList.add('bg-[#ffe600]','text-black');
+    if(avatarPrev) avatarPrev.textContent = inicial;
+    if(saudacao){ saudacao.classList.remove('hidden'); if(nomeBanner) nomeBanner.textContent = nomeCliente; }
+  } else {
+    btn.textContent = '?';
+    btn.classList.add('bg-black','text-white');
+    btn.classList.remove('bg-[#ffe600]','text-black');
+    if(avatarPrev) avatarPrev.textContent = '?';
+    if(saudacao) saudacao.classList.add('hidden');
+  }
+}
+window.atualizarAvatarGlobal = function(nome){ nomeCliente = nome; atualizarAvatar(); };
+
+atualizarAvatar();toast("Apagado local");return;} remove(ref(db,'produtos/'+id)).then(()=>toast("✅ Apagado!"));};
+  window.apagar=window.apagarFirebase;
+
+  document.getElementById('f-salvar').addEventListener('click',()=>{
+    const nome=document.getElementById('f-nome').value.trim(); const preco=document.getElementById('f-preco').value;
+    if(!nome||!preco){toast("Preencha nome e preço");return;}
+    const novo={nome,preco:parseFloat(preco),precoOriginal:parseFloat(document.getElementById('f-preco-antigo').value)||0,imagem:document.getElementById('f-emoji').value||"🎁",linkAfiliado:document.getElementById('f-link').value||"https://shopee.com.br",loja:document.getElementById('f-loja').value,addedAt:Date.now()};
+    push(produtosRef,novo).then((snap)=>{
+      // ENVIA NOTIFICACAO AUTOMATICA PRA TODO MUNDO
+      const titulo="🔥 Achadinho novo: "+nome.substring(0,30);
+      const msg="R$ "+preco+" • "+document.getElementById('f-loja').value+" • Corre que acaba rápido!";
+      push(notifRef,{titulo,mensagem:msg,produtoNome:nome,timestamp:Date.now(),hora:new Date().toLocaleString('pt-BR')});
+      toast("✅ Salvo + 🔔 Notificação enviada pra todos!");
+      document.getElementById('f-nome').value="";document.getElementById('f-preco').value="";document.getElementById('f-preco-antigo').value="";document.getElementById('f-emoji').value="";document.getElementById('f-link').value="";
+    });
+  });
+
+  // CONFIG LOJA AO VIVO
+  const defaultConfig={nome:"ACHADINHOS",tag:"MOBILE",badge:"🔥 NOVO • SININHO AUTOMÁTICO",t1:"Achadinhos que",t2:"valem cada centavo",cor:"#ff6b2b",rodapeTitulo:"ACHADINHOS OFICIAL 🛒",rodapeZap:"Zap: 81 99802-8998 • Bonito-PE"};
+  onValue(configRef,snap=>{
+    const cfg=snap.val()||defaultConfig;
+    document.getElementById('nome-loja').textContent=cfg.nome||defaultConfig.nome;
+    document.getElementById('tag-loja').textContent=cfg.tag||defaultConfig.tag;
+    document.getElementById('banner-badge').textContent=cfg.badge||defaultConfig.badge;
+    document.getElementById('banner-t1').textContent=cfg.t1||defaultConfig.t1;
+    document.getElementById('banner-t2').textContent=cfg.t2||defaultConfig.t2;
+    document.getElementById('banner-t2').style.color=cfg.cor||defaultConfig.cor;
+    document.getElementById('banner-bola').style.background=cfg.cor||defaultConfig.cor;
+    document.getElementById('rodape-titulo').textContent=cfg.rodapeTitulo||defaultConfig.rodapeTitulo;
+    document.getElementById('rodape-zap').textContent=cfg.rodapeZap||defaultConfig.rodapeZap;
+    if(!document.getElementById('edit-nome').value){document.getElementById('edit-nome').value=cfg.nome||"";document.getElementById('edit-tag').value=cfg.tag||"";document.getElementById('edit-badge').value=cfg.badge||"";document.getElementById('edit-t1').value=cfg.t1||"";document.getElementById('edit-t2').value=cfg.t2||"";document.getElementById('edit-cor').value=cfg.cor||"#ff6b2b";document.getElementById('edit-cor-txt').value=cfg.cor||"#ff6b2b";document.getElementById('edit-rodape-titulo').value=cfg.rodapeTitulo||"";document.getElementById('edit-rodape-zap').value=cfg.rodapeZap||"";}
+  });
+  document.getElementById('edit-salvar').addEventListener('click',()=>{
+    const novoCfg={nome:document.getElementById('edit-nome').value||"ACHADINHOS",tag:document.getElementById('edit-tag').value||"MOBILE",badge:document.getElementById('edit-badge').value||"🔥 NOVO",t1:document.getElementById('edit-t1').value||"Achadinhos que",t2:document.getElementById('edit-t2').value||"valem cada centavo",cor:document.getElementById('edit-cor-txt').value||"#ff6b2b",rodapeTitulo:document.getElementById('edit-rodape-titulo').value||"ACHADINHOS OFICIAL 🛒",rodapeZap:document.getElementById('edit-rodape-zap').value||"Zap: 81 99802-8998"};
+    set(configRef,novoCfg).then(()=>toast("✅ Loja atualizada ao vivo!"));
+  });
+
+  // ONLINE
+  onValue(onlineRef,snap=>{
+    const data=snap.val()||{}; const lista=Object.values(data); const recentes=lista.filter(v=>Date.now()-v.ts<120000);
     document.getElementById('online-top').textContent=recentes.length+" on-line";
     document.getElementById('online-painel').textContent=recentes.length+" on-line";
     document.getElementById('card-online').textContent=recentes.length;
     const div=document.getElementById('lista-online');
-    if(recentes.length===0){ div.innerHTML='<p class="text-zinc-400">Ninguém on-line agora...</p>'; }
-    else {
-      div.innerHTML=recentes.map(v=>'<div class="flex items-center justify-between p-2 bg-zinc-50 rounded-[10px]"><div><p class="font-bold text-[11px]">'+v.id.substring(0,8)+'... • '+v.hora+'</p><p class="text-[10px] text-zinc-500 truncate w-[200px]">'+v.ua.substring(0,60)+'</p></div><span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span></div>').join('');
-    }
+    if(recentes.length===0) div.innerHTML='<p class="text-zinc-400">Ninguém...</p>';
+    else div.innerHTML=recentes.map(v=>'<div class="flex justify-between p-2 bg-zinc-50 rounded-[10px]"><div><p class="font-bold text-[11px]">'+(v.nome? '👤 '+v.nome+' • ' : '')+v.id.substring(0,8)+'... • '+v.hora+'</p><p class="text-[10px] text-zinc-500 truncate w-[200px]">'+v.ua.substring(0,60)+'</p></div><span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span></div>').join('');
   });
-
-  // CLIQUES AO VIVO - rastreia quem clicou no VER OFERTA
-  function registrarClique(produtoId, nome){
-    push(cliquesRef, {
-      produtoId, produtoNome: nome,
-      visitorId: visitorId,
-      ts: Date.now(),
-      hora: new Date().toLocaleString('pt-BR'),
-      data: new Date().toLocaleDateString('pt-BR')
-    });
-  }
-  document.getElementById('grid').addEventListener('click', (e)=>{
-    const btn=e.target.closest('.btn-oferta');
-    if(btn){
-      const id=btn.getAttribute('data-id');
-      const nome=btn.getAttribute('data-nome');
-      registrarClique(id, nome);
-    }
-  });
-
-  onValue(cliquesRef, (snap)=>{
-    const data=snap.val()||{};
-    const lista=Object.values(data).reverse().slice(0,50);
-    const hoje=new Date().toLocaleDateString('pt-BR');
-    const hojeLista=lista.filter(c=>c.data===hoje);
-    document.getElementById('card-cliques').textContent=hojeLista.length;
-    document.getElementById('card-total-geral').textContent=lista.length+" total";
+  function registrarClique(id,nome){push(cliquesRef,{produtoId:id,produtoNome:nome,visitorId:visitorId,ts:Date.now(),hora:new Date().toLocaleString('pt-BR'),data:new Date().toLocaleDateString('pt-BR')});}
+  document.getElementById('grid').addEventListener('click',e=>{const btn=e.target.closest('.btn-oferta');if(btn) registrarClique(btn.getAttribute('data-id'),btn.getAttribute('data-nome'));});
+  onValue(cliquesRef,snap=>{
+    const data=snap.val()||{}; const lista=Object.values(data).reverse().slice(0,50); const hoje=new Date().toLocaleDateString('pt-BR'); const hojeLista=lista.filter(c=>c.data===hoje);
+    document.getElementById('card-cliques').textContent=hojeLista.length; document.getElementById('card-total-geral').textContent=lista.length+" total";
     const div=document.getElementById('lista-cliques');
-    if(lista.length===0){ div.innerHTML='<p class="text-zinc-400 text-[12px]">Nenhum clique ainda...</p>'; }
-    else {
-      div.innerHTML=lista.map(c=>'<div class="p-2 bg-zinc-50 rounded-[10px] border border-zinc-100"><p class="font-bold text-[11px]">🛒 '+ (c.produtoNome||c.produtoId).substring(0,35)+'</p><p class="text-[10px] text-zinc-500">'+c.hora+' • '+c.visitorId.substring(0,8)+'...</p></div>').join('');
-    }
+    if(lista.length===0) div.innerHTML='<p class="text-zinc-400 text-[12px]">Nenhum clique...</p>';
+    else div.innerHTML=lista.map(c=>'<div class="p-2 bg-zinc-50 rounded-[10px] border border-zinc-100"><p class="font-bold text-[11px]">🛒 '+ (c.produtoNome||c.produtoId).substring(0,35)+'</p><p class="text-[10px] text-zinc-500">'+c.hora+' • '+c.visitorId.substring(0,8)+'...</p></div>').join('');
   });
-  document.getElementById('limpar-cliques').addEventListener('click', ()=>{
-    if(confirm("Limpar todos os cliques?")){ remove(cliquesRef).then(()=>toast("Cliques limpos")); }
+  document.getElementById('limpar-cliques').addEventListener('click',()=>{if(confirm("Limpar cliques?")) remove(cliquesRef).then(()=>toast("Limpos"));});
+
+  // NOTIFICACOES + INSCRITOS
+  let notificacoesAnteriores=new Set(); let primeiraNotif=true;
+  onValue(notifRef,snap=>{
+    const data=snap.val()||{};
+    const lista=Object.entries(data).map(([id,v])=>({id,...v})).reverse();
+    const div=document.getElementById('historico-notif'); const div2=document.getElementById('historico-notif-2');
+    if(div) div.innerHTML=lista.slice(0,5).map(n=>'<div class="p-2 bg-zinc-50 rounded-[10px]"><p class="text-[11px] font-bold">'+n.titulo+'</p><p class="text-[10px] text-zinc-500">'+n.mensagem+'</p><p class="text-[9px] text-zinc-400">'+(n.hora||"")+'</p></div>').join('')||'<p class="text-zinc-400 text-[12px]">Nenhuma enviada</p>';
+    if(div2) div2.innerHTML=div.innerHTML;
+    document.getElementById('card-notif-enviadas').textContent=lista.length;
+    if(!primeiraNotif){
+      lista.forEach(n=>{
+        if(!notificacoesAnteriores.has(n.id)){
+          if(Notification.permission==='granted'){
+            try{ new Notification(n.titulo,{body:n.mensagem}); }catch(e){}
+          }
+        }
+      });
+    }
+    notificacoesAnteriores=new Set(lista.map(n=>n.id));
+    primeiraNotif=false;
+  });
+  onValue(inscritosRef,snap=>{
+    const data=snap.val()||{}; const lista=Object.values(data);
+    document.getElementById('card-inscritos').textContent=lista.length;
+    document.getElementById('inscritos-total').textContent=lista.length+" inscritos";
+    const div=document.getElementById('lista-inscritos');
+    if(lista.length===0) div.innerHTML='<p class="text-zinc-400">Ninguém ativou ainda...</p>';
+    else div.innerHTML=lista.reverse().slice(0,20).map(v=>'<div class="flex justify-between p-2 bg-zinc-50 rounded-[10px]"><p class="text-[11px] font-bold">'+v.id.substring(0,8)+'...</p><p class="text-[10px] text-zinc-500">'+v.hora+'</p></div>').join('');
   });
 
-  // NOTIFICACOES
-  const notifRef = ref(db, 'notificacoes');
-  document.getElementById('notif-enviar-todos').addEventListener('click', ()=>{
-    const titulo=document.getElementById('notif-titulo').value.trim();
-    const msg=document.getElementById('notif-msg').value.trim();
-    if(!titulo||!msg){ toast("Preencha"); return; }
-    push(notifRef, {titulo, mensagem:msg, timestamp:Date.now()}).then(()=>toast("📢 Enviada pra quem tá on-line!"));
-  });
-  onValue(notifRef, (snap)=>{
-    const data=snap.val();
-    if(data){
-      const lista=Object.values(data).reverse().slice(0,5);
-      const h=document.getElementById('historico-notif');
-      if(h) h.innerHTML=lista.map(n=>'<div class="p-2 bg-zinc-50 rounded-[10px]"><p class="text-[11px] font-bold">'+n.titulo+'</p><p class="text-[10px] text-zinc-500">'+n.mensagem+'</p></div>').join('');
-    }
-  });
+  // status permissao
+  document.getElementById('card-permissao').textContent=Notification.permission==='granted'?'Ativo ✅':Notification.permission==='denied'?'Bloqueado ❌':'Pendente';
+  if(Notification.permission==='granted') document.getElementById('bell-dot').classList.add('hidden');
 
-}catch(e){ console.log("Firebase erro", e); }
+  function enviarNotificacaoManual(){
+    const titulo=document.getElementById('notif-titulo').value.trim()||document.getElementById('notif-titulo-2').value.trim();
+    const msg=document.getElementById('notif-msg').value.trim()||document.getElementById('notif-msg-2').value.trim();
+    if(!titulo||!msg){toast("Preencha título e mensagem");return;}
+    push(notifRef,{titulo,mensagem:msg,timestamp:Date.now(),hora:new Date().toLocaleString('pt-BR')}).then(()=>toast("📢 Enviada pra todos que ativaram o sininho!"));
+  }
+  document.getElementById('notif-enviar-todos').addEventListener('click',enviarNotificacaoManual);
+  document.getElementById('notif-enviar-todos-2').addEventListener('click',enviarNotificacaoManual);
+
+}catch(e){console.log(e);}
 </script>
 <script>(function(){var loc=location.href.replace(/#.*$/,"");var ATTR_NAMES=["data-product-id","data-productid","data-product_id","product-id","productid","product_id","data-source-entity-id","source-entity-id","source_entity_id","data-product","data-metadata","data-meta"];var DATASET_KEYS=["productId","productid","product_id","sourceEntityId","sourceentityid","source_entity_id","product","metadata","meta"];function readProductId(value){if(typeof value!=="string"||value.length===0)return null;if(/^[0-9]{6,}$/.test(value))return value;var match=value.match(/(?:product(?:_|-)?id|source(?:_|-)?entity(?:_|-)?id)["'=:\s]+([0-9]{6,})/i);return match?match[1]:null}function extractProductId(start){for(var node=start;node&&node!==document.body;node=node.parentElement){for(var i=0;i<ATTR_NAMES.length;i++){var attrValue=node.getAttribute&&node.getAttribute(ATTR_NAMES[i]);var attrProductId=readProductId(attrValue);if(attrProductId)return attrProductId}var dataset=node.dataset||null;if(dataset){for(var j=0;j<DATASET_KEYS.length;j++){var dataValue=dataset[DATASET_KEYS[j]];var dataProductId=readProductId(dataValue);if(dataProductId)return dataProductId}}}return null}function isInlineMediaSlotElement(node){return !!(node&&node.getAttribute&&node.getAttribute("data-clippy-inline-media-slot")!==null)}function findInlineMediaSlot(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(isInlineMediaSlotElement(node))return node}return null}function readInlineMediaUrl(node){if(!node)return null;return node.getAttribute&&((node.getAttribute("data-clippy-inline-media-url")||node.getAttribute("data-url")||node.getAttribute("data_url")))||node.href||null}function stripHash(url){return String(url).replace(/#.*$/,"")}function urlsMatch(a,b){if(!a||!b)return false;try{return stripHash(new URL(a,loc).href)===stripHash(new URL(b,loc).href)}catch(_){return stripHash(a)===stripHash(b)}}function isFirstPartyReelUrl(value){try{var url=new URL(value,loc);if(url.protocol!=="https:")return false;var host=url.hostname.toLowerCase();var supported=host==="instagram.com"||host.endsWith(".instagram.com")||host==="facebook.com"||host.endsWith(".facebook.com");return supported&&/\/reels?\//i.test(url.pathname)}catch(_){return false}}function isInlineMediaUrlClick(node,href){var slot=findInlineMediaSlot(node);if(!slot)return false;var slotUrl=readInlineMediaUrl(slot);if(slotUrl)return urlsMatch(href,slotUrl);return isFirstPartyReelUrl(href)}function findDataHref(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(node.getAttribute){var href=node.getAttribute("data-href")||node.getAttribute("data-url");if(href)return{href:href,node:node}}}return null}var nativeOpen=window.open;window.open=function(url){if(parent!==window&&typeof url==="string"&&/^https?:\/\//.test(url)){parent.postMessage({type:"ecto:usercontent-link-click",href:url},"*");return null}return nativeOpen?nativeOpen.apply(window,arguments):null};document.addEventListener("click",function(e){var target=e.target instanceof Element?e.target:null;if(!target)return;if(parent===window)return;var a=target.closest?target.closest("a[href]"):null;if(a&&a.href&&/^https?:\/\//.test(a.href)&&a.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(a,a.href))return;var productId=extractProductId(target)||extractProductId(a);if(productId){e.preventDefault();parent.postMessage({type:"ecto-artifact-link-click",productId:productId},"*");return}e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:a.href},"*");return}var dataHref=findDataHref(target);if(dataHref&&/^https?:\/\//.test(dataHref.href)&&dataHref.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(dataHref.node,dataHref.href))return;e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:dataHref.href},"*")}},true)})();</script><script>(function(){var FOCUS_TYPE="ecto:artifact-focus-request";var CLOSE_TYPE="ecto:artifact-close-request";function focusArtifactDocument(){var body=document.body;if(!body)return;try{window.focus();}catch(e){}if(!body.hasAttribute("tabindex"))body.setAttribute("tabindex","-1");try{body.focus({preventScroll:true});}catch(e){try{body.focus();}catch(e2){}}}window.addEventListener("message",function(event){if(event.source!==window.parent)return;var data=event.data;if(!data||typeof data!=="object"||data.type!==FOCUS_TYPE)return;if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",focusArtifactDocument,{once:true});return;}focusArtifactDocument();});window.addEventListener("keydown",function(event){if(event.key!=="Escape")return;window.setTimeout(function(){if(event.defaultPrevented)return;window.parent.postMessage({type:CLOSE_TYPE},"*");},0);});})();</script>
 
