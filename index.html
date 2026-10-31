@@ -26,689 +26,151 @@
 }<br>
 </style><br>
 <meta charset="UTF-8"><br>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><br>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><br>
 <title>Achadinhos - Mobile Oficial</title><br>
-<script src="https://cdn.tailwindcss.com"></script><br>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800;900&amp;display=swap" rel="stylesheet"><br>
 <style><br>
-  *{font-family:Inter,sans-serif; -webkit-tap-highlight-color: transparent;}<br>
-  body{background:#ffffff; color:#111; overscroll-behavior:none;}<br>
-  .scroll-hide::-webkit-scrollbar{display:none}<br>
-  .scroll-hide{-ms-overflow-style:none; scrollbar-width:none}<br>
-  .line-2{display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden}<br>
+<em>{box-sizing:border-box;margin:0;padding:0;font-family:Inter,Arial,sans-serif}<br>
+body{background:#fff;color:#111}<br>
+.header{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid #eee}<br>
+.top{height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 14px}<br>
+.logo{display:flex;align-items:center;gap:8px;cursor:pointer}<br>
+.la{width:32px;height:32px;background:#000;color:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900}<br>
+.lt{font-weight:900;font-size:18px}<br>
+.bm{font-size:9px;background:#ffe600;color:#000;padding:3px 7px;border-radius:99px;font-weight:900}<br>
+.actions{display:flex;gap:8px}<br>
+.bbell{width:36px;height:36px;border-radius:99px;border:1px solid #ddd;background:#f5f5f5;cursor:pointer}<br>
+.bent{height:36px;padding:0 14px;border-radius:99px;background:#000;color:#fff;border:0;font-weight:700;font-size:12px;cursor:pointer}<br>
+.search{padding:0 14px 10px}<br>
+.swrap{position:relative}<br>
+.swrap input{width:100%;height:44px;border-radius:99px;border:1px solid #ddd;background:#f5f5f5;padding-left:38px;padding-right:12px;outline:none}<br>
+.cats{display:flex;gap:8px;padding:0 14px 12px;overflow:auto}<br>
+.cats::-webkit-scrollbar{display:none}<br>
+.cat{white-space:nowrap;height:32px;padding:0 14px;border-radius:99px;border:1px solid #ddd;background:#fff;font-size:13px;font-weight:700;cursor:pointer}<br>
+.cat.on{background:#000;color:#fff;border-color:#000}<br>
+.bannerw{padding:12px}<br>
+.banner{background:#000;color:#fff;border-radius:20px;padding:16px;position:relative;overflow:hidden}<br>
+.ball{position:absolute;width:120px;height:120px;background:#ff6b2b;border-radius:99px;right:-20px;top:-20px}<br>
+.bin{position:relative}<br>
+.tag{font-size:10px;background:rgba(255,255,255,.12);padding:4px 10px;border-radius:99px;font-weight:700}<br>
+.banner h1{font-size:22px;line-height:1.1;font-weight:900;margin-top:10px}<br>
+.banner h1 i{color:#ff6b2b;font-style:normal}<br>
+.foot{margin-top:10px;display:flex;gap:8px;align-items:center}<br>
+.cnt{background:#fff;color:#000;font-size:11px;font-weight:700;padding:4px 10px;border-radius:99px}<br>
+.live{font-size:11px;opacity:.6}<br>
+.main{max-width:480px;margin:0 auto;padding:0 12px 40px}<br>
+.vh{display:flex;justify-content:space-between;align-items:center;margin:16px 0 12px}<br>
+.vh h2{font-weight:900}<br>
+.vh h2 span{color:#ff6b2b}<br>
+.vh small{color:#888;font-size:11px}<br>
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}<br>
+.card{border:1px solid #e8e8e8;border-radius:14px;overflow:hidden;background:#fff;display:flex;flex-direction:column}<br>
+.img{aspect-ratio:1;background:#fff7ed;display:flex;align-items:center;justify-content:center;font-size:42px;position:relative}<br>
+.badge{position:absolute;top:8px;left:8px;background:#ff6b2b;color:#fff;font-size:10px;font-weight:900;padding:4px 8px;border-radius:99px}<br>
+.body{padding:10px;display:flex;flex-direction:column;flex:1}<br>
+.name{font-size:12.5px;font-weight:600;line-height:1.25;min-height:32px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}<br>
+.old{font-size:10px;color:#aaa;text-decoration:line-through;margin-top:6px}<br>
+.new{font-weight:900;font-size:16px;margin-top:2px}<br>
+.new small{font-size:11px}<br>
+.row{display:flex;gap:6px;align-items:center;margin-top:6px}<br>
+.tl{font-size:9px;font-weight:900;padding:3px 8px;border-radius:99px;color:#fff}<br>
+.tl.shopee{background:#ee4d2d}<br>
+.tl.amazon{background:#000}<br>
+.tl.mercado{background:#ffe600;color:#000}<br>
+.btn{margin-top:10px;height:36px;background:#ff6b2b;color:#fff;border-radius:99px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;text-decoration:none}<br>
+.ft{margin-top:28px;background:#f8f8f8;border:1px solid #eee;border-radius:16px;padding:14px;text-align:center}<br>
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#000;color:#fff;padding:10px 18px;border-radius:99px;font-size:13px;font-weight:700;display:none;z-index:99;max-width:90%;text-align:center}<br>
+.bg{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;z-index:30}<br>
+.sheet{position:absolute;bottom:0;left:0;right:0;background:#fff;border-radius:22px 22px 0 0;padding:20px;max-width:480px;margin:0 auto}<br>
+.x{position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:99px;background:#f0f0f0;border:0;cursor:pointer}<br>
+.drag{width:40px;height:4px;background:#ddd;border-radius:99px;margin:0 auto 14px}<br>
+.painel{position:fixed;inset:0;background:#fff;z-index:40;display:none;overflow:auto}<br>
+.ph{position:sticky;top:0;background:#fff;border-bottom:1px solid #eee;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 14px}<br>
+.form{border:1px solid #ddd;border-radius:16px;padding:14px;margin:14px}<br>
+.form input,.form select{width:100%;height:44px;border:1px solid #ddd;border-radius:12px;padding:0 12px;margin-bottom:8px;outline:none}<br>
+.btnsv{width:100%;height:44px;background:#ff6b2b;color:#fff;border-radius:99px;border:0;font-weight:700;cursor:pointer}<br>
+.item{border:1px solid #ddd;border-radius:12px;padding:10px;display:flex;gap:10px;align-items:center;margin-bottom:8px}<br>
+.th{width:44px;height:44px;background:#fff7ed;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}<br>
 </style><br>
 </head><br>
-<body class="bg-white antialiased"></p>
-
-<!-- HEADER MOBILE -->
-
-<p><header class="sticky top-0 z-30 bg-white border-b border-zinc-100"><br>
-  <!-- Linha 1: Logo + Entrar --><br>
-  <div class="flex items-center justify-between px-4 h-[56px]"><br>
-    <div id="logo" class="flex items-center gap-2"><br>
-      <div class="w-8 h-8 rounded-[10px] bg-black text-white grid place-items-center font-black text-[16px]">A</div><br>
-      <b class="text-[18px] tracking-tight text-black">ACHADINHOS</b><br>
-      <span class="text-[9px] font-black bg-[#ffe600] text-black px-2 py-0.5 rounded-full ml-1">MOBILE</span><br>
-    </div><br>
-    <div class="flex items-center gap-2 ml-auto"><br>
-      <button id="bell-notif" class="relative w-9 h-9 rounded-full bg-[#f5f5f5] border border-zinc-200 grid place-items-center text-[16px]">🔔<span id="bell-badge" class="hidden absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white"></span></button><br>
-      <button id="btn-dono" class="h-9 px-4 rounded-full bg-black text-white text-[12px] font-bold">Entrar</button><br>
-    </div><br>
-  </div><br>
-  <!-- Linha 2: Busca full width mobile --><br>
-  <div class="px-4 pb-3"><br>
-    <div class="relative"><br>
-      <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-[16px]">🔎</span><br>
-      <input id="busca" placeholder="Buscar achadinhos..." class="w-full h-[44px] pl-10 pr-4 rounded-full bg-[#f5f5f5] border border-zinc-200 text-[14px] text-black placeholder:text-zinc-500 outline-none focus:bg-white focus:border-black"><br>
-    </div><br>
-  </div><br>
-  <!-- Linha 3: Categorias scroll horizontal mobile --><br>
-  <div class="flex gap-2 px-4 pb-3 overflow-x-auto scroll-hide"><br>
-    <button data-cat="Todas" class="cat shrink-0 h-8 px-4 rounded-full text-[13px] font-bold bg-black text-white">Todas</button><br>
-    <button data-cat="Shopee" class="cat shrink-0 h-8 px-4 rounded-full text-[13px] font-bold bg-white border border-zinc-200 text-black">🟠 Shopee</button><br>
-    <button data-cat="Amazon" class="cat shrink-0 h-8 px-4 rounded-full text-[13px] font-bold bg-white border border-zinc-200 text-black">📦 Amazon</button><br>
-    <button data-cat="Mercado Livre" class="cat shrink-0 h-8 px-4 rounded-full text-[13px] font-bold bg-white border border-zinc-200 text-black">💛 Mercado Livre</button><br>
-    <button data-cat="Geral" class="cat shrink-0 h-8 px-4 rounded-full text-[13px] font-bold bg-white border border-zinc-200 text-black">Geral</button><br>
-  </div><br>
-</header></p>
-
-<!-- BANNER MOBILE - proporção vertical -->
-
-<div class="px-3 pt-3">
-  <div class="rounded-[20px] bg-black text-white p-4 relative overflow-hidden">
-    <div class="absolute -right-6 -top-6 w-[140px] h-[140px] bg-[#ff6b2b] rounded-full"></div>
-    <div class="relative z-10">
-      <div class="inline-flex items-center gap-1.5 bg-white/10 rounded-full px-2.5 py-1 text-[10px] font-bold tracking-widest">🔥 FIREBASE • MOBILE 100%</div>
-      <h1 class="text-[22px] leading-[1.05] font-black mt-2.5 tracking-tight">Achadinhos que<br><span class="text-[#ff6b2b]">valem cada centavo</span></h1>
-      <div class="mt-3 flex items-center gap-2">
-        <span class="text-[11px] bg-white text-black px-2.5 py-1 rounded-full font-bold" id="contador-top">8 achados</span>
-        <span class="text-[11px] text-white/60">• Firebase ao vivo</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- VITRINE MOBILE - 2 colunas igual app Shopee -->
-
-<p><main class="px-3 py-4 max-w-[480px] mx-auto w-full"><br>
-  <div class="flex items-center justify-between mb-3"><br>
-    <h2 class="font-black text-[16px] text-black">Vitrine • <span id="contador" class="text-[#ff6b2b]">8</span></h2><br>
-    <span class="text-[11px] text-zinc-500">Toque 5x no A • senha 1234</span><br>
-  </div></p>
-
-<p><div id="grid" class="grid grid-cols-2 gap-2.5"><div class="bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col active:scale-[0.98] transition-transform"><br>
-      <div class="aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden"><span class="text-[42px]">🗄️</span><br>
-        <div class="absolute top-2 left-2 bg-[#ff6b2b] text-white text-[10px] font-black px-2 py-1 rounded-full">-49%</div><br>
-      </div><br>
-      <div class="p-2.5 flex-1 flex flex-col"><br>
-        <p class="line-2 font-semibold text-[12.5px] leading-[1.25] min-h-[32px] text-black">Organizador de Gaveta Acrílico Cristal 3 Divisórias</p><br>
-        <div class="mt-2"><br>
-          <div class="text-[10px] text-zinc-400 line-through">R\( 59,00&lt;/div&gt;<br>
-          &lt;div class=&quot;flex items-baseline gap-0.5&quot;&gt;&lt;span class=&quot;text-[11px] font-bold text-black&quot;&gt;R\)</span><span class="text-[16px] font-black text-black tracking-tight">29,90</span></div><br>
-        </div><br>
-        <div class="mt-1.5 flex items-center gap-1"><br>
-          <span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-[#ee4d2d] text-white">SHOPEE</span><br>
-          <span class="text-[10px] text-emerald-600 font-bold">✓</span><br>
-        </div><br>
-        <a href="https://shopee.com.br" target="_blank" class="mt-2.5 h-9 bg-[#ff6b2b] active:bg-[#e85f26] text-white rounded-full grid place-items-center font-extrabold text-[12px] tracking-wide">VER OFERTA</a><br>
-      </div><br>
-    </div><div class="bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col active:scale-[0.98] transition-transform"><br>
-      <div class="aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden"><span class="text-[42px]">🍟</span><br>
-        <div class="absolute top-2 left-2 bg-[#ff6b2b] text-white text-[10px] font-black px-2 py-1 rounded-full">-30%</div><br>
-      </div><br>
-      <div class="p-2.5 flex-1 flex flex-col"><br>
-        <p class="line-2 font-semibold text-[12.5px] leading-[1.25] min-h-[32px] text-black">Air Fryer 4.2L Digital Timer Antiaderente</p><br>
-        <div class="mt-2"><br>
-          <div class="text-[10px] text-zinc-400 line-through">R\( 399,00&lt;/div&gt;<br>
-          &lt;div class=&quot;flex items-baseline gap-0.5&quot;&gt;&lt;span class=&quot;text-[11px] font-bold text-black&quot;&gt;R\)</span><span class="text-[16px] font-black text-black tracking-tight">279,00</span></div><br>
-        </div><br>
-        <div class="mt-1.5 flex items-center gap-1"><br>
-          <span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-black text-white">AMAZON</span><br>
-          <span class="text-[10px] text-emerald-600 font-bold">✓</span><br>
-        </div><br>
-        <a href="https://amazon.com.br" target="_blank" class="mt-2.5 h-9 bg-[#ff6b2b] active:bg-[#e85f26] text-white rounded-full grid place-items-center font-extrabold text-[12px] tracking-wide">VER OFERTA</a><br>
-      </div><br>
-    </div><div class="bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col active:scale-[0.98] transition-transform"><br>
-      <div class="aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden"><span class="text-[42px]">💡</span></p>
-
-<pre><code>  &lt;/div&gt;
-  &lt;div class=&quot;p-2.5 flex-1 flex flex-col&quot;&gt;
-    &lt;p class=&quot;line-2 font-semibold text-[12.5px] leading-[1.25] min-h-[32px] text-black&quot;&gt;Luminária com Sensor de Presença LED Recarregável&lt;/p&gt;
-    &lt;div class=&quot;mt-2&quot;&gt;
-
-      &lt;div class=&quot;flex items-baseline gap-0.5&quot;&gt;&lt;span class=&quot;text-[11px] font-bold text-black&quot;&gt;R$&lt;/span&gt;&lt;span class=&quot;text-[16px] font-black text-black tracking-tight&quot;&gt;34,90&lt;/span&gt;&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;mt-1.5 flex items-center gap-1&quot;&gt;
-      &lt;span class=&quot;text-[9px] font-black px-2 py-0.5 rounded-full bg-[#ee4d2d] text-white&quot;&gt;SHOPEE&lt;/span&gt;
-      &lt;span class=&quot;text-[10px] text-emerald-600 font-bold&quot;&gt;✓&lt;/span&gt;
-    &lt;/div&gt;
-    &lt;a href=&quot;https://shopee.com.br&quot; target=&quot;_blank&quot; class=&quot;mt-2.5 h-9 bg-[#ff6b2b] active:bg-[#e85f26] text-white rounded-full grid place-items-center font-extrabold text-[12px] tracking-wide&quot;&gt;VER OFERTA&lt;/a&gt;
-  &lt;/div&gt;
-&lt;/div&gt;&lt;div class=&quot;bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col active:scale-[0.98] transition-transform&quot;&gt;
-  &lt;div class=&quot;aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden&quot;&gt;&lt;span class=&quot;text-[42px]&quot;&gt;💇‍♀️&lt;/span&gt;
-
-  &lt;/div&gt;
-  &lt;div class=&quot;p-2.5 flex-1 flex flex-col&quot;&gt;
-    &lt;p class=&quot;line-2 font-semibold text-[12.5px] leading-[1.25] min-h-[32px] text-black&quot;&gt;Escova Alisadora 3 em 1 Seca e Modela&lt;/p&gt;
-    &lt;div class=&quot;mt-2&quot;&gt;
-
-      &lt;div class=&quot;flex items-baseline gap-0.5&quot;&gt;&lt;span class=&quot;text-[11px] font-bold text-black&quot;&gt;R$&lt;/span&gt;&lt;span class=&quot;text-[16px] font-black text-black tracking-tight&quot;&gt;89,90&lt;/span&gt;&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;mt-1.5 flex items-center gap-1&quot;&gt;
-      &lt;span class=&quot;text-[9px] font-black px-2 py-0.5 rounded-full bg-[#ffe600] text-black text-black&quot;&gt;MERCADO LIVRE&lt;/span&gt;
-      &lt;span class=&quot;text-[10px] text-emerald-600 font-bold&quot;&gt;✓&lt;/span&gt;
-    &lt;/div&gt;
-    &lt;a href=&quot;https://mercadolivre.com.br&quot; target=&quot;_blank&quot; class=&quot;mt-2.5 h-9 bg-[#ff6b2b] active:bg-[#e85f26] text-white rounded-full grid place-items-center font-extrabold text-[12px] tracking-wide&quot;&gt;VER OFERTA&lt;/a&gt;
-  &lt;/div&gt;
-&lt;/div&gt;&lt;div class=&quot;bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col active:scale-[0.98] transition-transform&quot;&gt;
-  &lt;div class=&quot;aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden&quot;&gt;&lt;span class=&quot;text-[42px]&quot;&gt;✨&lt;/span&gt;
-
-  &lt;/div&gt;
-  &lt;div class=&quot;p-2.5 flex-1 flex flex-col&quot;&gt;
-    &lt;p class=&quot;line-2 font-semibold text-[12.5px] leading-[1.25] min-h-[32px] text-black&quot;&gt;Kit 10 Panos Mágicos Microfibra Limpeza&lt;/p&gt;
-    &lt;div class=&quot;mt-2&quot;&gt;
-
-      &lt;div class=&quot;flex items-baseline gap-0.5&quot;&gt;&lt;span class=&quot;text-[11px] font-bold text-black&quot;&gt;R$&lt;/span&gt;&lt;span class=&quot;text-[16px] font-black text-black tracking-tight&quot;&gt;19,90&lt;/span&gt;&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;mt-1.5 flex items-center gap-1&quot;&gt;
-      &lt;span class=&quot;text-[9px] font-black px-2 py-0.5 rounded-full bg-[#ee4d2d] text-white&quot;&gt;SHOPEE&lt;/span&gt;
-      &lt;span class=&quot;text-[10px] text-emerald-600 font-bold&quot;&gt;✓&lt;/span&gt;
-    &lt;/div&gt;
-    &lt;a href=&quot;https://shopee.com.br&quot; target=&quot;_blank&quot; class=&quot;mt-2.5 h-9 bg-[#ff6b2b] active:bg-[#e85f26] text-white rounded-full grid place-items-center font-extrabold text-[12px] tracking-wide&quot;&gt;VER OFERTA&lt;/a&gt;
-  &lt;/div&gt;
-&lt;/div&gt;&lt;div class=&quot;bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col active:scale-[0.98] transition-transform&quot;&gt;
-  &lt;div class=&quot;aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden&quot;&gt;&lt;span class=&quot;text-[42px]&quot;&gt;📱&lt;/span&gt;
-
-  &lt;/div&gt;
-  &lt;div class=&quot;p-2.5 flex-1 flex flex-col&quot;&gt;
-    &lt;p class=&quot;line-2 font-semibold text-[12.5px] leading-[1.25] min-h-[32px] text-black&quot;&gt;Suporte Celular Articulado Mesa e Cama 360°&lt;/p&gt;
-    &lt;div class=&quot;mt-2&quot;&gt;
-
-      &lt;div class=&quot;flex items-baseline gap-0.5&quot;&gt;&lt;span class=&quot;text-[11px] font-bold text-black&quot;&gt;R$&lt;/span&gt;&lt;span class=&quot;text-[16px] font-black text-black tracking-tight&quot;&gt;26,90&lt;/span&gt;&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;mt-1.5 flex items-center gap-1&quot;&gt;
-      &lt;span class=&quot;text-[9px] font-black px-2 py-0.5 rounded-full bg-black text-white&quot;&gt;AMAZON&lt;/span&gt;
-      &lt;span class=&quot;text-[10px] text-emerald-600 font-bold&quot;&gt;✓&lt;/span&gt;
-    &lt;/div&gt;
-    &lt;a href=&quot;https://amazon.com.br&quot; target=&quot;_blank&quot; class=&quot;mt-2.5 h-9 bg-[#ff6b2b] active:bg-[#e85f26] text-white rounded-full grid place-items-center font-extrabold text-[12px] tracking-wide&quot;&gt;VER OFERTA&lt;/a&gt;
-  &lt;/div&gt;
-&lt;/div&gt;&lt;div class=&quot;bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col active:scale-[0.98] transition-transform&quot;&gt;
-  &lt;div class=&quot;aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden&quot;&gt;&lt;span class=&quot;text-[42px]&quot;&gt;📽️&lt;/span&gt;
-    &lt;div class=&quot;absolute top-2 left-2 bg-[#ff6b2b] text-white text-[10px] font-black px-2 py-1 rounded-full&quot;&gt;-36%&lt;/div&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;p-2.5 flex-1 flex flex-col&quot;&gt;
-    &lt;p class=&quot;line-2 font-semibold text-[12.5px] leading-[1.25] min-h-[32px] text-black&quot;&gt;Mini Projetor Portátil 4K WiFi&lt;/p&gt;
-    &lt;div class=&quot;mt-2&quot;&gt;
-      &lt;div class=&quot;text-[10px] text-zinc-400 line-through&quot;&gt;R$ 299,00&lt;/div&gt;
-      &lt;div class=&quot;flex items-baseline gap-0.5&quot;&gt;&lt;span class=&quot;text-[11px] font-bold text-black&quot;&gt;R$&lt;/span&gt;&lt;span class=&quot;text-[16px] font-black text-black tracking-tight&quot;&gt;189,90&lt;/span&gt;&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;mt-1.5 flex items-center gap-1&quot;&gt;
-      &lt;span class=&quot;text-[9px] font-black px-2 py-0.5 rounded-full bg-[#ee4d2d] text-white&quot;&gt;SHOPEE&lt;/span&gt;
-      &lt;span class=&quot;text-[10px] text-emerald-600 font-bold&quot;&gt;✓&lt;/span&gt;
-    &lt;/div&gt;
-    &lt;a href=&quot;https://shopee.com.br&quot; target=&quot;_blank&quot; class=&quot;mt-2.5 h-9 bg-[#ff6b2b] active:bg-[#e85f26] text-white rounded-full grid place-items-center font-extrabold text-[12px] tracking-wide&quot;&gt;VER OFERTA&lt;/a&gt;
-  &lt;/div&gt;
-&lt;/div&gt;&lt;div class=&quot;bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col active:scale-[0.98] transition-transform&quot;&gt;
-  &lt;div class=&quot;aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden&quot;&gt;&lt;span class=&quot;text-[42px]&quot;&gt;🎧&lt;/span&gt;
-
-  &lt;/div&gt;
-  &lt;div class=&quot;p-2.5 flex-1 flex flex-col&quot;&gt;
-    &lt;p class=&quot;line-2 font-semibold text-[12.5px] leading-[1.25] min-h-[32px] text-black&quot;&gt;Fone Bluetooth TWS com Case Power Bank&lt;/p&gt;
-    &lt;div class=&quot;mt-2&quot;&gt;
-
-      &lt;div class=&quot;flex items-baseline gap-0.5&quot;&gt;&lt;span class=&quot;text-[11px] font-bold text-black&quot;&gt;R$&lt;/span&gt;&lt;span class=&quot;text-[16px] font-black text-black tracking-tight&quot;&gt;49,90&lt;/span&gt;&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;mt-1.5 flex items-center gap-1&quot;&gt;
-      &lt;span class=&quot;text-[9px] font-black px-2 py-0.5 rounded-full bg-black text-white&quot;&gt;AMAZON&lt;/span&gt;
-      &lt;span class=&quot;text-[10px] text-emerald-600 font-bold&quot;&gt;✓&lt;/span&gt;
-    &lt;/div&gt;
-    &lt;a href=&quot;https://amazon.com.br&quot; target=&quot;_blank&quot; class=&quot;mt-2.5 h-9 bg-[#ff6b2b] active:bg-[#e85f26] text-white rounded-full grid place-items-center font-extrabold text-[12px] tracking-wide&quot;&gt;VER OFERTA&lt;/a&gt;
-  &lt;/div&gt;
-&lt;/div&gt;&lt;/div&gt;
-</code></pre>
-
-<p><!-- Rodapé mobile --><br>
-  <div class="mt-8 p-4 rounded-[16px] bg-[#f8f8f8] border border-zinc-100 text-center"><br>
-    <p class="font-black text-[13px] text-black">ACHADINHOS OFICIAL 🛒</p><br>
-    <p class="text-[11px] text-zinc-500 mt-1">Zap: 81 99802-8998 • Bonito-PE</p><br>
-    <p class="text-[10px] text-zinc-400 mt-2">Firebase: achadinhos-loja • Mobile 100%</p><br>
-  </div><br>
-</main></p>
-
-<!-- TOAST MOBILE - bottom center -->
-
-<div id="toast" class="fixed bottom-[20px] left-1/2 -translate-x-1/2 bg-black text-white px-5 py-3 rounded-full text-[13px] font-bold shadow-2xl hidden z-[60] max-w-[90%] text-center"></div>
-
-<!-- MODAL DONO MOBILE - bottom sheet -->
-
-<div id="modal" class="fixed inset-0 z-50 bg-black/50 hidden">
-  <div class="absolute inset-0" id="modal-bg"></div>
-  <div class="absolute bottom-0 left-0 right-0 bg-white rounded-t-[24px] p-6 max-w-[480px] mx-auto max-h-[85vh] overflow-auto">
-    <button onclick="document.getElementById('modal-notif').classList.add('hidden')" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-zinc-100 grid place-items-center font-bold">✕</button>
-    <div class="w-10 h-1 bg-zinc-200 rounded-full mx-auto mb-4"></div>
-    <b class="text-[16px] text-black">Modo Dono • Mobile 🔒</b>
-    <p class="text-[12px] text-zinc-500 mt-1">Senha: 1234 • Produtos vão pro Firebase</p>
-    <input id="senha" type="password" placeholder="Digite a senha" class="mt-4 w-full h-[48px] border border-zinc-200 rounded-[14px] px-4 text-[16px] text-black outline-none focus:border-black">
-    <button id="entrar" class="mt-3 w-full h-[48px] bg-black text-white rounded-full font-bold text-[15px]">Entrar no painel</button>
-    <button id="fechar" class="mt-2 w-full h-[48px] border border-zinc-200 rounded-full font-bold text-black text-[14px]">Fechar</button>
-  </div>
-</div>
-
-<!-- PAINEL GERENCIAR MOBILE - full screen bottom sheet -->
-
-<div id="painel" class="fixed inset-0 z-50 bg-white hidden overflow-auto">
-  <div class="sticky top-0 bg-white border-b border-zinc-100 px-4 h-[56px] flex items-center justify-between">
-    <div><b class="text-[16px] text-black">Gerenciar • <span id="total">8</span></b><p class="text-[11px] text-zinc-500">Firebase achadinhos-loja</p></div>
-    <button id="fechar-painel" class="w-10 h-10 rounded-full bg-zinc-100 grid place-items-center font-bold text-black">✕</button>
-  </div>
-  <div class="p-4 bg-[#fafafa] min-h-[calc(100vh-56px)]">
-    <div class="bg-white border border-zinc-200 rounded-[16px] p-4">
-      <p class="font-bold text-[14px] text-black mb-3">➕ Adicionar no Firebase</p>
-      <input id="f-nome" placeholder="Nome: Organizador Gaveta..." class="w-full h-[48px] border border-zinc-200 rounded-[12px] px-3 mb-2 text-[16px] text-black outline-none focus:border-black">
-      <div class="grid grid-cols-2 gap-2 mb-2">
-        <input id="f-preco" type="number" inputmode="decimal" placeholder="Preço 29.90" class="h-[48px] border border-zinc-200 rounded-[12px] px-3 text-[16px] text-black outline-none focus:border-black">
-        <input id="f-emoji" placeholder="Emoji 🗄️ ou URL" class="h-[48px] border border-zinc-200 rounded-[12px] px-3 text-[14px] text-black outline-none focus:border-black">
-      </div>
-      <input id="f-link" placeholder="Link afiliado Shopee/Amazon" class="w-full h-[48px] border border-zinc-200 rounded-[12px] px-3 mb-2 text-[14px] text-black outline-none focus:border-black">
-      <select id="f-loja" class="w-full h-[48px] border border-zinc-200 rounded-[12px] px-3 mb-3 text-[14px] text-black bg-white"><option>Shopee</option><option>Amazon</option><option>Mercado Livre</option><option>Geral</option></select>
-      <button id="f-salvar" class="w-full h-[48px] bg-[#ff6b2b] text-white rounded-full font-bold text-[15px]">Salvar no Firebase 🔥</button>
-    </div>
-    <div id="lista" class="mt-4 space-y-2">
-    <div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center">
-      <div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">🗄️</div>
-      <div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate text-black">Organizador de Gaveta Acrílico Cristal 3 Divisórias</p><p class="text-[11px] text-zinc-500">R$ 29.9 • Shopee</p></div>
-      <button onclick="apagar('1')" class="w-9 h-9 rounded-full border border-red-200 text-red-600 shrink-0 grid place-items-center">🗑️</button>
-    </div>
-  
-    <div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center">
-      <div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">🍟</div>
-      <div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate text-black">Air Fryer 4.2L Digital Timer Antiaderente</p><p class="text-[11px] text-zinc-500">R$ 279 • Amazon</p></div>
-      <button onclick="apagar('2')" class="w-9 h-9 rounded-full border border-red-200 text-red-600 shrink-0 grid place-items-center">🗑️</button>
-    </div>
-  
-    <div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center">
-      <div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">💡</div>
-      <div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate text-black">Luminária com Sensor de Presença LED Recarregável</p><p class="text-[11px] text-zinc-500">R$ 34.9 • Shopee</p></div>
-      <button onclick="apagar('3')" class="w-9 h-9 rounded-full border border-red-200 text-red-600 shrink-0 grid place-items-center">🗑️</button>
-    </div>
-  
-    <div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center">
-      <div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">💇‍♀️</div>
-      <div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate text-black">Escova Alisadora 3 em 1 Seca e Modela</p><p class="text-[11px] text-zinc-500">R$ 89.9 • Mercado Livre</p></div>
-      <button onclick="apagar('4')" class="w-9 h-9 rounded-full border border-red-200 text-red-600 shrink-0 grid place-items-center">🗑️</button>
-    </div>
-  
-    <div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center">
-      <div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">✨</div>
-      <div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate text-black">Kit 10 Panos Mágicos Microfibra Limpeza</p><p class="text-[11px] text-zinc-500">R$ 19.9 • Shopee</p></div>
-      <button onclick="apagar('5')" class="w-9 h-9 rounded-full border border-red-200 text-red-600 shrink-0 grid place-items-center">🗑️</button>
-    </div>
-  
-    <div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center">
-      <div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">📱</div>
-      <div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate text-black">Suporte Celular Articulado Mesa e Cama 360°</p><p class="text-[11px] text-zinc-500">R$ 26.9 • Amazon</p></div>
-      <button onclick="apagar('6')" class="w-9 h-9 rounded-full border border-red-200 text-red-600 shrink-0 grid place-items-center">🗑️</button>
-    </div>
-  
-    <div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center">
-      <div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">📽️</div>
-      <div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate text-black">Mini Projetor Portátil 4K WiFi</p><p class="text-[11px] text-zinc-500">R$ 189.9 • Shopee</p></div>
-      <button onclick="apagar('7')" class="w-9 h-9 rounded-full border border-red-200 text-red-600 shrink-0 grid place-items-center">🗑️</button>
-    </div>
-  
-    <div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center">
-      <div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">🎧</div>
-      <div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate text-black">Fone Bluetooth TWS com Case Power Bank</p><p class="text-[11px] text-zinc-500">R$ 49.9 • Amazon</p></div>
-      <button onclick="apagar('8')" class="w-9 h-9 rounded-full border border-red-200 text-red-600 shrink-0 grid place-items-center">🗑️</button>
-    </div>
-  </div>
-  </div>
-</div>
-
-<script>
-const Ev = [
-  {id:"1", nome:"Organizador de Gaveta Acrílico Cristal 3 Divisórias", precoNovo:29.9, precoAntigo:59, loja:"Shopee", emoji:"🗄️", affiliateLink:"https://shopee.com.br"},
-  {id:"2", nome:"Air Fryer 4.2L Digital Timer Antiaderente", precoNovo:279, precoAntigo:399, loja:"Amazon", emoji:"🍟", affiliateLink:"https://amazon.com.br"},
-  {id:"3", nome:"Luminária com Sensor de Presença LED Recarregável", precoNovo:34.9, loja:"Shopee", emoji:"💡", affiliateLink:"https://shopee.com.br"},
-  {id:"4", nome:"Escova Alisadora 3 em 1 Seca e Modela", precoNovo:89.9, loja:"Mercado Livre", emoji:"💇‍♀️", affiliateLink:"https://mercadolivre.com.br"},
-  {id:"5", nome:"Kit 10 Panos Mágicos Microfibra Limpeza", precoNovo:19.9, loja:"Shopee", emoji:"✨", affiliateLink:"https://shopee.com.br"},
-  {id:"6", nome:"Suporte Celular Articulado Mesa e Cama 360°", precoNovo:26.9, loja:"Amazon", emoji:"📱", affiliateLink:"https://amazon.com.br"},
-  {id:"7", nome:"Mini Projetor Portátil 4K WiFi", precoNovo:189.9, precoAntigo:299, loja:"Shopee", emoji:"📽️", affiliateLink:"https://shopee.com.br"},
-  {id:"8", nome:"Fone Bluetooth TWS com Case Power Bank", precoNovo:49.9, loja:"Amazon", emoji:"🎧", affiliateLink:"https://amazon.com.br"}
-];
-let produtos=[...Ev];
-let filtroCat="Todas";
-let busca="";
-
-function toast(msg){
-  const el=document.getElementById('toast');
-  el.textContent=msg;
-  el.classList.remove('hidden');
-  setTimeout(()=>el.classList.add('hidden'),3000);
-}
-
-function render(){
-  const grid=document.getElementById('grid');
-  let lista=produtos.filter(p=> p.nome.toLowerCase().includes(busca.toLowerCase()) && (filtroCat==="Todas"||p.loja===filtroCat));
-  document.getElementById('contador').textContent=lista.length;
-  document.getElementById('contador-top').textContent=produtos.length+" achados";
-  document.getElementById('total').textContent=produtos.length;
-  
-  if(lista.length===0){
-    grid.innerHTML='<div class="col-span-2 py-12 text-center"><p class="text-[28px]">🔍</p><p class="font-bold text-[14px] mt-2 text-black">Nada com esse filtro</p></div>';
-    return;
-  }
-  
-  grid.innerHTML=lista.map(p=>{
-    const img = p.imagemUrl ? `<img src="${p.imagemUrl}" class="w-full h-full object-cover">` : `<span class="text-[42px]">${p.emoji}</span>`;
-    const cor = p.loja==="Shopee" ? "bg-[#ee4d2d]" : p.loja==="Amazon" ? "bg-black" : p.loja==="Mercado Livre" ? "bg-[#ffe600] text-black" : "bg-zinc-800";
-    const txtCor = p.loja==="Mercado Livre" ? "text-black" : "text-white";
-    return `<div class="bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col active:scale-[0.98] transition-transform">
-      <div class="aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden">${img}
-        ${p.precoAntigo?`<div class="absolute top-2 left-2 bg-[#ff6b2b] text-white text-[10px] font-black px-2 py-1 rounded-full">-${Math.round((1-p.precoNovo/p.precoAntigo)*100)}%</div>`:''}
-      </div>
-      <div class="p-2.5 flex-1 flex flex-col">
-        <p class="line-2 font-semibold text-[12.5px] leading-[1.25] min-h-[32px] text-black">${p.nome}</p>
-        <div class="mt-2">
-          ${p.precoAntigo?`<div class="text-[10px] text-zinc-400 line-through">R$ ${p.precoAntigo.toFixed(2).replace(".",",")}</div>`:''}
-          <div class="flex items-baseline gap-0.5"><span class="text-[11px] font-bold text-black">R$</span><span class="text-[16px] font-black text-black tracking-tight">${Number(p.precoNovo).toFixed(2).replace(".",",")}</span></div>
-        </div>
-        <div class="mt-1.5 flex items-center gap-1">
-          <span class="text-[9px] font-black px-2 py-0.5 rounded-full ${cor} ${txtCor}">${p.loja.toUpperCase()}</span>
-          <span class="text-[10px] text-emerald-600 font-bold">✓</span>
-        </div>
-        <a href="${p.affiliateLink}" target="_blank" class="mt-2.5 h-9 bg-[#ff6b2b] active:bg-[#e85f26] text-white rounded-full grid place-items-center font-extrabold text-[12px] tracking-wide">VER OFERTA</a>
-      </div>
-    </div>`;
-  }).join('');
-  
-  document.getElementById('lista').innerHTML=produtos.map(p=>`
-    <div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center">
-      <div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">${p.imagemUrl?`<img src="${p.imagemUrl}" class="w-full h-full object-cover">`:p.emoji}</div>
-      <div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate text-black">${p.nome}</p><p class="text-[11px] text-zinc-500">R$ ${p.precoNovo} • ${p.loja}</p></div>
-      <button onclick="apagar('${p.id}')" class="w-9 h-9 rounded-full border border-red-200 text-red-600 shrink-0 grid place-items-center">🗑️</button>
-    </div>
-  `).join('');
-}
-
-render();
-
-// Eventos mobile
-document.getElementById('busca').addEventListener('input', e=>{ busca=e.target.value; render(); });
-document.querySelectorAll('.cat').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-    document.querySelectorAll('.cat').forEach(b=>b.className="cat shrink-0 h-8 px-4 rounded-full text-[13px] font-bold bg-white border border-zinc-200 text-black");
-    btn.className="cat shrink-0 h-8 px-4 rounded-full text-[13px] font-bold bg-black text-white";
-    filtroCat=btn.dataset.cat; render();
-  });
-});
-
-let clicks=[];
-document.getElementById('logo').addEventListener('click', ()=>{
-  clicks=[...clicks, Date.now()].filter(t=>Date.now()-t<3000);
-  if(clicks.length>=5){ clicks=[]; document.getElementById('modal').classList.remove('hidden'); document.getElementById('modal').classList.add('grid'); }
-});
-document.getElementById('btn-dono').addEventListener('click', ()=>{ document.getElementById('modal').classList.remove('hidden'); document.getElementById('modal').classList.add('grid'); });
-document.getElementById('fechar').addEventListener('click', ()=>{ document.getElementById('modal').classList.add('hidden'); document.getElementById('modal').classList.remove('grid'); });
-document.getElementById('modal-bg').addEventListener('click', ()=>{ document.getElementById('modal').classList.add('hidden'); document.getElementById('modal').classList.remove('grid'); });
-document.getElementById('entrar').addEventListener('click', ()=>{
-  const s=document.getElementById('senha').value;
-  if(s==="1234"||s==="felipe123"){ document.getElementById('modal').classList.add('hidden'); document.getElementById('painel').classList.remove('hidden'); toast("Modo dono ativado ✅"); }
-  else toast("Senha incorreta");
-});
-document.getElementById('fechar-painel').addEventListener('click', ()=>document.getElementById('painel').classList.add('hidden'));
-
-// ===== PERMISSÃO AUTOMÁTICA DE NOTIFICAÇÃO AO ABRIR A LOJA =====
-setTimeout(()=>{
-  if('Notification' in window && Notification.permission==='default'){
-    // Mostra um banner pedindo permissão
-    toast("🔔 Ative notificações para receber ofertas!");
-    // Pede permissão automaticamente após 3 segundos
-    setTimeout(()=>{
-      Notification.requestPermission().then(perm=>{
-        if(perm==='granted'){
-          toast("✅ Notificações ativadas! Você receberá ofertas mesmo com loja fechada");
-          document.getElementById('bell-badge').classList.remove('hidden');
-        }
-      });
-    }, 3000);
-  }
-}, 1500);
-
-// SININHO 🔔 - ABRIR MODAL NOTIFICAÇÃO (CORRIGIDO FECHAR)
-document.getElementById('bell-notif').addEventListener('click', ()=>{
-  document.getElementById('modal-notif').classList.remove('hidden');
-  document.getElementById('modal-notif').classList.add('grid');
-  // Pedir permissão se ainda não pediu
-  if('Notification' in window && Notification.permission==='default'){
-    Notification.requestPermission();
-  }
-});
-document.getElementById('fechar-notif').addEventListener('click', ()=>{
-  document.getElementById('modal-notif').classList.add('hidden');
-});
-document.getElementById('modal-notif-bg').addEventListener('click', ()=>{
-  document.getElementById('modal-notif').classList.add('hidden');
-  document.getElementById('modal-notif').classList.remove('grid');
-});
-document.getElementById('fechar-notif').addEventListener('click', ()=>{
-  document.getElementById('modal-notif').classList.add('hidden');
-  document.getElementById('modal-notif').classList.remove('grid');
-});
-// Fechar com ESC
-document.addEventListener('keydown', (e)=>{
-  if(e.key==='Escape'){
-    document.getElementById('modal-notif').classList.add('hidden');
-    document.getElementById('modal-notif').classList.remove('grid');
-  }
-});
-document.getElementById('bell-notif').addEventListener('click', ()=>{
-  document.getElementById('modal-notif').classList.remove('hidden');
-  document.getElementById('modal-notif').classList.add('grid');
-  if('Notification' in window && Notification.permission==='default'){
-    Notification.requestPermission();
-  }
-});
-document.getElementById('fechar-notif').addEventListener('click', ()=>{
-
-  document.getElementById('modal-notif').classList.add('hidden');
-});
-
-window.apagar=(id)=>{
-  if(confirm("Apagar?")){ produtos=produtos.filter(p=>p.id!==id); render(); toast("Apagado local"); }
-};
-document.getElementById('f-salvar').addEventListener('click', ()=>{
-  const nome=document.getElementById('f-nome').value;
-  const preco=document.getElementById('f-preco').value;
-  if(!nome||!preco){ toast("Preencha nome e preço"); return; }
-  const novo={id:Date.now().toString(), nome, precoNovo:parseFloat(preco), loja:document.getElementById('f-loja').value, emoji:document.getElementById('f-emoji').value||"🎁", affiliateLink:document.getElementById('f-link').value||"https://shopee.com.br"};
-  produtos.unshift(novo); render(); toast("Adicionado!"); document.getElementById('f-nome').value=""; document.getElementById('f-preco').value=""; document.getElementById('f-emoji').value=""; document.getElementById('f-link').value="";
-});
-</script>
-
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-import { getDatabase, ref, onValue, push, remove } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js";
-const firebaseConfig = {
-  apiKey: "AIzaSyAqkpuZamU05yXVGiQMtmyMmL68_Op-r88",
-  authDomain: "achadinhos-loja.firebaseapp.com",
-  databaseURL: "https://achadinhos-loja-default-rtdb.firebaseio.com",
-  projectId: "achadinhos-loja",
-  storageBucket: "achadinhos-loja.firebasestorage.app",
-  messagingSenderId: "114449338702",
-  appId: "1:114449338702:web:78ae8c8c5b792e0a6fce1f"
-};
-try{
-  const app=initializeApp(firebaseConfig);
-  const db=getDatabase(app);
-  const produtosRef=ref(db,'produtos');
-  onValue(produtosRef, (snap)=>{
-    const data=snap.val();
-    if(data){
-      const lista=Object.entries(data).map(([id,v])=>({
-        id, nome:v.nome, precoNovo:v.preco||v.precoNovo||0, precoAntigo:v.precoOriginal||v.precoAntigo||0,
-        loja:v.loja||"Shopee", emoji:v.imagem&&!v.imagem.startsWith("http")?v.imagem:"🎁",
-        imagemUrl:v.imagem&&v.imagem.startsWith("http")?v.imagem:null,
-        affiliateLink:v.linkAfiliado||v.affiliateLink||"#"
-      })).reverse();
-      if(lista.length>0){ produtos=lista; render(); }
-    }
-  });
-  // DELETE CORRIGIDO - FUNCIONA 100%
-  window.apagar=(id)=>{
-    if(!confirm("Apagar do Firebase achadinhos-loja?")) return;
-    console.log("Apagando ID:", id);
-    // Se ID curto (1-8) é local, só remove localmente mesmo
-    if(id && id.length <= 2){
-      produtos = produtos.filter(p=>p.id!==id);
-      render();
-      toast("Apagado local ✅");
-      return;
-    }
-    remove(ref(db,'produtos/'+id)).then(()=>{
-      toast("✅ Apagado do Firebase!");
-    }).catch(e=>{
-      console.error("Erro ao apagar:", e);
-      // Mesmo se falhar no Firebase, apaga local pra não travar
-      produtos = produtos.filter(p=>p.id!==id);
-      render();
-      toast("Apagado local (Firebase: "+e.message+")");
-    });
-  };
-  
-  // SALVAR CORRIGIDO
-  document.getElementById('f-salvar').addEventListener('click', ()=>{
-    const nome=document.getElementById('f-nome').value.trim();
-    const preco=document.getElementById('f-preco').value;
-    if(!nome||!preco){ toast("Preencha nome e preço"); return; }
-    const novo={
-      nome, 
-      preco:parseFloat(preco), 
-      precoNovo:parseFloat(preco), 
-      imagem:document.getElementById('f-emoji').value||"🎁", 
-      linkAfiliado:document.getElementById('f-link').value||"https://shopee.com.br", 
-      loja:document.getElementById('f-loja').value, 
-      categoria:document.getElementById('f-loja').value,
-      addedAt:Date.now(),
-      cliques:0
-    };
-    push(produtosRef, novo).then(()=>{
-      toast("✅ Salvo no Firebase!");
-      document.getElementById('f-nome').value=""; 
-      document.getElementById('f-preco').value="";
-      document.getElementById('f-emoji').value="";
-      document.getElementById('f-link').value="";
-    }).catch(e=>toast("Erro: "+e.message));
-  });
-  
-  // ===== SISTEMA DE NOTIFICAÇÃO COM SININHO 🔔 - FUNCIONA MESMO FECHADO =====
-  const notifRef = ref(db, 'notificacoes');
-  
-  // Pedir permissão de notificação assim que carregar
-  if('Notification' in window){
-    if(Notification.permission === 'default'){
-      setTimeout(()=>{ Notification.requestPermission().then(p=>{
-        if(p==='granted'){ toast("🔔 Notificações ativadas!"); document.getElementById('bell-badge').classList.remove('hidden'); }
-      }); }, 2000);
-    } else if(Notification.permission === 'granted'){
-      document.getElementById('bell-badge').classList.remove('hidden');
-    }
-  }
-  
-  // Escutar notificações novas e mostrar mesmo com loja aberta
-  onValue(notifRef, (snap)=>{
-    const data = snap.val();
-    if(data){
-      const lista = Object.entries(data).map(([id,v])=>({id, ...v})).reverse().slice(0,5);
-      document.getElementById('historico-notif').innerHTML = lista.map(n=>`
-        <div class="p-2 bg-[#f8f8f8] rounded-[10px] border border-zinc-100">
-          <p class="text-[12px] font-bold text-black truncate">${n.titulo}</p>
-          <p class="text-[11px] text-zinc-500 truncate">${n.mensagem}</p>
-          <p class="text-[10px] text-zinc-400">${new Date(n.timestamp).toLocaleString('pt-BR')}</p>
-        </div>
-      `).join('');
-      
-      // Mostrar notificação do sistema se for nova (últimos 30 segundos)
-      const ultima = lista[0];
-      if(ultima && Date.now() - ultima.timestamp < 30000 && Notification.permission==='granted'){
-        try{
-          new Notification(ultima.titulo, {
-            body: ultima.mensagem,
-            icon: 'https://cdn-icons-png.flaticon.com/512/263/263142.png',
-            badge: 'https://cdn-icons-png.flaticon.com/512/263/263142.png'
-          });
-        }catch(e){}
-      }
-    }
-  });
-  
-  // Enviar notificação para todos
-  document.getElementById('notif-enviar-todos').addEventListener('click', ()=>{
-    const titulo = document.getElementById('notif-titulo').value.trim();
-    const mensagem = document.getElementById('notif-msg').value.trim();
-    if(!titulo || !mensagem){ toast("Preencha título e mensagem"); return; }
-    
-    const notif = {
-      titulo,
-      mensagem,
-      timestamp: Date.now(),
-      de: "Achadinhos Oficial"
-    };
-    
-    push(notifRef, notif).then(()=>{
-      toast("📢 Notificação enviada para todos! 🔔");
-      // Tentar mostrar notificação local também
-      if(Notification.permission==='granted'){
-        new Notification(titulo, {body: mensagem});
-      }
-      // Limpar
-      document.getElementById('notif-msg').value="";
-    }).catch(e=>toast("Erro: "+e.message));
-  });
-  
-  document.getElementById('notif-testar').addEventListener('click', ()=>{
-    const titulo = document.getElementById('notif-titulo').value;
-    const mensagem = document.getElementById('notif-msg').value;
-    if(Notification.permission!=='granted'){
-      Notification.requestPermission().then(p=>{
-        if(p==='granted') new Notification(titulo, {body: mensagem});
-        else toast("Permita notificações no navegador");
-      });
-    } else {
-      new Notification(titulo, {body: mensagem});
-      toast("👁️ Teste enviado!");
-    }
-  });
-}catch(e){ console.log("Firebase offline, usando local"); }
-</script>
-
-<!-- MODAL NOTIFICAÇÃO - SININHO PARA TODOS -->
-
-<div id="modal-notif" class="fixed inset-0 z-[70] bg-black/50 hidden">
-  <div class="absolute inset-0" id="modal-notif-bg" onclick="document.getElementById('modal-notif').classList.add('hidden'); document.getElementById('modal-notif').classList.remove('grid');"></div>
-  <div class="absolute bottom-0 left-0 right-0 bg-white rounded-t-[24px] p-6 max-w-[480px] mx-auto max-h-[85vh] overflow-auto">
-    <button onclick="document.getElementById('modal-notif').classList.add('hidden')" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-zinc-100 grid place-items-center font-bold">✕</button>
-    <div class="w-10 h-1 bg-zinc-200 rounded-full mx-auto mb-4"></div>
-    <div class="flex items-center gap-2 mb-1">
-      <span class="text-[20px]">🔔</span>
-      <b class="text-[16px] text-black">Enviar notificação para todos</b>
-    </div>
-    <p class="text-[12px] text-zinc-500 mb-4">Funciona mesmo com loja fechada • Firebase achadinhos-loja</p>
-    
-    <div class="space-y-3">
-      <input id="notif-titulo" placeholder="Título: Ex: 🔥 Oferta relâmpago!" class="w-full h-[48px] border border-zinc-200 rounded-[12px] px-4 text-[14px] text-black outline-none focus:border-black" value="🔥 Achadinho novo na loja!">
-      <textarea id="notif-msg" placeholder="Mensagem: Ex: Air Fryer por apenas R$ 279, corre que acaba!" rows="3" class="w-full border border-zinc-200 rounded-[12px] px-4 py-3 text-[14px] text-black outline-none focus:border-black resize-none">Temos ofertas novas te esperando! Corre pra ver antes que acabe!</textarea>
-      
-      <div class="flex gap-2">
-        <button id="notif-enviar-todos" class="flex-1 h-[48px] bg-[#ff6b2b] text-white rounded-full font-bold text-[14px]">📢 Enviar para todos</button>
-        <button id="notif-testar" class="w-[48px] h-[48px] border border-zinc-200 rounded-full grid place-items-center">👁️</button>
-      </div>
-      
-      <div class="p-3 bg-[#fff7ed] border border-[#ffe4b5] rounded-[12px]">
-        <p class="text-[11px] font-bold text-[#9a3412]">📱 Como funciona com loja fechada:</p>
-        <p class="text-[11px] text-[#9a3412] mt-1">1. Cliente precisa permitir notificações (vamos pedir)<br>2. Você envia aqui<br>3. Mesmo com loja fechada, ele recebe no celular como notificação do Chrome</p>
-      </div>
-      
-      <button id="fechar-notif" onclick="document.getElementById('modal-notif').classList.add('hidden'); document.getElementById('modal-notif').classList.remove('grid');" class="w-full h-[48px] border border-zinc-200 rounded-full font-bold text-black text-[14px] mt-2">Fechar</button>
-    </div>
-    
-    <div class="mt-4">
-      <p class="text-[12px] font-bold text-black mb-2">Últimas enviadas:</p>
-      <div id="historico-notif" class="space-y-2 max-h-[120px] overflow-auto"></div>
-    </div>
-  </div>
-</div>
-
-<script>
-// FIX FINAL - GARANTE QUE SININHO FECHA SEMPRE
-(function(){
-  const modalNotif = document.getElementById('modal-notif');
-  const fecharNotif = document.getElementById('fechar-notif');
-  const bgNotif = document.getElementById('modal-notif-bg');
-  const bell = document.getElementById('bell-notif');
-  
-  function fechaNotif(){
-    if(modalNotif){
-      modalNotif.classList.add('hidden');
-      modalNotif.classList.remove('grid');
-    }
-  }
-  
-  if(fecharNotif) fecharNotif.onclick = fechaNotif;
-  if(bgNotif) bgNotif.onclick = fechaNotif;
-  
-  // Se clicar fora do conteúdo, fecha
-  if(modalNotif){
-    modalNotif.addEventListener('click', function(e){
-      if(e.target === modalNotif) fechaNotif();
-    });
-  }
-  
-  console.log("✅ Fix sininho aplicado - fecha 100%");
-})();
-</script>
-
-<script>(function(){var loc=location.href.replace(/#.*$/,"");var ATTR_NAMES=["data-product-id","data-productid","data-product_id","product-id","productid","product_id","data-source-entity-id","source-entity-id","source_entity_id","data-product","data-metadata","data-meta"];var DATASET_KEYS=["productId","productid","product_id","sourceEntityId","sourceentityid","source_entity_id","product","metadata","meta"];function readProductId(value){if(typeof value!=="string"||value.length===0)return null;if(/^[0-9]{6,}$/.test(value))return value;var match=value.match(/(?:product(?:_|-)?id|source(?:_|-)?entity(?:_|-)?id)["'=:\s]+([0-9]{6,})/i);return match?match[1]:null}function extractProductId(start){for(var node=start;node&&node!==document.body;node=node.parentElement){for(var i=0;i<ATTR_NAMES.length;i++){var attrValue=node.getAttribute&&node.getAttribute(ATTR_NAMES[i]);var attrProductId=readProductId(attrValue);if(attrProductId)return attrProductId}var dataset=node.dataset||null;if(dataset){for(var j=0;j<DATASET_KEYS.length;j++){var dataValue=dataset[DATASET_KEYS[j]];var dataProductId=readProductId(dataValue);if(dataProductId)return dataProductId}}}return null}function isInlineMediaSlotElement(node){return !!(node&&node.getAttribute&&node.getAttribute("data-clippy-inline-media-slot")!==null)}function findInlineMediaSlot(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(isInlineMediaSlotElement(node))return node}return null}function readInlineMediaUrl(node){if(!node)return null;return node.getAttribute&&((node.getAttribute("data-clippy-inline-media-url")||node.getAttribute("data-url")||node.getAttribute("data_url")))||node.href||null}function stripHash(url){return String(url).replace(/#.*$/,"")}function urlsMatch(a,b){if(!a||!b)return false;try{return stripHash(new URL(a,loc).href)===stripHash(new URL(b,loc).href)}catch(_){return stripHash(a)===stripHash(b)}}function isFirstPartyReelUrl(value){try{var url=new URL(value,loc);if(url.protocol!=="https:")return false;var host=url.hostname.toLowerCase();var supported=host==="instagram.com"||host.endsWith(".instagram.com")||host==="facebook.com"||host.endsWith(".facebook.com");return supported&&/\/reels?\//i.test(url.pathname)}catch(_){return false}}function isInlineMediaUrlClick(node,href){var slot=findInlineMediaSlot(node);if(!slot)return false;var slotUrl=readInlineMediaUrl(slot);if(slotUrl)return urlsMatch(href,slotUrl);return isFirstPartyReelUrl(href)}function findDataHref(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(node.getAttribute){var href=node.getAttribute("data-href")||node.getAttribute("data-url");if(href)return{href:href,node:node}}}return null}var nativeOpen=window.open;window.open=function(url){if(parent!==window&&typeof url==="string"&&/^https?:\/\//.test(url)){parent.postMessage({type:"ecto:usercontent-link-click",href:url},"*");return null}return nativeOpen?nativeOpen.apply(window,arguments):null};document.addEventListener("click",function(e){var target=e.target instanceof Element?e.target:null;if(!target)return;if(parent===window)return;var a=target.closest?target.closest("a[href]"):null;if(a&&a.href&&/^https?:\/\//.test(a.href)&&a.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(a,a.href))return;var productId=extractProductId(target)||extractProductId(a);if(productId){e.preventDefault();parent.postMessage({type:"ecto-artifact-link-click",productId:productId},"*");return}e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:a.href},"*");return}var dataHref=findDataHref(target);if(dataHref&&/^https?:\/\//.test(dataHref.href)&&dataHref.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(dataHref.node,dataHref.href))return;e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:dataHref.href},"*")}},true)})();</script><script>(function(){var FOCUS_TYPE="ecto:artifact-focus-request";var CLOSE_TYPE="ecto:artifact-close-request";function focusArtifactDocument(){var body=document.body;if(!body)return;try{window.focus();}catch(e){}if(!body.hasAttribute("tabindex"))body.setAttribute("tabindex","-1");try{body.focus({preventScroll:true});}catch(e){try{body.focus();}catch(e2){}}}window.addEventListener("message",function(event){if(event.source!==window.parent)return;var data=event.data;if(!data||typeof data!=="object"||data.type!==FOCUS_TYPE)return;if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",focusArtifactDocument,{once:true});return;}focusArtifactDocument();});window.addEventListener("keydown",function(event){if(event.key!=="Escape")return;window.setTimeout(function(){if(event.defaultPrevented)return;window.parent.postMessage({type:CLOSE_TYPE},"*");},0);});})();</script>
+<body><br>
+<div class="header"><br>
+<div class="top"><div class="logo" id="logo"><div class="la">A</div><div class="lt">ACHADINHOS</div><div class="bm">MOBILE</div></div><div class="actions"><button class="bbell" id="bell">🔔</button><button class="bent" id="bdono">Entrar</button></div></div><br>
+<div class="search"><div class="swrap"><input id="busca" placeholder="Buscar achadinhos..."></div></div><br>
+<div class="cats" id="cats"><button class="cat on" data-c="Todas">Todas</button><button class="cat" data-c="Shopee">Shopee</button><button class="cat" data-c="Amazon">Amazon</button><button class="cat" data-c="Mercado Livre">Mercado Livre</button><button class="cat" data-c="Geral">Geral</button></div><br>
+</div><br>
+<div class="bannerw"><div class="banner"><div class="ball"></div><div class="bin"><div class="tag">🔥 FIREBASE • MOBILE 100%</div><h1>Achadinhos que<br><i>valem cada centavo</i></h1><div class="foot"><div class="cnt" id="ctop">8 achados</div><div class="live">• Vercel 100%</div></div></div></div></div><br>
+<div class="main"><div class="vh"><h2>Vitrine • <span id="cc">8</span></h2><small>Toque 5x no A • senha 1234</small></div><div class="grid" id="grid"></div><div class="ft"><b>ACHADINHOS OFICIAL 🛒</b><br><small>Zap: 81 99802-8998 • Bonito-PE</small><br><small style="color:#aaa">Versao final Vercel - sem bug de R\(&lt;/small&gt;&lt;/div&gt;&lt;/div&gt;<br>
+&lt;div class=&quot;toast&quot; id=&quot;toast&quot;&gt;&lt;/div&gt;<br>
+&lt;div class=&quot;bg&quot; id=&quot;bgdono&quot;&gt;&lt;div class=&quot;sheet&quot;&gt;&lt;button class=&quot;x&quot; id=&quot;xdono&quot;&gt;✕&lt;/button&gt;&lt;div class=&quot;drag&quot;&gt;&lt;/div&gt;&lt;b&gt;Modo Dono 🔒&lt;/b&gt;&lt;p style=&quot;font-size:12px;color:#888;margin-top:4px&quot;&gt;Senha: 1234&lt;/p&gt;&lt;input id=&quot;senha&quot; type=&quot;password&quot; placeholder=&quot;Digite a senha&quot; style=&quot;width:100%;height:44px;border:1px solid #ddd;border-radius:12px;padding:0 12px;margin-top:14px&quot;&gt;&lt;button id=&quot;entrar&quot; style=&quot;width:100%;height:44px;background:#000;color:#fff;border-radius:99px;border:0;margin-top:10px;font-weight:700&quot;&gt;Entrar&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;<br>
+&lt;div class=&quot;bg&quot; id=&quot;bgnotif&quot;&gt;&lt;div class=&quot;sheet&quot;&gt;&lt;button class=&quot;x&quot; id=&quot;xnotif&quot;&gt;✕&lt;/button&gt;&lt;div class=&quot;drag&quot;&gt;&lt;/div&gt;&lt;b&gt;🔔 Notificacoes&lt;/b&gt;&lt;p style=&quot;font-size:12px;color:#888;margin-top:4px&quot;&gt;Ative para receber ofertas&lt;/p&gt;&lt;button id=&quot;bativar&quot; style=&quot;width:100%;height:44px;background:#ff6b2b;color:#fff;border-radius:99px;border:0;margin-top:14px;font-weight:700&quot;&gt;Ativar notificacoes&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;<br>
+&lt;div class=&quot;painel&quot; id=&quot;painel&quot;&gt;&lt;div class=&quot;ph&quot;&gt;&lt;div&gt;&lt;b id=&quot;ptotal&quot;&gt;Gerenciar • 8&lt;/b&gt;&lt;/div&gt;&lt;button class=&quot;x&quot; style=&quot;position:static&quot; id=&quot;xpainel&quot;&gt;✕&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;form&quot;&gt;&lt;b&gt;➕ Adicionar&lt;/b&gt;&lt;input id=&quot;fnome&quot; placeholder=&quot;Nome&quot;&gt;&lt;div style=&quot;display:flex;gap:8px&quot;&gt;&lt;input id=&quot;fpreco&quot; type=&quot;number&quot; placeholder=&quot;Preco 29.90&quot;&gt;&lt;input id=&quot;fantigo&quot; type=&quot;number&quot; placeholder=&quot;Antigo&quot;&gt;&lt;/div&gt;&lt;input id=&quot;femoji&quot; placeholder=&quot;Emoji ou URL https://&quot;&gt;&lt;input id=&quot;flink&quot; placeholder=&quot;Link afiliado&quot;&gt;&lt;select id=&quot;floja&quot;&gt;&lt;option&gt;Shopee&lt;/option&gt;&lt;option&gt;Amazon&lt;/option&gt;&lt;option&gt;Mercado Livre&lt;/option&gt;&lt;option&gt;Geral&lt;/option&gt;&lt;/select&gt;&lt;button class=&quot;btnsv&quot; id=&quot;fsalvar&quot;&gt;Salvar&lt;/button&gt;&lt;/div&gt;&lt;div id=&quot;lista&quot; style=&quot;padding:0 14px&quot;&gt;&lt;/div&gt;&lt;/div&gt;<br>
+&lt;script&gt;<br>
+var produtos = [<br>
+{id:&#39;1&#39;, nome:&#39;Organizador de Gaveta Acrilico Cristal 3 Divisorias&#39;, preco:29.9, antigo:59, loja:&#39;Shopee&#39;, emoji:&#39;🗄️&#39;, link:&#39;https://shopee.com.br&#39;},<br>
+{id:&#39;2&#39;, nome:&#39;Air Fryer 4.2L Digital Timer Antiaderente&#39;, preco:279, antigo:399, loja:&#39;Amazon&#39;, emoji:&#39;🍟&#39;, link:&#39;https://amazon.com.br&#39;},<br>
+{id:&#39;3&#39;, nome:&#39;Luminaria com Sensor de Presenca LED Recarregavel&#39;, preco:34.9, antigo:0, loja:&#39;Shopee&#39;, emoji:&#39;💡&#39;, link:&#39;https://shopee.com.br&#39;},<br>
+{id:&#39;4&#39;, nome:&#39;Escova Alisadora 3 em 1 Seca e Modela&#39;, preco:89.9, antigo:0, loja:&#39;Mercado Livre&#39;, emoji:&#39;💇‍♀️&#39;, link:&#39;https://mercadolivre.com.br&#39;},<br>
+{id:&#39;5&#39;, nome:&#39;Kit 10 Panos Magicos Microfibra Limpeza&#39;, preco:19.9, antigo:0, loja:&#39;Shopee&#39;, emoji:&#39;✨&#39;, link:&#39;https://shopee.com.br&#39;},<br>
+{id:&#39;6&#39;, nome:&#39;Suporte Celular Articulado Mesa e Cama 360&#39;, preco:26.9, antigo:0, loja:&#39;Amazon&#39;, emoji:&#39;📱&#39;, link:&#39;https://amazon.com.br&#39;},<br>
+{id:&#39;7&#39;, nome:&#39;Mini Projetor Portatil 4K WiFi&#39;, preco:189.9, antigo:299, loja:&#39;Shopee&#39;, emoji:&#39;📽️&#39;, link:&#39;https://shopee.com.br&#39;},<br>
+{id:&#39;8&#39;, nome:&#39;Fone Bluetooth TWS com Case Power Bank&#39;, preco:49.9, antigo:0, loja:&#39;Amazon&#39;, emoji:&#39;🎧&#39;, link:&#39;https://amazon.com.br&#39;}<br>
+];<br>
+var cat = &#39;Todas&#39;;<br>
+var busca = &#39;&#39;;<br>
+function esc(s){ var d=document.createElement(&#39;div&#39;); d.textContent=s; return d.innerHTML; }<br>
+function toast(m){ var t=document.getElementById(&#39;toast&#39;); t.textContent=m; t.style.display=&#39;block&#39;; clearTimeout(t._t); t._t=setTimeout(function(){t.style.display=&#39;none&#39;},2500); }<br>
+function fmt(v){ return &#39;R\) &#39; + Number(v).toFixed(2).replace(&#39;.&#39;,&#39;,&#39;); }<br>
+function render(){<br>
+ var grid=document.getElementById(&#39;grid&#39;);<br>
+ var lista=[];<br>
+ for(var i=0;i<produtos.length;i++){ var p=produtos[i]; var okNome=p.nome.toLowerCase().indexOf(busca.toLowerCase())>=0; var okCat=(cat=<mark>&#39;Todas&#39;||p.loja</mark>=cat); if(okNome&amp;&amp;okCat) lista.push(p); }<br>
+ document.getElementById(&#39;cc&#39;).textContent=lista.length;<br>
+ document.getElementById(&#39;ctop&#39;).textContent=produtos.length+&#39; achados&#39;;<br>
+ document.getElementById(&#39;ptotal&#39;).textContent=&#39;Gerenciar • &#39;+produtos.length;<br>
+ if(lista.length===0){ grid.innerHTML=&#39;<div style="grid-column:1/-1;padding:30px;text-align:center">Nada encontrado</div>&#39;; return; }<br>
+ var html=&#39;&#39;;<br>
+ for(var j=0;j<lista.length;j++){<br>
+  var p=lista[j];<br>
+  var off='';<br>
+  if(p.antigo && p.antigo>p.preco){ var perc=Math.round((1-p.preco/p.antigo)</em>100); off=&#39;<div class="badge">-&#39;+perc+&#39;%</div>&#39;; }<br>
+  var oldhtml=&#39;&#39;;<br>
+  if(p.antigo &amp;&amp; p.antigo&gt;p.preco){ oldhtml=&#39;<div class="old">&#39;+fmt(p.antigo)+&#39;</div>&#39;; }<br>
+  var tclass=&#39;shopee&#39;;<br>
+  if(p.loja=<mark>&#39;Amazon&#39;) tclass=&#39;amazon&#39;;<br>
+  if(p.loja</mark>=&#39;Mercado Livre&#39;) tclass=&#39;mercado&#39;;<br>
+  var img=p.emoji;<br>
+  if(img.indexOf(&#39;http&#39;)=<mark>0){ img=&#39;<img src="'+esc(img)+'" style="width:100%;height:100%;object-fit:cover">&#39;; }<br>
+  html+=&#39;<div class="card"><div class="img">&#39;+img+off+&#39;</div><div class="body"><div class="name">&#39;+esc(p.nome)+&#39;</div>&#39;+oldhtml+&#39;<div class="new"><small>R$</small> &#39;+Number(p.preco).toFixed(2).replace(&#39;.&#39;,&#39;,&#39;)+&#39;</div><div class="row"><span class="tl '+tclass+'">&#39;+esc(p.loja.toUpperCase())+&#39;</span></div><a class="btn" href="'+esc(p.link)+'" target="_blank">VER OFERTA</a></div></div>&#39;;<br>
+ }<br>
+ grid.innerHTML=html;<br>
+ var lhtml=&#39;&#39;;<br>
+ for(var k=0;k&lt;produtos.length;k++){<br>
+  var pp=produtos[k];<br>
+  var th=pp.emoji;<br>
+  if(th.indexOf(&#39;http&#39;)</mark>=0){ th=&#39;<img src="'+esc(th)+'" style="width:100%;height:100%;object-fit:cover">&#39;; }<br>
+  lhtml+=&#39;<div class="item"><div class="th">&#39;+th+&#39;</div><div style="flex:1"><div style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">&#39;+esc(pp.nome)+&#39;</div><small style="color:#888">&#39;+fmt(pp.preco)+&#39; • &#39;+esc(pp.loja)+&#39;</small></div><button onclick="apagar(''+pp.id+'')" style="width:36px;height:36px;border-radius:99px;border:1px solid #fca5a5;color:#dc2626;background:#fff;cursor:pointer">🗑️</button></div>&#39;;<br>
+ }<br>
+ document.getElementById(&#39;lista&#39;).innerHTML=lhtml;<br>
+}<br>
+render();<br>
+document.getElementById(&#39;busca&#39;).addEventListener(&#39;input&#39;, function(e){ busca=e.target.value; render(); });<br>
+var cats=document.querySelectorAll(&#39;.cat&#39;);<br>
+for(var c=0;c<cats.length;c++){ cats[c].addEventListener('click', function(){ for(var x=0;x<cats.length;x++) cats[x].classList.remove('on'); this.classList.add('on'); cat=this.getAttribute('data-c'); render(); }); }<br>
+var clicks=[];<br>
+document.getElementById('logo').addEventListener('click', function(){ clicks.push(Date.now()); clicks=clicks.filter(function(t){return Date.now()-t<3000}); if(clicks.length>=5){ clicks=[]; document.getElementById(&#39;bgdono&#39;).style.display=&#39;block&#39;; } });<br>
+document.getElementById(&#39;bdono&#39;).addEventListener(&#39;click&#39;, function(){ document.getElementById(&#39;bgdono&#39;).style.display=&#39;block&#39;; });<br>
+document.getElementById(&#39;xdono&#39;).addEventListener(&#39;click&#39;, function(){ document.getElementById(&#39;bgdono&#39;).style.display=&#39;none&#39;; });<br>
+document.getElementById(&#39;bgdono&#39;).addEventListener(&#39;click&#39;, function(e){ if(e.target.id=<mark>&#39;bgdono&#39;) e.target.style.display=&#39;none&#39;; });<br>
+document.getElementById(&#39;entrar&#39;).addEventListener(&#39;click&#39;, function(){ var s=document.getElementById(&#39;senha&#39;).value; if(s</mark>=&#39;1234&#39;||s=<mark>&#39;felipe123&#39;){ document.getElementById(&#39;bgdono&#39;).style.display=&#39;none&#39;; document.getElementById(&#39;painel&#39;).style.display=&#39;block&#39;; toast(&#39;Modo dono ✅&#39;); } else toast(&#39;Senha incorreta&#39;); });<br>
+document.getElementById(&#39;xpainel&#39;).addEventListener(&#39;click&#39;, function(){ document.getElementById(&#39;painel&#39;).style.display=&#39;none&#39;; });<br>
+document.getElementById(&#39;bell&#39;).addEventListener(&#39;click&#39;, function(){ document.getElementById(&#39;bgnotif&#39;).style.display=&#39;block&#39;; });<br>
+document.getElementById(&#39;xnotif&#39;).addEventListener(&#39;click&#39;, function(){ document.getElementById(&#39;bgnotif&#39;).style.display=&#39;none&#39;; });<br>
+document.getElementById(&#39;bgnotif&#39;).addEventListener(&#39;click&#39;, function(e){ if(e.target.id</mark>=&#39;bgnotif&#39;) e.target.style.display=&#39;none&#39;; });<br>
+document.getElementById(&#39;bativar&#39;).addEventListener(&#39;click&#39;, function(){ if(&#39;Notification&#39; in window){ Notification.requestPermission().then(function(p){ if(p=<mark>&#39;granted&#39;) toast(&#39;Notificacoes ativadas ✅&#39;); else toast(&#39;Negado&#39;); }); } });<br>
+window.apagar=function(id){ if(!confirm(&#39;Apagar?&#39;)) return; var np=[]; for(var i=0;i&lt;produtos.length;i++) if(produtos[i].id!</mark>id) np.push(produtos[i]); produtos=np; render(); toast(&#39;Apagado&#39;); };<br>
+document.getElementById(&#39;fsalvar&#39;).addEventListener(&#39;click&#39;, function(){ var n=document.getElementById(&#39;fnome&#39;).value.trim(); var pr=document.getElementById(&#39;fpreco&#39;).value; if(!n||!pr){ toast(&#39;Preencha nome e preco&#39;); return; } var novo={id:Date.now().toString(), nome:n, preco:parseFloat(pr), antigo:parseFloat(document.getElementById(&#39;fantigo&#39;).value)||0, loja:document.getElementById(&#39;floja&#39;).value, emoji:document.getElementById(&#39;femoji&#39;).value||&#39;🎁&#39;, link:document.getElementById(&#39;flink&#39;).value||&#39;<a href="https://shopee.com.br&#x27;">https://shopee.com.br&#39;</a>}; produtos.unshift(novo); render(); toast(&#39;Adicionado!&#39;); document.getElementById(&#39;fnome&#39;).value=&#39;&#39;; document.getElementById(&#39;fpreco&#39;).value=&#39;&#39;; document.getElementById(&#39;fantigo&#39;).value=&#39;&#39;; document.getElementById(&#39;femoji&#39;).value=&#39;&#39;; document.getElementById(&#39;flink&#39;).value=&#39;&#39;; });<br>
+</script><br>
+<script>(function(){var loc=location.href.replace(/#.<em>\(/,&quot;&quot;);var ATTR_NAMES=[&quot;data-product-id&quot;,&quot;data-productid&quot;,&quot;data-product_id&quot;,&quot;product-id&quot;,&quot;productid&quot;,&quot;product_id&quot;,&quot;data-source-entity-id&quot;,&quot;source-entity-id&quot;,&quot;source_entity_id&quot;,&quot;data-product&quot;,&quot;data-metadata&quot;,&quot;data-meta&quot;];var DATASET_KEYS=[&quot;productId&quot;,&quot;productid&quot;,&quot;product_id&quot;,&quot;sourceEntityId&quot;,&quot;sourceentityid&quot;,&quot;source_entity_id&quot;,&quot;product&quot;,&quot;metadata&quot;,&quot;meta&quot;];function readProductId(value){if(typeof value!==&quot;string&quot;||value.length===0)return null;if(/^[0-9]{6,}\)/.test(value))return value;var match=value.match(/(?:product(?:<u>|-)?id|source(?:</u>|-)?entity(?:<u>|-)?id)[&quot;&#39;=:\s]+([0-9]{6,})/i);return match?match[1]:null}function extractProductId(start){for(var node=start;node&amp;&amp;node!==document.body;node=node.parentElement){for(var i=0;i&lt;ATTR</u>NAMES.length;i++){var attrValue=node.getAttribute&amp;&amp;node.getAttribute(ATTR<u>NAMES[i]);var attrProductId=readProductId(attrValue);if(attrProductId)return attrProductId}var dataset=node.dataset||null;if(dataset){for(var j=0;j&lt;DATASET</u>KEYS.length;j++){var dataValue=dataset[DATASET<u>KEYS[j]];var dataProductId=readProductId(dataValue);if(dataProductId)return dataProductId}}}return null}function isInlineMediaSlotElement(node){return !!(node&amp;&amp;node.getAttribute&amp;&amp;node.getAttribute(<q>data-clippy-inline-media-slot</q>)!<mark>null)}function findInlineMediaSlot(start){for(var node=start;node&amp;&amp;node!</mark>document.body;node=node.parentElement){if(isInlineMediaSlotElement(node))return node}return null}function readInlineMediaUrl(node){if(!node)return null;return node.getAttribute&amp;&amp;((node.getAttribute(<q>data-clippy-inline-media-url</q>)||node.getAttribute(<q>data-url</q>)||node.getAttribute(&quot;data</u>url&quot;)))||node.href||null}function stripHash(url){return String(url).replace(/#.</em>\(/,&quot;&quot;)}function urlsMatch(a,b){if(!a||!b)return false;try{return stripHash(new URL(a,loc).href)===stripHash(new URL(b,loc).href)}catch(_){return stripHash(a)===stripHash(b)}}function isFirstPartyReelUrl(value){try{var url=new URL(value,loc);if(url.protocol!==&quot;https:&quot;)return false;var host=url.hostname.toLowerCase();var supported=host===&quot;instagram.com&quot;||host.endsWith(&quot;.instagram.com&quot;)||host===&quot;facebook.com&quot;||host.endsWith(&quot;.facebook.com&quot;);return supported&amp;&amp;/\/reels?\//i.test(url.pathname)}catch(_){return false}}function isInlineMediaUrlClick(node,href){var slot=findInlineMediaSlot(node);if(!slot)return false;var slotUrl=readInlineMediaUrl(slot);if(slotUrl)return urlsMatch(href,slotUrl);return isFirstPartyReelUrl(href)}function findDataHref(start){for(var node=start;node&amp;&amp;node!==document.body;node=node.parentElement){if(node.getAttribute){var href=node.getAttribute(&quot;data-href&quot;)||node.getAttribute(&quot;data-url&quot;);if(href)return{href:href,node:node}}}return null}var nativeOpen=window.open;window.open=function(url){if(parent!==window&amp;&amp;typeof url===&quot;string&quot;&amp;&amp;/^https?:\/\//.test(url)){parent.postMessage({type:&quot;ecto:usercontent-link-click&quot;,href:url},&quot;*&quot;);return null}return nativeOpen?nativeOpen.apply(window,arguments):null};document.addEventListener(&quot;click&quot;,function(e){var target=e.target instanceof Element?e.target:null;if(!target)return;if(parent===window)return;var a=target.closest?target.closest(&quot;a[href]&quot;):null;if(a&amp;&amp;a.href&amp;&amp;/^https?:\/\//.test(a.href)&amp;&amp;a.href.replace(/#.*\)/,<q>)!==loc){if(isInlineMediaUrlClick(a,a.href))return;var productId=extractProductId(target)||extractProductId(a);if(productId){e.preventDefault();parent.postMessage({type:<q>ecto-artifact-link-click</q>,productId:productId},<q>*</q>);return}e.preventDefault();parent.postMessage({type:<q>ecto:usercontent-link-click</q>,href:a.href},<q>*</q>);return}var dataHref=findDataHref(target);if(dataHref&amp;&amp;/<sup>https?:\/\//.test(dataHref.href)&amp;&amp;dataHref.href.replace(/#.*$/,</sup></q>)!<mark>loc){if(isInlineMediaUrlClick(dataHref.node,dataHref.href))return;e.preventDefault();parent.postMessage({type:<q>ecto:usercontent-link-click</q>,href:dataHref.href},<q>*</q>)}},true)})();</script><script>(function(){var FOCUS<u>TYPE=<q>ecto:artifact-focus-request</q>;var CLOSE</u>TYPE=<q>ecto:artifact-close-request</q>;function focusArtifactDocument(){var body=document.body;if(!body)return;try{window.focus();}catch(e){}if(!body.hasAttribute(<q>tabindex</q>))body.setAttribute(<q>tabindex</q>,<q>-1</q>);try{body.focus({preventScroll:true});}catch(e){try{body.focus();}catch(e2){}}}window.addEventListener(<q>message</q>,function(event){if(event.source!</mark>window.parent)return;var data=event.data;if(!data||typeof data!<mark><q>object</q>||data.type!</mark>FOCUS<u>TYPE)return;if(document.readyState=<mark><q>loading</q>){document.addEventListener(<q>DOMContentLoaded</q>,focusArtifactDocument,{once:true});return;}focusArtifactDocument();});window.addEventListener(<q>keydown</q>,function(event){if(event.key!</mark><q>Escape</q>)return;window.setTimeout(function(){if(event.defaultPrevented)return;window.parent.postMessage({type:CLOSE</u>TYPE},<q>*</q>);},0);});})();</script></p>
 
 <p></body></html></p>
 <script>window.webkit.messageHandlers.TextLoaded.postMessage('TextLoaded')</script></body></html>
