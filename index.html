@@ -24,6 +24,27 @@
 :where(code, pre, kbd, samp) {<br>
   font-family: <q>Optimistic Mono</q>, ui-monospace, monospace;<br>
 }<br>
+</style><style><br>
+@font-face {<br>
+  font-family: <q>Optimistic</q>;<br>
+  font-style: normal;<br>
+  font-weight: 400 600;<br>
+  font-display: swap;<br>
+  src: url(<q>/fonts/OptimisticAI<u>VF</u>Optimized.woff2</q>) format(<q>woff2</q>);<br>
+}<br>
+@font-face {<br>
+  font-family: <q>Optimistic Mono</q>;<br>
+  font-style: normal;<br>
+  font-weight: 400;<br>
+  font-display: swap;<br>
+  src: url(<q>/fonts/OptimisticMono<u>W</u>TextRegular.woff2</q>) format(<q>woff2</q>);<br>
+}<br>
+:where(html) {<br>
+  font-family: <q>Optimistic</q>, system-ui, sans-serif;<br>
+}<br>
+:where(code, pre, kbd, samp) {<br>
+  font-family: <q>Optimistic Mono</q>, ui-monospace, monospace;<br>
+}<br>
 </style><br>
 <meta charset="UTF-8"><br>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><br>
@@ -82,13 +103,14 @@
   <div class="mt-8 p-4 rounded-[16px] bg-[#f8f8f8] border border-zinc-100 text-center"><br>
     <p id="rodape-titulo" class="font-black text-[13px] text-black">ACHADINHOS OFICIAL 🛒</p><br>
     <p id="rodape-zap" class="text-[11px] text-zinc-500 mt-1">Zap: 81 99802-8998 • Bonito-PE</p><br>
-    <p class="text-[10px] text-zinc-400 mt-2">🔔 Sininho automático ao entrar</p><br>
+    <a id="rodape-insta" href="https://instagram.com/filipe_ferreira12" target="_blank" class="mt-3 inline-flex items-center justify-center gap-2 h-11 px-6 rounded-full bg-black text-white font-bold text-[12px] hover:bg-zinc-800 transition w-full"><br>
+      <span class="text-[16px]">📸</span> Seguir no Instagram<br>
+    </a><br>
+    <p class="text-[10px] text-zinc-400 mt-3">🔔 Sininho automático ao entrar</p><br>
   </div><br>
 </main></p>
 
 <div id="toast" class="fixed bottom-[20px] left-1/2 -translate-x-1/2 bg-black text-white px-5 py-3 rounded-full text-[13px] font-bold shadow-2xl hidden z-[60] max-w-[90%] text-center"></div>
-
-<!-- MODAL SININHO AUTOMATICO AO ENTRAR -->
 
 <div id="modal-sininho" class="fixed inset-0 z-[80] bg-black/60 hidden">
   <div class="absolute bottom-0 left-0 right-0 bg-white rounded-t-[28px] p-6 max-w-[480px] mx-auto animate-[slideUp_0.3s]">
@@ -105,8 +127,6 @@
     </div>
   </div>
 </div>
-
-<!-- MODAL CONFIG CLIENTE - NOME -->
 
 <div id="modal-cliente" class="fixed inset-0 z-[85] bg-black/60 hidden">
   <div class="absolute inset-0" id="modal-cliente-bg"></div>
@@ -175,7 +195,8 @@
       <label class="text-[11px] font-bold text-zinc-600">TITULO LINHA 2 LARANJA</label><input id="edit-t2" class="w-full h-[44px] border border-zinc-200 rounded-[12px] px-3 mb-3 text-[14px] outline-none focus:border-black">
       <label class="text-[11px] font-bold text-zinc-600">COR DESTAQUE</label><div class="flex gap-2 mb-3"><input id="edit-cor" type="color" value="#ff6b2b" class="w-14 h-[44px] rounded-[12px] border border-zinc-200 p-1"><input id="edit-cor-txt" class="flex-1 h-[44px] border border-zinc-200 rounded-[12px] px-3 text-[14px] outline-none"></div>
       <label class="text-[11px] font-bold text-zinc-600">RODAPÉ TITULO</label><input id="edit-rodape-titulo" class="w-full h-[44px] border border-zinc-200 rounded-[12px] px-3 mb-3 text-[14px] outline-none focus:border-black">
-      <label class="text-[11px] font-bold text-zinc-600">RODAPÉ ZAP</label><input id="edit-rodape-zap" class="w-full h-[44px] border border-zinc-200 rounded-[12px] px-3 mb-4 text-[14px] outline-none focus:border-black">
+      <label class="text-[11px] font-bold text-zinc-600">RODAPÉ ZAP</label><input id="edit-rodape-zap" class="w-full h-[44px] border border-zinc-200 rounded-[12px] px-3 mb-3 text-[14px] outline-none focus:border-black">
+      <label class="text-[11px] font-bold text-zinc-600">LINK INSTAGRAM (NOVO)</label><input id="edit-rodape-insta" class="w-full h-[44px] border border-zinc-200 rounded-[12px] px-3 mb-4 text-[14px] outline-none focus:border-black" placeholder="https://instagram.com/seu_perfil">
       <button id="edit-salvar" class="w-full h-[48px] bg-black text-white rounded-full font-bold">💾 Salvar ao vivo</button>
     </div>
   </div>
@@ -260,7 +281,6 @@ function render(){
 }
 render();
 
-// CLIENTE CONFIG - NOME
 let nomeCliente = localStorage.getItem('cliente_nome') || '';
 function atualizarAvatar(){
   const btn = document.getElementById('btn-cliente');
@@ -284,67 +304,13 @@ function atualizarAvatar(){
   }
 }
 window.atualizarAvatarGlobal = function(nome){ nomeCliente = nome; atualizarAvatar(); };
-
 atualizarAvatar();
-document.getElementById('busca').addEventListener('input',e=>{busca=e.target.value;render();
 
-// CLIENTE CONFIG - NOME
-let nomeCliente = localStorage.getItem('cliente_nome') || '';
-function atualizarAvatar(){
-  const btn = document.getElementById('btn-cliente');
-  const avatarPrev = document.getElementById('avatar-preview');
-  const saudacao = document.getElementById('saudacao-cliente');
-  const nomeBanner = document.getElementById('nome-cliente-banner');
-  if(!btn) return;
-  if(nomeCliente && nomeCliente.trim()){
-    const inicial = nomeCliente.trim()[0].toUpperCase();
-    btn.textContent = inicial;
-    btn.classList.remove('bg-black','text-white');
-    btn.classList.add('bg-[#ffe600]','text-black');
-    if(avatarPrev) avatarPrev.textContent = inicial;
-    if(saudacao){ saudacao.classList.remove('hidden'); if(nomeBanner) nomeBanner.textContent = nomeCliente; }
-  } else {
-    btn.textContent = '?';
-    btn.classList.add('bg-black','text-white');
-    btn.classList.remove('bg-[#ffe600]','text-black');
-    if(avatarPrev) avatarPrev.textContent = '?';
-    if(saudacao) saudacao.classList.add('hidden');
-  }
-}
-window.atualizarAvatarGlobal = function(nome){ nomeCliente = nome; atualizarAvatar(); };
-
-atualizarAvatar();});
+document.getElementById('busca').addEventListener('input',e=>{busca=e.target.value;render();});
 document.querySelectorAll('.cat').forEach(btn=>{
   btn.addEventListener('click',()=>{
     document.querySelectorAll('.cat').forEach(b=>b.className="cat shrink-0 h-8 px-4 rounded-full text-[13px] font-bold bg-white border border-zinc-200 text-black");
     btn.className="cat shrink-0 h-8 px-4 rounded-full text-[13px] font-bold bg-black text-white"; filtroCat=btn.dataset.cat; render();
-
-// CLIENTE CONFIG - NOME
-let nomeCliente = localStorage.getItem('cliente_nome') || '';
-function atualizarAvatar(){
-  const btn = document.getElementById('btn-cliente');
-  const avatarPrev = document.getElementById('avatar-preview');
-  const saudacao = document.getElementById('saudacao-cliente');
-  const nomeBanner = document.getElementById('nome-cliente-banner');
-  if(!btn) return;
-  if(nomeCliente && nomeCliente.trim()){
-    const inicial = nomeCliente.trim()[0].toUpperCase();
-    btn.textContent = inicial;
-    btn.classList.remove('bg-black','text-white');
-    btn.classList.add('bg-[#ffe600]','text-black');
-    if(avatarPrev) avatarPrev.textContent = inicial;
-    if(saudacao){ saudacao.classList.remove('hidden'); if(nomeBanner) nomeBanner.textContent = nomeCliente; }
-  } else {
-    btn.textContent = '?';
-    btn.classList.add('bg-black','text-white');
-    btn.classList.remove('bg-[#ffe600]','text-black');
-    if(avatarPrev) avatarPrev.textContent = '?';
-    if(saudacao) saudacao.classList.add('hidden');
-  }
-}
-window.atualizarAvatarGlobal = function(nome){ nomeCliente = nome; atualizarAvatar(); };
-
-atualizarAvatar();
   });
 });
 let clicks=[];
@@ -384,136 +350,117 @@ document.getElementById('input-nome-cliente')?.addEventListener('input', (e)=>{
   document.getElementById('avatar-preview').textContent = v ? v[0].toUpperCase() : '?';
 });
 
+let imagemOtimizadaFinal = null;
+let otimizandoAuto = false;
 
+async function comprimirAuto(src, maxSize=600, qualidade=0.70){
+  return new Promise((resolve, reject)=>{
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.onload = ()=>{
+      let w = img.width, h = img.height;
+      if(w>h){ if(w>maxSize){ h*=maxSize/w; w=maxSize; } } else { if(h>maxSize){ w*=maxSize/h; h=maxSize; } }
+      const canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img,0,0,w,h);
+      canvas.toBlob(b=> b?resolve(b):reject("erro blob"), 'image/webp', qualidade);
+    };
+    img.onerror = ()=>reject("erro carregar");
+    img.src = src;
+  });
+}
+async function dataUrlParaBlobAuto(dataUrl){
+  const res = await fetch(dataUrl);
+  return await res.blob();
+}
+async function uploadStorageAuto(blob){
+  const nomeArq = 'produtos/'+Date.now()+'_'+Math.random().toString(36).substr(2,5)+'.webp';
+  const refSt = sRef(storage, nomeArq);
+  await uploadBytes(refSt, blob);
+  return await getDownloadURL(refSt);
+}
 
-  // ===== COMPRESSÃO AUTOMÁTICA AO COLAR LINK =====
-  let imagemOtimizadaFinal = null;
-  let otimizandoAuto = false;
+const inputImg = document.getElementById('f-emoji');
+const prevBox = document.getElementById('preview-img');
+const prevTag = document.getElementById('preview-img-tag');
 
-  async function comprimirAuto(src, maxSize=600, qualidade=0.70){
-    return new Promise((resolve, reject)=>{
-      const img = new Image();
-      img.crossOrigin = "anonymous";
-      img.onload = ()=>{
-        let w = img.width, h = img.height;
-        if(w>h){ if(w>maxSize){ h*=maxSize/w; w=maxSize; } } else { if(h>maxSize){ w*=maxSize/h; h=maxSize; } }
-        const canvas = document.createElement('canvas');
-        canvas.width = w; canvas.height = h;
-        const ctx = canvas.getContext('2d');
-        ctx.drawImage(img,0,0,w,h);
-        canvas.toBlob(b=> b?resolve(b):reject("erro blob"), 'image/webp', qualidade);
-      };
-      img.onerror = ()=>reject("erro carregar");
-      img.src = src;
-    });
+async function otimizarAoColar(valor){
+  if(otimizandoAuto) return;
+  const v = valor.trim();
+  if(!v) return;
+  const ehImagem = v.startsWith('http://')||v.startsWith('https://')||v.startsWith('data:image');
+  if(!ehImagem) {
+    prevBox?.classList.add('hidden');
+    imagemOtimizadaFinal = null;
+    return;
   }
-  async function dataUrlParaBlobAuto(dataUrl){
-    const res = await fetch(dataUrl);
-    return await res.blob();
-  }
-  async function uploadStorageAuto(blob){
-    const nomeArq = 'produtos/'+Date.now()+'_'+Math.random().toString(36).substr(2,5)+'.webp';
-    const refSt = sRef(storage, nomeArq);
-    await uploadBytes(refSt, blob);
-    return await getDownloadURL(refSt);
-  }
-
-  const inputImg = document.getElementById('f-emoji');
-  const prevBox = document.getElementById('preview-img');
-  const prevTag = document.getElementById('preview-img-tag');
-
-  async function otimizarAoColar(valor){
-    if(otimizandoAuto) return;
-    const v = valor.trim();
-    if(!v) return;
-    const ehImagem = v.startsWith('http://')||v.startsWith('https://')||v.startsWith('data:image');
-    if(!ehImagem) {
-      prevBox?.classList.add('hidden');
-      imagemOtimizadaFinal = null;
-      return;
-    }
-
-    // Se for emoji, não otimiza
-    if(v.length <= 4) return;
-
-    otimizandoAuto = true;
-    const btnSalvar = document.getElementById('f-salvar');
-    const txtBtnOriginal = btnSalvar ? btnSalvar.textContent : '';
-
-    try{
-      prevBox.classList.remove('hidden');
-      prevTag.src = v;
-      
-      if(v.startsWith('data:image')){
-        if(btnSalvar){ btnSalvar.textContent = "🗜️ Comprimindo data:image..."; btnSalvar.disabled = true; }
-        toast("Detectei imagem gigante, comprimindo automaticamente...");
-        const blobOrig = await dataUrlParaBlobAuto(v);
-        const kbOrig = (blobOrig.size/1024).toFixed(0);
-        const blobComp = await comprimirAuto(v, 600, 0.65);
+  if(v.length <= 4) return;
+  otimizandoAuto = true;
+  const btnSalvar = document.getElementById('f-salvar');
+  const txtBtnOriginal = btnSalvar ? btnSalvar.textContent : '';
+  try{
+    prevBox.classList.remove('hidden');
+    prevTag.src = v;
+    if(v.startsWith('data:image')){
+      if(btnSalvar){ btnSalvar.textContent = "🗜️ Comprimindo data:image..."; btnSalvar.disabled = true; }
+      toast("Detectei imagem gigante, comprimindo automaticamente...");
+      const blobOrig = await dataUrlParaBlobAuto(v);
+      const kbOrig = (blobOrig.size/1024).toFixed(0);
+      const blobComp = await comprimirAuto(v, 600, 0.65);
+      const kbComp = (blobComp.size/1024).toFixed(0);
+      if(btnSalvar) btnSalvar.textContent = "☁️ Subindo otimizada...";
+      const urlFinal = await uploadStorageAuto(blobComp);
+      imagemOtimizadaFinal = urlFinal;
+      inputImg.value = urlFinal;
+      prevTag.src = urlFinal;
+      toast("✅ Comprimida de "+kbOrig+"KB para "+kbComp+"KB - 95% economia!");
+    } else if(v.startsWith('http')){
+      if(btnSalvar){ btnSalvar.textContent = "🗜️ Otimizando link..."; btnSalvar.disabled = true; }
+      try{
+        const blobComp = await comprimirAuto(v, 600, 0.72);
         const kbComp = (blobComp.size/1024).toFixed(0);
-        if(btnSalvar) btnSalvar.textContent = "☁️ Subindo otimizada...";
+        if(btnSalvar) btnSalvar.textContent = "☁️ Salvando versão leve...";
         const urlFinal = await uploadStorageAuto(blobComp);
         imagemOtimizadaFinal = urlFinal;
         inputImg.value = urlFinal;
         prevTag.src = urlFinal;
-        toast("✅ Comprimida de "+kbOrig+"KB para "+kbComp+"KB - 95% economia!");
-      } else if(v.startsWith('http')){
-        if(btnSalvar){ btnSalvar.textContent = "🗜️ Otimizando link..."; btnSalvar.disabled = true; }
-        // Mostra preview original primeiro
-        try{
-          const blobComp = await comprimirAuto(v, 600, 0.72);
-          const kbComp = (blobComp.size/1024).toFixed(0);
-          if(btnSalvar) btnSalvar.textContent = "☁️ Salvando versão leve...";
-          const urlFinal = await uploadStorageAuto(blobComp);
-          imagemOtimizadaFinal = urlFinal;
-          inputImg.value = urlFinal;
-          prevTag.src = urlFinal;
-          toast("✅ Link convertido pra webp "+kbComp+"KB - não gasta seu 1GB!");
-        }catch(eCors){
-          // Se CORS bloquear, mantém link original mesmo (já é leve, só 80 caracteres no banco)
-          console.log("CORS, mantendo original", eCors);
-          prevTag.src = v;
-          imagemOtimizadaFinal = v;
-          toast("✅ Link https:// detectado - já é super leve (0,08KB no banco)");
-        }
+        toast("✅ Link convertido pra webp "+kbComp+"KB - não gasta seu 1GB!");
+      }catch(eCors){
+        prevTag.src = v;
+        imagemOtimizadaFinal = v;
+        toast("✅ Link https:// detectado - já é super leve (0,08KB no banco)");
       }
-    }catch(err){
-      console.log("erro auto otimizar", err);
-      toast("Erro ao otimizar, mas pode salvar que já é leve");
-      imagemOtimizadaFinal = v;
-    }finally{
-      otimizandoAuto = false;
-      if(btnSalvar){ btnSalvar.textContent = txtBtnOriginal || "Salvar achadinho"; btnSalvar.disabled = false; }
     }
+  }catch(err){
+    toast("Erro ao otimizar, mas pode salvar que já é leve");
+    imagemOtimizadaFinal = v;
+  }finally{
+    otimizandoAuto = false;
+    if(btnSalvar){ btnSalvar.textContent = txtBtnOriginal || "Salvar achadinho"; btnSalvar.disabled = false; }
   }
+}
 
-  // Dispara automaticamente ao colar
-  inputImg?.addEventListener('paste', (e)=>{
-    setTimeout(()=>{
-      otimizarAoColar(e.target.value);
-    }, 100);
-  });
-  // Também ao digitar/colar e sair do campo
-  inputImg?.addEventListener('change', (e)=> otimizarAoColar(e.target.value));
-  inputImg?.addEventListener('blur', (e)=> {
-    if(e.target.value.trim().startsWith('http') && !imagemOtimizadaFinal) otimizarAoColar(e.target.value);
-  });
-  // Preview simples enquanto digita
-  inputImg?.addEventListener('input', (e)=>{
-    const v = e.target.value.trim();
-    if(v.startsWith('http') || v.startsWith('data:image')){
-      prevBox.classList.remove('hidden');
-      // não troca src se já está otimizando
-      if(!otimizandoAuto) prevTag.src = v;
-    } else if(v.length>0 && v.length<=4){
-      prevBox.classList.remove('hidden');
-      prevTag.style.display='none';
-      prevBox.innerHTML = '<p class="text-[10px] font-bold text-zinc-500 mb-1">Preview emoji:</p><div class="text-[32px]">'+v+'</div>';
-    } else {
-      prevBox.classList.add('hidden');
-    }
-  });
-
+inputImg?.addEventListener('paste', (e)=>{
+  setTimeout(()=>{ otimizarAoColar(e.target.value); }, 100);
+});
+inputImg?.addEventListener('change', (e)=> otimizarAoColar(e.target.value));
+inputImg?.addEventListener('blur', (e)=> {
+  if(e.target.value.trim().startsWith('http') && !imagemOtimizadaFinal) otimizarAoColar(e.target.value);
+});
+inputImg?.addEventListener('input', (e)=>{
+  const v = e.target.value.trim();
+  if(v.startsWith('http') || v.startsWith('data:image')){
+    prevBox.classList.remove('hidden');
+    if(!otimizandoAuto) prevTag.src = v;
+  } else if(v.length>0 && v.length<=4){
+    prevBox.classList.remove('hidden');
+    prevTag.style.display='none';
+    prevBox.innerHTML = '<p class="text-[10px] font-bold text-zinc-500 mb-1">Preview emoji:</p><div class="text-[32px]">'+v+'</div>';
+  } else {
+    prevBox.classList.add('hidden');
+  }
+});
 
 document.getElementById('sininho-depois').addEventListener('click',()=>{document.getElementById('modal-sininho').classList.add('hidden');localStorage.setItem('sininho_adiado',Date.now());});
 </script>
@@ -527,6 +474,7 @@ try{
   const app=initializeApp(firebaseConfig);
   const db=getDatabase(app);
   const storage=getStorage(app);
+  window.storage=storage; window.sRef=sRef; window.uploadBytes=uploadBytes; window.getDownloadURL=getDownloadURL;
   const produtosRef=ref(db,'produtos');
   const onlineRef=ref(db,'online');
   const cliquesRef=ref(db,'cliques');
@@ -543,7 +491,6 @@ try{
   function atualizaPresenca(){set(meuOnlineRef,{id:visitorId,online:true,ts:Date.now(),ua:navigator.userAgent.substring(0,120),hora:new Date().toLocaleTimeString('pt-BR')});}
   atualizaPresenca(); setInterval(atualizaPresenca,30000); onDisconnect(meuOnlineRef).remove();
 
-  // SININHO AUTOMATICO AO ENTRAR
   function mostrarSininhoAuto(){
     const permissao=Notification.permission;
     const jaAtivou=localStorage.getItem('sininho_ativado');
@@ -551,7 +498,7 @@ try{
     const tempoAdiado=adiado?Date.now()-parseInt(adiado):Infinity;
     if(permissao!=='default') return;
     if(jaAtivou) return;
-    if(tempoAdiado< 24*60*60*1000) return; // 24h
+    if(tempoAdiado< 24*60*60*1000) return;
     setTimeout(()=>{document.getElementById('modal-sininho').classList.remove('hidden');}, 2500);
   }
   mostrarSininhoAuto();
@@ -563,7 +510,7 @@ try{
       if(perm==='granted'){
         localStorage.setItem('sininho_ativado','1');
         document.getElementById('bell-dot').classList.add('hidden');
-        set(inscritosRef,{}); // garante node
+        set(inscritosRef,{});
         set(ref(db,'inscritos_sininho/'+visitorId),{id:visitorId,ts:Date.now(),hora:new Date().toLocaleString('pt-BR'),ua:navigator.userAgent.substring(0,80)});
         toast("🔔 Sininho ativado! Você vai receber ofertas!");
         new Notification("🔔 Sininho ativado!",{body:"Você vai receber achadinhos novos na hora!"});
@@ -576,7 +523,6 @@ try{
   }
   document.getElementById('sininho-ativar').addEventListener('click',ativarSininho);
   
-  // SALVAR NOME CLIENTE
   function salvarNomeClienteFirebase(nome){
     if(!nome) return;
     set(meuClienteRef,{id:visitorId,nome:nome,ts:Date.now(),hora:new Date().toLocaleString('pt-BR'),ua:navigator.userAgent.substring(0,80),sininho: Notification.permission});
@@ -589,11 +535,6 @@ try{
     localStorage.setItem('cliente_nome', nome);
     nomeClienteLocal = nome;
     if(window.atualizarAvatarGlobal) window.atualizarAvatarGlobal(nome);
-    const btn = document.getElementById('btn-cliente');
-    if(btn){ btn.textContent = nome[0].toUpperCase(); btn.classList.remove('bg-black','text-white'); btn.classList.add('bg-[#ffe600]','text-black'); }
-    const saud = document.getElementById('saudacao-cliente');
-    const nomeB = document.getElementById('nome-cliente-banner');
-    if(saud && nomeB){ saud.classList.remove('hidden'); nomeB.textContent = nome; }
     salvarNomeClienteFirebase(nome);
     document.getElementById('modal-cliente').classList.add('hidden');
     toast("✅ Olá, "+nome+"! Nome salvo");
@@ -615,7 +556,6 @@ try{
     else new Notification("🔔 Teste",{body:"Sininho funcionando! Quando adicionar produto novo, chega pra todo mundo!"});
   });
 
-  // PRODUTOS + DETECTA NOVO PRODUTO PARA NOTIFICAR TODOS
   let produtosAnteriores=new Set();
   let primeiraCarga=true;
   onValue(produtosRef,snap=>{
@@ -624,11 +564,9 @@ try{
       const isImg = (s)=>{ if(!s) return false; s=s.trim(); return s.startsWith('http://')||s.startsWith('https://')||s.startsWith('data:image')||s.startsWith('//'); };
       const lista=Object.entries(data).map(([id,v])=>({id,nome:v.nome,precoNovo:v.preco||v.precoNovo||0,precoAntigo:v.precoOriginal||v.precoAntigo||0,loja:v.loja||"Shopee",emoji:!isImg(v.imagem)?v.imagem:"🎁",imagemUrl:isImg(v.imagem)?v.imagem:null,affiliateLink:v.linkAfiliado||v.affiliateLink||"#"} )).reverse();
       if(lista.length>0){
-        // detecta novos
         if(!primeiraCarga){
           lista.forEach(p=>{
             if(!produtosAnteriores.has(p.id)){
-              // NOVO PRODUTO DETECTADO
               if(Notification.permission==='granted'){
                 try{ new Notification("🔥 Achadinho novo!",{body:p.nome.substring(0,60)+" - R$ "+p.precoNovo, icon:"https://cdn-icons-png.flaticon.com/512/263/263142.png"}); }catch(e){}
               }
@@ -638,65 +576,11 @@ try{
         produtos=lista;
         produtosAnteriores=new Set(lista.map(p=>p.id));
         render();
-
-// CLIENTE CONFIG - NOME
-let nomeCliente = localStorage.getItem('cliente_nome') || '';
-function atualizarAvatar(){
-  const btn = document.getElementById('btn-cliente');
-  const avatarPrev = document.getElementById('avatar-preview');
-  const saudacao = document.getElementById('saudacao-cliente');
-  const nomeBanner = document.getElementById('nome-cliente-banner');
-  if(!btn) return;
-  if(nomeCliente && nomeCliente.trim()){
-    const inicial = nomeCliente.trim()[0].toUpperCase();
-    btn.textContent = inicial;
-    btn.classList.remove('bg-black','text-white');
-    btn.classList.add('bg-[#ffe600]','text-black');
-    if(avatarPrev) avatarPrev.textContent = inicial;
-    if(saudacao){ saudacao.classList.remove('hidden'); if(nomeBanner) nomeBanner.textContent = nomeCliente; }
-  } else {
-    btn.textContent = '?';
-    btn.classList.add('bg-black','text-white');
-    btn.classList.remove('bg-[#ffe600]','text-black');
-    if(avatarPrev) avatarPrev.textContent = '?';
-    if(saudacao) saudacao.classList.add('hidden');
-  }
-}
-window.atualizarAvatarGlobal = function(nome){ nomeCliente = nome; atualizarAvatar(); };
-
-atualizarAvatar();
         primeiraCarga=false;
       }
     }
   });
-  window.apagarFirebase=(id)=>{if(!confirm("Apagar definitivo?"))return;if(id&&id.length<=2){produtos=produtos.filter(p=>p.id!==id);render();
-
-// CLIENTE CONFIG - NOME
-let nomeCliente = localStorage.getItem('cliente_nome') || '';
-function atualizarAvatar(){
-  const btn = document.getElementById('btn-cliente');
-  const avatarPrev = document.getElementById('avatar-preview');
-  const saudacao = document.getElementById('saudacao-cliente');
-  const nomeBanner = document.getElementById('nome-cliente-banner');
-  if(!btn) return;
-  if(nomeCliente && nomeCliente.trim()){
-    const inicial = nomeCliente.trim()[0].toUpperCase();
-    btn.textContent = inicial;
-    btn.classList.remove('bg-black','text-white');
-    btn.classList.add('bg-[#ffe600]','text-black');
-    if(avatarPrev) avatarPrev.textContent = inicial;
-    if(saudacao){ saudacao.classList.remove('hidden'); if(nomeBanner) nomeBanner.textContent = nomeCliente; }
-  } else {
-    btn.textContent = '?';
-    btn.classList.add('bg-black','text-white');
-    btn.classList.remove('bg-[#ffe600]','text-black');
-    if(avatarPrev) avatarPrev.textContent = '?';
-    if(saudacao) saudacao.classList.add('hidden');
-  }
-}
-window.atualizarAvatarGlobal = function(nome){ nomeCliente = nome; atualizarAvatar(); };
-
-atualizarAvatar();toast("Apagado local");return;} remove(ref(db,'produtos/'+id)).then(()=>toast("✅ Apagado!"));};
+  window.apagarFirebase=(id)=>{if(!confirm("Apagar definitivo?"))return;if(id&&id.length<=2){produtos=produtos.filter(p=>p.id!==id);render();toast("Apagado local");return;} remove(ref(db,'produtos/'+id)).then(()=>toast("✅ Apagado!"));};
   window.apagar=window.apagarFirebase;
 
   document.getElementById('f-salvar').addEventListener('click',()=>{
@@ -716,8 +600,7 @@ atualizarAvatar();toast("Apagado local");return;} remove(ref(db,'produtos/'+id))
     });
   });
 
-  // CONFIG LOJA AO VIVO
-  const defaultConfig={nome:"ACHADINHOS",tag:"MOBILE",badge:"🔥 NOVO • SININHO AUTOMÁTICO",t1:"Achadinhos que",t2:"valem cada centavo",cor:"#ff6b2b",rodapeTitulo:"ACHADINHOS OFICIAL 🛒",rodapeZap:"Zap: 81 99802-8998 • Bonito-PE"};
+  const defaultConfig={nome:"ACHADINHOS",tag:"MOBILE",badge:"🔥 NOVO • SININHO AUTOMÁTICO",t1:"Achadinhos que",t2:"valem cada centavo",cor:"#ff6b2b",rodapeTitulo:"ACHADINHOS OFICIAL 🛒",rodapeZap:"Zap: 81 99802-8998 • Bonito-PE",rodapeInsta:"https://instagram.com/filipe_ferreira12"};
   onValue(configRef,snap=>{
     const cfg=snap.val()||defaultConfig;
     document.getElementById('nome-loja').textContent=cfg.nome||defaultConfig.nome;
@@ -729,14 +612,36 @@ atualizarAvatar();toast("Apagado local");return;} remove(ref(db,'produtos/'+id))
     document.getElementById('banner-bola').style.background=cfg.cor||defaultConfig.cor;
     document.getElementById('rodape-titulo').textContent=cfg.rodapeTitulo||defaultConfig.rodapeTitulo;
     document.getElementById('rodape-zap').textContent=cfg.rodapeZap||defaultConfig.rodapeZap;
-    if(!document.getElementById('edit-nome').value){document.getElementById('edit-nome').value=cfg.nome||"";document.getElementById('edit-tag').value=cfg.tag||"";document.getElementById('edit-badge').value=cfg.badge||"";document.getElementById('edit-t1').value=cfg.t1||"";document.getElementById('edit-t2').value=cfg.t2||"";document.getElementById('edit-cor').value=cfg.cor||"#ff6b2b";document.getElementById('edit-cor-txt').value=cfg.cor||"#ff6b2b";document.getElementById('edit-rodape-titulo').value=cfg.rodapeTitulo||"";document.getElementById('edit-rodape-zap').value=cfg.rodapeZap||"";}
+    const instaEl=document.getElementById('rodape-insta');
+    if(instaEl){ instaEl.href=cfg.rodapeInsta||defaultConfig.rodapeInsta; }
+    if(!document.getElementById('edit-nome').value){
+      document.getElementById('edit-nome').value=cfg.nome||"";
+      document.getElementById('edit-tag').value=cfg.tag||"";
+      document.getElementById('edit-badge').value=cfg.badge||"";
+      document.getElementById('edit-t1').value=cfg.t1||"";
+      document.getElementById('edit-t2').value=cfg.t2||"";
+      document.getElementById('edit-cor').value=cfg.cor||"#ff6b2b";
+      document.getElementById('edit-cor-txt').value=cfg.cor||"#ff6b2b";
+      document.getElementById('edit-rodape-titulo').value=cfg.rodapeTitulo||"";
+      document.getElementById('edit-rodape-zap').value=cfg.rodapeZap||"";
+      document.getElementById('edit-rodape-insta').value=cfg.rodapeInsta||"https://instagram.com/filipe_ferreira12";
+    }
   });
   document.getElementById('edit-salvar').addEventListener('click',()=>{
-    const novoCfg={nome:document.getElementById('edit-nome').value||"ACHADINHOS",tag:document.getElementById('edit-tag').value||"MOBILE",badge:document.getElementById('edit-badge').value||"🔥 NOVO",t1:document.getElementById('edit-t1').value||"Achadinhos que",t2:document.getElementById('edit-t2').value||"valem cada centavo",cor:document.getElementById('edit-cor-txt').value||"#ff6b2b",rodapeTitulo:document.getElementById('edit-rodape-titulo').value||"ACHADINHOS OFICIAL 🛒",rodapeZap:document.getElementById('edit-rodape-zap').value||"Zap: 81 99802-8998"};
-    set(configRef,novoCfg).then(()=>toast("✅ Loja atualizada ao vivo!"));
+    const novoCfg={
+      nome:document.getElementById('edit-nome').value||"ACHADINHOS",
+      tag:document.getElementById('edit-tag').value||"MOBILE",
+      badge:document.getElementById('edit-badge').value||"🔥 NOVO",
+      t1:document.getElementById('edit-t1').value||"Achadinhos que",
+      t2:document.getElementById('edit-t2').value||"valem cada centavo",
+      cor:document.getElementById('edit-cor-txt').value||"#ff6b2b",
+      rodapeTitulo:document.getElementById('edit-rodape-titulo').value||"ACHADINHOS OFICIAL 🛒",
+      rodapeZap:document.getElementById('edit-rodape-zap').value||"Zap: 81 99802-8998",
+      rodapeInsta:document.getElementById('edit-rodape-insta').value||"https://instagram.com/filipe_ferreira12"
+    };
+    set(configRef,novoCfg).then(()=>toast("✅ Loja atualizada ao vivo! Instagram salvo!"));
   });
 
-  // ONLINE
   onValue(onlineRef,snap=>{
     const data=snap.val()||{}; const lista=Object.values(data); const recentes=lista.filter(v=>Date.now()-v.ts<120000);
     document.getElementById('online-top').textContent=recentes.length+" on-line";
@@ -757,7 +662,6 @@ atualizarAvatar();toast("Apagado local");return;} remove(ref(db,'produtos/'+id))
   });
   document.getElementById('limpar-cliques').addEventListener('click',()=>{if(confirm("Limpar cliques?")) remove(cliquesRef).then(()=>toast("Limpos"));});
 
-  // NOTIFICACOES + INSCRITOS
   let notificacoesAnteriores=new Set(); let primeiraNotif=true;
   onValue(notifRef,snap=>{
     const data=snap.val()||{};
@@ -787,7 +691,6 @@ atualizarAvatar();toast("Apagado local");return;} remove(ref(db,'produtos/'+id))
     else div.innerHTML=lista.reverse().slice(0,20).map(v=>'<div class="flex justify-between p-2 bg-zinc-50 rounded-[10px]"><p class="text-[11px] font-bold">'+v.id.substring(0,8)+'...</p><p class="text-[10px] text-zinc-500">'+v.hora+'</p></div>').join('');
   });
 
-  // status permissao
   document.getElementById('card-permissao').textContent=Notification.permission==='granted'?'Ativo ✅':Notification.permission==='denied'?'Bloqueado ❌':'Pendente';
   if(Notification.permission==='granted') document.getElementById('bell-dot').classList.add('hidden');
 
@@ -802,6 +705,7 @@ atualizarAvatar();toast("Apagado local");return;} remove(ref(db,'produtos/'+id))
 
 }catch(e){console.log(e);}
 </script>
+
 <script>(function(){var loc=location.href.replace(/#.*$/,"");var ATTR_NAMES=["data-product-id","data-productid","data-product_id","product-id","productid","product_id","data-source-entity-id","source-entity-id","source_entity_id","data-product","data-metadata","data-meta"];var DATASET_KEYS=["productId","productid","product_id","sourceEntityId","sourceentityid","source_entity_id","product","metadata","meta"];function readProductId(value){if(typeof value!=="string"||value.length===0)return null;if(/^[0-9]{6,}$/.test(value))return value;var match=value.match(/(?:product(?:_|-)?id|source(?:_|-)?entity(?:_|-)?id)["'=:\s]+([0-9]{6,})/i);return match?match[1]:null}function extractProductId(start){for(var node=start;node&&node!==document.body;node=node.parentElement){for(var i=0;i<ATTR_NAMES.length;i++){var attrValue=node.getAttribute&&node.getAttribute(ATTR_NAMES[i]);var attrProductId=readProductId(attrValue);if(attrProductId)return attrProductId}var dataset=node.dataset||null;if(dataset){for(var j=0;j<DATASET_KEYS.length;j++){var dataValue=dataset[DATASET_KEYS[j]];var dataProductId=readProductId(dataValue);if(dataProductId)return dataProductId}}}return null}function isInlineMediaSlotElement(node){return !!(node&&node.getAttribute&&node.getAttribute("data-clippy-inline-media-slot")!==null)}function findInlineMediaSlot(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(isInlineMediaSlotElement(node))return node}return null}function readInlineMediaUrl(node){if(!node)return null;return node.getAttribute&&((node.getAttribute("data-clippy-inline-media-url")||node.getAttribute("data-url")||node.getAttribute("data_url")))||node.href||null}function stripHash(url){return String(url).replace(/#.*$/,"")}function urlsMatch(a,b){if(!a||!b)return false;try{return stripHash(new URL(a,loc).href)===stripHash(new URL(b,loc).href)}catch(_){return stripHash(a)===stripHash(b)}}function isFirstPartyReelUrl(value){try{var url=new URL(value,loc);if(url.protocol!=="https:")return false;var host=url.hostname.toLowerCase();var supported=host==="instagram.com"||host.endsWith(".instagram.com")||host==="facebook.com"||host.endsWith(".facebook.com");return supported&&/\/reels?\//i.test(url.pathname)}catch(_){return false}}function isInlineMediaUrlClick(node,href){var slot=findInlineMediaSlot(node);if(!slot)return false;var slotUrl=readInlineMediaUrl(slot);if(slotUrl)return urlsMatch(href,slotUrl);return isFirstPartyReelUrl(href)}function findDataHref(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(node.getAttribute){var href=node.getAttribute("data-href")||node.getAttribute("data-url");if(href)return{href:href,node:node}}}return null}var nativeOpen=window.open;window.open=function(url){if(parent!==window&&typeof url==="string"&&/^https?:\/\//.test(url)){parent.postMessage({type:"ecto:usercontent-link-click",href:url},"*");return null}return nativeOpen?nativeOpen.apply(window,arguments):null};document.addEventListener("click",function(e){var target=e.target instanceof Element?e.target:null;if(!target)return;if(parent===window)return;var a=target.closest?target.closest("a[href]"):null;if(a&&a.href&&/^https?:\/\//.test(a.href)&&a.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(a,a.href))return;var productId=extractProductId(target)||extractProductId(a);if(productId){e.preventDefault();parent.postMessage({type:"ecto-artifact-link-click",productId:productId},"*");return}e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:a.href},"*");return}var dataHref=findDataHref(target);if(dataHref&&/^https?:\/\//.test(dataHref.href)&&dataHref.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(dataHref.node,dataHref.href))return;e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:dataHref.href},"*")}},true)})();</script><script>(function(){var FOCUS_TYPE="ecto:artifact-focus-request";var CLOSE_TYPE="ecto:artifact-close-request";function focusArtifactDocument(){var body=document.body;if(!body)return;try{window.focus();}catch(e){}if(!body.hasAttribute("tabindex"))body.setAttribute("tabindex","-1");try{body.focus({preventScroll:true});}catch(e){try{body.focus();}catch(e2){}}}window.addEventListener("message",function(event){if(event.source!==window.parent)return;var data=event.data;if(!data||typeof data!=="object"||data.type!==FOCUS_TYPE)return;if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",focusArtifactDocument,{once:true});return;}focusArtifactDocument();});window.addEventListener("keydown",function(event){if(event.key!=="Escape")return;window.setTimeout(function(){if(event.defaultPrevented)return;window.parent.postMessage({type:CLOSE_TYPE},"*");},0);});})();</script>
 
 <p></body></html></p>
