@@ -51,149 +51,9 @@
 <title>Achadinhos - Notificação Automática</title><br>
 <script src="https://cdn.tailwindcss.com"></script><br>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800;900&amp;display=swap" rel="stylesheet"><br>
-<style>*{font-family:Inter,sans-serif;-webkit-tap-highlight-color:transparent}.scroll-hide::-webkit-scrollbar{display:none}.line-2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}@keyframes slideDown{from{transform:translate(-50%,-100%);opacity:0}to{transform:translate(-50%,0);opacity:1}}</style></p>
-
-<style id="textura-sutil">
-body{
-  background-color:#faf9f7 !important;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
-}
-main .bg-white{
-  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
-}
-</style>
-
-<style id="botoes-3d-profissional">
-/* ===== BOTÕES 3D PROFISSIONAIS COMBINANDO COM FUNDO TEXTURIZADO ===== */
-.cat, #btn-cliente, #bell-notif, .btn-oferta, #btn-grupo-zap-top, #rodape-grupo, #rodape-insta {
-  position: relative;
-  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-  transform: translateY(0);
-}
-.cat.bg-white, .cat.bg-zinc-50 {
-  background: linear-gradient(180deg, #ffffff 0%, #fdfcfa 100%) !important;
-  border: 1px solid #e8e3dd !important;
-  box-shadow: 
-    0 1px 0 #e8e3dd,
-    0 2px 4px rgba(0,0,0,0.04),
-    0 4px 8px rgba(0,0,0,0.03),
-    inset 0 1px 0 rgba(255,255,255,1) !important;
-}
-.cat.bg-white:hover, .cat.bg-zinc-50:hover {
-  transform: translateY(-1px);
-  box-shadow: 
-    0 2px 0 #e8e3dd,
-    0 4px 8px rgba(0,0,0,0.06),
-    0 8px 16px rgba(0,0,0,0.04),
-    inset 0 1px 0 rgba(255,255,255,1) !important;
-}
-.cat.bg-black {
-  background: linear-gradient(180deg, #1a1a1a 0%, #000000 100%) !important;
-  box-shadow: 
-    0 2px 0 #000000,
-    0 3px 6px rgba(0,0,0,0.15),
-    0 6px 12px rgba(0,0,0,0.1),
-    inset 0 1px 0 rgba(255,255,255,0.15) !important;
-  border: 1px solid #000 !important;
-}
-.btn-oferta {
-  background: linear-gradient(180deg, #ff7a3d 0%, #ff6b2b 100%) !important;
-  box-shadow: 
-    0 2px 0 #d95a24,
-    0 3px 6px rgba(255,107,43,0.25),
-    0 6px 12px rgba(255,107,43,0.15),
-    inset 0 1px 0 rgba(255,255,255,0.25) !important;
-  border: 1px solid #ff6b2b !important;
-}
-.btn-oferta:hover {
-  transform: translateY(-1px);
-  box-shadow: 
-    0 3px 0 #d95a24,
-    0 6px 12px rgba(255,107,43,0.3),
-    0 12px 20px rgba(255,107,43,0.2),
-    inset 0 1px 0 rgba(255,255,255,0.25) !important;
-}
-.btn-oferta:active {
-  transform: translateY(1px);
-  box-shadow: 
-    0 1px 0 #d95a24,
-    0 2px 4px rgba(255,107,43,0.2),
-    inset 0 1px 2px rgba(0,0,0,0.1) !important;
-}
-#btn-grupo-zap-top, #rodape-grupo {
-  background: linear-gradient(180deg, #242424 0%, #0f0f0f 100%) !important;
-  box-shadow: 
-    0 2px 0 #000000,
-    0 3px 8px rgba(0,0,0,0.2),
-    0 8px 16px rgba(0,0,0,0.12),
-    inset 0 1px 0 rgba(255,255,255,0.12) !important;
-  border: 1px solid #000 !important;
-}
-#btn-grupo-zap-top:hover, #rodape-grupo:hover {
-  transform: translateY(-1px);
-  box-shadow: 
-    0 3px 0 #000000,
-    0 6px 12px rgba(0,0,0,0.25),
-    0 12px 24px rgba(0,0,0,0.15),
-    inset 0 1px 0 rgba(255,255,255,0.12) !important;
-}
-#rodape-insta {
-  background: linear-gradient(180deg, #ffffff 0%, #faf9f7 100%) !important;
-  border: 1px solid #e8e3dd !important;
-  box-shadow: 
-    0 1.5px 0 #e8e3dd,
-    0 3px 6px rgba(0,0,0,0.05),
-    0 6px 12px rgba(0,0,0,0.03),
-    inset 0 1px 0 rgba(255,255,255,1) !important;
-}
-#rodape-insta:hover {
-  transform: translateY(-1px);
-  box-shadow: 
-    0 2.5px 0 #e8e3dd,
-    0 5px 10px rgba(0,0,0,0.07),
-    0 10px 20px rgba(0,0,0,0.04),
-    inset 0 1px 0 rgba(255,255,255,1) !important;
-}
-#btn-cliente {
-  background: linear-gradient(180deg, #ffffff 0%, #fdfcfa 100%) !important;
-  border: 1px solid #e8e3dd !important;
-  box-shadow: 
-    0 1px 0 #e8e3dd,
-    0 2px 6px rgba(0,0,0,0.05),
-    inset 0 1px 0 rgba(255,255,255,1) !important;
-}
-#bell-notif {
-  background: linear-gradient(180deg, #faf9f7 0%, #f5f1eb 100%) !important;
-  border: 1px solid #e8e3dd !important;
-  box-shadow: 
-    0 1px 0 #e8e3dd,
-    0 2px 4px rgba(0,0,0,0.04),
-    inset 0 1px 0 rgba(255,255,255,0.8) !important;
-}
-.cat:active, #btn-grupo-zap-top:active, #rodape-grupo:active, #rodape-insta:active, #btn-cliente:active, #bell-notif:active {
-  transform: translateY(1.5px) !important;
-}
-#grid > div {
-  box-shadow: 
-    0 1px 0 #e8e3dd,
-    0 2px 8px rgba(0,0,0,0.04),
-    0 8px 16px rgba(0,0,0,0.02),
-    inset 0 1px 0 rgba(255,255,255,1) !important;
-  border: 1px solid #ece7e1 !important;
-  transition: all 0.2s ease;
-}
-#grid > div:hover {
-  transform: translateY(-2px);
-  box-shadow: 
-    0 2px 0 #e8e3dd,
-    0 8px 16px rgba(0,0,0,0.06),
-    0 16px 32px rgba(0,0,0,0.04),
-    inset 0 1px 0 rgba(255,255,255,1) !important;
-}
-</style>
-
-<p></head><br>
-<body class="bg-white antialiased"></p>
+<style>*{font-family:Inter,sans-serif;-webkit-tap-highlight-color:transparent}.scroll-hide::-webkit-scrollbar{display:none}.line-2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}@keyframes slideDown{from{transform:translate(-50%,-100%);opacity:0}to{transform:translate(-50%,0);opacity:1}}</style><br>
+</head><br>
+<body class="antialiased"></p>
 
 <p><header class="sticky top-0 z-30 bg-[#faf9f7]/90 backdrop-blur-md border-b border-zinc-200/50"><br>
   <div class="flex items-center justify-between px-3 h-[48px]"><br>
@@ -219,7 +79,7 @@ main .bg-white{
     </div><br>
   </div><br>
   <div class="px-3 pb-2 pt-0.5"><br>
-    <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-[14px] opacity-60">🔎</span><input id="busca" placeholder="Buscar achadinhos..." class="w-full h-[36px] pl-9 pr-4 rounded-full bg-white border border-zinc-200 text-[12.5px] text-black placeholder:text-zinc-500 outline-none focus:border-zinc-300 shadow-sm transition"></div><br>
+    <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-[14px] opacity-60">🔎</span><input id="busca" placeholder="Buscar achadinhos..." class="w-full h-[36px] pl-9 pr-4 rounded-full bg-zinc-100 border border-transparent text-[12.5px] text-black placeholder:text-zinc-500 outline-none focus:bg-white focus:border-zinc-300 transition"></div><br>
   </div><br>
   <div class="flex gap-1.5 px-3 pb-2 overflow-x-auto scroll-hide"><br>
     <button data-cat="Todas" class="cat shrink-0 h-[32px] px-3.5 rounded-full text-[12px] font-bold bg-black text-white">Todas</button><br>
@@ -233,13 +93,24 @@ main .bg-white{
       <div class="h-[1px] flex-1 bg-zinc-100"></div><br>
     </div><br>
     <div class="flex gap-1.5 overflow-x-auto scroll-hide"><br>
-      <button data-cat="Moda Feminina" class="cat shrink-0 h-[28px] px-3 rounded-full text-[11px] font-bold bg-zinc-50 border border-zinc-200 text-zinc-700 hover:bg-pink-50 hover:border-pink-200 hover:text-pink-700 transition">👗 Moda</button><br>
-      <button data-cat="Beleza" class="cat shrink-0 h-[28px] px-3 rounded-full text-[11px] font-bold bg-zinc-50 border border-zinc-200 text-zinc-700 hover:bg-pink-50 hover:border-pink-200 hover:text-pink-700 transition">💄 Beleza</button><br>
-      <button data-cat="Bolsas" class="cat shrink-0 h-[28px] px-3 rounded-full text-[11px] font-bold bg-zinc-50 border border-zinc-200 text-zinc-700 hover:bg-pink-50 hover:border-pink-200 hover:text-pink-700 transition">👜 Bolsas</button><br>
-      <button data-cat="Calçados Femininos" class="cat shrink-0 h-[28px] px-3 rounded-full text-[11px] font-bold bg-zinc-50 border border-zinc-200 text-zinc-700 hover:bg-pink-50 hover:border-pink-200 hover:text-pink-700 transition">👠 Calçados</button><br>
-      <button data-cat="Lingerie" class="cat shrink-0 h-[28px] px-3 rounded-full text-[11px] font-bold bg-zinc-50 border border-zinc-200 text-zinc-700 hover:bg-pink-50 hover:border-pink-200 hover:text-pink-700 transition">💖 Lingerie</button><br>
-      <button data-cat="Skincare" class="cat shrink-0 h-[28px] px-3 rounded-full text-[11px] font-bold bg-zinc-50 border border-zinc-200 text-zinc-700 hover:bg-pink-50 hover:border-pink-200 hover:text-pink-700 transition">✨ Skincare</button><br>
+      <button data-cat="Moda Feminina" class="cat shrink-0 h-[28px] px-3 rounded-full text-[11px] font-bold bg-zinc-50 border border-zinc-200 text-zinc-700">👗 Moda</button><br>
+      <button data-cat="Beleza" class="cat shrink-0 h-[28px] px-3 rounded-full text-[11px] font-bold bg-zinc-50 border border-zinc-200 text-zinc-700">💄 Beleza</button><br>
+      <button data-cat="Bolsas" class="cat shrink-0 h-[28px] px-3 rounded-full text-[11px] font-bold bg-zinc-50 border border-zinc-200 text-zinc-700">👜 Bolsas</button><br>
+      <button data-cat="Calçados Femininos" class="cat shrink-0 h-[28px] px-3 rounded-full text-[11px] font-bold bg-zinc-50 border border-zinc-200 text-zinc-700">👠 Calçados</button><br>
+      <button data-cat="Lingerie" class="cat shrink-0 h-[28px] px-3 rounded-full text-[11px] font-bold bg-zinc-50 border border-zinc-200 text-zinc-700">💖 Lingerie</button><br>
+      <button data-cat="Skincare" class="cat shrink-0 h-[28px] px-3 rounded-full text-[11px] font-bold bg-zinc-50 border border-zinc-200 text-zinc-700">✨ Skincare</button><br>
     </div><br>
+  </div><br>
+  <!-- CTA GRUPO VIP CLEAN PROFISSIONAL --><br>
+  <div class="px-3 pt-2.5"><br>
+    <a id="btn-grupo-zap-top" href="https://chat.whatsapp.com/I7XYYOFpDsCLWrowi7xg1J?s=cl&amp;p=i&amp;mlu=4&amp;ilr=4&amp;iam=2" target="_blank" class="flex items-center justify-between bg-zinc-900 text-white rounded-full px-4 h-[40px] hover:bg-black transition"><br>
+      <div class="flex items-center gap-2.5"><br>
+        <div class="w-6 h-6 rounded-full bg-[#25D366] grid place-items-center text-[11px]">💬</div><br>
+        <span class="text-[12px] font-bold tracking-tight">Grupo VIP de cupons no WhatsApp</span><br>
+        <span class="hidden sm:inline-flex text-[10px] font-medium text-white/60">• ao vivo</span><br>
+      </div><br>
+      <span class="text-[11px] font-black bg-white text-black px-3 py-1 rounded-full">Entrar</span><br>
+    </a><br>
   </div><br>
 </header></p>
 
@@ -258,27 +129,6 @@ main .bg-white{
   </div>
 </div>
 
-<!-- CTA GRUPO WHATSAPP - CUPONS EM TEMPO REAL -->
-
-<!-- CTA GRUPO WHATSAPP - VERSÃO CLEAN PROFISSIONAL -->
-
-<div class="px-3 pt-2.5">
-  <a id="btn-grupo-zap-top" href="https://chat.whatsapp.com/I7XYYOFpDsCLWrowi7xg1J?s=cl&amp;p=i&amp;mlu=4&amp;ilr=4&amp;iam=2" target="_blank" class="flex items-center justify-between bg-zinc-900 text-white rounded-full px-4 h-[40px] hover:bg-black transition">
-    <div class="flex items-center gap-2.5">
-      <div class="w-6 h-6 rounded-full bg-[#25D366] grid place-items-center text-[11px]">💬</div>
-      <span class="text-[12px] font-bold tracking-tight">Grupo VIP de cupons no WhatsApp</span>
-      <span class="hidden sm:inline-flex text-[10px] font-medium text-white/60">• ao vivo</span>
-    </div>
-    <span class="text-[11px] font-black bg-white text-black px-3 py-1 rounded-full">Entrar</span>
-  </a>
-</div>
-
-<pre><code>  &lt;a id=&quot;btn-grupo-zap-top&quot; href=&quot;https://chat.whatsapp.com/I7XYYOFpDsCLWrowi7xg1J?s=cl&amp;amp;p=i&amp;amp;mlu=4&amp;amp;ilr=4&amp;amp;iam=2&quot; target=&quot;_blank&quot; class=&quot;mt-3 w-full h-[48px] bg-white text-[#128C7E] rounded-full grid place-items-center font-black text-[14px] shadow-lg hover:scale-[1.02] transition-transform&quot;&gt;
-    🚀 ENTRAR NO GRUPO VIP AGORA
-  &lt;/a&gt;
-  &lt;p class=&quot;text-[10px] text-white/70 text-center mt-2&quot;&gt;✅ 1.247 pessoas já entraram • 100% grátis&lt;/p&gt;
-</code></pre>
-
 <p><main class="px-3 py-3 max-w-[480px] mx-auto w-full"><br>
   <div class="flex items-center justify-between mb-3"><br>
     <h2 class="font-black text-[16px] text-black">Vitrine • <span id="contador" class="text-[#ff6b2b]">14</span></h2><br>
@@ -296,7 +146,7 @@ main .bg-white{
   </div><br>
 </main></p>
 
-<div id="welcome-popup" class="fixed top-[16px] left-1/2 -translate-x-1/2 z-[90] bg-black text-white px-6 py-4 rounded-[20px] shadow-2xl hidden max-w-[90%] text-center border border-zinc-800">
+<div id="welcome-popup" class="fixed top-[16px] left-1/2 -translate-x-1/2 z-[90] bg-black text-white px-6 py-4 rounded-[20px] shadow-2xl max-w-[90%] text-center border border-zinc-800">
   <p id="welcome-text" class="text-[14px] font-black leading-tight">Bem-vindo aos Achadinhos! 🛒🔥</p>
   <p class="text-[11px] text-white/60 mt-1 font-medium">Os melhores achados em tempo real</p>
 </div>
@@ -386,7 +236,7 @@ main .bg-white{
       <label class="text-[11px] font-bold text-zinc-600">COR DESTAQUE</label><div class="flex gap-2 mb-3"><input id="edit-cor" type="color" value="#ff6b2b" class="w-14 h-[44px] rounded-[12px] border border-zinc-200 p-1"><input id="edit-cor-txt" class="flex-1 h-[44px] border border-zinc-200 rounded-[12px] px-3 text-[14px] outline-none"></div>
       <label class="text-[11px] font-bold text-zinc-600">RODAPÉ TITULO</label><input id="edit-rodape-titulo" class="w-full h-[44px] border border-zinc-200 rounded-[12px] px-3 mb-3 text-[14px] outline-none focus:border-black">
       <label class="text-[11px] font-bold text-zinc-600">RODAPÉ ZAP</label><input id="edit-rodape-zap" class="w-full h-[44px] border border-zinc-200 rounded-[12px] px-3 mb-3 text-[14px] outline-none focus:border-black">
-      <label class="text-[11px] font-bold text-zinc-600">LINK GRUPO WHATSAPP (CUPONS)</label><input id="edit-grupo-zap" class="w-full h-[44px] border border-zinc-200 rounded-[12px] px-3 mb-3 text-[14px] outline-none focus:border-black" placeholder="https://chat.whatsapp.com/..."><label class="text-[11px] font-bold text-zinc-600">LINK INSTAGRAM (NOVO)</label><input id="edit-rodape-insta" class="w-full h-[44px] border border-zinc-200 rounded-[12px] px-3 mb-4 text-[14px] outline-none focus:border-black" placeholder="https://instagram.com/seu_perfil">
+      <label class="text-[11px] font-bold text-zinc-600">LINK INSTAGRAM (NOVO)</label><input id="edit-rodape-insta" class="w-full h-[44px] border border-zinc-200 rounded-[12px] px-3 mb-4 text-[14px] outline-none focus:border-black" placeholder="https://instagram.com/seu_perfil">
       <button id="edit-salvar" class="w-full h-[48px] bg-black text-white rounded-full font-bold">💾 Salvar ao vivo</button>
     </div>
   </div>
@@ -854,7 +704,6 @@ try{
     const instaEl=document.getElementById('rodape-insta');
     if(instaEl){ instaEl.href=cfg.rodapeInsta||defaultConfig.rodapeInsta; }
     const grupoLinks=[document.getElementById('btn-grupo-zap-top'),document.getElementById('rodape-grupo')];
-
     grupoLinks.forEach(el=>{if(el)el.href=cfg.grupoZap||defaultConfig.grupoZap;});
     if(!document.getElementById('edit-nome').value){
       document.getElementById('edit-nome').value=cfg.nome||"";
@@ -867,7 +716,6 @@ try{
       document.getElementById('edit-rodape-titulo').value=cfg.rodapeTitulo||"";
       document.getElementById('edit-rodape-zap').value=cfg.rodapeZap||"";
       document.getElementById('edit-rodape-insta').value=cfg.rodapeInsta||"https://instagram.com/filipe_ferreira12";
-      document.getElementById('edit-grupo-zap').value=cfg.grupoZap||"https://chat.whatsapp.com/I7XYYOFpDsCLWrowi7xg1J?s=cl&p=i&mlu=4&ilr=4&iam=2";
     }
   });
   document.getElementById('edit-salvar').addEventListener('click',()=>{
@@ -880,8 +728,7 @@ try{
       cor:document.getElementById('edit-cor-txt').value||"#ff6b2b",
       rodapeTitulo:document.getElementById('edit-rodape-titulo').value||"ACHADINHOS OFICIAL 🛒",
       rodapeZap:document.getElementById('edit-rodape-zap').value||"Zap: 81 99802-8998",
-      rodapeInsta:document.getElementById('edit-rodape-insta').value||"https://instagram.com/filipe_ferreira12",
-      grupoZap:document.getElementById('edit-grupo-zap').value||"https://chat.whatsapp.com/I7XYYOFpDsCLWrowi7xg1J?s=cl&p=i&mlu=4&ilr=4&iam=2"
+      rodapeInsta:document.getElementById('edit-rodape-insta').value||"https://instagram.com/filipe_ferreira12"
     };
     set(configRef,novoCfg).then(()=>toast("✅ Loja atualizada ao vivo! Instagram salvo!"));
   });
