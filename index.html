@@ -37,13 +37,20 @@
 html,body{margin:0;padding:0;background:#fff;overflow-x:hidden;width:100%}
 .scroll-hide::-webkit-scrollbar{display:none}
 .line-2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-@keyframes slideDown{from{transform:translate(-50%,-100%);opacity:0}to{transform:translate(-50%,0);opacity:1}}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
 .skeleton{animation:pulse 1.5s ease-in-out infinite}
-header{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;z-index:100;background:#faf9f7;border-bottom:1px solid #e5e5e5}
-#banner-fundo{position:fixed;top:138px;left:50%;transform:translateX(-50%);width:calc(100% - 24px);max-width:456px;z-index:90;margin:0}
-main{padding-top:252px;margin:0 auto;max-width:480px}
-#dropdown-feminino,#dropdown-masculino{position:absolute;left:0;right:0;top:100%;z-index:101;box-shadow:0 8px 24px rgba(0,0,0,0.12)}
+header{position:sticky;top:0;z-index:40;background:#faf9f7;border-bottom:1px solid #e5e5e5;width:100%;max-width:480px;margin:0 auto}
+#banner-fundo{position:sticky;top:138px;z-index:30;margin:12px auto 0 auto;width:calc(100% - 24px);max-width:456px}
+main{padding-top:12px;margin:0 auto;max-width:480px}
+#dropdown-feminino,#dropdown-masculino{position:absolute;left:0;right:0;top:100%;z-index:41;box-shadow:0 8px 24px rgba(0,0,0,0.12)}
+/* PAINEL ADM E MODAIS ACIMA DE TUDO */
+#painel{z-index:100 !important}
+#modal{z-index:200 !important}
+#modal-produto{z-index:210 !important}
+#modal-sininho{z-index:220 !important}
+#modal-cliente{z-index:230 !important}
+#toast{z-index:240 !important}
+#welcome-popup{z-index:250 !important}
 </style>
 
 <p></head><br>
