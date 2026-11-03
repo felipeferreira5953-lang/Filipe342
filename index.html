@@ -132,6 +132,13 @@ main{padding-top:92px !important;margin-top:0 !important}<br>
 header{position:fixed !important;top:0 !important}<br>
 #banner-fundo{margin-top:0 !important}</p>
 
+<p>/* REMOVE ESPACO BRANCO DE BAIXO 100% - SEM MEXER NO RESTO */<br>
+main.pb-0{padding-bottom:0 !important;margin-bottom:0 !important}<br>
+#skeleton, #grid, #empty-state{margin:0 !important;padding:0 !important;min-height:0 !important;height:auto !important}<br>
+#skeleton.hidden, #grid.hidden, #empty-state.hidden{display:none !important;height:0 !important;min-height:0 !important;margin:0 !important;padding:0 !important}<br>
+.mobile-shell{padding-bottom:0 !important;margin-bottom:0 !important;min-height:0 !important}<br>
+body{padding-bottom:0 !important;margin-bottom:0 !important}</p>
+
 <p></style><br>
 </head><br>
 <body class="antialiased"><div class="mobile-shell"><br>
@@ -192,7 +199,7 @@ header{position:fixed !important;top:0 !important}<br>
     </div><br>
   </div><br>
 </header><br>
-<main class="px-3 pb-24"><br>
+<main class="px-3 pb-0"><br>
 <div class="px-0 pt-2"><br>
 <div id="banner-fundo" style="background:#000000;background-color:#000000;border-radius:16px;padding:14px;position:relative;overflow:hidden;height:110px;min-height:110px;display:flex;align-items:center;box-shadow:0 8px 24px rgba(0,0,0,0.25);border:1px solid #222;"><br>
     <div id="banner-bola" style="position:absolute;top:0;right:0;width:88px;height:88px;background:#ff6b2b;border-radius:0 16px 0 32px;"></div><br>
@@ -212,7 +219,7 @@ header{position:fixed !important;top:0 !important}<br>
   </div><br>
 </div></p>
 
-<div class="px-2.5 py-2">
+<div class="px-2.5 py-0">
   <div class="flex items-center justify-between mb-2">
     <h2 class="font-black text-[14px] text-black">Vitrine • <span id="contador" class="text-[#ff6b2b]">19</span></h2>
     <span class="text-[10px] text-zinc-400">5x no A = ADM</span>
@@ -232,7 +239,7 @@ header{position:fixed !important;top:0 !important}<br>
     <p class="text-[11px] text-zinc-500 mt-1 px-6" id="empty-desc">Ainda não temos achados nessa categoria</p>
     <button id="empty-btn" class="mt-4 h-9 px-5 rounded-full bg-black text-white font-bold text-[12px]">Ver todos os achados</button>
   </div>
-  <div class="mt-4 p-3 rounded-[12px] bg-[#fafafa] border border-zinc-100 text-center">
+  <div class="mt-0 p-3 rounded-[12px] bg-[#fafafa] border border-zinc-100 text-center">
     <p id="rodape-titulo" class="font-black text-[12px] tracking-wide text-black">ACHADINHOS OFICIAL 🛒</p>
     <p id="rodape-zap" class="text-[11px] text-zinc-500 mt-1">Zap: 81 99802-8998 • Bonito-PE</p>
     <div class="mt-3 flex gap-2">
