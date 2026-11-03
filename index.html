@@ -455,6 +455,44 @@ window.atualizarAvatarGlobal = function(nome){ nomeCliente = nome; atualizarAvat
 atualizarAvatar();
 
 document.getElementById('busca').addEventListener('input',e=>{busca=e.target.value;render();});
+// Dropdown FEMININO / MASCULINO - clean sem poluição
+const btnFem = document.getElementById('btn-feminino');
+const btnMasc = document.getElementById('btn-masculino');
+const dropFem = document.getElementById('dropdown-feminino');
+const dropMasc = document.getElementById('dropdown-masculino');
+const arrowFem = document.getElementById('arrow-fem');
+const arrowMasc = document.getElementById('arrow-masc');
+
+function fecharDropdowns(){
+  if(dropFem) dropFem.classList.add('hidden');
+  if(dropMasc) dropMasc.classList.add('hidden');
+  if(btnFem){ btnFem.classList.remove('bg-black','text-white','border-black'); btnFem.classList.add('bg-zinc-50','border-zinc-200'); }
+  if(btnMasc){ btnMasc.classList.remove('bg-black','text-white','border-black'); btnMasc.classList.add('bg-zinc-50','border-zinc-200'); }
+  if(arrowFem) arrowFem.textContent='▼';
+  if(arrowMasc) arrowMasc.textContent='▼';
+}
+
+btnFem?.addEventListener('click', ()=>{
+  const isHidden = dropFem.classList.contains('hidden');
+  fecharDropdowns();
+  if(isHidden){
+    dropFem.classList.remove('hidden');
+    btnFem.classList.remove('bg-zinc-50','border-zinc-200');
+    btnFem.classList.add('bg-black','text-white','border-black');
+    arrowFem.textContent='▲';
+  }
+});
+btnMasc?.addEventListener('click', ()=>{
+  const isHidden = dropMasc.classList.contains('hidden');
+  fecharDropdowns();
+  if(isHidden){
+    dropMasc.classList.remove('hidden');
+    btnMasc.classList.remove('bg-zinc-50','border-zinc-200');
+    btnMasc.classList.add('bg-black','text-white','border-black');
+    arrowMasc.textContent='▲';
+  }
+});
+
 document.querySelectorAll('.cat').forEach(btn=>{
   btn.addEventListener('click',()=>{
     const femCats = ['Moda Feminina','Beleza','Bolsas','Calçados Femininos','Lingerie','Skincare'];
@@ -472,7 +510,7 @@ document.querySelectorAll('.cat').forEach(btn=>{
     }else{
       btn.className='cat shrink-0 h-[30px] px-3 rounded-full text-[12px] font-bold bg-black text-white';
     }
-    filtroCat=btn.dataset.cat; render();
+    filtroCat=btn.dataset.cat; render(); fecharDropdowns();
   });
 });
 let clicks=[];
