@@ -128,61 +128,9 @@ body{max-width:100vw;overflow-x:hidden;background:#faf9f7;margin:0 auto;position
 <p>/* FIX DEFINITIVO - CABECALHO FIXO E SEM ESPACO BRANCO */<br>
 html,body{margin:0 !important;padding:0 !important;background:#ffffff !important;min-height:0 !important;height:auto !important;overflow-x:hidden !important}<br>
 .mobile-shell{margin:0 auto !important;padding:0 !important;min-height:0 !important;max-width:430px !important;background:#ffffff !important}<br>
-main{padding-top:270px !important;margin-top:0 !important}<br>
+main{padding-top:92px !important;margin-top:0 !important}<br>
 header{position:fixed !important;top:0 !important}<br>
 #banner-fundo{margin-top:0 !important}</p>
-
-<p>/* REMOVE ESPACO BRANCO DE BAIXO 100% - SEM MEXER NO RESTO */<br>
-main.pb-0{padding-bottom:0 !important;margin-bottom:0 !important}<br>
-#skeleton, #grid, #empty-state{margin:0 !important;padding:0 !important;min-height:0 !important;height:auto !important}<br>
-#skeleton.hidden, #grid.hidden, #empty-state.hidden{display:none !important;height:0 !important;min-height:0 !important;margin:0 !important;padding:0 !important}<br>
-.mobile-shell{padding-bottom:0 !important;margin-bottom:0 !important;min-height:0 !important}<br>
-body{padding-bottom:0 !important;margin-bottom:0 !important}</p>
-
-<p>/* BANNER FIXO TAMBEM - SO PRODUTOS ROLAM - REVISADO SEM ESPACO BRANCO <em>/<br>
-#banner-fundo{<br>
-  position:fixed !important;<br>
-  top:152px !important;<br>
-  left:50% !important;<br>
-  transform:translateX(-50%) !important;<br>
-  width:calc(100% - 16px) !important;<br>
-  max-width:414px !important;<br>
-  z-index:90 !important;<br>
-  margin:0 !important;<br>
-  height:110px !important;<br>
-  min-height:110px !important;<br>
-}<br>
-main{<br>
-  padding-top:270px !important; /</em> header 152px + banner 110px + 8px gap <em>/<br>
-  padding-bottom:0 !important;<br>
-  margin-top:0 !important;<br>
-  min-height:0 !important;<br>
-}<br>
-#grid, #skeleton, #empty-state{<br>
-  margin-top:0 !important;<br>
-  min-height:0 !important;<br>
-  padding-top:0 !important;<br>
-}<br>
-/</em> Container da vitrine sem espaco <em>/<br>
-.px-2.5.py-0{<br>
-  padding-top:4px !important;<br>
-  padding-bottom:0 !important;<br>
-  margin-top:0 !important;<br>
-}<br>
-/</em> Remove wrapper do banner que causava espaco branco quando banner e fixed */<br>
-.px-0.pt-2{<br>
-  padding:0 !important;<br>
-  margin:0 !important;<br>
-  height:0 !important;<br>
-  min-height:0 !important;<br>
-  overflow:visible !important;<br>
-}</p>
-
-<p>/* GARANTIA ZERO ESPACO BRANCO */<br>
-html{overflow-x:hidden !important}<br>
-body{overflow-x:hidden !important;background:#ffffff !important}<br>
-.mobile-shell{overflow-x:hidden !important}<br>
-#banner-fundo + *{margin-top:0 !important}</p>
 
 <p></style><br>
 </head><br>
@@ -203,7 +151,7 @@ body{overflow-x:hidden !important;background:#ffffff !important}<br>
       <span id="tag-loja" class="hidden">MOBILE</span><br>
     </div><br>
     <div class="flex items-center gap-2 ml-auto"><br>
-      <button id="btn-cliente" class="h-8 px-3 rounded-full bg-white border border-zinc-200 flex items-center gap-1.5 font-bold text-[12px] text-black shadow-sm animate-pulse"><br>
+      <button id="btn-cliente" class="h-8 px-3 rounded-full bg-white border border-zinc-200 flex items-center gap-1.5 font-bold text-[12px] text-black shadow-sm"><br>
       <span id="btn-cliente-icon" class="w-5 h-5 rounded-full bg-black text-white grid place-items-center text-[10px] font-black">👤</span><br>
       <span id="btn-cliente-text">Seu nome</span><br>
     </button><br>
@@ -244,7 +192,7 @@ body{overflow-x:hidden !important;background:#ffffff !important}<br>
     </div><br>
   </div><br>
 </header><br>
-<main class="px-3 pb-0"><br>
+<main class="px-3 pb-24"><br>
 <div class="px-0 pt-2"><br>
 <div id="banner-fundo" style="background:#000000;background-color:#000000;border-radius:16px;padding:14px;position:relative;overflow:hidden;height:110px;min-height:110px;display:flex;align-items:center;box-shadow:0 8px 24px rgba(0,0,0,0.25);border:1px solid #222;"><br>
     <div id="banner-bola" style="position:absolute;top:0;right:0;width:88px;height:88px;background:#ff6b2b;border-radius:0 16px 0 32px;"></div><br>
@@ -264,7 +212,7 @@ body{overflow-x:hidden !important;background:#ffffff !important}<br>
   </div><br>
 </div></p>
 
-<div class="px-2.5 py-0">
+<div class="px-2.5 py-2">
   <div class="flex items-center justify-between mb-2">
     <h2 class="font-black text-[14px] text-black">Vitrine • <span id="contador" class="text-[#ff6b2b]">19</span></h2>
     <span class="text-[10px] text-zinc-400">5x no A = ADM</span>
@@ -284,7 +232,7 @@ body{overflow-x:hidden !important;background:#ffffff !important}<br>
     <p class="text-[11px] text-zinc-500 mt-1 px-6" id="empty-desc">Ainda não temos achados nessa categoria</p>
     <button id="empty-btn" class="mt-4 h-9 px-5 rounded-full bg-black text-white font-bold text-[12px]">Ver todos os achados</button>
   </div>
-  <div class="mt-0 p-3 rounded-[12px] bg-[#fafafa] border border-zinc-100 text-center">
+  <div class="mt-4 p-3 rounded-[12px] bg-[#fafafa] border border-zinc-100 text-center">
     <p id="rodape-titulo" class="font-black text-[12px] tracking-wide text-black">ACHADINHOS OFICIAL 🛒</p>
     <p id="rodape-zap" class="text-[11px] text-zinc-500 mt-1">Zap: 81 99802-8998 • Bonito-PE</p>
     <div class="mt-3 flex gap-2">
@@ -296,7 +244,7 @@ body{overflow-x:hidden !important;background:#ffffff !important}<br>
 </div></main>
 
 
-<div id="welcome-popup" class="fixed top-[16px] left-1/2 -translate-x-1/2 z-[90] bg-black text-white px-6 py-4 rounded-[20px] shadow-2xl max-w-[90%] text-center border border-zinc-800">
+<div id="welcome-popup" class="fixed top-[16px] left-1/2 -translate-x-1/2 z-[90] bg-black text-white px-6 py-4 rounded-[20px] shadow-2xl max-w-[90%] text-center border border-zinc-800 hidden">
   <p id="welcome-text" class="text-[14px] font-black leading-tight">Bem-vindo aos Achadinhos! 🛒🔥</p>
   <p class="text-[11px] text-white/60 mt-1 font-medium">Os melhores achados em tempo real</p>
 </div>
