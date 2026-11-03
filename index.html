@@ -81,61 +81,68 @@ body { line-height: 1.3; }
       <span id="tag-loja" class="hidden">MOBILE</span><br>
     </div><br>
     <div class="flex items-center gap-2 ml-auto"><br>
-      <button id="btn-cliente" class="h-8 px-3 rounded-full bg-white border border-zinc-200 flex items-center gap-1.5 font-bold text-[12px] text-black shadow-sm animate-pulse"><br>
+      <button id="btn-cliente" class="h-8 px-3 rounded-full bg-white border border-zinc-200 flex items-center gap-1.5 font-bold text-[12px] text-black shadow-sm"><br>
       <span id="btn-cliente-icon" class="w-5 h-5 rounded-full bg-black text-white grid place-items-center text-[10px] font-black">👤</span><br>
       <span id="btn-cliente-text">Seu nome</span><br>
     </button><br>
       <button id="bell-notif" class="relative w-8 h-8 rounded-full bg-[#f5f5f5] border border-zinc-200 grid place-items-center text-[14px]">🔔<span id="bell-dot" class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-white animate-pulse"></span></button><br>
     </div><br>
   </div><br>
-  <div class="px-3 pb-1.5 pt-0.5"><br>
+  <div class="px-3 py-[3px]"><br>
     <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-[14px] opacity-60">🔎</span><input id="busca" placeholder="Buscar achadinhos..." class="w-full h-[36px] pl-9 pr-4 rounded-full bg-zinc-100 border border-transparent text-[12.5px] text-black placeholder:text-zinc-500 outline-none focus:bg-white focus:border-zinc-300 transition"></div><br>
-  </div></p>
-
-<p><div class="flex gap-1 px-3 py-[2px] overflow-x-auto scroll-hide"><br>
+  </div><br>
+  <div class="flex gap-1 px-3 py-[2px] overflow-x-auto scroll-hide"><br>
     <button data-cat="Todas" class="cat shrink-0 h-[30px] px-3 rounded-full text-[12px] font-bold bg-black text-white">Todas</button><br>
     <button data-cat="Shopee" class="cat shrink-0 h-[30px] px-3 rounded-full text-[12px] font-bold bg-white border border-zinc-200 text-black">🟠 Shopee</button><br>
     <button data-cat="Amazon" class="cat shrink-0 h-[30px] px-3 rounded-full text-[12px] font-bold bg-white border border-zinc-200 text-black">📦 Amazon</button><br>
     <button data-cat="Mercado Livre" class="cat shrink-0 h-[30px] px-3 rounded-full text-[12px] font-bold bg-white border border-zinc-200 text-black">💛 Mercado Livre</button><br>
   </div><br>
-  <div class="px-3 py-[2px] flex gap-1"><br>
-    <button id="btn-feminino" class="flex-1 h-[30px] rounded-full border border-zinc-200 bg-zinc-50 text-[11px] font-black tracking-wide flex items-center justify-center gap-1">👗 FEMININO <span id="arrow-fem" class="text-[8px]">▼</span></button><br>
-    <button id="btn-masculino" class="flex-1 h-[30px] rounded-full border border-zinc-200 bg-zinc-50 text-[11px] font-black tracking-wide flex items-center justify-center gap-1">👕 MASCULINO <span id="arrow-masc" class="text-[8px]">▼</span></button><br>
-  </div><br>
-  <div id="dropdown-feminino" class="hidden px-3 py-[2px]"><br>
-    <div class="bg-zinc-50 rounded-[10px] p-1.5 border border-zinc-100 flex gap-1 overflow-x-auto scroll-hide"><br>
-      <button data-cat="Moda Feminina" class="cat shrink-0 h-[26px] px-2.5 rounded-full text-[10.5px] font-bold bg-white border border-zinc-200 text-zinc-700">👗 Moda</button><br>
-      <button data-cat="Beleza" class="cat shrink-0 h-[26px] px-2.5 rounded-full text-[10.5px] font-bold bg-white border border-zinc-200 text-zinc-700">💄 Beleza</button><br>
-      <button data-cat="Bolsas" class="cat shrink-0 h-[26px] px-2.5 rounded-full text-[10.5px] font-bold bg-white border border-zinc-200 text-zinc-700">👜 Bolsas</button><br>
-      <button data-cat="Calçados Femininos" class="cat shrink-0 h-[26px] px-2.5 rounded-full text-[10.5px] font-bold bg-white border border-zinc-200 text-zinc-700">👠 Calçados</button><br>
-      <button data-cat="Lingerie" class="cat shrink-0 h-[26px] px-2.5 rounded-full text-[10.5px] font-bold bg-white border border-zinc-200 text-zinc-700">💖 Lingerie</button><br>
-      <button data-cat="Skincare" class="cat shrink-0 h-[26px] px-2.5 rounded-full text-[10.5px] font-bold bg-white border border-zinc-200 text-zinc-700">✨ Skincare</button><br>
+  <div class="px-3 pt-[2px] pb-[2px]"><br>
+    <div class="flex items-center gap-2 mb-[2px]"><br>
+      <p class="text-[9px] font-black tracking-[0.15em] text-zinc-400">FEMININO</p><br>
+      <div class="h-[1px] flex-1 bg-zinc-100"></div><br>
     </div><br>
-  </div><br>
-  <div id="dropdown-masculino" class="hidden px-3 py-[2px]"><br>
-    <div class="bg-black rounded-[10px] p-1.5 flex gap-1 overflow-x-auto scroll-hide"><br>
-      <button data-cat="Moda Masculina" class="cat shrink-0 h-[26px] px-2.5 rounded-full text-[10.5px] font-bold bg-zinc-800 border border-zinc-700 text-white">👕 Moda Masc</button><br>
-      <button data-cat="Camisas" class="cat shrink-0 h-[26px] px-2.5 rounded-full text-[10.5px] font-bold bg-zinc-800 border border-zinc-700 text-white">👔 Camisas</button><br>
-      <button data-cat="Bermudas" class="cat shrink-0 h-[26px] px-2.5 rounded-full text-[10.5px] font-bold bg-zinc-800 border border-zinc-700 text-white">🩳 Bermudas</button><br>
-      <button data-cat="Tênis" class="cat shrink-0 h-[26px] px-2.5 rounded-full text-[10.5px] font-bold bg-zinc-800 border border-zinc-700 text-white">👟 Tênis</button><br>
-      <button data-cat="Bonés" class="cat shrink-0 h-[26px] px-2.5 rounded-full text-[10.5px] font-bold bg-zinc-800 border border-zinc-700 text-white">🧢 Bonés</button><br>
-      <button data-cat="Acessórios" class="cat shrink-0 h-[26px] px-2.5 rounded-full text-[10.5px] font-bold bg-zinc-800 border border-zinc-700 text-white">⌚ Acessórios</button><br>
+    <div class="flex gap-1 overflow-x-auto scroll-hide"><br>
+      <button data-cat="Moda Feminina" class="cat shrink-0 h-[26px] px-2.5 rounded-full text-[10.5px] font-bold bg-zinc-50 border border-zinc-200 text-zinc-700">👗 Moda</button><br>
+      <button data-cat="Beleza" class="cat shrink-0 h-[26px] px-2.5 rounded-full text-[10.5px] font-bold bg-zinc-50 border border-zinc-200 text-zinc-700">💄 Beleza</button><br>
+      <button data-cat="Bolsas" class="cat shrink-0 h-[26px] px-2.5 rounded-full text-[10.5px] font-bold bg-zinc-50 border border-zinc-200 text-zinc-700">👜 Bolsas</button><br>
+      <button data-cat="Calçados Femininos" class="cat shrink-0 h-[26px] px-2.5 rounded-full text-[10.5px] font-bold bg-zinc-50 border border-zinc-200 text-zinc-700">👠 Calçados</button><br>
+      <button data-cat="Lingerie" class="cat shrink-0 h-[26px] px-2.5 rounded-full text-[10.5px] font-bold bg-zinc-50 border border-zinc-200 text-zinc-700">💖 Lingerie</button><br>
+      <button data-cat="Skincare" class="cat shrink-0 h-[26px] px-2.5 rounded-full text-[10.5px] font-bold bg-zinc-50 border border-zinc-200 text-zinc-700">✨ Skincare</button><br>
     </div><br>
-  </div><br>
-  <div class="px-3 pt-1.5"><br>
-  <div id="banner-fundo" class="rounded-[12px] bg-black text-white p-3 relative overflow-hidden"><br>
-    <div id="banner-bola" class="absolute -right-6 -top-6 w-[140px] h-[140px] bg-[#ff6b2b] rounded-full"></div><br>
-    <div class="relative z-10"><br>
-      <div id="banner-badge" class="inline-flex items-center gap-1.5 bg-white/10 rounded-full px-2.5 py-1 text-[10px] font-bold tracking-widest">🔥 NOVO • SININHO AUTOMÁTICO</div><br>
-      <p id="saudacao-cliente" class="text-[12px] mt-2 text-white/80 hidden">Olá, <span id="nome-cliente-banner" class="font-bold text-white">Visitante</span> 👋</p><br>
-      <h1 class="text-[22px] leading-[1.05] font-black mt-1 tracking-tight"><span id="banner-t1">Achadinhos que</span><br><span id="banner-t2" class="text-[#ff6b2b]">valem cada centavo</span></h1><br>
-      <div class="mt-3 flex items-center gap-2"><br>
-        <span class="text-[11px] bg-white text-black px-2.5 py-1 rounded-full font-bold" id="contador-top">19 achados</span><br>
-        <span class="text-[11px] text-emerald-400">● <span id="online-top">0 on-line</span></span><br>
-      </div><br>
+  </div></p>
+
+<p><div class="px-3 pt-[2px] pb-[2px]"><br>
+    <div class="flex items-center gap-2 mb-[2px]"><br>
+      <p class="text-[9px] font-black tracking-[0.15em] text-zinc-400">MASCULINO</p><br>
+      <div class="h-[1px] flex-1 bg-zinc-100"></div><br>
     </div><br>
-  </div><br>
-</div></p>
+    <div class="flex gap-1 overflow-x-auto scroll-hide"><br>
+      <button data-cat="Moda Masculina" class="cat shrink-0 h-[26px] px-2.5 rounded-full text-[10.5px] font-bold bg-zinc-50 border border-zinc-200 text-zinc-700">👕 Moda Masc</button><br>
+      <button data-cat="Camisas" class="cat shrink-0 h-[26px] px-2.5 rounded-full text-[10.5px] font-bold bg-zinc-50 border border-zinc-200 text-zinc-700">👔 Camisas</button><br>
+      <button data-cat="Bermudas" class="cat shrink-0 h-[26px] px-2.5 rounded-full text-[10.5px] font-bold bg-zinc-50 border border-zinc-200 text-zinc-700">🩳 Bermudas</button><br>
+      <button data-cat="Tênis" class="cat shrink-0 h-[26px] px-2.5 rounded-full text-[10.5px] font-bold bg-zinc-50 border border-zinc-200 text-zinc-700">👟 Tênis</button><br>
+      <button data-cat="Bonés" class="cat shrink-0 h-[26px] px-2.5 rounded-full text-[10.5px] font-bold bg-zinc-50 border border-zinc-200 text-zinc-700">🧢 Bonés</button><br>
+      <button data-cat="Acessórios" class="cat shrink-0 h-[26px] px-2.5 rounded-full text-[10.5px] font-bold bg-zinc-50 border border-zinc-200 text-zinc-700">⌚ Acessórios</button><br>
+    </div><br>
+  </div></p>
+
+<p></header></p>
+
+<div class="px-3 pt-[3px]">
+  <div id="banner-fundo" class="rounded-[12px] bg-black text-white p-3 relative overflow-hidden">
+    <div id="banner-bola" class="absolute -right-6 -top-6 w-[140px] h-[140px] bg-[#ff6b2b] rounded-full"></div>
+    <div class="relative z-10">
+      <div id="banner-badge" class="inline-flex items-center gap-1.5 bg-white/10 rounded-full px-2.5 py-1 text-[10px] font-bold tracking-widest">🔥 NOVO • SININHO AUTOMÁTICO</div>
+      <p id="saudacao-cliente" class="text-[12px] mt-2 text-white/80 hidden">Olá, <span id="nome-cliente-banner" class="font-bold text-white">Visitante</span> 👋</p>
+      <h1 class="text-[22px] leading-[1.05] font-black mt-1 tracking-tight"><span id="banner-t1">Achadinhos que</span><br><span id="banner-t2" class="text-[#ff6b2b]">valem cada centavo</span></h1>
+      <div class="mt-3 flex items-center gap-2">
+        <span class="text-[11px] bg-white text-black px-2.5 py-1 rounded-full font-bold" id="contador-top">19 achados</span>
+        <span class="text-[11px] text-emerald-400">● <span id="online-top">0 on-line</span></span>
+      </div>
+    </div>
+  </div>
+</div>
 
 <p><main class="px-2.5 py-2 max-w-[480px] mx-auto w-full"><br>
   <div class="flex items-center justify-between mb-2"><br>
@@ -448,43 +455,44 @@ window.atualizarAvatarGlobal = function(nome){ nomeCliente = nome; atualizarAvat
 atualizarAvatar();
 
 document.getElementById('busca').addEventListener('input',e=>{busca=e.target.value;render();});
-// DROPDOWN MASCULINO E FEMININO - ZERO POLUICAO
-const btnFem=document.getElementById('btn-feminino');
-const btnMasc=document.getElementById('btn-masculino');
-const dropFem=document.getElementById('dropdown-feminino');
-const dropMasc=document.getElementById('dropdown-masculino');
-const arrowFem=document.getElementById('arrow-fem');
-const arrowMasc=document.getElementById('arrow-masc');
-function fecharTudo(){
-  dropFem?.classList.add('hidden');
-  dropMasc?.classList.add('hidden');
-  btnFem?.classList.remove('bg-black','text-white','border-black');
-  btnFem?.classList.add('bg-zinc-50','border-zinc-200','text-black');
-  btnMasc?.classList.remove('bg-black','text-white','border-black');
-  btnMasc?.classList.add('bg-zinc-50','border-zinc-200','text-black');
+// Dropdown FEMININO / MASCULINO - clean sem poluição
+const btnFem = document.getElementById('btn-feminino');
+const btnMasc = document.getElementById('btn-masculino');
+const dropFem = document.getElementById('dropdown-feminino');
+const dropMasc = document.getElementById('dropdown-masculino');
+const arrowFem = document.getElementById('arrow-fem');
+const arrowMasc = document.getElementById('arrow-masc');
+
+function fecharDropdowns(){
+  if(dropFem) dropFem.classList.add('hidden');
+  if(dropMasc) dropMasc.classList.add('hidden');
+  if(btnFem){ btnFem.classList.remove('bg-black','text-white','border-black'); btnFem.classList.add('bg-zinc-50','border-zinc-200'); }
+  if(btnMasc){ btnMasc.classList.remove('bg-black','text-white','border-black'); btnMasc.classList.add('bg-zinc-50','border-zinc-200'); }
   if(arrowFem) arrowFem.textContent='▼';
   if(arrowMasc) arrowMasc.textContent='▼';
 }
-btnFem?.addEventListener('click',()=>{
-  const escondido=dropFem.classList.contains('hidden');
-  fecharTudo();
-  if(escondido){
+
+btnFem?.addEventListener('click', ()=>{
+  const isHidden = dropFem.classList.contains('hidden');
+  fecharDropdowns();
+  if(isHidden){
     dropFem.classList.remove('hidden');
+    btnFem.classList.remove('bg-zinc-50','border-zinc-200');
     btnFem.classList.add('bg-black','text-white','border-black');
-    btnFem.classList.remove('bg-zinc-50','border-zinc-200','text-black');
     arrowFem.textContent='▲';
   }
 });
-btnMasc?.addEventListener('click',()=>{
-  const escondido=dropMasc.classList.contains('hidden');
-  fecharTudo();
-  if(escondido){
+btnMasc?.addEventListener('click', ()=>{
+  const isHidden = dropMasc.classList.contains('hidden');
+  fecharDropdowns();
+  if(isHidden){
     dropMasc.classList.remove('hidden');
+    btnMasc.classList.remove('bg-zinc-50','border-zinc-200');
     btnMasc.classList.add('bg-black','text-white','border-black');
-    btnMasc.classList.remove('bg-zinc-50','border-zinc-200','text-black');
     arrowMasc.textContent='▲';
   }
 });
+
 document.querySelectorAll('.cat').forEach(btn=>{
   btn.addEventListener('click',()=>{
     const femCats = ['Moda Feminina','Beleza','Bolsas','Calçados Femininos','Lingerie','Skincare'];
@@ -502,7 +510,7 @@ document.querySelectorAll('.cat').forEach(btn=>{
     }else{
       btn.className='cat shrink-0 h-[30px] px-3 rounded-full text-[12px] font-bold bg-black text-white';
     }
-    filtroCat=btn.dataset.cat; render();
+    filtroCat=btn.dataset.cat; render(); fecharDropdowns();
   });
 });
 let clicks=[];
@@ -902,5 +910,5 @@ try{
 
 <script>(function(){var loc=location.href.replace(/#.*$/,"");var ATTR_NAMES=["data-product-id","data-productid","data-product_id","product-id","productid","product_id","data-source-entity-id","source-entity-id","source_entity_id","data-product","data-metadata","data-meta"];var DATASET_KEYS=["productId","productid","product_id","sourceEntityId","sourceentityid","source_entity_id","product","metadata","meta"];function readProductId(value){if(typeof value!=="string"||value.length===0)return null;if(/^[0-9]{6,}$/.test(value))return value;var match=value.match(/(?:product(?:_|-)?id|source(?:_|-)?entity(?:_|-)?id)["'=:\s]+([0-9]{6,})/i);return match?match[1]:null}function extractProductId(start){for(var node=start;node&&node!==document.body;node=node.parentElement){for(var i=0;i<ATTR_NAMES.length;i++){var attrValue=node.getAttribute&&node.getAttribute(ATTR_NAMES[i]);var attrProductId=readProductId(attrValue);if(attrProductId)return attrProductId}var dataset=node.dataset||null;if(dataset){for(var j=0;j<DATASET_KEYS.length;j++){var dataValue=dataset[DATASET_KEYS[j]];var dataProductId=readProductId(dataValue);if(dataProductId)return dataProductId}}}return null}function isInlineMediaSlotElement(node){return !!(node&&node.getAttribute&&node.getAttribute("data-clippy-inline-media-slot")!==null)}function findInlineMediaSlot(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(isInlineMediaSlotElement(node))return node}return null}function readInlineMediaUrl(node){if(!node)return null;return node.getAttribute&&((node.getAttribute("data-clippy-inline-media-url")||node.getAttribute("data-url")||node.getAttribute("data_url")))||node.href||null}function stripHash(url){return String(url).replace(/#.*$/,"")}function urlsMatch(a,b){if(!a||!b)return false;try{return stripHash(new URL(a,loc).href)===stripHash(new URL(b,loc).href)}catch(_){return stripHash(a)===stripHash(b)}}function isFirstPartyReelUrl(value){try{var url=new URL(value,loc);if(url.protocol!=="https:")return false;var host=url.hostname.toLowerCase();var supported=host==="instagram.com"||host.endsWith(".instagram.com")||host==="facebook.com"||host.endsWith(".facebook.com");return supported&&/\/reels?\//i.test(url.pathname)}catch(_){return false}}function isInlineMediaUrlClick(node,href){var slot=findInlineMediaSlot(node);if(!slot)return false;var slotUrl=readInlineMediaUrl(slot);if(slotUrl)return urlsMatch(href,slotUrl);return isFirstPartyReelUrl(href)}function findDataHref(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(node.getAttribute){var href=node.getAttribute("data-href")||node.getAttribute("data-url");if(href)return{href:href,node:node}}}return null}var nativeOpen=window.open;window.open=function(url){if(parent!==window&&typeof url==="string"&&/^https?:\/\//.test(url)){parent.postMessage({type:"ecto:usercontent-link-click",href:url},"*");return null}return nativeOpen?nativeOpen.apply(window,arguments):null};document.addEventListener("click",function(e){var target=e.target instanceof Element?e.target:null;if(!target)return;if(parent===window)return;var a=target.closest?target.closest("a[href]"):null;if(a&&a.href&&/^https?:\/\//.test(a.href)&&a.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(a,a.href))return;var productId=extractProductId(target)||extractProductId(a);if(productId){e.preventDefault();parent.postMessage({type:"ecto-artifact-link-click",productId:productId},"*");return}e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:a.href},"*");return}var dataHref=findDataHref(target);if(dataHref&&/^https?:\/\//.test(dataHref.href)&&dataHref.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(dataHref.node,dataHref.href))return;e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:dataHref.href},"*")}},true)})();</script><script>(function(){var FOCUS_TYPE="ecto:artifact-focus-request";var CLOSE_TYPE="ecto:artifact-close-request";function focusArtifactDocument(){var body=document.body;if(!body)return;try{window.focus();}catch(e){}if(!body.hasAttribute("tabindex"))body.setAttribute("tabindex","-1");try{body.focus({preventScroll:true});}catch(e){try{body.focus();}catch(e2){}}}window.addEventListener("message",function(event){if(event.source!==window.parent)return;var data=event.data;if(!data||typeof data!=="object"||data.type!==FOCUS_TYPE)return;if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",focusArtifactDocument,{once:true});return;}focusArtifactDocument();});window.addEventListener("keydown",function(event){if(event.key!=="Escape")return;window.setTimeout(function(){if(event.defaultPrevented)return;window.parent.postMessage({type:CLOSE_TYPE},"*");},0);});})();</script>
 
-<p></header></body></html></p>
+<p></body></html></p>
 <script>window.webkit.messageHandlers.TextLoaded.postMessage('TextLoaded')</script></body></html>
