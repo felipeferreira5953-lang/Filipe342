@@ -61,7 +61,7 @@ body{max-width:100vw;overflow-x:hidden;background:#faf9f7;margin:0 auto;position
 .skeleton{animation:pulse 1.5s ease-in-out infinite}</p>
 
 <p>/* SHELL MOBILE - limita a 430px (iPhone Pro Max) - no PC aparece como celular no centro */<br>
-.mobile-shell{max-width:430px;margin:0 auto;min-height:0;background:#ffffff;position:relative;box-shadow:0 0 0 1px rgba(0,0,0,0.04);padding:0 !important} html,body{margin:0 !important;padding:0 !important;height:auto !important;min-height:0 !important;background:#ffffff !important} body{overflow-x:hidden} main{padding-top:0 !important;margin-top:0 !important} header{margin:0 !important;top:0 !important} #skeleton,#grid{margin-top:0 !important;padding-top:0 !important}<br>
+.mobile-shell{max-width:430px;margin:0 auto;min-height:100vh;background:#ffffff;position:relative;box-shadow:0 0 0 1px rgba(0,0,0,0.04)}<br>
 @media (min-width:431px){body{background:#f2f1ef}.mobile-shell{box-shadow:0 0 0 1px rgba(0,0,0,0.06),0 20px 60px rgba(0,0,0,0.08)}}</p>
 
 <p>/* BOTÕES 3D - tamanho dedo mobile (44px min touch) <em>/<br>
@@ -125,10 +125,17 @@ body{max-width:100vw;overflow-x:hidden;background:#faf9f7;margin:0 auto;position
 #contador-top{background: #ffffff !important; color: #000000 !important;}<br>
 #online-top{color: #10b981 !important;}</p>
 
+<p>/* FIX DEFINITIVO - CABECALHO FIXO E SEM ESPACO BRANCO */<br>
+html,body{margin:0 !important;padding:0 !important;background:#ffffff !important;min-height:0 !important;height:auto !important;overflow-x:hidden !important}<br>
+.mobile-shell{margin:0 auto !important;padding:0 !important;min-height:0 !important;max-width:430px !important;background:#ffffff !important}<br>
+main{padding-top:92px !important;margin-top:0 !important}<br>
+header{position:fixed !important;top:0 !important}<br>
+#banner-fundo{margin-top:0 !important}</p>
+
 <p></style><br>
 </head><br>
 <body class="antialiased"><div class="mobile-shell"><br>
-<header class="sticky top-0 z-30 bg-white border-b border-zinc-200/50" style="margin:0;top:0"><br>
+<header class="fixed top-0 left-1/2 -translate-x-1/2 z-[100] bg-white border-b border-zinc-200/50 w-full max-w-[430px]" style="position:fixed !important;top:0 !important;left:50% !important;transform:translateX(-50%) !important;width:100% !important;max-width:430px !important;margin:0 !important"><br>
   <div class="flex items-center justify-between px-3 h-[42px]"><br>
     <div id="logo" class="flex items-center gap-2.5 cursor-pointer select-none"><br>
       <div class="w-9 h-9 rounded-[12px] bg-black grid place-items-center relative shadow-sm"><br>
@@ -144,7 +151,7 @@ body{max-width:100vw;overflow-x:hidden;background:#faf9f7;margin:0 auto;position
       <span id="tag-loja" class="hidden">MOBILE</span><br>
     </div><br>
     <div class="flex items-center gap-2 ml-auto"><br>
-      <button id="btn-cliente" class="h-8 px-3 rounded-full bg-white border border-zinc-200 flex items-center gap-1.5 font-bold text-[12px] text-black shadow-sm"><br>
+      <button id="btn-cliente" class="h-8 px-3 rounded-full bg-white border border-zinc-200 flex items-center gap-1.5 font-bold text-[12px] text-black shadow-sm animate-pulse"><br>
       <span id="btn-cliente-icon" class="w-5 h-5 rounded-full bg-black text-white grid place-items-center text-[10px] font-black">👤</span><br>
       <span id="btn-cliente-text">Seu nome</span><br>
     </button><br>
@@ -185,7 +192,7 @@ body{max-width:100vw;overflow-x:hidden;background:#faf9f7;margin:0 auto;position
     </div><br>
   </div><br>
 </header><br>
-<main class="px-3 pb-6 pt-0 mt-0"><br>
+<main class="px-3 pb-24"><br>
 <div class="px-0 pt-2"><br>
 <div id="banner-fundo" style="background:#000000;background-color:#000000;border-radius:16px;padding:14px;position:relative;overflow:hidden;height:110px;min-height:110px;display:flex;align-items:center;box-shadow:0 8px 24px rgba(0,0,0,0.25);border:1px solid #222;"><br>
     <div id="banner-bola" style="position:absolute;top:0;right:0;width:88px;height:88px;background:#ff6b2b;border-radius:0 16px 0 32px;"></div><br>
