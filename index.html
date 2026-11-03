@@ -76,24 +76,37 @@ body{max-width:100vw;overflow-x:hidden;background:#faf9f7;margin:0 auto;position
 }<br>
 #busca{font-size:16px !important; /</em> evita zoom iPhone */}</p>
 
-<p>/* BANNER COMPACTO PROFISSIONAL - altura fixa mobile */<br>
+<p>/* BANNER COMPACTO PROFISSIONAL - altura fixa mobile - CORRIGIDO VISIBILIDADE */<br>
 #banner-fundo{<br>
-  background: radial-gradient(120% 120% at 80% 0%, rgba(255,107,43,0.12) 0%, transparent 50%), <br>
-              linear-gradient(180deg, #0f0f0f 0%, #000000 100%);<br>
+  background: #000000 !important;<br>
+  background-color: #000000 !important;<br>
+  color: #ffffff !important;<br>
   box-shadow: 0 8px 24px -8px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.1);<br>
-  border: 1px solid rgba(255,255,255,0.06);<br>
-  height:92px;<br>
+  border: 1px solid rgba(255,255,255,0.08);<br>
+  height: 110px !important;<br>
+  min-height: 110px !important;<br>
 }<br>
 #banner-bola{<br>
-  background: radial-gradient(80% 80% at 30% 30%, #ff8c4a 0%, #ff6b2b 40%, #e55a1f 100%);<br>
-  box-shadow: inset -4px -4px 12px rgba(0,0,0,0.25), inset 4px 4px 12px rgba(255,255,255,0.25);<br>
+  background: #ff6b2b !important;<br>
+  background-color: #ff6b2b !important;<br>
+  width: 88px !important;<br>
+  height: 88px !important;<br>
+  border-radius: 0 0 0 32px !important;<br>
+  position: absolute !important;<br>
+  top: 0 !important;<br>
+  right: 0 !important;<br>
 }<br>
 #banner-badge{<br>
-  background: rgba(255,255,255,0.09);<br>
-  backdrop-filter: blur(8px);<br>
-  border: 1px solid rgba(255,255,255,0.1);<br>
+  background: rgba(255,255,255,0.12) !important;<br>
+  color: #ffffff !important;<br>
+  border: 1px solid rgba(255,255,255,0.15) !important;<br>
 }<br>
-</style><br>
+#banner-t1{color: #ffffff !important; font-size: 15px !important; font-weight: 900 !important; line-height: 1.1 !important;}<br>
+#banner-t2{color: #ff6b2b !important; font-size: 15px !important; font-weight: 900 !important;}<br>
+#contador-top{background: #ffffff !important; color: #000000 !important;}<br>
+#online-top{color: #10b981 !important;}</p>
+
+<p></style><br>
 </head><br>
 <body class="antialiased"><div class="mobile-shell"><br>
 <header class="sticky top-0 z-30 bg-[#faf9f7]/90 backdrop-blur-md border-b border-zinc-200/50"><br>
@@ -155,19 +168,20 @@ body{max-width:100vw;overflow-x:hidden;background:#faf9f7;margin:0 auto;position
 </header><br>
 <main class="px-3 pb-24"><br>
 <div class="px-0 pt-2"><br>
-<div id="banner-fundo" class="rounded-[14px] text-white p-3 relative overflow-hidden flex items-center"><br>
-    <div id="banner-bola" class="absolute -right-5 -top-5 w-[72px] h-[72px] rounded-full"></div><br>
-    <div class="absolute -right-6 top-0 w-[100px] h-[100px] bg-[#ff6b2b]/12 rounded-full blur-[14px]"></div><br>
-    <div class="relative z-10 w-full flex justify-between items-center"><br>
-      <div class="flex-1 min-w-0 pr-2"><br>
-        <div id="banner-badge" class="inline-flex items-center gap-1 rounded-full px-2 py-1 text-[8.5px] font-black tracking-[0.08em]">🔥 <span id="badge-text">NOVO • SININHO</span></div><br>
-        <p id="saudacao-cliente" class="text-[11px] mt-1 text-white/60 hidden truncate">Olá, <span id="nome-cliente-banner" class="font-bold text-white">Visitante</span></p><br>
-        <h1 class="text-[14px] leading-[1.2] font-black mt-1 tracking-[-0.01em]"><span id="banner-t1" contenteditable="true" class="outline-none">Achadinhos que</span> <span id="banner-t2" contenteditable="true" class="text-[#ff6b2b] outline-none">valem cada centavo</span></h1><br>
-        <div class="mt-1 flex items-center gap-2"><br>
-          <span class="text-[10px] bg-white text-black px-2 py-1 rounded-full font-black" id="contador-top">19 achados</span><br>
-          <span class="text-[10px] text-emerald-400 font-bold">● <span id="online-top">0 on-line</span></span><br>
+<div id="banner-fundo" style="background:#000000;background-color:#000000;border-radius:16px;padding:14px;position:relative;overflow:hidden;height:110px;min-height:110px;display:flex;align-items:center;box-shadow:0 8px 24px rgba(0,0,0,0.25);border:1px solid #222;"><br>
+    <div id="banner-bola" style="position:absolute;top:0;right:0;width:88px;height:88px;background:#ff6b2b;border-radius:0 16px 0 32px;"></div><br>
+    <div style="position:absolute;right:10px;top:10px;width:90px;height:90px;background:rgba(255,107,43,0.3);border-radius:50%;filter:blur(16px);"></div><br>
+    <div style="position:relative;z-index:10;width:100%;"><br>
+        <div id="banner-badge" style="display:inline-flex;align-items:center;gap:4px;background:rgba(255,255,255,0.15);color:#ffffff;border:1px solid rgba(255,255,255,0.2);border-radius:9999px;padding:5px 10px;font-size:9px;font-weight:900;letter-spacing:0.08em;">🔥 <span id="badge-text" style="color:#ffffff;">NOVO • SININHO AUTOMÁTICO</span></div><br>
+        <p id="saudacao-cliente" class="hidden" style="color:rgba(255,255,255,0.7);font-size:11px;margin-top:4px;">Olá, <span id="nome-cliente-banner" style="color:#ffffff;font-weight:bold;">Visitante</span> 👋</p><br>
+        <h1 style="margin-top:6px;line-height:1.2;display:block;"><br>
+            <span id="banner-t1" style="color:#ffffff !important;font-size:15px !important;font-weight:900 !important;display:inline;">Achadinhos que</span><br>
+            <span id="banner-t2" style="color:#ff6b2b !important;font-size:15px !important;font-weight:900 !important;display:inline;"> valem cada centavo</span><br>
+        </h1><br>
+        <div style="margin-top:8px;display:flex;align-items:center;gap:8px;"><br>
+          <span id="contador-top" style="background:#ffffff;color:#000000;padding:5px 10px;border-radius:9999px;font-size:10px;font-weight:900;display:inline-block;">19 achados</span><br>
+          <span style="color:#10b981;font-size:10px;font-weight:700;">● <span id="online-top" style="color:#10b981;">0 on-line</span></span><br>
         </div><br>
-      </div><br>
     </div><br>
   </div><br>
 </div></p>
@@ -204,7 +218,7 @@ body{max-width:100vw;overflow-x:hidden;background:#faf9f7;margin:0 auto;position
 </div></main>
 
 
-<div id="welcome-popup" class="fixed top-[16px] left-1/2 -translate-x-1/2 z-[90] bg-black text-white px-6 py-4 rounded-[20px] shadow-2xl hidden max-w-[90%] text-center border border-zinc-800">
+<div id="welcome-popup" class="fixed top-[16px] left-1/2 -translate-x-1/2 z-[90] bg-black text-white px-6 py-4 rounded-[20px] shadow-2xl max-w-[90%] text-center border border-zinc-800">
   <p id="welcome-text" class="text-[14px] font-black leading-tight">Bem-vindo aos Achadinhos! 🛒🔥</p>
   <p class="text-[11px] text-white/60 mt-1 font-medium">Os melhores achados em tempo real</p>
 </div>
