@@ -128,7 +128,7 @@ body{max-width:100vw;overflow-x:hidden;background:#faf9f7;margin:0 auto;position
 <p>/* FIX DEFINITIVO - CABECALHO FIXO E SEM ESPACO BRANCO */<br>
 html,body{margin:0 !important;padding:0 !important;background:#ffffff !important;min-height:0 !important;height:auto !important;overflow-x:hidden !important}<br>
 .mobile-shell{margin:0 auto !important;padding:0 !important;min-height:0 !important;max-width:430px !important;background:#ffffff !important}<br>
-main{padding-top:92px !important;margin-top:0 !important}<br>
+main{padding-top:270px !important;margin-top:0 !important}<br>
 header{position:fixed !important;top:0 !important}<br>
 #banner-fundo{margin-top:0 !important}</p>
 
@@ -138,6 +138,51 @@ main.pb-0{padding-bottom:0 !important;margin-bottom:0 !important}<br>
 #skeleton.hidden, #grid.hidden, #empty-state.hidden{display:none !important;height:0 !important;min-height:0 !important;margin:0 !important;padding:0 !important}<br>
 .mobile-shell{padding-bottom:0 !important;margin-bottom:0 !important;min-height:0 !important}<br>
 body{padding-bottom:0 !important;margin-bottom:0 !important}</p>
+
+<p>/* BANNER FIXO TAMBEM - SO PRODUTOS ROLAM - REVISADO SEM ESPACO BRANCO <em>/<br>
+#banner-fundo{<br>
+  position:fixed !important;<br>
+  top:152px !important;<br>
+  left:50% !important;<br>
+  transform:translateX(-50%) !important;<br>
+  width:calc(100% - 16px) !important;<br>
+  max-width:414px !important;<br>
+  z-index:90 !important;<br>
+  margin:0 !important;<br>
+  height:110px !important;<br>
+  min-height:110px !important;<br>
+}<br>
+main{<br>
+  padding-top:270px !important; /</em> header 152px + banner 110px + 8px gap <em>/<br>
+  padding-bottom:0 !important;<br>
+  margin-top:0 !important;<br>
+  min-height:0 !important;<br>
+}<br>
+#grid, #skeleton, #empty-state{<br>
+  margin-top:0 !important;<br>
+  min-height:0 !important;<br>
+  padding-top:0 !important;<br>
+}<br>
+/</em> Container da vitrine sem espaco <em>/<br>
+.px-2.5.py-0{<br>
+  padding-top:4px !important;<br>
+  padding-bottom:0 !important;<br>
+  margin-top:0 !important;<br>
+}<br>
+/</em> Remove wrapper do banner que causava espaco branco quando banner e fixed */<br>
+.px-0.pt-2{<br>
+  padding:0 !important;<br>
+  margin:0 !important;<br>
+  height:0 !important;<br>
+  min-height:0 !important;<br>
+  overflow:visible !important;<br>
+}</p>
+
+<p>/* GARANTIA ZERO ESPACO BRANCO */<br>
+html{overflow-x:hidden !important}<br>
+body{overflow-x:hidden !important;background:#ffffff !important}<br>
+.mobile-shell{overflow-x:hidden !important}<br>
+#banner-fundo + *{margin-top:0 !important}</p>
 
 <p></style><br>
 </head><br>
