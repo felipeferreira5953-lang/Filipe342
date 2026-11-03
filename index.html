@@ -124,6 +124,49 @@ main{
   margin-top: 8px !important;
 }
 
+/* === FIX DEFINITIVO ESPAÇO BRANCO TOPO - V2 === */
+html{
+  background: #faf9f7 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+body{
+  background: #faf9f7 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  padding-top: calc(132px + env(safe-area-inset-top, 0px)) !important; /* altura do header */
+}
+header{
+  position: fixed !important;
+  top: 0 !important;
+  left: 50% !important;
+  right: auto !important;
+  transform: translateX(-50%) !important;
+  width: 100% !important;
+  max-width: 480px !important;
+  margin: 0 auto !important;
+  z-index: 50 !important;
+  padding-top: env(safe-area-inset-top, 0px) !important;
+  background: #faf9f7 !important;
+  border-bottom: 1px solid #e5e5e5 !important;
+}
+main{
+  background: #ffffff !important;
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+#banner-fundo{
+  position: relative !important;
+  top: auto !important;
+  margin-top: 12px !important;
+  margin-bottom: 0 !important;
+}
+/* garante que nenhum elemento antes do header crie espaço */
+body > *:first-child{
+  margin-top: 0 !important;
+}
+
+
 </style>
 
 <p></head><br>
