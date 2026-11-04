@@ -169,72 +169,64 @@ body > *:first-child{
 
 </style>
 
-<style id="textura-pro-v2">
-/* TEXTURA PROFISSIONAL SUTIL */
+<style id="textura-pro-v3">
 body{
   background-color:#faf9f7 !important;
   background-image:
     radial-gradient(at 20% 15%, rgba(255,107,43,0.07) 0%, transparent 50%),
     radial-gradient(at 85% 85%, rgba(0,0,0,0.04) 0%, transparent 45%),
-    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E") !important;
-  background-attachment: fixed;
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
 }
 main{
-  background: linear-gradient(to bottom, #ffffff 0%, #fdfdfc 100%) !important;
-  position:relative;
+  background:#fff !important;
+  background-image:
+    radial-gradient(at 50% 0%, rgba(0,0,0,0.015) 0%, transparent 60%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E") !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.8), 0 -1px 0 rgba(0,0,0,0.03);
 }
-main::before{
-  content:"";
-  position:absolute; inset:0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.85'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");
-  pointer-events:none; opacity:0.5;
-}
-/* PROFUNDIDADE BOTÕES - Todas, Shopee, etc */
-.cat, #btn-fem, #btn-masc, .cat button, button.cat{
-  box-shadow: 0 1px 2px rgba(0,0,0,0.06), 0 2px 6px rgba(0,0,0,0.05), 0 0 0 1px rgba(0,0,0,0.03), inset 0 1px 0 rgba(255,255,255,0.7) !important;
+.cat{
+  box-shadow: 0 1px 0 rgba(255,255,255,0.9) inset, 0 1px 2px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04) !important;
   transition: all 0.2s cubic-bezier(0.16,1,0.3,1) !important;
-  transform: translateZ(0);
 }
-.cat:hover, #btn-fem:hover, #btn-masc:hover{
-  transform: translateY(-1px) !important;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.07), 0 4px 12px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.8) !important;
+.cat:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.9) inset, 0 2px 4px rgba(0,0,0,0.08), 0 8px 20px rgba(0,0,0,0.06) !important;
 }
-.cat:active, #btn-fem:active, #btn-masc:active{
-  transform: translateY(0) scale(0.97) !important;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.08), inset 0 1px 3px rgba(0,0,0,0.12) !important;
+.cat:active{
+  transform: translateY(0) scale(0.97);
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.04) !important;
 }
-.cat.active, .cat.bg-black, #btn-fem.bg-black, #btn-masc.bg-black{
-  box-shadow: 0 2px 8px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.15) !important;
+.cat.bg-black, .cat.!bg-black{
+  box-shadow: 0 1px 0 rgba(255,255,255,0.15) inset, 0 2px 6px rgba(0,0,0,0.2), 0 8px 24px rgba(0,0,0,0.12) !important;
 }
-/* CARDS PRODUTO */
+#banner-fundo > div{
+  box-shadow: 0 1px 0 rgba(255,255,255,0.1) inset, 0 8px 24px rgba(0,0,0,0.25), 0 20px 48px rgba(0,0,0,0.15) !important;
+}
 #grid > div{
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 4px 12px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.02) !important;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.8) inset, 0 1px 3px rgba(0,0,0,0.06), 0 6px 20px rgba(0,0,0,0.04) !important;
   transition: all 0.25s cubic-bezier(0.16,1,0.3,1) !important;
 }
 #grid > div:hover{
-  transform: translateY(-3px) !important;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08), 0 12px 24px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.03) !important;
+  transform: translateY(-3px);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.8) inset, 0 4px 12px rgba(0,0,0,0.08), 0 12px 32px rgba(0,0,0,0.08) !important;
 }
-/* BANNER */
-#banner-fundo > div{
-  box-shadow: 0 8px 24px rgba(0,0,0,0.18), 0 2px 8px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.1) !important;
-}
-/* HEADER */
-header{
-  backdrop-filter: blur(12px) saturate(1.15) !important;
-  -webkit-backdrop-filter: blur(12px) saturate(1.15) !important;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04) !important;
-}
-/* BOTÃO VER OFERTA */
 .btn-oferta{
-  box-shadow: 0 2px 8px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.2) !important;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.25) inset, 0 2px 6px rgba(255,107,43,0.35), 0 4px 12px rgba(255,107,43,0.2) !important;
+}
+.btn-oferta:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.25) inset, 0 4px 10px rgba(255,107,43,0.4), 0 8px 20px rgba(255,107,43,0.25) !important;
 }
 .btn-oferta:active{
-  transform: scale(0.96) !important;
+  transform: scale(0.97);
+  box-shadow: inset 0 1px 4px rgba(0,0,0,0.2) !important;
 }
-/* BOTÃO NOME verde já tem profundidade, reforça */
-.btn-nome-ativo{
-  box-shadow: 0 0 0 3px rgba(34,197,94,0.12), 0 2px 8px rgba(34,197,94,0.18), 0 1px 2px rgba(0,0,0,0.05) !important;
+header{
+  backdrop-filter: blur(12px) saturate(1.2) !important;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.8) inset, 0 4px 20px rgba(0,0,0,0.06) !important;
+}
+#btn-cliente{
+  box-shadow: 0 1px 0 rgba(255,255,255,0.8) inset, 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04) !important;
 }
 </style>
 
@@ -344,7 +336,8 @@ header{
 </main></p>
 
 <div id="welcome-popup" class="fixed top-[16px] left-1/2 -translate-x-1/2 z-[90] bg-black text-white px-6 py-4 rounded-[20px] shadow-2xl max-w-[90%] text-center border border-zinc-800">
-  <p id="welcome-text" class="text-[14px] font-black leading-tight">Bem-vindo aos Achadinhos! 🛒🔥</p><p class="text-[11px] text-white/60 mt-1 font-medium">Os melhores achados em tempo real
+  <p id="welcome-text" class="text-[14px] font-black leading-tight">Bem-vindo aos Achadinhos! 🛒🔥
+  </p><p class="text-[11px] text-white/60 mt-1 font-medium">Os melhores achados em tempo real
 </p></div>
 <div id="toast" class="fixed bottom-[20px] left-1/2 -translate-x-1/2 bg-black text-white px-5 py-3 rounded-full text-[13px] font-bold shadow-2xl hidden z-[60] max-w-[90%] text-center"></div>
 
@@ -483,7 +476,7 @@ header{
       <input id="notif-titulo" class="w-full h-[44px] border border-zinc-200 rounded-[12px] px-3 mb-2 text-[14px]" value="🔥 Achadinho novo na loja!">
       <textarea id="notif-msg" rows="3" class="w-full border border-zinc-200 rounded-[12px] px-3 py-3 text-[14px] resize-none">Temos ofertas novas te esperando! Corre que acaba rápido!</textarea>
       <button id="notif-enviar-todos" class="w-full h-[42px] bg-black text-white rounded-full font-bold mt-3">📢 Enviar notificação pra todo mundo agora</button>
-      <!-- Teste removido - só envia pra todos no ADM -->
+      <!-- Teste removido - só ADM envia pra todos -->
     </div>
     <div class="bg-white border border-zinc-200 rounded-[16px] p-4 mb-4">
       <p class="font-bold text-[13px] mb-3">👥 Quem ativou o sininho
@@ -502,7 +495,7 @@ header{
 
 <div id="modal-notif" class="fixed inset-0 z-[70] bg-black/50 hidden">
   <div class="absolute inset-0" id="modal-notif-bg"></div>
-  <div class="absolute bottom-0 left-0 right-0 bg-white rounded-t-[24px] p-6 max-w-[480px] mx-auto"><div class="w-10 h-1 bg-zinc-200 rounded-full mx-auto mb-4"></div><b>🔔 Histórico de Notificações</b><p class="text-[11px] text-zinc-500 mt-1">Envio só pelo ADM • Aba Sininho</p><div class="mt-4"><button id="fechar-notif" class="w-full h-[42px] bg-black text-white rounded-full font-bold">Fechar</button></div><div id="historico-notif-2" class="mt-4 space-y-2"></div></div>
+  <div class="absolute bottom-0 left-0 right-0 bg-white rounded-t-[24px] p-6 max-w-[480px] mx-auto"><div class="w-10 h-1 bg-zinc-200 rounded-full mx-auto mb-4"></div><b>🔔 Histórico</b><p class="text-[11px] text-zinc-500 mt-1">Envio só no ADM</p><div class="mt-4"><button id="fechar-notif" class="w-full h-[42px] bg-black text-white rounded-full font-bold">Fechar</button></div><div id="historico-notif-2" class="mt-4 space-y-2"></div></div>
 </div>
 
 <script>
@@ -1016,7 +1009,8 @@ async function ensureStorage(){
   if(storage) return {storage, sRef, uploadBytes, getDownloadURL};
   if(storageLoading) return storageLoading;
   storageLoading = import("https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js").then(mod=>{
-    storage = mod.getStorage(app);
+    const st = mod.getStorage(app);
+    storage = st;
     sRef = mod.ref;
     uploadBytes = mod.uploadBytes;
     getDownloadURL = mod.getDownloadURL;
@@ -1028,11 +1022,12 @@ async function ensureStorage(){
 window.ensureStorage = ensureStorage;
 
 const firebaseConfig={apiKey:"AIzaSyAqkpuZamU05yXVGiQMtmyMmL68_Op-r88",authDomain:"achadinhos-loja.firebaseapp.com",databaseURL:"https://achadinhos-loja-default-rtdb.firebaseio.com",projectId:"achadinhos-loja",storageBucket:"achadinhos-loja.firebasestorage.app",messagingSenderId:"114449338702",appId:"1:114449338702:web:78ae8c8c5b792e0a6fce1f"};
+let app, db;
 try{
-  const app=initializeApp(firebaseConfig);
-  const db=getDatabase(app);
-  const storage=getStorage(app);
-  window.storage=storage; window.sRef=sRef; window.uploadBytes=uploadBytes; window.getDownloadURL=getDownloadURL;
+  app=initializeApp(firebaseConfig);
+  db=getDatabase(app);
+  window.app=app; window.db=db;
+  // storage lazy - só no ADM via ensureStorage()
   const produtosRef=ref(db,'produtos');
   const onlineRef=ref(db,'online');
   const cliquesRef=ref(db,'cliques');
