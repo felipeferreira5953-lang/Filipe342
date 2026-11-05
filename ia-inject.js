@@ -1,121 +1,106 @@
-// ia-inject.js V20 ULTRA 3/3 - Anti corrida de foto + 0% margem + usa resolve-js.js no backend
+// ia-inject.js V20 FIX BOTÃO - Recria botão IA no layout exato do print + usa api/resolve-js.js
 (function(){
   const API = '/api/shopee-direct';
-  let currentAbort = null;
-  let lastUrl = '';
+  let abortCtrl = null;
 
-  function $(id){ return document.getElementById(id); }
-  function showStatus(msg, type='info'){
-    let el = $('ia-status');
-    if(!el){
-      el = document.createElement('div');
-      el.id = 'ia-status';
-      el.style.cssText = 'margin:12px 0;padding:10px;border-radius:8px;font-size:13px;';
-      const container = $('resultado') || document.body;
-      container.parentNode.insertBefore(el, container);
-    }
-    el.textContent = msg;
-    el.style.background = type==='error'?'#fee':type==='success'?'#efe':'#eef';
-    el.style.display = 'block';
+  function getInputs(){
+    const all = Array.from(document.querySelectorAll('input'));
+    const nome = all.find(i => i.placeholder?.toLowerCase().includes('nome')) || all[0];
+    const preco = all.find(i => i.placeholder === 'Preço' || i.placeholder?.toLowerCase() === 'preço') || all[1];
+    const precoAntigo = all.find(i => i.placeholder?.toLowerCase().includes('antigo')) || all[2];
+    const img = all.find(i => i.placeholder?.toLowerCase().includes('imagem')) || all[3];
+    // Link é o que tem s.shopee.com.br ou o 5º input
+    let link = all.find(i => /s\.shopee|shope\.ee|mercadolivre|amzn\.to|shein|tiktok|meli\.la/i.test(i.value)) || all[4] || all[all.length-1];
+    return { all, nome, preco, precoAntigo, img, link };
+  }
+
+  function ensureButton(){
+    if(document.getElementById('btn-ia-auto')) return;
+    const { link } = getInputs();
+    if(!link) return;
+
+    const btn = document.createElement('button');
+    btn.id = 'btn-ia-auto';
+    btn.type = 'button';
+    btn.innerHTML = '🤖 Gerar com IA Automático';
+    btn.style.cssText = 'width:100%;margin:8px 0 12px 0;padding:12px;background:linear-gradient(90deg,#8a2be2,#ff6a00);color:#fff;border:none;border-radius:10px;font-weight:bold;font-size:14px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.15)';
+    
+    // Insere logo depois do input do link
+    link.parentNode.insertBefore(btn, link.nextSibling);
+    
+    btn.addEventListener('click', gerar);
+    
+    // Auto-gera ao colar link
+    link.addEventListener('paste', ()=>{
+      setTimeout(()=>gerar(), 600);
+    });
+    link.addEventListener('change', ()=>{
+      if(link.value.trim().length > 15) gerar();
+    });
+
+    console.log('[IA] Botão recriado no layout ADM');
   }
 
   async function gerar(){
-    const input = $('link-produto') || $('shopee-link') || document.querySelector('input[type="text"]');
-    const btn = $('btn-gerar') || $('gerar-btn') || document.querySelector('button');
-    const resultado = $('resultado');
-    const previewImg = $('preview-imagem') || $('imagem-preview');
-    const previewNome = $('preview-nome') || $('nome-preview');
-    const previewPreco = $('preview-preco') || $('preco-preview');
+    const { nome, preco, precoAntigo, img, link } = getInputs();
+    const btn = document.getElementById('btn-ia-auto');
+    if(!link || !link.value.trim()){ alert('Cole o link Shopee primeiro'); return; }
 
-    const url = (input?.value || '').trim();
-    if(!url){ showStatus('Cole o link Shopee/ML/Amazon/Shein/TikTok', 'error'); return; }
-    if(url === lastUrl && resultado && resultado.style.display !== 'none'){
-      showStatus('Link já gerado', 'info');
-      return;
-    }
-
-    lastUrl = url;
+    const url = link.value.trim();
     
-    if(currentAbort) currentAbort.abort();
-    currentAbort = new AbortController();
+    if(abortCtrl) abortCtrl.abort();
+    abortCtrl = new AbortController();
 
-    if(btn){ btn.disabled = true; btn.textContent = 'Gerando...'; }
-    
-    // LIMPA TUDO antes - anti corrida
-    if(resultado){
-      resultado.style.display = 'none';
-      resultado.innerHTML = '';
-    }
-    if(previewImg){ previewImg.src = ''; previewImg.style.display = 'none'; }
-    if(previewNome) previewNome.textContent = '';
-    if(previewPreco) previewPreco.textContent = '';
-    
-    showStatus('Resolvendo link com resolve-js.js + API oficial...', 'info');
+    if(btn){ btn.disabled=true; btn.innerHTML='⏳ Resolvendo com resolve-js.js + API...'; }
 
+    // Anti corrida: limpa só se for novo
     try{
-      const res = await fetch(`${API}?url=${encodeURIComponent(url)}`, { signal: currentAbort.signal });
+      const res = await fetch(`${API}?url=${encodeURIComponent(url)}`, { signal: abortCtrl.signal });
       const data = await res.json();
-      
-      if(!data.ok){
-        throw new Error(data.error || 'Não conseguiu resolver');
+      if(!data.ok) throw new Error(data.error || 'Falha');
+
+      const p = data.product || data;
+      const nomeFinal = p.name || p.nome || data.nome || '';
+      const precoFinal = p.price || p.preco || data.preco || '';
+      const precoAntigoFinal = p.priceOld || p.precoAntigo || data.precoAntigo || (precoFinal? (Number(precoFinal)*1.35).toFixed(2) : '');
+      const imgFinal = p.image || p.imagem || data.imagem || '';
+
+      if(nome) { nome.value = nomeFinal.substring(0,120); nome.dispatchEvent(new Event('input',{bubbles:true})); }
+      if(preco) { preco.value = precoFinal; preco.dispatchEvent(new Event('input',{bubbles:true})); }
+      if(precoAntigo) { precoAntigo.value = precoAntigoFinal; precoAntigo.dispatchEvent(new Event('input',{bubbles:true})); }
+      if(img) { img.value = imgFinal; img.dispatchEvent(new Event('input',{bubbles:true})); img.dispatchEvent(new Event('change',{bubbles:true})); }
+
+      // Tenta achar selects e preencher
+      const selects = Array.from(document.querySelectorAll('select'));
+      if(data.categoria && selects[0]){ 
+        const opt = Array.from(selects[0].options).find(o=> o.text.toLowerCase().includes((data.categoria||'').toLowerCase().substring(0,4)));
+        if(opt) selects[0].value = opt.value;
+      }
+      if(data.loja && selects[1]){
+        const opt2 = Array.from(selects[1].options).find(o=> o.text.toLowerCase().includes((data.loja||'').toLowerCase().substring(0,4)));
+        if(opt2) selects[1].value = opt2.value;
       }
 
-      showStatus(`✅ ${data.metodo} | Certeza: ${data.certeza}`, 'success');
+      if(btn) btn.innerHTML = `✅ ${data.loja} • R$ ${precoFinal} • ${data.metodo?.substring(0,30)||''}`;
+      setTimeout(()=>{ if(btn) btn.innerHTML='🤖 Gerar com IA Automático'; btn.disabled=false; }, 3000);
 
-      const produto = data.product || { name: data.nome, image: data.imagem, price: data.preco, priceOld: data.precoAntigo };
-      
-      // Preenche campos se existirem
-      if($('nome-produto')) $('nome-produto').value = produto.name || '';
-      if($('preco-produto')) $('preco-produto').value = produto.price || '';
-      if($('preco-antigo')) $('preco-antigo').value = produto.priceOld || '';
-      if($('imagem-produto')) $('imagem-produto').value = produto.image || '';
-      if($('link-afiliado')) $('link-afiliado').value = data.affiliateLink || url;
-      if($('categoria')) $('categoria').value = data.categoria || 'Geral';
-      if($('loja')) $('loja').value = data.loja || '';
-
-      // Preview anti corrida - só mostra se for do URL atual
-      if(previewImg && produto.image){
-        previewImg.src = produto.image;
-        previewImg.style.display = 'block';
-        previewImg.onerror = () => { previewImg.style.display = 'none'; };
-      }
-      if(previewNome) previewNome.textContent = produto.name || '';
-      if(previewPreco) previewPreco.textContent = produto.price ? `R$ ${produto.price}` : '';
-
-      if(resultado){
-        resultado.style.display = 'block';
-        resultado.innerHTML = `
-          <div style="border:1px solid #ddd;border-radius:12px;padding:12px;display:flex;gap:12px;align-items:center">
-            <img src="${produto.image}" style="width:80px;height:80px;object-fit:cover;border-radius:8px" onerror="this.style.display='none'">
-            <div style="flex:1">
-              <div style="font-weight:bold;font-size:14px;line-height:1.2">${produto.name||''}</div>
-              <div style="color:#e63946;font-weight:bold;margin-top:4px">R$ ${produto.price||''} <span style="text-decoration:line-through;color:#888;font-weight:normal;font-size:12px">R$ ${produto.priceOld||''}</span></div>
-              <div style="font-size:11px;color:#555;margin-top:4px">${data.loja} • ${data.categoria} • ${data.metodo}</div>
-            </div>
-          </div>
-        `;
-      }
-
-      // Auto copy prompt ou legenda se tiver
-      if(window.gerarLegenda) window.gerarLegenda(data);
-      
     }catch(e){
-      if(e.name === 'AbortError') return;
-      showStatus('Erro: '+e.message, 'error');
+      if(e.name==='AbortError') return;
       console.error(e);
-    }finally{
-      if(btn){ btn.disabled = false; btn.textContent = 'Gerar Achadinho'; }
-      currentAbort = null;
+      if(btn){ btn.innerHTML='❌ Erro: '+e.message; btn.disabled=false; }
+      alert('Erro IA: '+e.message);
     }
   }
 
-  // Liga botão
+  // Observa DOM pra recriar se React limpar
+  const observer = new MutationObserver(()=> ensureButton());
   document.addEventListener('DOMContentLoaded', ()=>{
-    const btn = $('btn-gerar') || $('gerar-btn') || document.querySelector('#gerar');
-    if(btn) btn.addEventListener('click', gerar);
-    const input = $('link-produto') || $('shopee-link');
-    if(input) input.addEventListener('keydown', (e)=>{ if(e.key==='Enter') gerar(); });
+    ensureButton();
+    observer.observe(document.body, { childList:true, subtree:true });
+    setInterval(ensureButton, 2000);
   });
+  // Se já carregou
+  setTimeout(()=>{ ensureButton(); observer.observe(document.body, { childList:true, subtree:true }); }, 1000);
 
-  window.gerarAchadinho = gerar;
+  window.gerarIA = gerar;
 })();
