@@ -1,4 +1,4 @@
-// api/shopee-direct.js V20 ULTRA - 2/3 - Importa resolve-js.js pra 0% erro
+// api/shopee-direct.js V21 FIX PREÇO + IMAGEM - Corrige preço 5,14 e libera CORS da foto
 import crypto from 'crypto';
 import { resolveShortUrl, extractShopeeIds, extractShopeeIdsFromHtml, extractMLId } from './resolve-js.js';
 
@@ -32,7 +32,7 @@ function getAllPrices(html){
   if(!html) return prices;
   try{
     const scripts=[...html.matchAll(/<script[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)];
-    for(const s of scripts){ try{ const j=JSON.parse(s[1]); const arr=Array.isArray(j)?j:[j]; for(const item of arr){ const offer=item.offers||item; if(offer?.price) prices.push(String(offer.price)); if(offer?.lowPrice) prices.push(String(offer.lowPrice)); } }catch(e){} }
+    for(const s of scripts){ try{ const j=JSON.parse(s[1]); const arr=Array.isArray(j)?j:[j]; for(const item of arr){ const offer=item.offers||item; if(offer?.price) prices.push(String(offer.price)); if(offer?.lowPrice) prices.push(String(offer.lowPrice)); if(offer?.highPrice) prices.push(String(offer.highPrice)); } }catch(e){} }
   }catch(e){}
   const amz=[...html.matchAll(/<span[^>]*class="[^"]*a-offscreen[^"]*"[^>]*>([^<]+)<\/span>/gi)]; for(const a of amz) prices.push(a[1]);
   const metas=['product:price:amount','og:price:amount','product:price','price']; for(const k of metas){ const v=getMeta(html,[k]); if(v) prices.push(v); }
@@ -41,16 +41,27 @@ function getAllPrices(html){
   return prices.filter(Boolean);
 }
 
-function parseFirstValidPrice(prices){
-  for(let raw of prices){
-    let s=String(raw).replace(/[R$\s]/gi,'').replace(/[^\d.,]/g,'').trim(); if(!s) continue;
-    if(s.includes(',') && s.includes('.')) s=s.replace(/\./g,'').replace(',','.');
-    else if(s.includes(',')) s=s.replace(',','.');
-    const f=parseFloat(s); if(isNaN(f)||f<=0||f>100000) continue;
-    if(s.includes('.')||f<100) return f.toFixed(2);
-    return (f/100).toFixed(2);
+function parsePriceSmart(raw){
+  let s=String(raw).replace(/[R$\s]/gi,'').replace(/[^\d.,]/g,'').trim(); if(!s) return null;
+  if(s.includes(',') && s.includes('.')) s=s.replace(/\./g,'').replace(',','.');
+  else if(s.includes(',')) s=s.replace(',','.');
+  let f=parseFloat(s); if(isNaN(f)||f<=0||f>100000) return null;
+  if(s.includes('.')||f<100) return f;
+  return f/100;
+}
+
+function parseBestPrice(prices, platform){
+  const parsed = prices.map(p=>parsePriceSmart(p)).filter(v=>v!==null && v>1 && v<50000);
+  if(!parsed.length) return null;
+  // Para Shopee/Amazon, pega o MAIOR preço plausível (evita pegar 5,14 de parcela)
+  parsed.sort((a,b)=>b-a);
+  // Se tem preços muito discrepantes, pega o do meio/alto
+  if(platform==='shopee'){
+    // Remove preços < 20 se tiver maiores
+    const altos = parsed.filter(v=>v>=20);
+    if(altos.length) return altos[0];
   }
-  return '';
+  return parsed[0];
 }
 
 export default async function handler(req, res) {
@@ -58,6 +69,20 @@ export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   if (req.method === 'OPTIONS') return res.status(200).end();
+  
+  // Proxy de imagem para formato super leve (resolve CORS cf.shopee)
+  if(req.query.img){
+    try{
+      const imgUrl = decodeURIComponent(req.query.img);
+      const r = await fetch(imgUrl, { headers: { 'User-Agent':'Mozilla/5.0', 'Referer':'https://shopee.com.br/' }, signal: AbortSignal.timeout(10000) });
+      const buf = Buffer.from(await r.arrayBuffer());
+      res.setHeader('Content-Type', r.headers.get('content-type')||'image/jpeg');
+      res.setHeader('Access-Control-Allow-Origin','*');
+      res.setHeader('Cache-Control','public, max-age=86400');
+      return res.status(200).send(buf);
+    }catch(e){ return res.status(500).json({ok:false, error:'img proxy fail'}); }
+  }
+
   const shortUrl = (req.query.url || req.query.link || req.body?.url || '').trim();
   if (!shortUrl) return res.status(400).json({ ok: false, error: 'URL vazia' });
 
@@ -83,7 +108,7 @@ export default async function handler(req, res) {
         const j=await r.json();
         if(j?.title){
           product={ name:j.title, image:j.pictures?.[0]?.secure_url||j.thumbnail||'', price:Number(j.price).toFixed(2), priceOld:j.original_price?Number(j.original_price).toFixed(2):(Number(j.price)*1.35).toFixed(2) };
-          metodo=`API ML Oficial ${mlId} + resolve-js`;
+          metodo=`API ML Oficial ${mlId} + resolve-js V21`;
         }
       }catch(e){}
     }
@@ -94,39 +119,68 @@ export default async function handler(req, res) {
     if(ids){
       try{
         const ts=Math.floor(Date.now()/1000);
-        const payload=JSON.stringify({ query:`query { productOfferV2(itemId: ${ids.itemId}, limit: 1) { nodes { productName imageUrl priceMin priceMax } } }` });
+        // Tenta com shopId se tiver
+        const queryWithShop = ids.shopId ? `query { productOfferV2(itemId: ${ids.itemId}, shopId: ${ids.shopId}, limit: 1) { nodes { productName imageUrl priceMin priceMax } } }` : `query { productOfferV2(itemId: ${ids.itemId}, limit: 1) { nodes { productName imageUrl priceMin priceMax } } }`;
+        const payload=JSON.stringify({ query: queryWithShop });
         const sig=crypto.createHash('sha256').update(`${APP_ID}${ts}${payload}${SECRET}`).digest('hex');
         const r=await fetch('https://open-api.affiliate.shopee.com.br/graphql',{ method:'POST', headers:{'Content-Type':'application/json','Authorization':`SHA256 Credential=${APP_ID}, Timestamp=${ts}, Signature=${sig}`}, body:payload, signal:AbortSignal.timeout(8000) });
         const j=await r.json();
         const node=j?.data?.productOfferV2?.nodes?.[0];
         if(node?.priceMin){
-          product={ name:node.productName, image:node.imageUrl, price:(Number(node.priceMin)/100).toFixed(2), priceOld:node.priceMax?(Number(node.priceMax)/100).toFixed(2):(Number(node.priceMin)/100*1.4).toFixed(2) };
-          metodo=`API Shopee Oficial ${ids.itemId} + resolve-js`;
+          let pMin = Number(node.priceMin);
+          let pMax = node.priceMax ? Number(node.priceMax) : 0;
+          // FIX PREÇO 5,14: Shopee manda em centavos, mas às vezes já manda em reais. Se < 1000 e nome é caro, multiplica
+          // Se pMin < 1000 e é microondas/tv/etc, provavelmente já é em reais *100? Na verdade Shopee sempre manda *100. 5,14 = 514 centavos = item de 5 reais, não microondas.
+          // Então vamos usar HTML como validação
+          let price = pMin/100;
+          let priceOld = pMax ? pMax/100 : price*1.4;
+          
+          // Valida com HTML: se API deu 5,14 mas HTML tem 500+, usa HTML
+          const htmlPrices = getAllPrices(htmlResolved);
+          const bestHtml = parseBestPrice(htmlPrices, 'shopee');
+          if(bestHtml && bestHtml > price*3 && bestHtml > 50){
+            price = bestHtml;
+            priceOld = bestHtml*1.35;
+            metodo = `API Shopee + HTML CORRIGIDO (API deu ${pMin/100}, HTML ${bestHtml})`;
+          }else{
+            metodo=`API Shopee Oficial ${ids.itemId} V21 FIX`;
+          }
+          
+          product={ name:node.productName, image:node.imageUrl, price:price.toFixed(2), priceOld:priceOld.toFixed(2) };
         }
-      }catch(e){}
+      }catch(e){ console.error('Shopee API err', e); }
     }
   }
 
   if(!product){
     if(flyData?.ogTitle || flyData?.ogImage){
       const prices=[]; if(flyData?.preco_atual) prices.push(String(flyData.preco_atual)); prices.push(...getAllPrices(htmlResolved));
-      product={ name:flyData.ogTitle||getMeta(htmlResolved,['og:title'])||'', image:flyData.ogImage||getMeta(htmlResolved,['og:image'])||'', price:parseFirstValidPrice(prices), priceOld:'' };
-      metodo=`Fly GRU ${platform.toUpperCase()} + resolve-js`;
+      const best = parseBestPrice(prices, platform);
+      product={ name:flyData.ogTitle||getMeta(htmlResolved,['og:title'])||'', image:flyData.ogImage||getMeta(htmlResolved,['og:image'])||'', price:best?best.toFixed(2):'', priceOld:'' };
+      metodo=`Fly GRU ${platform.toUpperCase()} + resolve-js V21`;
     }else if(htmlResolved){
-      const title=getMeta(htmlResolved,['og:title'])||''; const image=getMeta(htmlResolved,['og:image'])||''; const preco=parseFirstValidPrice(getAllPrices(htmlResolved));
-      if(title||image){ product={ name:title.substring(0,150), image, price:preco, priceOld:'' }; metodo=`HTML ${platform.toUpperCase()} + resolve-js`; }
+      const title=getMeta(htmlResolved,['og:title'])||''; const image=getMeta(htmlResolved,['og:image'])||''; 
+      const best = parseBestPrice(getAllPrices(htmlResolved), platform);
+      if(title||image||best){ product={ name:title.substring(0,150), image, price:best?best.toFixed(2):'', priceOld:best?(best*1.35).toFixed(2):'' }; metodo=`HTML ${platform.toUpperCase()} + resolve-js V21`; }
     }
   }
 
-  if(!product) return res.status(200).json({ ok:false, error:'Não resolveu', platform, expanded:expanded.substring(0,200), hasFly:!!flyData, version:'V20 ULTRA 2/3' });
+  if(!product) return res.status(200).json({ ok:false, error:'Não resolveu', platform, expanded:expanded.substring(0,200), hasFly:!!flyData, version:'V21 FIX PREÇO' });
   if(product.price && !product.priceOld) product.priceOld=(Number(product.price)*1.35).toFixed(2);
+  
+  // Cria URL proxy pra foto super leve (resolve CORS)
+  let imagemProxy = product.image;
+  if(product.image && product.image.includes('shopee.com.br')){
+    imagemProxy = `/api/shopee-direct?img=${encodeURIComponent(product.image)}`;
+  }
+
   const lojaNome=platform==='shopee'?'Shopee':platform==='ml'?'Mercado Livre':platform==='amazon'?'Amazon':platform==='tiktok'?'TikTok Shop':platform==='shein'?'Shein':'Loja';
-  const categoria=(()=>{ const n=(product.name||'').toLowerCase(); if(/copo|vidro|jogo|cozinha/.test(n)) return 'Casa e Cozinha'; if(/camiseta|tênis|bermuda/.test(n)) return 'Moda Masculina'; if(/vestido|bolsa|shein/.test(n)) return 'Moda Feminina'; return 'Geral'; })();
+  const categoria=(()=>{ const n=(product.name||'').toLowerCase(); if(/microondas|geladeira|fogão|copo|vidro|cozinha/.test(n)) return 'Casa e Cozinha'; if(/camiseta|tênis|bermuda/.test(n)) return 'Moda Masculina'; if(/vestido|bolsa|shein/.test(n)) return 'Moda Feminina'; return 'Geral'; })();
 
   return res.status(200).json({
     ok:true, platform, original:shortUrl, expanded, affiliateLink:shortUrl,
-    product, nome:product.name, imagem:product.image, preco:product.price, precoAntigo:product.priceOld,
-    loja:lojaNome, categoria, metodo, certeza:platform==='ml'||platform==='shopee'?'100% API + resolve-js':'95% Fly + resolve-js',
-    debug:{ version:'V20 ULTRA 2/3', platform, expanded:expanded.substring(0,200) }
+    product, nome:product.name, imagem:product.image, imagemProxy, preco:product.price, precoAntigo:product.priceOld,
+    loja:lojaNome, categoria, metodo, certeza:platform==='ml'||platform==='shopee'?'100% API + V21 FIX':'95% Fly + V21',
+    debug:{ version:'V21 FIX PREÇO E FOTO LEVE', platform, expanded:expanded.substring(0,200), priceRaw:product.price }
   });
 }
