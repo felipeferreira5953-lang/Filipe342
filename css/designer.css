@@ -1,0 +1,162 @@
+
+@font-face {
+  font-family: "Optimistic";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("/fonts/OptimisticAI_VF_Optimized.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Optimistic Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/OptimisticMono_W_TextRegular.woff2") format("woff2");
+}
+:where(html) {
+  font-family: "Optimistic", system-ui, sans-serif;
+}
+:where(code, pre, kbd, samp) {
+  font-family: "Optimistic Mono", ui-monospace, monospace;
+}
+
+
+/* === */
+
+
+@font-face {
+  font-family: "Optimistic";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("/fonts/OptimisticAIVFOptimized.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Optimistic Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/OptimisticMonoWTextRegular.woff2") format("woff2");
+}
+:where(html) {
+  font-family: "Optimistic", system-ui, sans-serif;
+}
+:where(code, pre, kbd, samp) {
+  font-family: "Optimistic Mono", ui-monospace, monospace;
+}
+
+
+/* === */
+
+
+*{font-family:Inter,sans-serif;-webkit-tap-highlight-color:transparent;box-sizing:border-box}
+html,body{margin:0;padding:0;background:#fff;overflow-x:hidden;width:100%}
+.scroll-hide::-webkit-scrollbar{display:none}
+.line-2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.skeleton{animation:pulse 1.5s ease-in-out infinite}
+header{position:sticky;top:0;z-index:40;background:#faf9f7;border-bottom:1px solid #e5e5e5;width:100%;max-width:480px;margin:0 auto}
+#banner-fundo{position:sticky;top:138px;z-index:30;margin:12px auto 0 auto;width:calc(100% - 24px);max-width:456px}
+main{padding-top:12px;margin:0 auto;max-width:480px}
+#dropdown-feminino,#dropdown-masculino{position:absolute;left:0;right:0;top:100%;z-index:41;box-shadow:0 8px 24px rgba(0,0,0,0.12)}
+/* PAINEL ADM E MODAIS ACIMA DE TUDO */
+#painel{z-index:100 !important}
+#modal{z-index:200 !important}
+#modal-produto{z-index:210 !important}
+#modal-sininho{z-index:220 !important}
+#modal-cliente{z-index:230 !important}
+#toast{z-index:240 !important}
+#welcome-popup{z-index:250 !important}
+
+/* === BOTÃO NOME - VERDE CLEAN PROFISSIONAL === */
+#btn-cliente{
+  transition: all 0.35s cubic-bezier(0.16,1,0.3,1);
+}
+.btn-nome-ativo{
+  background: #f0fdf4 !important;
+  border-color: #bbf7d0 !important;
+  color: #166534 !important;
+  box-shadow: 0 0 0 3px rgba(34,197,94,0.10), 0 1px 2px rgba(0,0,0,0.04) !important;
+}
+.btn-nome-ativo #btn-cliente-icon{
+  background: #16a34a !important;
+  color: #ffffff !important;
+  border: none !important;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+}
+@keyframes nomeConfirmado{
+  0%{transform:scale(1)}
+  35%{transform:scale(1.07)}
+  65%{transform:scale(0.98)}
+  100%{transform:scale(1)}
+}
+.btn-nome-ativo.anim-ativo{
+  animation: nomeConfirmado 0.55s cubic-bezier(0.16,1,0.3,1);
+}
+
+/* === FIX ESPAÇO BRANCO TOPO === */
+html, body{
+  background: #faf9f7 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+body{
+  padding-top: 0 !important;
+  padding-top: env(safe-area-inset-top, 0) !important;
+}
+header{
+  top: 0 !important;
+  margin-top: 0 !important;
+  padding-top: env(safe-area-inset-top, 0);
+  background: #faf9f7 !important;
+}
+main{
+  background: #ffffff;
+  min-height: 100vh;
+}
+/* remove o respiro extra entre header e banner que aumentava a sensação de branco */
+#banner-fundo{
+  margin-top: 8px !important;
+}
+
+/* === FIX DEFINITIVO ESPAÇO BRANCO TOPO - V2 === */
+html{
+  background: #faf9f7 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+body{
+  background: #faf9f7 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  padding-top: calc(132px + env(safe-area-inset-top, 0px)) !important; /* altura do header */
+}
+header{
+  position: fixed !important;
+  top: 0 !important;
+  left: 50% !important;
+  right: auto !important;
+  transform: translateX(-50%) !important;
+  width: 100% !important;
+  max-width: 480px !important;
+  margin: 0 auto !important;
+  z-index: 50 !important;
+  padding-top: env(safe-area-inset-top, 0px) !important;
+  background: #faf9f7 !important;
+  border-bottom: 1px solid #e5e5e5 !important;
+}
+main{
+  background: #ffffff !important;
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+#banner-fundo{
+  position: relative !important;
+  top: auto !important;
+  margin-top: 12px !important;
+  margin-bottom: 0 !important;
+}
+/* garante que nenhum elemento antes do header crie espaço */
+body > *:first-child{
+  margin-top: 0 !important;
+}
