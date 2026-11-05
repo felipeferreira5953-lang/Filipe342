@@ -337,7 +337,7 @@ header{
   </p></div><br>
 </main></p>
 
-<div id="welcome-popup" class="fixed top-[16px] left-1/2 -translate-x-1/2 z-[90] bg-zinc-900 text-white px-5 py-3.5 rounded-[16px] shadow-2xl max-w-[90%] text-center border border-zinc-800 hidden">
+<div id="welcome-popup" class="fixed top-[16px] left-1/2 -translate-x-1/2 z-[90] bg-zinc-900 text-white px-5 py-3.5 rounded-[16px] shadow-2xl max-w-[90%] text-center border border-zinc-800">
   <p id="welcome-text" class="text-[13px] font-semibold leading-tight tracking-tight">Bem-vindo aos Achadinhos</p><p class="text-[11px] text-white/60 mt-1 font-medium">Seleção em tempo real</p></div>
 <div id="toast" class="fixed bottom-[20px] left-1/2 -translate-x-1/2 bg-black text-white px-5 py-3 rounded-full text-[13px] font-bold shadow-2xl hidden z-[60] max-w-[90%] text-center"></div>
 
@@ -520,7 +520,7 @@ const Ev=[
 {id:"18",nome:"Boné Aba Reta Original",precoNovo:39.9,loja:"Shopee",emoji:"🧢",categoria:"Bonés",affiliateLink:"https://shopee.com.br"},
 {id:"19",nome:"Relógio Masculino Esportivo Prova D'água",precoNovo:79.9,precoAntigo:149.9,loja:"Amazon",emoji:"⌚",categoria:"Acessórios",affiliateLink:"https://amazon.com.br"}
 ];
-let produtos=[...Ev]; let filtroCat="Todas"; let busca="";
+let produtos=[...Ev]; let filtroCat="Todas"; let busca=""; let limiteVisivel=20;
 function toast(m){const el=document.getElementById('toast'); if(!el) return; el.textContent=m; el.classList.remove('hidden'); setTimeout(()=>el.classList.add('hidden'),3000);}
 function mostrarBoasVindas(){const popup=document.getElementById('welcome-popup');const txt=document.getElementById('welcome-text');const sub=popup?.querySelector('p:nth-child(2)');if(!popup||!txt)return;const nome=localStorage.getItem('cliente_nome');if(nome&&nome.trim()){const primeiro=nome.trim().split(' ')[0];txt.textContent=`Olá, ${primeiro}`;if(sub)sub.textContent=`Bem-vindo de volta`;}else{txt.textContent=`Bem-vindo aos Achadinhos`;if(sub)sub.textContent=`Seleção em tempo real`;}popup.classList.remove('hidden');setTimeout(()=>{popup.classList.add('hidden');},4000);}
 window.addEventListener('load',()=>{setTimeout(mostrarBoasVindas,800);});
@@ -584,7 +584,7 @@ function render(){
   } else {
     if(emptyState) emptyState.classList.add('hidden');
   }
-  grid.innerHTML=lista.map(p=>{
+  grid.innerHTML=lista.slice(0,limiteVisivel).map(p=>{
     const isImgUrl = p.imagemUrl && (p.imagemUrl.startsWith('http') || p.imagemUrl.startsWith('data:image'));
     const img = isImgUrl ? '<img src="'+p.imagemUrl+'" class="w-full h-full object-cover" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'grid\'"><div class=\'w-full h-full grid place-items-center text-[42px] hidden\'>'+esc(p.emoji||'🎁')+'</div>' : '<span class="text-[42px]">'+esc(p.emoji||'🎁')+'</span>';
     const off=p.precoAntigo?'<div class="absolute top-2 left-2 bg-[#ff6b2b] text-white text-[10px] font-black px-2 py-1 rounded-full">-'+Math.round((1-p.precoNovo/p.precoAntigo)*100)+'%</div>':'';
@@ -593,6 +593,22 @@ function render(){
     const txtCor=p.loja==="Mercado Livre"?"text-black":"text-white";
     return '<div onclick="abrirResumo(\''+p.id+'\')" class="produto-card bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col cursor-pointer active:scale-[0.98] transition"><div class="aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden">'+img+off+'<div class="absolute bottom-1 right-1 bg-black/70 text-white text-[9px] font-bold px-2 py-0.5 rounded-full">👁️ Ver resumo</div></div><div class="p-2 flex-1 flex flex-col"><p class="line-2 font-semibold text-[12.5px] min-h-[32px]">'+esc(p.nome)+'<div class="mt-2">'+antigo+'<div class="flex items-baseline gap-0.5"><span class="text-[11px] font-bold">R$</span><span class="text-[16px] font-black">'+Number(p.precoNovo).toFixed(2).replace(".",",")+'</span></div></div><div class="mt-1.5 flex items-center gap-1"><span class="text-[9px] font-black px-2 py-0.5 rounded-full '+cor+' '+txtCor+'">'+esc(p.loja.toUpperCase())+'</span></div><a href="'+p.affiliateLink+'" data-id="'+p.id+'" data-nome="'+esc(p.nome)+'" target="_blank" onclick="event.stopPropagation()" class="btn-oferta mt-2 h-8 bg-[#ff6b2b] text-white rounded-full grid place-items-center font-extrabold text-[12px]">VER OFERTA</a></div></div>';
   }).join('');
+  // PAGINAÇÃO 20 EM 20 - SUPER LEVE
+  let btnVerMais = document.getElementById('btn-ver-mais');
+  if(lista.length > limiteVisivel){
+    if(!btnVerMais){
+      btnVerMais = document.createElement('button');
+      btnVerMais.id = 'btn-ver-mais';
+      btnVerMais.className = 'mt-4 w-full h-11 rounded-full bg-black text-white font-bold text-[13px] active:scale-[0.98] transition';
+      btnVerMais.onclick = ()=>{ limiteVisivel += 20; render(); };
+      grid.parentNode.appendChild(btnVerMais);
+    }
+    const restantes = lista.length - limiteVisivel;
+    btnVerMais.textContent = `Ver mais 20 • ${restantes} restantes`;
+    btnVerMais.classList.remove('hidden');
+  } else {
+    if(btnVerMais) btnVerMais.classList.add('hidden');
+  }
   const elLista=document.getElementById('lista'); if(elLista) elLista.innerHTML=produtos.map(p=>{
     const thumb = p.imagemUrl ? '<img src="'+p.imagemUrl+'" loading="lazy" class="w-full h-full object-cover rounded-[10px]" onerror="this.parentElement.textContent=\''+(p.emoji||'🎁')+'\'">' : esc(p.emoji||'🎁');
     return '<div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">'+thumb+'</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">'+esc(p.nome)+'<p class="text-[11px] text-zinc-500">R$ '+p.precoNovo+' • '+esc(p.loja)+'</div><button onclick="apagarFirebase(\''+p.id+'\')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div>';
@@ -736,9 +752,9 @@ function abrirResumo(id){
 
 document.getElementById('modal-produto-bg')?.addEventListener('click',()=>document.getElementById('modal-produto').classList.add('hidden'));
 
- document.querySelector('[data-cat="Todas"]')?.addEventListener('click',()=>{filtroCat='Todas'; fecharTudo?.();});
+ document.querySelector('[data-cat="Todas"]')?.addEventListener('click',()=>{filtroCat='Todas'; limiteVisivel=20; fecharTudo?.(); render();});
  document.getElementById('empty-btn')?.addEventListener('click',()=>{
-  filtroCat='Todas';
+  filtroCat='Todas'; limiteVisivel=20;
   document.querySelectorAll('.cat').forEach(b=>{
     if(b.dataset.cat==='Todas'){ b.className='cat shrink-0 h-[30px] px-3 rounded-full text-[12px] font-bold bg-black text-white'; }
     else if(['Moda Feminina','Beleza','Bolsas','Calçados Femininos','Lingerie','Skincare','Moda Masculina','Camisas','Bermudas','Tênis','Bonés','Acessórios'].includes(b.dataset.cat)){ b.className='cat shrink-0 h-[26px] px-2.5 rounded-full text-[10.5px] font-bold bg-zinc-50 border border-zinc-200 text-zinc-700'; }
@@ -787,7 +803,7 @@ function atualizarAvatar(){
 window.atualizarAvatarGlobal = function(nome){ nomeCliente = nome; atualizarAvatar(); };
 atualizarAvatar();
 
-document.getElementById('busca')?.addEventListener('input',e=>{busca=e.target.value;render();});
+document.getElementById('busca')?.addEventListener('input',e=>{busca=e.target.value;limiteVisivel=20;render();});
 // DROPDOWN - DOIS JUNTOS
 const btnFem=document.getElementById('btn-feminino');
 const btnMasc=document.getElementById('btn-masculino');
@@ -808,7 +824,7 @@ function fecharTudo(){
 btnFem?.addEventListener('click',()=>{
   const escondido=dropFem.classList.contains('hidden');
   // Filtra só femininas
-  filtroCat='FEMININO';
+  filtroCat='FEMININO'; limiteVisivel=20;
   document.querySelectorAll('.cat').forEach(b=>b.classList.remove('!bg-black','!text-white'));
   render();
   fecharTudo();
@@ -822,7 +838,7 @@ btnFem?.addEventListener('click',()=>{
 btnMasc?.addEventListener('click',()=>{
   const escondido=dropMasc.classList.contains('hidden');
   // Filtra só masculinas
-  filtroCat='MASCULINO';
+  filtroCat='MASCULINO'; limiteVisivel=20;
   document.querySelectorAll('.cat').forEach(b=>b.classList.remove('!bg-black','!text-white'));
   render();
   fecharTudo();
@@ -850,7 +866,7 @@ document.querySelectorAll('.cat').forEach(btn=>{
     }else{
       btn.className='cat shrink-0 h-[30px] px-3 rounded-full text-[12px] font-bold bg-black text-white';
     }
-    filtroCat=btn.dataset.cat; render();
+    filtroCat=btn.dataset.cat; limiteVisivel=20; render();
   });
 });
 let clicks=[];
