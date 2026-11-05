@@ -1,4 +1,4 @@
-// /api/shopee-direct.js - V11 DEFINITIVO - COMPATIVEL COM ia-inject.js V9 e V11 - SEMPRE OK
+// /api/shopee-direct.js - V12 - PRECO CORRETO + RAPIDO
 import crypto from 'crypto';
 
 const FLY_ROBO_URL = 'https://criador-achadinhos-brasil.fly.dev';
@@ -13,9 +13,7 @@ function extractIds(url) {
     if (parts.length >= 2) {
       const last = parts[parts.length-1];
       const prev = parts[parts.length-2];
-      if (/^\d{6,}$/.test(last) && /^\d{6,}$/.test(prev)) {
-        return { shopId: prev, itemId: last };
-      }
+      if (/^\d{6,}$/.test(last) && /^\d{6,}$/.test(prev)) return { shopId: prev, itemId: last };
     }
   } catch {}
   let m = url.match(/-i\.(\d+)\.(\d+)/);
@@ -25,6 +23,23 @@ function extractIds(url) {
   m = url.match(/(\d{6,})\/(\d{6,})/);
   if (m) return { shopId: m[1], itemId: m[2] };
   return null;
+}
+
+function parsePriceCorrect(v) {
+  if (v === null || v === undefined || v === '') return '';
+  const s = String(v).trim();
+  if (!s) return '';
+  // Se tem ponto, já está em reais (ex: "14.00")
+  if (s.includes('.')) {
+    const f = parseFloat(s);
+    if (isNaN(f)) return '';
+    return f.toFixed(2);
+  }
+  // Sem ponto: pode ser centavos (1400 => 14.00) ou já reais (14 => 14.00)
+  const f = parseFloat(s);
+  if (isNaN(f)) return '';
+  if (f >= 100) return (f / 100).toFixed(2); // 1400 -> 14.00
+  return f.toFixed(2); // 14 -> 14.00
 }
 
 function detectarCategoria(nome){
@@ -45,16 +60,15 @@ export default async function handler(req, res) {
 
   let expanded = shortUrl;
   let flyData = null;
-  let flyError = null;
 
   try {
     const r = await fetch(`${FLY_ROBO_URL}/expand?url=${encodeURIComponent(shortUrl)}`, { 
       headers: { 'User-Agent': 'Mozilla/5.0' },
-      signal: AbortSignal.timeout(15000) 
+      signal: AbortSignal.timeout(10000) 
     });
     flyData = await r.json();
     expanded = flyData?.expanded || flyData?.final_url || expanded;
-  } catch(e) { flyError = e.message; }
+  } catch(e) {}
 
   let ids = extractIds(expanded);
   if (!ids && flyData) {
@@ -63,89 +77,62 @@ export default async function handler(req, res) {
   }
 
   let product = null;
-  let apiTried = [];
   
   if (ids) {
-    // Tenta shopId+itemId
     try {
       const ts = Math.floor(Date.now()/1000);
-      const payload = JSON.stringify({ query: `query { productOfferV2(input: { shopId: ${ids.shopId}, itemId: ${ids.itemId} }) { nodes { productName imageUrl priceMin priceMax offerLink commissionRate } } }` });
+      const payload = JSON.stringify({ query: `query { productOfferV2(itemId: ${ids.itemId}, limit: 1) { nodes { productName imageUrl priceMin priceMax commissionRate } } }` });
       const sig = crypto.createHash('sha256').update(`${APP_ID}${ts}${payload}${SECRET}`).digest('hex');
       const r = await fetch('https://open-api.affiliate.shopee.com.br/graphql', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `SHA256 Credential=${APP_ID}, Timestamp=${ts}, Signature=${sig}` },
         body: payload,
-        signal: AbortSignal.timeout(12000)
+        signal: AbortSignal.timeout(8000)
       });
       const j = await r.json();
-      apiTried.push({ type: 'shopId+itemId', hasNodes: !!j?.data?.productOfferV2?.nodes?.length });
       const node = j?.data?.productOfferV2?.nodes?.[0];
-      if (node) product = { name: node.productName, image: node.imageUrl, price: (parseInt(node.priceMin)/100).toString(), priceOld: (parseInt(node.priceMax)/100).toString(), offerLink: node.offerLink, metodo: 'API Oficial shopId+itemId' };
-    } catch(e) { apiTried.push({ type: 'shopId+itemId', error: e.message }); }
-
-    // Tenta só itemId (formato que seu Fly usa)
-    if (!product) {
-      try {
-        const ts = Math.floor(Date.now()/1000);
-        const payload = JSON.stringify({ query: `query { productOfferV2(itemId: ${ids.itemId}, limit: 1) { nodes { productName imageUrl priceMin priceMax commissionRate } } }` });
-        const sig = crypto.createHash('sha256').update(`${APP_ID}${ts}${payload}${SECRET}`).digest('hex');
-        const r = await fetch('https://open-api.affiliate.shopee.com.br/graphql', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Authorization': `SHA256 Credential=${APP_ID}, Timestamp=${ts}, Signature=${sig}` },
-          body: payload,
-          signal: AbortSignal.timeout(12000)
-        });
-        const j = await r.json();
-        apiTried.push({ type: 'itemId only', hasNodes: !!j?.data?.productOfferV2?.nodes?.length });
-        const node = j?.data?.productOfferV2?.nodes?.[0];
-        if (node) product = { name: node.productName, image: node.imageUrl, price: (parseInt(node.priceMin)/100).toString(), priceOld: (parseInt(node.priceMax)/100).toString(), metodo: 'API Oficial itemId' };
-      } catch(e) { apiTried.push({ type: 'itemId only', error: e.message }); }
-    }
+      if (node) {
+        product = { 
+          name: node.productName, 
+          image: node.imageUrl, 
+          price: parsePriceCorrect(node.priceMin), 
+          priceOld: parsePriceCorrect(node.priceMax), 
+          metodo: 'API Oficial' 
+        };
+      }
+    } catch(e) {}
   }
 
-  // Fallback Fly (seu robô que você provou que funciona)
   if (!product && flyData) {
-    const name = flyData.ogTitle || flyData.title;
-    const image = flyData.ogImage || flyData.image_original || flyData.image || flyData.image_proxy;
-    const price = flyData.preco_atual;
-    const priceOld = flyData.preco_antes;
-    if (name || image) {
-      product = { name: name || `Produto ${ids?.itemId||'Shopee'}`, image: image || '', price: price ? String(price) : '', priceOld: priceOld ? String(priceOld) : '', metodo: 'Fly GRU - IP brasileiro' };
-    }
+    product = { 
+      name: flyData.ogTitle || flyData.title || `Produto ${ids?.itemId||'Shopee'}`, 
+      image: flyData.ogImage || flyData.image_original || flyData.image || '', 
+      price: parsePriceCorrect(flyData.preco_atual), 
+      priceOld: parsePriceCorrect(flyData.preco_antes),
+      metodo: 'Fly GRU' 
+    };
   }
 
   if (!product) {
-    product = { name: `Produto Shopee ${ids?.itemId||''}`, image: flyData?.image_original||'', price: '', priceOld: '', metodo: 'Fallback' };
+    product = { name: `Produto ${ids?.itemId||'Shopee'}`, image: '', price: '', priceOld: '', metodo: 'Fallback' };
   }
 
   const categoria = detectarCategoria(product.name);
 
-  // RETORNO COMPATIVEL COM TUDO: formato novo + formato antigo que ia-inject.js espera
   return res.status(200).json({
     ok: true,
-    // Formato novo
     original: shortUrl,
     expanded,
     affiliateLink: shortUrl,
     product,
-    // Formato antigo que ia-inject.js V9 esperava
     nome: product.name,
     imagem: product.image,
     preco: product.price,
     precoAntigo: product.priceOld,
     loja: 'Shopee',
     categoria,
-    metodo: product.metodo || 'V11 DEFINITIVO',
+    metodo: product.metodo,
     temCredencialOficial: true,
-    precisaResolverNoCliente: false,
-    debug: {
-      version: 'V11 DEFINITIVO - COMPATIVEL',
-      expanded,
-      ids,
-      flyData: flyData ? { title: flyData.title?.slice(0,80), hasImage: !!flyData.image_original, shop_id: flyData.shop_id, item_id: flyData.item_id, preco: flyData.preco_atual } : null,
-      flyError,
-      apiTried,
-      productSource: product.metodo
-    }
+    debug: { version: 'V12 PRECO CORRETO', expanded, ids }
   });
 }
