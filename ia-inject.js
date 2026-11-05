@@ -1,139 +1,102 @@
-// ia-inject.js V21 FIX SALVAR + PREÇO + FOTO LEVE - Corrige botão Salvando travado e preço 5,14
+// ia-inject.js V23 FINAL para index_7.html - NÃO muda super leve, só preenche e dispara seu compressor original
 (function(){
   const API = '/api/shopee-direct';
-  let abortCtrl = null;
 
-  function getInputs(){
-    const all = Array.from(document.querySelectorAll('input'));
-    const nome = all.find(i => i.placeholder?.toLowerCase().includes('nome')) || all[0];
-    const preco = all.find(i => i.placeholder === 'Preço' || i.placeholder?.toLowerCase() === 'preço') || all[1];
-    const precoAntigo = all.find(i => i.placeholder?.toLowerCase().includes('antigo')) || all[2];
-    const img = all.find(i => i.placeholder?.toLowerCase().includes('imagem')) || all[3];
-    let link = all.find(i => /s\.shopee|shope\.ee|mercadolivre|amzn\.to|shein|tiktok|meli\.la/i.test(i.value)) || all[4] || all[all.length-1];
-    return { all, nome, preco, precoAntigo, img, link };
-  }
+  function getEl(id){ return document.getElementById(id); }
 
-  function getSalvarBtn(){
-    return Array.from(document.querySelectorAll('button')).find(b=> b.textContent.toLowerCase().includes('salvar') && b.textContent.toLowerCase().includes('notificar') || b.textContent.toLowerCase().includes('salvando'));
-  }
-
-  function ensureButton(){
+  function ensureIAButton(){
     if(document.getElementById('btn-ia-auto')) return;
-    const { link } = getInputs();
-    if(!link) return;
-    if(document.getElementById('btn-ia-auto')) return;
-
+    const linkInput = getEl('f-link');
+    if(!linkInput) return;
+    
     const btn = document.createElement('button');
     btn.id = 'btn-ia-auto';
     btn.type = 'button';
     btn.innerHTML = '🤖 Gerar com IA Automático';
-    btn.style.cssText = 'width:100%;margin:8px 0 12px 0;padding:12px;background:linear-gradient(90deg,#8a2be2,#ff6a00);color:#fff;border:none;border-radius:10px;font-weight:bold;font-size:14px;cursor:pointer;';
+    btn.style.cssText = 'width:100%;margin:8px 0;padding:12px;background:linear-gradient(90deg,#8a2be2,#ff6a00);color:#fff;border:none;border-radius:12px;font-weight:bold;font-size:14px;cursor:pointer;';
     
-    link.parentNode.insertBefore(btn, link.nextSibling);
-    btn.addEventListener('click', gerar);
-    link.addEventListener('paste', ()=> setTimeout(()=>gerar(), 600));
+    linkInput.parentNode.insertBefore(btn, linkInput.nextSibling);
+    btn.addEventListener('click', gerarIA);
+    
+    // Auto ao colar link Shopee
+    linkInput.addEventListener('paste', ()=> setTimeout(gerarIA, 700));
   }
 
-  async function comprimirParaWebpLeve(imageUrl){
-    // Tenta comprimir, se falhar retorna original (não trava)
-    try{
-      // Usa proxy da nossa API pra evitar CORS
-      const proxyUrl = imageUrl.includes('shopee.com.br') ? `${API}?img=${encodeURIComponent(imageUrl)}` : imageUrl;
-      const res = await fetch(proxyUrl);
-      const blob = await res.blob();
-      const bitmap = await createImageBitmap(blob);
-      const canvas = document.createElement('canvas');
-      const max = 600;
-      let w = bitmap.width, h = bitmap.height;
-      if(w>max || h>max){
-        if(w>h){ h = Math.round(h*max/w); w=max; } else { w = Math.round(w*max/h); h=max; }
-      }
-      canvas.width=w; canvas.height=h;
-      canvas.getContext('2d').drawImage(bitmap,0,0,w,h);
-      const webpBlob = await new Promise(r=> canvas.toBlob(r,'image/webp',0.7));
-      return webpBlob;
-    }catch(e){
-      console.warn('Compressão falhou, usando original', e);
-      return null;
+  async function gerarIA(){
+    const linkInput = getEl('f-link');
+    const btn = getEl('btn-ia-auto');
+    if(!linkInput || !linkInput.value.trim()){
+      alert('Cole o link Shopee/ML/Amazon primeiro no campo Link afiliado');
+      return;
     }
-  }
-
-  async function gerar(){
-    const { nome, preco, precoAntigo, img, link } = getInputs();
-    const btn = document.getElementById('btn-ia-auto');
-    if(!link || !link.value.trim()){ alert('Cole o link Shopee'); return; }
-    const url = link.value.trim();
-    if(abortCtrl) abortCtrl.abort();
-    abortCtrl = new AbortController();
-    if(btn){ btn.disabled=true; btn.innerHTML='⏳ Buscando preço certo...'; }
+    const url = linkInput.value.trim();
+    if(btn){ btn.disabled=true; btn.innerHTML='⏳ Resolvendo com resolve-js.js + API...'; }
 
     try{
-      const res = await fetch(`${API}?url=${encodeURIComponent(url)}`, { signal: abortCtrl.signal });
+      const res = await fetch(`${API}?url=${encodeURIComponent(url)}`);
       const data = await res.json();
-      if(!data.ok) throw new Error(data.error);
-      const p = data.product || data;
-      let price = parseFloat(String(p.price||p.preco||'').replace(',','.'));
-      // FIX preço 5,14 pra microondas: se preço < 20 e nome tem microondas, tenta pegar do HTML que veio
-      if(price < 20 && (p.name||'').toLowerCase().includes('micro')){
-        // Vai usar o preco que a V21 já corrigiu no backend
-        price = parseFloat(data.preco||price);
-      }
+      if(!data.ok) throw new Error(data.error||'Falha API');
 
-      if(nome) { nome.value = (p.name||p.nome||data.nome||'').substring(0,120); nome.dispatchEvent(new Event('input',{bubbles:true})); }
-      if(preco) { preco.value = data.preco || p.price || ''; preco.dispatchEvent(new Event('input',{bubbles:true})); }
-      if(precoAntigo) { precoAntigo.value = data.precoAntigo || p.priceOld || (price? (price*1.35).toFixed(2) : ''); precoAntigo.dispatchEvent(new Event('input',{bubbles:true})); }
-      if(img) { img.value = data.imagem || p.image || ''; img.dispatchEvent(new Event('input',{bubbles:true})); img.dispatchEvent(new Event('change',{bubbles:true})); 
-        // Dispara compressão leve em background, sem travar
-        setTimeout(async ()=>{
-          const salvarBtn = getSalvarBtn();
-          if(salvarBtn) salvarBtn.innerHTML = '☁️ Salvando versão leve...';
-          const blob = await comprimirParaWebpLeve(data.imagem);
-          if(blob){
-            console.log('WebP leve pronto', (blob.size/1024).toFixed(1)+'KB');
-            window._ultimoWebpLeve = blob; // Salva pra usar no salvar
-            if(salvarBtn) salvarBtn.innerHTML = '✅ Versão leve pronta! Clique pra salvar';
-            setTimeout(()=>{ if(salvarBtn) salvarBtn.innerHTML='💾 Salvar + 🔔 Notificar todo mundo'; }, 2000);
-          }else{
-            if(salvarBtn) salvarBtn.innerHTML='💾 Salvar + 🔔 Notificar todo mundo (original)';
+      // Preenche campos do seu index_7.html sem mexer no super leve
+      const nomeEl = getEl('f-nome');
+      const precoEl = getEl('f-preco');
+      const precoAntigoEl = getEl('f-preco-antigo');
+      const imgEl = getEl('f-emoji');
+      const lojaEl = getEl('f-loja');
+      const catEl = getEl('f-categoria');
+
+      if(nomeEl){ nomeEl.value = (data.nome||data.product?.name||'').substring(0,120); nomeEl.dispatchEvent(new Event('input',{bubbles:true})); }
+      if(precoEl){ precoEl.value = data.preco||data.product?.price||''; precoEl.dispatchEvent(new Event('input',{bubbles:true})); }
+      if(precoAntigoEl){ precoAntigoEl.value = data.precoAntigo||data.product?.priceOld||''; precoAntigoEl.dispatchEvent(new Event('input',{bubbles:true})); }
+      
+      // IMPORTANTE: preenche imagem e DISPARA seu otimizarAoColar original que faz webp 600px ~40KB + Storage
+      if(imgEl){
+        imgEl.value = data.imagem||data.product?.image||'';
+        imgEl.dispatchEvent(new Event('input',{bubbles:true}));
+        imgEl.dispatchEvent(new Event('change',{bubbles:true}));
+        imgEl.dispatchEvent(new Event('paste',{bubbles:true}));
+        // Força seu compressor que já existe no index
+        if(window.otimizarAoColar) window.otimizarAoColar = window.otimizarAoColar; // mantém original
+        // Dispara manualmente o evento que seu index escuta
+        setTimeout(()=>{
+          const event = new Event('input', {bubbles:true});
+          imgEl.dispatchEvent(event);
+          if(typeof otimizarAoColar === 'function'){
+            try{ otimizarAoColar(imgEl.value); }catch(e){}
           }
-        }, 500);
+          // Fallback: chama direto se tiver função global
+          if(window._otimizar) window._otimizar(imgEl.value);
+        }, 200);
       }
 
-      if(btn) btn.innerHTML = `✅ ${data.loja} • R$ ${data.preco} • ${data.metodo?.substring(0,25)}`;
-      setTimeout(()=>{ if(btn) { btn.innerHTML='🤖 Gerar com IA Automático'; btn.disabled=false; } }, 3000);
+      if(lojaEl){
+        const loja = data.loja||'';
+        const opt = Array.from(lojaEl.options).find(o=> o.text.toLowerCase().includes(loja.toLowerCase().substring(0,4)));
+        if(opt) lojaEl.value = opt.value;
+      }
+      if(catEl && data.categoria){
+        const opt2 = Array.from(catEl.options).find(o=> o.text.toLowerCase().includes(data.categoria.toLowerCase().substring(0,4)));
+        if(opt2) catEl.value = opt2.value;
+      }
+
+      if(btn) btn.innerHTML = `✅ ${data.loja} • R$ ${data.preco} • ${data.metodo?.substring(0,30)}`;
+      setTimeout(()=>{ if(btn){ btn.innerHTML='🤖 Gerar com IA Automático'; btn.disabled=false; } }, 3000);
+
     }catch(e){
-      if(e.name==='AbortError') return;
       console.error(e);
       if(btn){ btn.innerHTML='❌ '+e.message; btn.disabled=false; }
+      setTimeout(()=>{ if(btn) btn.innerHTML='🤖 Gerar com IA Automático'; }, 3000);
+      alert('Erro IA: '+e.message);
     }
   }
 
-  // FIX BOTÃO SALVAR TRAVADO: intercepta e garante que salva mesmo se compressão falhar
-  function patchSalvar(){
-    const salvarBtn = getSalvarBtn();
-    if(!salvarBtn || salvarBtn.dataset.patched) return;
-    salvarBtn.dataset.patched = '1';
-    salvarBtn.addEventListener('click', async (e)=>{
-      // Se travou em "Salvando versão leve...", força destravar após 3s
-      const originalText = salvarBtn.innerHTML;
-      if(originalText.toLowerCase().includes('salvando')){
-        setTimeout(()=>{
-          if(salvarBtn.innerHTML.toLowerCase().includes('salvando')){
-            console.log('Forçando destravar botão salvar');
-            salvarBtn.innerHTML = '💾 Salvar + 🔔 Notificar todo mundo';
-            salvarBtn.disabled = false;
-          }
-        }, 4000);
-      }
-    }, true);
-  }
-
-  const observer = new MutationObserver(()=>{ ensureButton(); patchSalvar(); });
+  // Mantém super leve original intacto, só injeta botão
+  const obs = new MutationObserver(()=> ensureIAButton());
   document.addEventListener('DOMContentLoaded', ()=>{
-    ensureButton(); patchSalvar();
-    observer.observe(document.body, { childList:true, subtree:true });
-    setInterval(()=>{ ensureButton(); patchSalvar(); }, 2000);
+    ensureIAButton();
+    obs.observe(document.body, {childList:true, subtree:true});
+    setInterval(ensureIAButton, 2000);
   });
-  setTimeout(()=>{ ensureButton(); patchSalvar(); observer.observe(document.body, { childList:true, subtree:true }); }, 1000);
-  window.gerarIA = gerar;
+  setTimeout(()=>{ ensureIAButton(); obs.observe(document.body, {childList:true, subtree:true}); }, 1000);
+  window.gerarIA = gerarIA;
 })();
