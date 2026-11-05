@@ -1,8 +1,7 @@
+// superleve.js CORRIGIDO - 100% compativel com Firebase + ADM
+// Mantem seu 20 a 20, webp 600px ~40KB, proxy cf.shopee
 
-// superleve.js - Desempenho Super Leve 600px webp ~40KB - SEPARADO
-// Mantém seu compressor original, com proxy pra cf.shopee não travar
-
-let imagemOtimizadaFinal = null;
+window.imagemOtimizadaFinal = window.imagemOtimizadaFinal || null;
 let otimizandoAuto = false;
 
 async function comprimirAuto(src, maxSize=600, qualidade=0.70){
@@ -41,7 +40,12 @@ async function dataUrlParaBlobAuto(dataUrl){
 }
 
 async function uploadStorageAuto(blob){
-  await ensureStorage();
+  if(window.ensureStorage) await window.ensureStorage();
+  const storage = window.storage;
+  const sRef = window.sRef;
+  const uploadBytes = window.uploadBytes;
+  const getDownloadURL = window.getDownloadURL;
+  if(!storage || !sRef) throw new Error("Firebase Storage ainda nao carregou");
   const nomeArq = 'produtos/'+Date.now()+'_'+Math.random().toString(36).substr(2,5)+'.webp';
   const refSt = sRef(storage, nomeArq);
   await uploadBytes(refSt, blob);
@@ -50,7 +54,7 @@ async function uploadStorageAuto(blob){
 
 async function otimizarAoColar(valor){
   if(otimizandoAuto) return;
-  const v = valor.trim();
+  const v = (valor||'').trim();
   if(!v) return;
   const ehImagem = v.startsWith('http://')||v.startsWith('https://')||v.startsWith('data:image');
   const inputImg = document.getElementById('f-emoji');
@@ -58,7 +62,7 @@ async function otimizarAoColar(valor){
   const prevTag = document.getElementById('preview-img-tag');
   if(!ehImagem) {
     prevBox?.classList.add('hidden');
-    imagemOtimizadaFinal = null;
+    window.imagemOtimizadaFinal = null;
     return;
   }
   if(v.length <= 4) return;
@@ -66,51 +70,50 @@ async function otimizarAoColar(valor){
   const btnSalvar = document.getElementById('f-salvar');
   const txtBtnOriginal = btnSalvar ? btnSalvar.textContent : '';
   try{
-    prevBox.classList.remove('hidden');
+    prevBox?.classList.remove('hidden');
     if(prevTag) prevTag.src = v;
     if(v.startsWith('data:image')){
-      if(btnSalvar){ btnSalvar.textContent = "🗜️ Comprimindo data:image..."; btnSalvar.disabled = true; }
-      const blobOrig = await dataUrlParaBlobAuto(v);
+      if(btnSalvar){ btnSalvar.textContent = "Comprimindo data:image..."; btnSalvar.disabled = true; }
       const blobComp = await comprimirAuto(v, 600, 0.65);
-      if(btnSalvar) btnSalvar.textContent = "☁️ Subindo otimizada...";
+      if(btnSalvar) btnSalvar.textContent = "Subindo otimizada...";
       const urlFinal = await uploadStorageAuto(blobComp);
-      imagemOtimizadaFinal = urlFinal;
+      window.imagemOtimizadaFinal = urlFinal;
       if(inputImg) inputImg.value = urlFinal;
       if(prevTag) prevTag.src = urlFinal;
-      toast("✅ Comprimida pra webp "+(blobComp.size/1024).toFixed(0)+"KB - 95% economia!");
+      if(window.toast) toast("Comprimida pra webp "+(blobComp.size/1024).toFixed(0)+"KB - 95% economia!");
     } else if(v.startsWith('http')){
-      if(btnSalvar){ btnSalvar.textContent = "🗜️ Otimizando link..."; btnSalvar.disabled = true; }
+      if(btnSalvar){ btnSalvar.textContent = "Otimizando link..."; btnSalvar.disabled = true; }
       try{
         const blobComp = await comprimirAuto(v, 600, 0.72);
         const kbComp = (blobComp.size/1024).toFixed(0);
-        if(btnSalvar) btnSalvar.textContent = "☁️ Salvando versão leve...";
+        if(btnSalvar) btnSalvar.textContent = "Salvando versao leve...";
         const urlFinal = await uploadStorageAuto(blobComp);
-        imagemOtimizadaFinal = urlFinal;
+        window.imagemOtimizadaFinal = urlFinal;
         if(inputImg) inputImg.value = urlFinal;
         if(prevTag) prevTag.src = urlFinal;
-        toast("✅ Link convertido pra webp "+kbComp+"KB - não gasta seu 1GB!");
+        if(window.toast) toast("Link convertido pra webp "+kbComp+"KB - nao gasta seu 1GB!");
       }catch(eCors){
         if(prevTag) prevTag.src = v;
-        imagemOtimizadaFinal = v;
-        toast("✅ Link https:// detectado - já é super leve (0,08KB no banco)");
+        window.imagemOtimizadaFinal = v;
+        if(window.toast) toast("Link https detectado - ja e super leve (0,08KB no banco)");
       }
     }
   }catch(err){
-    toast("Erro ao otimizar, mas pode salvar que já é leve");
-    imagemOtimizadaFinal = v;
+    console.error(err);
+    if(window.toast) toast("Erro ao otimizar, mas pode salvar que ja e leve");
+    window.imagemOtimizadaFinal = v;
   }finally{
     otimizandoAuto = false;
-    if(btnSalvar){ btnSalvar.textContent = txtBtnOriginal || "Salvar + 🔔 Notificar todo mundo"; btnSalvar.disabled = false; }
+    if(btnSalvar){ btnSalvar.textContent = txtBtnOriginal || "Salvar + Notificar todo mundo"; btnSalvar.disabled = false; }
   }
 }
 
-// Eventos da imagem - separados aqui
 document.addEventListener('DOMContentLoaded', ()=>{
   const inputImg = document.getElementById('f-emoji');
   if(!inputImg) return;
   inputImg.addEventListener('paste', (e)=>{ setTimeout(()=>{ otimizarAoColar(e.target.value); }, 100); });
   inputImg.addEventListener('change', (e)=> otimizarAoColar(e.target.value));
-  inputImg.addEventListener('blur', (e)=> { if(e.target.value.trim().startsWith('http') && !imagemOtimizadaFinal) otimizarAoColar(e.target.value); });
+  inputImg.addEventListener('blur', (e)=> { if(e.target.value.trim().startsWith('http') && !window.imagemOtimizadaFinal) otimizarAoColar(e.target.value); });
   inputImg.addEventListener('input', (e)=>{
     const v = e.target.value.trim();
     let emojiDiv = document.getElementById('preview-emoji');
@@ -132,5 +135,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
   });
 });
 
-window.imagemOtimizadaFinal = imagemOtimizadaFinal;
 window.otimizarAoColar = otimizarAoColar;
+window.comprimirAuto = comprimirAuto;
+console.log("superleve.js corrigido carregado - 20 a 20 ativo");
