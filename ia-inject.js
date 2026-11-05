@@ -1,4 +1,4 @@
-// ia-inject.js V7 FIX - corrige bug dados.debug.join
+// ia-inject.js V9 - OFICIAL + CLIENTE - resolve s.shopee no celular e usa API oficial no servidor
 (function(){
   function detectarLojaIA(url){
     const u=(url||'').toLowerCase();
@@ -28,7 +28,7 @@
   function initIA(){
     const inputLink=document.getElementById('f-link');
     const btnSalvar=document.getElementById('f-salvar');
-    if(!inputLink||document.getElementById('btn-ia-scrape-v7')) return;
+    if(!inputLink||document.getElementById('btn-ia-scrape-v9')) return;
     
     const wrapper=document.createElement('div');
     wrapper.style.position='relative';
@@ -36,12 +36,12 @@
     inputLink.parentNode.insertBefore(wrapper,inputLink);
     wrapper.appendChild(inputLink);
     inputLink.style.paddingRight='110px';
-    inputLink.placeholder='Cole link CURTO do app Shopee - IA oficial';
+    inputLink.placeholder='Cole link CURTO do app - IA Oficial';
     
     const btn=document.createElement('button');
-    btn.id='btn-ia-scrape-v7';
+    btn.id='btn-ia-scrape-v9';
     btn.type='button';
-    btn.textContent='🤖 IA';
+    btn.textContent='🤖 IA Oficial';
     btn.style.position='absolute';
     btn.style.right='4px';
     btn.style.top='4px';
@@ -57,7 +57,7 @@
     wrapper.appendChild(btn);
     
     const status=document.createElement('div');
-    status.id='ia-status-v7';
+    status.id='ia-status-v9';
     status.style.display='none';
     status.style.marginBottom='8px';
     status.style.fontSize='11px';
@@ -69,7 +69,31 @@
       if(!d) return '';
       if(Array.isArray(d)) return d.join(' | ');
       if(typeof d === 'string') return d;
-      try{ return JSON.stringify(d).substring(0,200); }catch(e){ return String(d).substring(0,200); }
+      try{ return JSON.stringify(d).substring(0,300); }catch(e){ return String(d).substring(0,300); }
+    }
+
+    async function resolverShortNoCliente(shortUrl){
+      const proxies = [
+        `https://corsproxy.io/?${encodeURIComponent(shortUrl)}`,
+        `https://api.allorigins.win/raw?url=${encodeURIComponent(shortUrl)}`,
+        `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(shortUrl)}`,
+        `https://thingproxy.freeboard.io/fetch/${shortUrl}`,
+        `https://proxy.cors.sh/${shortUrl}`
+      ];
+      for(const pUrl of proxies){
+        try{
+          const r = await fetch(pUrl, { signal: AbortSignal.timeout(10000) });
+          const txt = await r.text();
+          const m = txt.match(/https:\/\/shopee\.com\.br\/[^"'\s]+-i\.(\d+)\.(\d+)/i);
+          if(m) return { url: m[0], html: txt, proxy: pUrl };
+          if(r.url && r.url.includes('-i.') && r.url.includes('shopee.com.br')) return { url: r.url, html: txt, proxy: pUrl };
+        }catch(e){}
+      }
+      try{
+        const r = await fetch(shortUrl, { redirect: 'follow' });
+        if(r.url.includes('-i.')) return { url: r.url, html: '', proxy: 'direct' };
+      }catch(e){}
+      return { url: shortUrl, html: '', proxy: 'none' };
     }
 
     async function scrapeComIA(urlAfiliado){
@@ -79,111 +103,99 @@
       const txtSalvarOrig=btnSalvar?btnSalvar.textContent:'Salvar + 🔔 Notificar todo mundo';
       try{
         btn.textContent='⏳ Oficial...'; btn.disabled=true;
-        if(btnSalvar){ btnSalvar.textContent='🤖 Shopee Oficial API...'; btnSalvar.disabled=true; }
+        if(btnSalvar){ btnSalvar.textContent='🔗 Usando API Oficial Shopee...'; btnSalvar.disabled=true; }
         status.style.display='block';
-        status.textContent='🔗 Resolvendo link curto via API oficial Shopee...';
+        status.textContent='🔑 Usando sua API Oficial AppID 1834706...';
         status.style.background='#eff6ff';
         status.style.border='1px solid #bfdbfe';
         status.style.color='#1e40af';
         
-        let dados=null;
-        
-        // CHAMA API OFICIAL QUE VOCÊ CONFIGUROU
-        try{
-          const controller=new AbortController();
-          const timeout=setTimeout(()=>controller.abort(),25000);
-          // Usa nova rota oficial
-          const endpoint = link.includes('shopee') ? '/api/shopee-direct' : '/api/scrape';
-          const r=await fetch(endpoint+'?url='+encodeURIComponent(link),{signal:controller.signal});
-          clearTimeout(timeout);
-          if(r.ok){ 
-            dados=await r.json(); 
-            console.log('Dados API oficial:', dados);
-          } else {
-            const txt=await r.text();
-            console.log('Erro API:', txt);
-            dados={ error: 'HTTP '+r.status+' '+txt.substring(0,100), debug: txt.substring(0,200) };
+        let finalUrl = link;
+
+        if(link.includes('s.shopee.com.br') || link.includes('shope.ee')){
+          status.textContent='📱 Passo 1/2: Resolvendo link curto no seu celular...';
+          const resolved = await resolverShortNoCliente(link);
+          finalUrl = resolved.url;
+          status.textContent=`🔗 Resolvido: ${finalUrl.substring(0,60)}... via ${resolved.proxy.substring(0,20)}`;
+          if(finalUrl.includes('s.shopee.com.br')){
+            status.textContent='❌ Celular não resolveu, tentando servidor...';
           }
-        }catch(e){ 
-          console.log('api oficial falhou',e);
-          dados={ error: e.message, debug: e.message };
-          // Fallback pra antiga
-          try{
-            const r2=await fetch('/api/scrape?url='+encodeURIComponent(link));
-            if(r2.ok) dados=await r2.json();
-          }catch(e2){}
         }
+
+        status.textContent='🔑 Passo 2/2: Chamando API Oficial Shopee com seu AppID...';
         
-        if(!dados) dados={nome:'',imagem:'',preco:'',loja:detectarLojaIA(link),categoria:'Geral'};
-        
-        // Preenche campos
-        if(dados.nome) {
-          const el=document.getElementById('f-nome');
-          if(el) el.value=dados.nome;
+        let dados=null;
+        try{
+          const r=await fetch('/api/shopee-direct?url='+encodeURIComponent(finalUrl||link),{signal:AbortSignal.timeout(20000)});
+          if(r.ok) dados=await r.json();
+          else {
+            const t=await r.text();
+            dados={error:`HTTP ${r.status} ${t.substring(0,100)}`, debug:[]};
+          }
+        }catch(e){ dados={error:e.message, debug:[]}; }
+
+        if(!dados) dados={nome:'',imagem:'',preco:''};
+
+        // Se servidor mandou resolver no cliente e já temos finalUrl longo, tenta PDP no cliente como fallback
+        if((!dados.nome || !dados.imagem) && dados.precisaResolverNoCliente && finalUrl.includes('-i.')){
+          status.textContent='📦 Servidor bloqueado, buscando PDP direto no seu celular...';
+          const m = finalUrl.match(/-i\.(\d+)\.(\d+)/);
+          if(m){
+            try{
+              const shopId=m[1], itemId=m[2];
+              const pdpUrl=`https://shopee.com.br/api/v4/pdp/get_pc?shopid=${shopId}&itemid=${itemId}`;
+              const rr=await fetch(pdpUrl, { headers:{'Accept':'application/json'} });
+              const jj=await rr.json();
+              if(jj?.data?.name){
+                dados.nome=jj.data.name;
+                if(jj.data.images?.[0]){
+                  let imgId=jj.data.images[0];
+                  dados.imagem=imgId.startsWith('http')?imgId:`https://down-br.img.susercontent.com/file/${imgId}_800x800`;
+                }
+                if(jj.data.price_min) dados.preco=(jj.data.price_min/100000).toFixed(2);
+                if(jj.data.price_before_discount>jj.data.price_min) dados.precoAntigo=(jj.data.price_before_discount/100000).toFixed(2);
+                dados.metodo='PDP Cliente (fallback)';
+              }
+            }catch(e){}
+          }
         }
-        if(dados.preco) {
-          const el=document.getElementById('f-preco');
-          if(el) el.value=dados.preco;
-        }
-        if(dados.precoAntigo){
-          const el=document.getElementById('f-preco-antigo');
-          if(el) el.value=dados.precoAntigo;
-        }
+
+        if(dados.nome) document.getElementById('f-nome').value=dados.nome;
+        if(dados.preco) document.getElementById('f-preco').value=dados.preco;
+        if(dados.precoAntigo) document.getElementById('f-preco-antigo').value=dados.precoAntigo;
         if(dados.imagem){
           const inpImg=document.getElementById('f-emoji');
           if(inpImg){ 
             inpImg.value=dados.imagem; 
-            if(window.otimizarAoColar){
-              try{ await window.otimizarAoColar(dados.imagem); }catch(e){ 
-                const prev=document.getElementById('preview-img-tag');
-                const prevBox=document.getElementById('preview-img');
-                if(prev){ prev.src=dados.imagem; if(prevBox) prevBox.classList.remove('hidden'); }
-              }
-            } else {
-              const prev=document.getElementById('preview-img-tag');
-              const prevBox=document.getElementById('preview-img');
-              if(prev){ prev.src=dados.imagem; if(prevBox) prevBox.classList.remove('hidden'); }
-            }
+            if(window.otimizarAoColar){ try{ await window.otimizarAoColar(dados.imagem); }catch(e){} }
           }
         }
-        
-        const lojaFinal=dados.loja||detectarLojaIA(link);
-        const catFinal=dados.categoria||detectarCategoriaIA(dados.nome||'');
-        const elLoja=document.getElementById('f-loja');
-        const elCat=document.getElementById('f-categoria');
-        if(elLoja) elLoja.value=lojaFinal;
-        if(elCat && catFinal!=='Geral') elCat.value=catFinal;
-        
-        if(dados.imagem && dados.nome && !dados.nome.toLowerCase().includes('shopee brasil')){
-          status.textContent='✅ IA OFICIAL: '+(dados.nome||'produto').substring(0,50)+' • '+lojaFinal+' • Imagem 0MB OK • Método: '+(dados.metodo||'PDP');
+        document.getElementById('f-loja').value=dados.loja||'Shopee';
+        if(dados.categoria && dados.categoria!=='Geral') document.getElementById('f-categoria').value=dados.categoria;
+        else if(dados.nome) document.getElementById('f-categoria').value=detectarCategoriaIA(dados.nome);
+
+        if(dados.imagem && dados.nome){
+          const oficial = dados.temCredencialOficial ? '🔑 API OFICIAL' : '📱 Celular';
+          status.textContent=`✅ ${oficial}: ${dados.nome.substring(0,50)} • ${dados.metodo||'OK'} • Imagem OK`;
           status.style.background='#f0fdf4';
           status.style.borderColor='#bbf7d0';
           status.style.color='#166534';
-        } else if(dados.nome){
-          status.textContent='⚠️ IA pegou nome mas Shopee bloqueou imagem. Nome: '+(dados.nome||'ok')+' - Debug: '+formatDebug(dados.debug).substring(0,150);
-          status.style.background='#fef9c3';
-          status.style.borderColor='#fde68a';
-          status.style.color='#854d0e';
         } else {
-          const debugTxt = formatDebug(dados.debug);
-          status.textContent='❌ Shopee bloqueou. Erro: '+(dados.error||'desconhecido')+' - Debug: '+debugTxt.substring(0,200);
+          status.textContent=`❌ Erro: ${dados.error||'não achou'} | Debug: ${formatDebug(dados.debug).substring(0,250)} | Credencial: ${dados.temCredencialOficial?'OK':'FALTA ENV'}`;
           status.style.background='#fee2e2';
           status.style.borderColor='#fecaca';
           status.style.color='#991b1b';
-          status.style.border='1px solid #fecaca';
         }
-        
         setTimeout(()=>{ if(status) status.style.display='none'; },15000);
         
       }catch(err){
         status.style.display='block';
-        status.textContent='❌ Erro IA oficial: '+err.message;
+        status.textContent='❌ Erro IA: '+err.message;
         status.style.background='#fee2e2';
         status.style.border='1px solid #fecaca';
         status.style.color='#991b1b';
-        console.error(err);
       }finally{ 
-        btn.textContent='🤖 IA'; 
+        btn.textContent='🤖 IA Oficial'; 
         btn.disabled=false;
         if(btnSalvar){ btnSalvar.textContent=txtSalvarOrig; btnSalvar.disabled=false; }
       }
