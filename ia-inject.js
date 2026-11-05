@@ -1,4 +1,4 @@
-// ia-inject.js V3 - COM API SHOPEE OFICIAL + fallback scrape - não trava
+// ia-inject.js V6 - LINK CURTO OBRIGATÓRIO - resolve no navegador (não na Vercel) pra furar bloqueio
 (function(){
   function detectarLojaIA(url){
     const u=(url||'').toLowerCase();
@@ -24,6 +24,73 @@
     }
     return 'Geral';
   }
+
+  // RESOLVE LINK CURTO NO NAVEGADOR DO CLIENTE (IP residencial, não bloqueado)
+  async function resolverLinkCurtoNoNavegador(shortUrl){
+    const url = shortUrl.trim();
+    if (!url.includes('s.shopee.com.br') && !url.includes('shope.ee')) return url;
+    
+    // Tenta 3 proxies diferentes no navegador
+    const proxies = [
+      'https://api.allorigins.win/get?url=',
+      'https://api.codetabs.com/v1/proxy?quest=',
+      'https://corsproxy.io/?'
+    ];
+    
+    for (const proxyBase of proxies) {
+      try {
+        const controller = new AbortController();
+        const t = setTimeout(()=>controller.abort(), 8000);
+        const r = await fetch(proxyBase + encodeURIComponent(url), { signal: controller.signal });
+        clearTimeout(t);
+        let html = '';
+        if (proxyBase.includes('allorigins')) {
+          const j = await r.json();
+          html = j.contents || '';
+        } else {
+          html = await r.text();
+        }
+        if (!html) continue;
+        
+        // Procura URL real da Shopee no HTML
+        // 1. Procura -i.SHOPID.ITEMID
+        let m = html.match(/https:\/\/shopee\.com\.br\/[^"'\s]+-i\.(\d+)\.(\d+)[^"'\s]*/i);
+        if (m) {
+          let found = m[0].replace(/&amp;/g,'&');
+          try { found = decodeURIComponent(found); } catch(e){}
+          return found;
+        }
+        // 2. Procura shopee.com.br genérico
+        m = html.match(/https:\/\/shopee\.com\.br\/[^\s"'<>]+\/[^"'\s]*/i);
+        if (m) return m[0];
+        // 3. Procura deo.shopeemobile e depois dentro dele
+        m = html.match(/https:\/\/deo\.shopeemobile\.com\/[^"'\s]+/i);
+        if (m) {
+          // tenta resolver o deo também
+          try {
+            const r2 = await fetch('https://api.allorigins.win/get?url=' + encodeURIComponent(m[0]));
+            const j2 = await r2.json();
+            const html2 = j2.contents || '';
+            const m2 = html2.match(/https:\/\/shopee\.com\.br\/[^"'\s]+-i\.\d+\.\d+/i);
+            if (m2) return m2[0];
+          } catch(e){}
+        }
+        // 4. Se achou HTML com shopee.com.br no texto, tenta extrair
+        const all = html.match(/shopee\.com\.br\/[^"'\s]+/gi);
+        if (all && all.length > 0) {
+          for (const u of all) {
+            if (u.includes('-i.') && !u.includes('deo.shopeemobile')) {
+              return 'https://' + u.replace(/^https?:\/\//,'').replace(/&amp;/g,'&');
+            }
+          }
+        }
+      } catch(e) {
+        console.log('proxy falhou', proxyBase, e);
+      }
+    }
+    return url; // se não resolveu, manda original mesmo
+  }
+
   function initIA(){
     const inputLink=document.getElementById('f-link');
     const btnSalvar=document.getElementById('f-salvar');
@@ -35,7 +102,7 @@
     inputLink.parentNode.insertBefore(wrapper,inputLink);
     wrapper.appendChild(inputLink);
     inputLink.style.paddingRight='110px';
-    inputLink.placeholder='Cole link afiliado - IA auto com sua API';
+    inputLink.placeholder='Cole link CURTO Shopee - IA resolve';
     
     const btn=document.createElement('button');
     btn.id='btn-ia-scrape';
@@ -68,57 +135,56 @@
     wrapper.parentNode.insertBefore(status,wrapper.nextSibling);
 
     async function scrapeComIA(urlAfiliado){
-      const link=(urlAfiliado||'').trim();
+      let link=(urlAfiliado||'').trim();
       if(!link.startsWith('http')){ alert('Cole um link https://'); return; }
       const txtOrig=btn.textContent;
       const txtSalvarOrig=btnSalvar?btnSalvar.textContent:'Salvar + 🔔 Notificar todo mundo';
       try{
-        btn.textContent='⏳ Lendo...'; btn.disabled=true;
-        if(btnSalvar){ btnSalvar.textContent='🤖 IA com API Shopee...'; btnSalvar.disabled=true; }
-        if(window.toast) window.toast('🤖 IA lendo '+detectarLojaIA(link)+' via API oficial...');
+        btn.textContent='⏳ Resolvendo...'; btn.disabled=true;
+        if(btnSalvar){ btnSalvar.textContent='🔗 Resolvendo link curto...'; btnSalvar.disabled=true; }
+        if(window.toast) window.toast('🔗 Resolvendo link curto Shopee...');
+        
+        let urlParaApi = link;
+        
+        // SE FOR LINK CURTO, RESOLVE NO NAVEGADOR PRIMEIRO
+        if (link.includes('s.shopee.com.br') || link.includes('shope.ee')) {
+          btn.textContent='🔗 Link curto...';
+          if(btnSalvar) btnSalvar.textContent='🔗 Decodificando s.shopee...';
+          const resolvido = await resolverLinkCurtoNoNavegador(link);
+          if (resolvido && resolvido !== link) {
+            urlParaApi = resolvido;
+            status.style.display='block';
+            status.textContent='🔗 Link curto resolvido: ' + resolvido.substring(0,60) + '... buscando dados...';
+            status.style.background='#eff6ff';
+            status.style.borderColor='#bfdbfe';
+            status.style.color='#1e40af';
+            console.log('Link curto resolvido:', link, '->', resolvido);
+          } else {
+            console.log('Não conseguiu resolver link curto, mandando original pra API V5');
+          }
+        }
+        
+        btn.textContent='⏳ Lendo...';
+        if(btnSalvar) btnSalvar.textContent='🤖 IA lendo Shopee...';
         
         let dados=null;
         
-        // TENTATIVA 1: API OFICIAL SHOPEE (se você configurou SHOPEE_APP_ID na Vercel)
-        if(link.toLowerCase().includes('shopee') || link.includes('shope.ee')){
-          try{
-            const ctrl=new AbortController();
-            const to=setTimeout(()=>ctrl.abort(),15000);
-            const r=await fetch('/api/shopee-affiliate?url='+encodeURIComponent(link),{signal:ctrl.signal});
-            clearTimeout(to);
-            if(r.ok){
-              const j=await r.json();
-              if(j.nome || j.imagem || j.fonte==='shopee_affiliate_api'){
-                dados=j;
-                console.log('Shopee API oficial OK',j);
-              }
-            }
-          }catch(e){ console.log('Shopee API não configurada ou falhou, vai pro scrape',e); }
-        }
-
-        // TENTATIVA 2: /api/scrape V2 (funciona para todos)
-        if(!dados || !dados.nome){
-          try{
-            const controller=new AbortController();
-            const timeout=setTimeout(()=>controller.abort(),15000);
-            const r=await fetch('/api/scrape?url='+encodeURIComponent(link),{signal:controller.signal});
-            clearTimeout(timeout);
-            if(r.ok){ 
-              const j=await r.json();
-              if(!j.error) dados={...dados, ...j};
-              else if(!dados) dados=j;
-            }
-          }catch(e){ console.log('scrape api falhou',e); }
-        }
+        // CHAMA API V5 COM URL RESOLVIDA
+        try{
+          const controller=new AbortController();
+          const timeout=setTimeout(()=>controller.abort(),20000);
+          const r=await fetch('/api/scrape?url='+encodeURIComponent(urlParaApi),{signal:controller.signal});
+          clearTimeout(timeout);
+          if(r.ok){ 
+            dados=await r.json(); 
+          }
+        }catch(e){ console.log('api falhou',e); }
         
-        // TENTATIVA 3: allorigins direto
-        if(!dados || !dados.nome){
+        // Fallback allorigins direto se API falhou
+        if(!dados || (!dados.nome && !dados.imagem)){
           try{
-            const proxy='https://api.allorigins.win/get?url='+encodeURIComponent(link);
-            const controller2=new AbortController();
-            const timeout2=setTimeout(()=>controller2.abort(),12000);
-            const rp=await fetch(proxy,{signal:controller2.signal});
-            clearTimeout(timeout2);
+            const proxy='https://api.allorigins.win/get?url='+encodeURIComponent(urlParaApi);
+            const rp=await fetch(proxy);
             const jp=await rp.json(); 
             const html=jp.contents||'';
             if(html){
@@ -131,10 +197,12 @@
                 return '';
               };
               let nome=getMeta('og:title')||(html.match(/<title[^>]*>([^<]+)<\/title>/i)?.[1]||'');
-              nome=nome.replace(/\| Shopee.*|\| Amazon.*/i,'').trim().substring(0,100);
+              nome=nome.replace(/\| Shopee.*/i,'').trim().substring(0,150);
+              if(nome.toLowerCase().includes('shopee brasil')) nome='';
               let imagem=getMeta('og:image')||'';
+              if(imagem.includes('shopee-logo') || imagem.includes('deo.shopeemobile')) imagem='';
               if(!imagem){
-                const m2=html.match(/https:\/\/[^"']*susercontent[^"']*\.jpg/i) || html.match(/https:\/\/[^"']*down-br[^"']*\.jpg/i);
+                const m2=html.match(/https:\/\/down-br[^"'\s]+\.(?:jpg|png)/i);
                 if(m2) imagem=m2[0];
               }
               dados=dados||{};
@@ -148,6 +216,7 @@
         
         if(!dados) dados={nome:'',imagem:'',preco:'',loja:detectarLojaIA(link),categoria:'Geral'};
         
+        // Preenche
         if(dados.nome) {
           const el=document.getElementById('f-nome');
           if(el) el.value=dados.nome;
@@ -155,6 +224,10 @@
         if(dados.preco) {
           const el=document.getElementById('f-preco');
           if(el) el.value=dados.preco;
+        }
+        if(dados.precoAntigo){
+          const el=document.getElementById('f-preco-antigo');
+          if(el) el.value=dados.precoAntigo;
         }
         if(dados.imagem){
           const inpImg=document.getElementById('f-emoji');
@@ -182,31 +255,33 @@
         if(elCat && catFinal!=='Geral') elCat.value=catFinal;
         
         status.style.display='block';
-        const isApiOficial = dados.fonte==='shopee_affiliate_api' || dados.superLeve;
-        if(dados.imagem){
-          status.textContent=(isApiOficial?'✅ API SHOPEE OFICIAL: ':'✅ IA: ')+(dados.nome||'produto')+' • '+lojaFinal+' • 0MB';
+        if(dados.imagem && dados.nome && !dados.nome.toLowerCase().includes('shopee brasil')){
+          status.textContent='✅ IA (link curto): '+(dados.nome||'produto').substring(0,50)+' • '+lojaFinal+' • 0MB';
           status.style.background='#f0fdf4';
           status.style.borderColor='#bbf7d0';
           status.style.color='#166534';
-        } else {
-          status.textContent='⚠️ IA pegou nome mas bloqueou imagem. Cole imagem manual. Nome: '+(dados.nome||'ok');
+        } else if(dados.nome){
+          status.textContent='⚠️ IA pegou nome mas Shopee bloqueou imagem. Cole imagem manual. Nome: '+(dados.nome||'ok');
           status.style.background='#fef9c3';
           status.style.borderColor='#fde68a';
           status.style.color='#854d0e';
+        } else {
+          status.textContent='❌ Shopee bloqueou link curto. Tente: abra o link curto no navegador, copie o link GRANDE shopee.com.br/...-i.123... e cole aqui. Ou aguarde 5s e tente de novo.';
+          status.style.background='#fee2e2';
+          status.style.borderColor='#fecaca';
+          status.style.color='#991b1b';
         }
         
-        if(window.toast) window.toast(dados.imagem?(isApiOficial?'✅ API Oficial com imagem 0MB!':'✅ IA com imagem 0MB!'):'⚠️ Cole imagem manual');
+        if(window.toast) window.toast(dados.imagem?'✅ IA link curto OK com imagem!':'⚠️ Link curto bloqueado - tente link grande');
         
-        setTimeout(()=>{ if(status) status.style.display='none'; },8000);
+        setTimeout(()=>{ if(status) status.style.display='none'; },10000);
         
       }catch(err){
         status.style.display='block';
-        status.textContent='❌ Erro IA: '+err.message+' - Preenchi loja: '+detectarLojaIA(link);
+        status.textContent='❌ Erro IA link curto: '+err.message;
         status.style.background='#fee2e2';
         status.style.borderColor='#fecaca';
         status.style.color='#991b1b';
-        const elLoja=document.getElementById('f-loja');
-        if(elLoja) elLoja.value=detectarLojaIA(link);
       }finally{ 
         btn.textContent='🤖 IA'; 
         btn.disabled=false;
@@ -214,12 +289,12 @@
       }
     }
     
-    btn.addEventListener('click',()=>{ const v=inputLink.value.trim(); if(v) scrapeComIA(v); else alert('Cole o link afiliado primeiro'); });
+    btn.addEventListener('click',()=>{ const v=inputLink.value.trim(); if(v) scrapeComIA(v); else alert('Cole o link afiliado curto primeiro'); });
     inputLink.addEventListener('paste',()=>{ 
       setTimeout(()=>{ 
         const v=inputLink.value.trim(); 
         if(v&&v.startsWith('http')&&v.length>15) scrapeComIA(v); 
-      },400); 
+      },600); 
     });
     
     window.scrapeComIA=scrapeComIA;
