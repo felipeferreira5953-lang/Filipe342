@@ -170,20 +170,18 @@ body > *:first-child{
 </style>
 
 <style id="textura-pro-v3">
-/* TEXTURA RESTAURADA - MAIS VISÍVEL */
 body{
   background-color:#faf9f7 !important;
   background-image:
-    radial-gradient(at 20% 15%, rgba(255,107,43,0.12) 0%, transparent 50%),
-    radial-gradient(at 85% 85%, rgba(0,0,0,0.06) 0%, transparent 45%),
-    url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E") !important;
+    radial-gradient(at 20% 15%, rgba(255,107,43,0.07) 0%, transparent 50%),
+    radial-gradient(at 85% 85%, rgba(0,0,0,0.04) 0%, transparent 45%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
 }
 main{
-  background:#ffffff !important;
+  background:#fff !important;
   background-image:
-    radial-gradient(at 50% 0%, rgba(255,107,43,0.04) 0%, transparent 60%),
-    radial-gradient(at 0% 100%, rgba(0,0,0,0.03) 0%, transparent 50%),
-    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E") !important;
+    radial-gradient(at 50% 0%, rgba(0,0,0,0.015) 0%, transparent 60%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E") !important;
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.8), 0 -1px 0 rgba(0,0,0,0.03);
 }
 .cat{
@@ -250,7 +248,7 @@ header{
       <span id="tag-loja" class="hidden">MOBILE</span><br>
     </div><br>
     <div class="flex items-center gap-2 ml-auto"><br>
-      <button id="btn-cliente" class="h-8 px-3 rounded-full bg-white border border-zinc-200 flex items-center gap-1.5 font-bold text-[12px] text-black shadow-sm"><br>
+      <button id="btn-cliente" class="h-8 px-3 rounded-full bg-white border border-zinc-200 flex items-center gap-1.5 font-bold text-[12px] text-black shadow-sm animate-pulse"><br>
       <span id="btn-cliente-icon" class="w-5 h-5 rounded-full bg-black text-white grid place-items-center text-[10px] font-black">👤</span><br>
       <span id="btn-cliente-text">Seu nome</span><br>
     </button><br>
@@ -337,8 +335,10 @@ header{
   </p></div><br>
 </main></p>
 
-<div id="welcome-popup" class="fixed top-[16px] left-1/2 -translate-x-1/2 z-[90] bg-zinc-900 text-white px-5 py-3.5 rounded-[16px] shadow-2xl max-w-[90%] text-center border border-zinc-800 hidden">
-  <p id="welcome-text" class="text-[13px] font-semibold leading-tight tracking-tight">Bem-vindo aos Achadinhos</p><p class="text-[11px] text-white/60 mt-1 font-medium">Seleção em tempo real</p></div>
+<div id="welcome-popup" class="fixed top-[16px] left-1/2 -translate-x-1/2 z-[90] bg-black text-white px-6 py-4 rounded-[20px] shadow-2xl max-w-[90%] text-center border border-zinc-800">
+  <p id="welcome-text" class="text-[14px] font-black leading-tight">Bem-vindo aos Achadinhos! 🛒🔥
+  </p><p class="text-[11px] text-white/60 mt-1 font-medium">Os melhores achados em tempo real
+</p></div>
 <div id="toast" class="fixed bottom-[20px] left-1/2 -translate-x-1/2 bg-black text-white px-5 py-3 rounded-full text-[13px] font-bold shadow-2xl hidden z-[60] max-w-[90%] text-center"></div>
 
 <div id="modal-sininho" class="fixed inset-0 z-[80] bg-black/60 hidden">
@@ -520,9 +520,9 @@ const Ev=[
 {id:"18",nome:"Boné Aba Reta Original",precoNovo:39.9,loja:"Shopee",emoji:"🧢",categoria:"Bonés",affiliateLink:"https://shopee.com.br"},
 {id:"19",nome:"Relógio Masculino Esportivo Prova D'água",precoNovo:79.9,precoAntigo:149.9,loja:"Amazon",emoji:"⌚",categoria:"Acessórios",affiliateLink:"https://amazon.com.br"}
 ];
-let produtos=[...Ev]; let filtroCat="Todas"; let busca=""; let limiteVisivel=20;
+let produtos=[...Ev]; let filtroCat="Todas"; let busca="";
 function toast(m){const el=document.getElementById('toast'); if(!el) return; el.textContent=m; el.classList.remove('hidden'); setTimeout(()=>el.classList.add('hidden'),3000);}
-function mostrarBoasVindas(){const popup=document.getElementById('welcome-popup');const txt=document.getElementById('welcome-text');const sub=popup?.querySelector('p:nth-child(2)');if(!popup||!txt)return;const nome=localStorage.getItem('cliente_nome');if(nome&&nome.trim()){const primeiro=nome.trim().split(' ')[0];txt.textContent=`Olá, ${primeiro}`;if(sub)sub.textContent=`Bem-vindo de volta`;}else{txt.textContent=`Bem-vindo aos Achadinhos`;if(sub)sub.textContent=`Seleção em tempo real`;}popup.classList.remove('hidden');setTimeout(()=>{popup.classList.add('hidden');},4000);}
+function mostrarBoasVindas(){const popup=document.getElementById('welcome-popup');const txt=document.getElementById('welcome-text');if(!popup||!txt)return;const nome=localStorage.getItem('cliente_nome');if(nome&&nome.trim()){const primeiro=nome.trim().split(' ')[0];txt.innerHTML=`Olá, ${primeiro}! 👋 Bem-vinda de volta!`;}else{txt.innerHTML=`Bem-vindo aos Achadinhos! 🛒🔥`;}popup.classList.remove('hidden');setTimeout(()=>{popup.classList.add('hidden');},5000);}
 window.addEventListener('load',()=>{setTimeout(mostrarBoasVindas,800);});
 function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
 function render(){
@@ -584,7 +584,7 @@ function render(){
   } else {
     if(emptyState) emptyState.classList.add('hidden');
   }
-  grid.innerHTML=lista.slice(0,limiteVisivel).map(p=>{
+  grid.innerHTML=lista.map(p=>{
     const isImgUrl = p.imagemUrl && (p.imagemUrl.startsWith('http') || p.imagemUrl.startsWith('data:image'));
     const img = isImgUrl ? '<img src="'+p.imagemUrl+'" class="w-full h-full object-cover" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'grid\'"><div class=\'w-full h-full grid place-items-center text-[42px] hidden\'>'+esc(p.emoji||'🎁')+'</div>' : '<span class="text-[42px]">'+esc(p.emoji||'🎁')+'</span>';
     const off=p.precoAntigo?'<div class="absolute top-2 left-2 bg-[#ff6b2b] text-white text-[10px] font-black px-2 py-1 rounded-full">-'+Math.round((1-p.precoNovo/p.precoAntigo)*100)+'%</div>':'';
@@ -593,22 +593,6 @@ function render(){
     const txtCor=p.loja==="Mercado Livre"?"text-black":"text-white";
     return '<div onclick="abrirResumo(\''+p.id+'\')" class="produto-card bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col cursor-pointer active:scale-[0.98] transition"><div class="aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden">'+img+off+'<div class="absolute bottom-1 right-1 bg-black/70 text-white text-[9px] font-bold px-2 py-0.5 rounded-full">👁️ Ver resumo</div></div><div class="p-2 flex-1 flex flex-col"><p class="line-2 font-semibold text-[12.5px] min-h-[32px]">'+esc(p.nome)+'<div class="mt-2">'+antigo+'<div class="flex items-baseline gap-0.5"><span class="text-[11px] font-bold">R$</span><span class="text-[16px] font-black">'+Number(p.precoNovo).toFixed(2).replace(".",",")+'</span></div></div><div class="mt-1.5 flex items-center gap-1"><span class="text-[9px] font-black px-2 py-0.5 rounded-full '+cor+' '+txtCor+'">'+esc(p.loja.toUpperCase())+'</span></div><a href="'+p.affiliateLink+'" data-id="'+p.id+'" data-nome="'+esc(p.nome)+'" target="_blank" onclick="event.stopPropagation()" class="btn-oferta mt-2 h-8 bg-[#ff6b2b] text-white rounded-full grid place-items-center font-extrabold text-[12px]">VER OFERTA</a></div></div>';
   }).join('');
-  // PAGINAÇÃO 20 EM 20 - SUPER LEVE
-  let btnVerMais = document.getElementById('btn-ver-mais');
-  if(lista.length > limiteVisivel){
-    if(!btnVerMais){
-      btnVerMais = document.createElement('button');
-      btnVerMais.id = 'btn-ver-mais';
-      btnVerMais.className = 'mt-4 w-full h-11 rounded-full bg-black text-white font-bold text-[13px] active:scale-[0.98] transition';
-      btnVerMais.onclick = ()=>{ limiteVisivel += 20; render(); };
-      grid.parentNode.appendChild(btnVerMais);
-    }
-    const restantes = lista.length - limiteVisivel;
-    btnVerMais.textContent = `Ver mais 20 • ${restantes} restantes`;
-    btnVerMais.classList.remove('hidden');
-  } else {
-    if(btnVerMais) btnVerMais.classList.add('hidden');
-  }
   const elLista=document.getElementById('lista'); if(elLista) elLista.innerHTML=produtos.map(p=>{
     const thumb = p.imagemUrl ? '<img src="'+p.imagemUrl+'" loading="lazy" class="w-full h-full object-cover rounded-[10px]" onerror="this.parentElement.textContent=\''+(p.emoji||'🎁')+'\'">' : esc(p.emoji||'🎁');
     return '<div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">'+thumb+'</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">'+esc(p.nome)+'<p class="text-[11px] text-zinc-500">R$ '+p.precoNovo+' • '+esc(p.loja)+'</div><button onclick="apagarFirebase(\''+p.id+'\')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div>';
@@ -630,12 +614,6 @@ function gerarResumo(p){
   if(nome.includes('organizador') || nome.includes('gaveta')){
     comoFunciona = 'Você encaixa nas gavetas e separa tudo em divisórias. Cada coisa no seu lugar, sem bagunça.';
     beneficios = ['Organiza gavetas em segundos','Acrílico cristal resistente','Visual limpo e bonito'];
-  } else if(nome.includes('espelho') && (nome.includes('orgânico') || nome.includes('organico'))){
-    comoFunciona = 'Espelho orgânico com formato assimétrico moderno. Amplia o ambiente e tem acabamento premium, ideal pra quarto e sala.';
-    beneficios = ['Design orgânico moderno','Acabamento premium','Valoriza qualquer ambiente'];
-  } else if((nome.includes('air fryer') || nome.includes('fritadeira') || nome.includes('oven') || nome.includes('philco')) && nome.includes('12l')){
-    comoFunciona = 'Air Fryer Oven Philco 12L 1800W 4 em 1. Assa, frita sem óleo, desidrata e aquece. Cesto antiaderente e timer digital.';
-    beneficios = ['12L família grande','4 em 1: frita, assa, desidrata','1800W potência rápida'];
   } else if(nome.includes('air fryer') || nome.includes('fritadeira')){
     comoFunciona = 'Frita com ar quente circulando a 200°C, sem precisar de óleo. É só colocar, programar o timer e pronto.';
     beneficios = ['Frita sem óleo','Timer digital','Antiaderente fácil de limpar'];
@@ -645,41 +623,6 @@ function gerarResumo(p){
   } else if(nome.includes('escova') || nome.includes('alisadora')){
     comoFunciona = 'É escova e secador ao mesmo tempo. Penteia e alisa enquanto seca, sem precisar de chapinha.';
     beneficios = ['3 em 1: seca, alisa e modela','Não queima o cabelo','Resultado de salão em casa'];
-  } else if(nome.includes('jaqueta') || (nome.includes('casaco') && (nome.includes('jeans') || nome.includes('sarja')))){
-    comoFunciona = 'Jaqueta jeans com casaco sarja, corte slim linha fino premium. Modelagem clássica com bolso em algodão, encorpada e estilosa pra meia-estação.';
-    beneficios = ['Corte slim linha fino premium','Jeans + sarja cores clássicas','Bolso em algodão reforçado'];
-  } else if(nome.includes('kit 3 camiseta') || (nome.includes('kit') && nome.includes('camiseta') && nome.includes('lisa') && nome.includes('básica'))){
-    comoFunciona = 'Kit com 3 camisetas lisas básicas 100% algodão. Modelagem confortável e respirável, não desbota e não encolhe.';
-    beneficios = ['100% algodão macio','Kit econômico com 3','Não desbota e não encolhe'];
-  } else if(nome.includes('camiseta')){
-    comoFunciona = 'Camiseta básica lisa 100% algodão, corte tradicional confortável. Leve e respirável pro dia a dia.';
-    beneficios = ['100% algodão','Costura reforçada','Conforto o dia todo'];
-  } else if(nome.includes('camisa') && nome.includes('oversized')){
-    comoFunciona = 'Camisa oversized estilo street, corte moderno e descolado. Usa solta com bermuda ou calça pra look urbano.';
-    beneficios = ['Corte oversized moderno','Tecido respirável','Não desbota'];
-  } else if(nome.includes('camisa')){
-    comoFunciona = 'Camisa com corte alinhado e tecido leve. Ideal pra trabalho ou passeio casual.';
-    beneficios = ['Tecido leve','Corte alinhado','Fácil de combinar'];
-  } else if(nome.includes('calça')){
-    comoFunciona = 'Calça com modelagem slim e tecido resistente. Cintura média com bolso funcional e conforto o dia todo.';
-    beneficios = ['Modelagem slim','Tecido resistente','Conforto garantido'];
-  } else if(nome.includes('bermuda') || nome.includes('moletom') || nome.includes('shorts') || nome.includes('tactel')){
-    comoFunciona = 'Bermuda moletom/tactel leve e macia, cós com elástico e cordão. Ideal pra casa, academia ou rolê.';
-    beneficios = ['Moletom/tactel confortável','Bolso lateral prático','Não encolhe'];
-  } else if(nome.includes('tênis') || nome.includes('tenis')){
-    if(nome.includes('sandrini') || nome.includes('aero') || nome.includes('spark')){
-      comoFunciona = 'Tênis Sandrini Aero Spark pra corrida e academia. Solado com amortecimento Aero que absorve impacto e cabedal respirável.';
-      beneficios = ['Amortecimento Aero Spark','Respirável e leve','Antiderrapante pra treino'];
-    } else {
-      comoFunciona = 'Tênis com solado amortecedor que absorve impacto. Corre, caminha e treina sem dor no pé.';
-      beneficios = ['Amortecimento macio','Respirável','Antiderrapante'];
-    }
-  } else if(nome.includes('boné') || nome.includes('bone')){
-    comoFunciona = 'Boné aba reta original com regulagem snapback atrás. Protege do sol com estilo street.';
-    beneficios = ['Aba reta original','Regulagem universal','Tecido premium'];
-  } else if(nome.includes('relógio') || nome.includes('relogio')){
-    comoFunciona = 'Relógio masculino esportivo prova d\'água com pulseira ajustável e mostrador moderno.';
-    beneficios = ['Prova d\'água','Bateria duradoura','Design esportivo premium'];
   } else if(nome.includes('vestido') || cat.includes('moda feminina')){
     comoFunciona = 'Tecido leve e fresquinho, modelagem que valoriza o corpo. Perfeito pro dia a dia e passeios.';
     beneficios = ['Tecido confortável','Não amassa fácil','Combina com tudo'];
@@ -698,9 +641,21 @@ function gerarResumo(p){
   } else if(cat.includes('skincare')){
     comoFunciona = 'Fórmula com ácido hialurônico que hidrata profundo. Aplica de manhã e noite na pele limpa.';
     beneficios = ['Hidrata por 24h','Reduz linhas finas','Pele mais viçosa'];
-  } else if(cat.includes('acessório') || cat.includes('acessorio')){
-    comoFunciona = 'Acessório selecionado pra dar aquele toque final no look. Qualidade premium e estilo garantido.';
-    beneficios = ['Acabamento premium','Estilo versátil','Durabilidade'];
+  } else if(cat.includes('moda masculina') || nome.includes('camisa masculina') || nome.includes('oversized')){
+    comoFunciona = 'Camisa oversized estilo street, corte moderno. Usa solta com bermuda ou calça.';
+    beneficios = ['Tecido respirável','Corte street moderno','Não desbota'];
+  } else if(nome.includes('bermuda')){
+    comoFunciona = 'Moletom leve e macio, cós com elástico. Ideal pra ficar em casa ou sair.';
+    beneficios = ['Moletom confortável','Bolso lateral','Não encolhe'];
+  } else if(nome.includes('tênis')){
+    comoFunciona = 'Solado amortecedor que absorve impacto. Corre, caminha e treina sem dor no pé.';
+    beneficios = ['Amortecimento macio','Respirável','Antiderrapante'];
+  } else if(nome.includes('boné')){
+    comoFunciona = 'Aba reta com regulagem atrás. Protege do sol com estilo.';
+    beneficios = ['Aba reta original','Regulagem universal','Tecido premium'];
+  } else if(nome.includes('relógio') || cat.includes('acessório')){
+    comoFunciona = 'Relógio esportivo prova d\'água com pulseira ajustável. Marca hora e estilo.';
+    beneficios = ['Prova d\'água','Bateria duradoura','Design esportivo'];
   } else {
     comoFunciona = 'Produto selecionado a dedo por qualidade e preço. Achadinho que vale cada centavo, com entrega rápida.';
     beneficios = ['Achado verificado','Melhor preço','Entrega rápida'];
@@ -752,9 +707,9 @@ function abrirResumo(id){
 
 document.getElementById('modal-produto-bg')?.addEventListener('click',()=>document.getElementById('modal-produto').classList.add('hidden'));
 
- document.querySelector('[data-cat="Todas"]')?.addEventListener('click',()=>{filtroCat='Todas'; limiteVisivel=20; fecharTudo?.(); render();});
+ document.querySelector('[data-cat="Todas"]')?.addEventListener('click',()=>{filtroCat='Todas'; fecharTudo?.();});
  document.getElementById('empty-btn')?.addEventListener('click',()=>{
-  filtroCat='Todas'; limiteVisivel=20;
+  filtroCat='Todas';
   document.querySelectorAll('.cat').forEach(b=>{
     if(b.dataset.cat==='Todas'){ b.className='cat shrink-0 h-[30px] px-3 rounded-full text-[12px] font-bold bg-black text-white'; }
     else if(['Moda Feminina','Beleza','Bolsas','Calçados Femininos','Lingerie','Skincare','Moda Masculina','Camisas','Bermudas','Tênis','Bonés','Acessórios'].includes(b.dataset.cat)){ b.className='cat shrink-0 h-[26px] px-2.5 rounded-full text-[10.5px] font-bold bg-zinc-50 border border-zinc-200 text-zinc-700'; }
@@ -803,7 +758,7 @@ function atualizarAvatar(){
 window.atualizarAvatarGlobal = function(nome){ nomeCliente = nome; atualizarAvatar(); };
 atualizarAvatar();
 
-document.getElementById('busca')?.addEventListener('input',e=>{busca=e.target.value;limiteVisivel=20;render();});
+document.getElementById('busca')?.addEventListener('input',e=>{busca=e.target.value;render();});
 // DROPDOWN - DOIS JUNTOS
 const btnFem=document.getElementById('btn-feminino');
 const btnMasc=document.getElementById('btn-masculino');
@@ -824,7 +779,7 @@ function fecharTudo(){
 btnFem?.addEventListener('click',()=>{
   const escondido=dropFem.classList.contains('hidden');
   // Filtra só femininas
-  filtroCat='FEMININO'; limiteVisivel=20;
+  filtroCat='FEMININO';
   document.querySelectorAll('.cat').forEach(b=>b.classList.remove('!bg-black','!text-white'));
   render();
   fecharTudo();
@@ -838,7 +793,7 @@ btnFem?.addEventListener('click',()=>{
 btnMasc?.addEventListener('click',()=>{
   const escondido=dropMasc.classList.contains('hidden');
   // Filtra só masculinas
-  filtroCat='MASCULINO'; limiteVisivel=20;
+  filtroCat='MASCULINO';
   document.querySelectorAll('.cat').forEach(b=>b.classList.remove('!bg-black','!text-white'));
   render();
   fecharTudo();
@@ -866,7 +821,7 @@ document.querySelectorAll('.cat').forEach(btn=>{
     }else{
       btn.className='cat shrink-0 h-[30px] px-3 rounded-full text-[12px] font-bold bg-black text-white';
     }
-    filtroCat=btn.dataset.cat; limiteVisivel=20; render();
+    filtroCat=btn.dataset.cat; render();
   });
 });
 let clicks=[];
@@ -950,26 +905,8 @@ const prevTag = document.getElementById('preview-img-tag');
 
 async function otimizarAoColar(valor){
   if(otimizandoAuto) return;
-  let v = valor.trim();
+  const v = valor.trim();
   if(!v) return;
-  // FIX GOOGLE: se colou link do Google Lens/imgres/url, extrai o imgurl real automaticamente
-  if(v.includes('google.com')){
-    try{
-      const urlObj = new URL(v);
-      let imgurl = urlObj.searchParams.get('imgurl') || urlObj.searchParams.get('q') || urlObj.searchParams.get('url');
-      if(imgurl && imgurl.startsWith('http')){ v = decodeURIComponent(imgurl); toast("🔗 Link do Google convertido pro link direto!"); }
-      else if(v.includes('imgurl=')){
-        const match = v.match(/imgurl=([^&]+)/);
-        if(match && match[1]){ v = decodeURIComponent(match[1]); toast("🔗 Link do Google convertido pro link direto!"); }
-      }
-    }catch(e){
-      // fallback regex se URL falhar
-      try{
-        const m = valor.match(/imgurl=([^&]+)/);
-        if(m && m[1]){ v = decodeURIComponent(m[1]); toast("🔗 Link do Google convertido pro link direto!"); }
-      }catch(e2){}
-    }
-  }
   const ehImagem = v.startsWith('http://')||v.startsWith('https://')||v.startsWith('data:image');
   if(!ehImagem) {
     prevBox?.classList.add('hidden');
@@ -984,51 +921,41 @@ async function otimizarAoColar(valor){
     prevBox.classList.remove('hidden');
     prevTag.src = v;
     if(v.startsWith('data:image')){
-      if(btnSalvar){ btnSalvar.textContent = "🗜️ iPhone: comprimindo..."; btnSalvar.disabled = true; }
-      toast("📱 iPhone detectado, comprimindo pra 40KB...");
+      if(btnSalvar){ btnSalvar.textContent = "🗜️ Comprimindo data:image..."; btnSalvar.disabled = true; }
+      toast("Detectei imagem gigante, comprimindo automaticamente...");
       const blobOrig = await dataUrlParaBlobAuto(v);
       const kbOrig = (blobOrig.size/1024).toFixed(0);
-      const blobComp = await comprimirAuto(v, 600, 0.70);
+      const blobComp = await comprimirAuto(v, 600, 0.65);
       const kbComp = (blobComp.size/1024).toFixed(0);
-      if(btnSalvar) btnSalvar.textContent = "☁️ Subindo...";
+      if(btnSalvar) btnSalvar.textContent = "☁️ Subindo otimizada...";
       const urlFinal = await uploadStorageAuto(blobComp);
       imagemOtimizadaFinal = urlFinal;
       inputImg.value = urlFinal;
       prevTag.src = urlFinal;
-      toast("✅ iPhone OK! De "+kbOrig+"KB pra "+kbComp+"KB!");
+      toast("✅ Comprimida de "+kbOrig+"KB para "+kbComp+"KB - 95% economia!");
     } else if(v.startsWith('http')){
-      // SUPER LEVE se for link direto da Shopee/ML/Amazon - inclui todos CDNs
-      const isSuperLeve = v.includes('mlstatic.com') || v.includes('shopee.com.br') || v.includes('m.media-amazon.com') || v.includes('http2.mlstatic') || v.includes('cf.shopee') || v.includes('susercontent.com') || v.includes('shopee') || v.includes('mlstatic') || v.includes('amazon') || v.includes('down-br') || v.includes('up-tl');
-      if(isSuperLeve){
-        imagemOtimizadaFinal = v;
-        inputImg.value = v;
+      if(btnSalvar){ btnSalvar.textContent = "🗜️ Otimizando link..."; btnSalvar.disabled = true; }
+      try{
+        const blobComp = await comprimirAuto(v, 600, 0.72);
+        const kbComp = (blobComp.size/1024).toFixed(0);
+        if(btnSalvar) btnSalvar.textContent = "☁️ Salvando versão leve...";
+        const urlFinal = await uploadStorageAuto(blobComp);
+        imagemOtimizadaFinal = urlFinal;
+        inputImg.value = urlFinal;
+        prevTag.src = urlFinal;
+        toast("✅ Link convertido pra webp "+kbComp+"KB - não gasta seu 1GB!");
+      }catch(eCors){
         prevTag.src = v;
-        toast("✅ SUPER LEVE! Link direto Shopee/ML/Amazon - 0MB Storage, aguenta 1.000 produtos!");
-      } else {
-        if(btnSalvar){ btnSalvar.textContent = "🗜️ Otimizando..."; btnSalvar.disabled = true; }
-        try{
-          const blobComp = await comprimirAuto(v, 600, 0.72);
-          const kbComp = (blobComp.size/1024).toFixed(0);
-          if(btnSalvar) btnSalvar.textContent = "☁️ Salvando...";
-          const urlFinal = await uploadStorageAuto(blobComp);
-          imagemOtimizadaFinal = urlFinal;
-          inputImg.value = urlFinal;
-          prevTag.src = urlFinal;
-          toast("✅ Convertido pra webp "+kbComp+"KB!");
-        }catch(eCors){
-          prevTag.src = v;
-          imagemOtimizadaFinal = v;
-          toast("✅ Link https:// super leve - 0,08KB no banco!");
-        }
+        imagemOtimizadaFinal = v;
+        toast("✅ Link https:// detectado - já é super leve (0,08KB no banco)");
       }
     }
   }catch(err){
-    console.error(err);
-    toast("Erro, mas pode salvar - vou tentar como está");
+    toast("Erro ao otimizar, mas pode salvar que já é leve");
     imagemOtimizadaFinal = v;
   }finally{
     otimizandoAuto = false;
-    if(btnSalvar){ btnSalvar.textContent = txtBtnOriginal || "Salvar + 🔔 Notificar todo mundo"; btnSalvar.disabled = false; }
+    if(btnSalvar){ btnSalvar.textContent = txtBtnOriginal || "Salvar achadinho"; btnSalvar.disabled = false; }
   }
 }
 
@@ -1136,6 +1063,7 @@ try{
       if(perm==='granted'){
         localStorage.setItem('sininho_ativado','1');
         document.getElementById('bell-dot').classList.add('hidden');
+        set(inscritosRef,{});
         set(ref(db,'inscritos_sininho/'+visitorId),{id:visitorId,ts:Date.now(),hora:new Date().toLocaleString('pt-BR'),ua:navigator.userAgent.substring(0,80)});
         toast("🔔 Sininho ativado! Você vai receber ofertas!");
         new Notification("🔔 Sininho ativado!",{body:"Você vai receber achadinhos novos na hora!"});
