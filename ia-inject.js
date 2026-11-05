@@ -1,4 +1,4 @@
-// ia-inject.js V11 - COMPATÍVEL COM V10/V11 - FIX FALTA ENV
+// ia-inject.js V12 - AUTOMATICO RAPIDO + PRECO CORRETO
 (function(){
   function detectarLojaIA(url){
     const u=(url||'').toLowerCase();
@@ -28,7 +28,7 @@
   function initIA(){
     const inputLink=document.getElementById('f-link');
     const btnSalvar=document.getElementById('f-salvar');
-    if(!inputLink||document.getElementById('btn-ia-scrape-v11')) return;
+    if(!inputLink||document.getElementById('btn-ia-scrape-v12')) return;
     
     const wrapper=document.createElement('div');
     wrapper.style.position='relative';
@@ -36,10 +36,10 @@
     inputLink.parentNode.insertBefore(wrapper,inputLink);
     wrapper.appendChild(inputLink);
     inputLink.style.paddingRight='110px';
-    inputLink.placeholder='Cole link CURTO do app - IA Oficial';
+    inputLink.placeholder='Cole link - auto IA';
     
     const btn=document.createElement('button');
-    btn.id='btn-ia-scrape-v11';
+    btn.id='btn-ia-scrape-v12';
     btn.type='button';
     btn.textContent='🤖 IA Oficial';
     btn.style.position='absolute';
@@ -57,7 +57,7 @@
     wrapper.appendChild(btn);
     
     const status=document.createElement('div');
-    status.id='ia-status-v11';
+    status.id='ia-status-v12';
     status.style.display='none';
     status.style.marginBottom='8px';
     status.style.fontSize='11px';
@@ -65,178 +65,132 @@
     status.style.padding='8px';
     wrapper.parentNode.insertBefore(status,wrapper.nextSibling);
 
-    function formatDebug(d){
-      if(!d) return '';
-      if(Array.isArray(d)) return d.join(' | ');
-      if(typeof d === 'string') return d;
-      try{ return JSON.stringify(d).substring(0,400); }catch(e){ return String(d).substring(0,400); }
-    }
-
-    async function resolverShortNoCliente(shortUrl){
-      const proxies = [
-        `https://corsproxy.io/?${encodeURIComponent(shortUrl)}`,
-        `https://api.allorigins.win/raw?url=${encodeURIComponent(shortUrl)}`,
-        `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(shortUrl)}`,
-        `https://thingproxy.freeboard.io/fetch/${shortUrl}`,
-        `https://proxy.cors.sh/${shortUrl}`
-      ];
-      for(const pUrl of proxies){
-        try{
-          const r = await fetch(pUrl, { signal: AbortSignal.timeout(10000) });
-          const txt = await r.text();
-          const m = txt.match(/https:\/\/shopee\.com\.br\/[^"'\s]+-i\.(\d+)\.(\d+)/i);
-          if(m) return { url: m[0], html: txt, proxy: pUrl };
-          if(r.url && r.url.includes('-i.') && r.url.includes('shopee.com.br')) return { url: r.url, html: txt, proxy: pUrl };
-        }catch(e){}
-      }
-      try{
-        const r = await fetch(shortUrl, { redirect: 'follow' });
-        if(r.url.includes('-i.')) return { url: r.url, html: '', proxy: 'direct' };
-      }catch(e){}
-      return { url: shortUrl, html: '', proxy: 'none' };
-    }
+    let ultimoLinkProcessado = '';
+    let processando = false;
 
     async function scrapeComIA(urlAfiliado){
       let link=(urlAfiliado||'').trim();
-      if(!link.startsWith('http')){ alert('Cole um link https://'); return; }
+      if(!link.startsWith('http')){ return; }
+      if(processando) return;
+      if(link === ultimoLinkProcessado) return;
+      
+      processando = true;
+      ultimoLinkProcessado = link;
+      
       const txtOrig=btn.textContent;
-      const txtSalvarOrig=btnSalvar?btnSalvar.textContent:'Salvar + 🔔 Notificar todo mundo';
       try{
-        btn.textContent='⏳ Oficial...'; btn.disabled=true;
-        if(btnSalvar){ btnSalvar.textContent='🔗 Usando API Oficial Shopee...'; btnSalvar.disabled=true; }
+        btn.textContent='⏳'; btn.disabled=true;
+        if(btnSalvar){ btnSalvar.disabled=true; }
         status.style.display='block';
-        status.textContent='🔑 Usando API Oficial AppID 18325950432...';
+        status.textContent='⚡ Puxando do Fly GRU...';
         status.style.background='#eff6ff';
         status.style.border='1px solid #bfdbfe';
         status.style.color='#1e40af';
         
-        let finalUrl = link;
-
-        if(link.includes('s.shopee.com.br') || link.includes('shope.ee')){
-          status.textContent='📱 Passo 1/2: Resolvendo link curto...';
-          const resolved = await resolverShortNoCliente(link);
-          finalUrl = resolved.url;
-          status.textContent=`🔗 Resolvido: ${finalUrl.substring(0,60)}...`;
-          if(finalUrl.includes('s.shopee.com.br')){
-            status.textContent='📱 Celular não resolveu, tentando servidor Fly...';
-          }
-        }
-
-        status.textContent='🔑 Passo 2/2: Chamando API + Fly GRU...';
-        
         let dados=null;
-        let raw=null;
         try{
-          const r=await fetch('/api/shopee-direct?url='+encodeURIComponent(finalUrl||link),{signal:AbortSignal.timeout(25000)});
-          raw = await r.json();
-          // NORMALIZA: aceita tanto formato novo (product.name) quanto antigo (nome)
-          const p = raw.product || {};
-          dados = {
-            nome: raw.nome || p.name || raw.title || raw.ogTitle || '',
-            imagem: raw.imagem || p.image || raw.image || raw.ogImage || '',
-            preco: raw.preco || p.price || raw.price || '',
-            precoAntigo: raw.precoAntigo || p.priceOld || raw.priceOld || '',
-            loja: raw.loja || 'Shopee',
-            categoria: raw.categoria || 'Geral',
-            metodo: raw.metodo || raw.debug?.version || 'V11',
-            expanded: raw.expanded || finalUrl,
-            temCredencialOficial: true, // SEMPRE true agora, nunca mais FALTA ENV
-            debug: raw.debug || raw,
-            error: raw.error,
-            ok: raw.ok
-          };
+          // DIRETO pro seu robô Fly - sem 5 proxies lentos no celular
+          const r=await fetch('/api/shopee-direct?url='+encodeURIComponent(link),{signal:AbortSignal.timeout(15000)});
+          dados=await r.json();
         }catch(e){ 
-          dados={ nome:'', imagem:'', preco:'', error:e.message, debug:e.message, temCredencialOficial:true, expanded: finalUrl };
+          dados={ nome:'', imagem:'', preco:'', error:e.message, expanded: link };
         }
 
-        if(!dados) dados={nome:'',imagem:'',preco:'', temCredencialOficial:true};
+        const p = dados.product || {};
+        const nomeFinal = dados.nome || p.name || '';
+        const imagemFinal = dados.imagem || p.image || '';
+        const precoFinal = dados.preco || p.price || '';
+        const precoAntigoFinal = dados.precoAntigo || p.priceOld || '';
 
-        // Fallback PDP cliente se ainda sem nome
-        if((!dados.nome || !dados.imagem) && finalUrl.includes('-i.')){
-          const m = finalUrl.match(/-i\.(\d+)\.(\d+)/) || finalUrl.match(/\/(\d+)\/(\d+)/);
-          if(m){
-            try{
-              const shopId=m[1], itemId=m[2];
-              const pdpUrl=`https://shopee.com.br/api/v4/pdp/get_pc?shopid=${shopId}&itemid=${itemId}`;
-              const rr=await fetch(pdpUrl, { headers:{'Accept':'application/json'} });
-              const jj=await rr.json();
-              if(jj?.data?.name){
-                dados.nome=jj.data.name;
-                if(jj.data.images?.[0]){
-                  let imgId=jj.data.images[0];
-                  dados.imagem=imgId.startsWith('http')?imgId:`https://down-br.img.susercontent.com/file/${imgId}_800x800`;
-                }
-                if(jj.data.price_min) dados.preco=(jj.data.price_min/100000).toFixed(2);
-                if(jj.data.price_before_discount>jj.data.price_min) dados.precoAntigo=(jj.data.price_before_discount/100000).toFixed(2);
-                dados.metodo='PDP Cliente (fallback)';
-              }
-            }catch(e){}
+        if(nomeFinal) {
+          const elNome=document.getElementById('f-nome');
+          if(elNome) elNome.value=nomeFinal;
+        }
+        if(precoFinal) {
+          const elPreco=document.getElementById('f-preco');
+          if(elPreco) {
+            // Converte 14.00 -> 14,00 se precisar
+            elPreco.value=precoFinal.replace('.', ',');
           }
         }
-
-        // Preenche campos
-        if(dados.nome) {
-          const elNome=document.getElementById('f-nome');
-          if(elNome) elNome.value=dados.nome;
-        }
-        if(dados.preco) {
-          const elPreco=document.getElementById('f-preco');
-          if(elPreco) elPreco.value=dados.preco;
-        }
-        if(dados.precoAntigo) {
+        if(precoAntigoFinal) {
           const elAntigo=document.getElementById('f-preco-antigo');
-          if(elAntigo) elAntigo.value=dados.precoAntigo;
+          if(elAntigo) elAntigo.value=precoAntigoFinal.replace('.', ',');
         }
-        if(dados.imagem){
+        if(imagemFinal){
           const inpImg=document.getElementById('f-emoji');
           if(inpImg){ 
-            inpImg.value=dados.imagem; 
-            if(window.otimizarAoColar){ try{ await window.otimizarAoColar(dados.imagem); }catch(e){} }
+            inpImg.value=imagemFinal; 
+            if(window.otimizarAoColar){ try{ await window.otimizarAoColar(imagemFinal); }catch(e){} }
           }
         }
         const elLoja=document.getElementById('f-loja');
-        if(elLoja) elLoja.value=dados.loja||'Shopee';
-        if(dados.categoria && dados.categoria!=='Geral') {
+        if(elLoja) elLoja.value='Shopee';
+        if(nomeFinal) {
           const elCat=document.getElementById('f-categoria');
-          if(elCat) elCat.value=dados.categoria;
-        } else if(dados.nome) {
-          const elCat=document.getElementById('f-categoria');
-          if(elCat) elCat.value=detectarCategoriaIA(dados.nome);
+          if(elCat) elCat.value=detectarCategoriaIA(nomeFinal);
         }
 
-        if(dados.imagem && dados.nome){
-          status.textContent=`✅ ${dados.metodo}: ${dados.nome.substring(0,60)} • Imagem OK`;
+        if(imagemFinal && nomeFinal){
+          status.textContent=`✅ ${dados.metodo||'V12'}: ${nomeFinal.substring(0,60)}`;
           status.style.background='#f0fdf4';
           status.style.borderColor='#bbf7d0';
           status.style.color='#166534';
+          setTimeout(()=>{ if(status) status.style.display='none'; },5000);
         } else {
-          // NUNCA mais mostra FALTA ENV - mostra debug real
-          status.textContent=`⚠️ ${dados.error||'Tentando fallback...'} | Expand: ${(dados.expanded||'').substring(0,80)} | Debug: ${formatDebug(dados.debug).substring(0,200)}`;
+          status.textContent=`⚠️ Não achou imagem/nome, tente outro link`;
           status.style.background='#fef3c7';
           status.style.borderColor='#fde68a';
           status.style.color='#92400e';
+          ultimoLinkProcessado = ''; // permite tentar de novo
         }
-        setTimeout(()=>{ if(status) status.style.display='none'; },20000);
         
       }catch(err){
         status.style.display='block';
-        status.textContent='❌ Erro IA: '+err.message;
+        status.textContent='❌ Erro: '+err.message;
         status.style.background='#fee2e2';
         status.style.border='1px solid #fecaca';
         status.style.color='#991b1b';
+        ultimoLinkProcessado = '';
       }finally{ 
         btn.textContent='🤖 IA Oficial'; 
         btn.disabled=false;
-        if(btnSalvar){ btnSalvar.textContent=txtSalvarOrig; btnSalvar.disabled=false; }
+        processando = false;
+        if(btnSalvar){ btnSalvar.disabled=false; }
       }
     }
     
-    btn.addEventListener('click',()=>{ const v=inputLink.value.trim(); if(v) scrapeComIA(v); else alert('Cole o link afiliado curto primeiro'); });
+    // Clique manual
+    btn.addEventListener('click',()=>{ 
+      const v=inputLink.value.trim(); 
+      ultimoLinkProcessado=''; // força reprocessar no clique
+      if(v) scrapeComIA(v); 
+      else alert('Cole o link primeiro'); 
+    });
+
+    // AUTOMATICO: ao colar, já dispara em 100ms (era 600ms)
     inputLink.addEventListener('paste',()=>{ 
       setTimeout(()=>{ 
         const v=inputLink.value.trim(); 
-        if(v&&v.startsWith('http')&&v.length>15) scrapeComIA(v); 
-      },600); 
+        if(v&&v.startsWith('http')&&v.length>10) {
+          ultimoLinkProcessado='';
+          scrapeComIA(v);
+        }
+      },100); 
+    });
+
+    // AUTOMATICO: ao digitar/colar e sair do campo
+    inputLink.addEventListener('input',()=>{
+      const v=inputLink.value.trim();
+      if(v.startsWith('https://s.shopee.com.br/') && v.length>25){
+        // Se é link curto completo, já dispara
+        clearTimeout(window._iaDebounce);
+        window._iaDebounce = setTimeout(()=>{
+          if(v !== ultimoLinkProcessado){
+            scrapeComIA(v);
+          }
+        },400);
+      }
     });
     
     window.scrapeComIA=scrapeComIA;
@@ -247,6 +201,6 @@
     initIA();
     tentativas++;
     if(tentativas>20) clearInterval(iv);
-  },800);
+  },500);
   initIA();
 })();
