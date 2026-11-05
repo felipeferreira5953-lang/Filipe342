@@ -1,12 +1,28 @@
-// /api/shopee-direct.js - FINAL - URL FIXADA https://criador-achadinhos-brasil.fly.dev
+// /api/shopee-direct.js - V8 FIX - pega formato /loja/ID/ID e resolve FALTA ENV
 import crypto from 'crypto';
 
 const FLY_ROBO_URL = process.env.FLY_ROBO_URL || 'https://criador-achadinhos-brasil.fly.dev';
 
+// CREDENCIAIS DO SEU APP.PY - fallback se ENV faltar na Vercel
+const FALLBACK_APP_ID = "18325950432";
+const FALLBACK_SECRET = "O25HE4WDN6GGDCII4DUFFCZ7RDEHHGM6";
+
 function extractIds(url) {
+  // Formato 1: -i.SHOPID.ITEMID
   let m = url.match(/-i\.(\d+)\.(\d+)/);
   if (m) return { shopId: m[1], itemId: m[2] };
+  // Formato 2: /product/SHOPID/ITEMID
   m = url.match(/\/product\/(\d+)\/(\d+)/);
+  if (m) return { shopId: m[1], itemId: m[2] };
+  // Formato 3: /QUALQUER-NOME/SHOPID/ITEMID - ex: /opaanlp/375201738/22299409946
+  m = url.match(/\/[^\/]+\/(\d+)\/(\d+)(?:\?|$)/);
+  if (m) {
+    // Shopee as vezes inverte, mas 99% é shopId= primeiro, itemId= segundo
+    // Seu exemplo: 375201738 / 22299409946
+    return { shopId: m[1], itemId: m[2] };
+  }
+  // Formato 4: dois numeros longos no final da URL
+  m = url.match(/(\d{6,})\/(\d{6,})/);
   if (m) return { shopId: m[1], itemId: m[2] };
   return null;
 }
@@ -18,8 +34,8 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
 
   const shortUrl = req.query.url || req.query.link || req.body?.url || '';
-  const APP_ID = process.env.SHOPEE_APP_ID;
-  const SECRET = process.env.SHOPEE_SECRET;
+  const APP_ID = process.env.SHOPEE_APP_ID || process.env.SHOPEE_ID || FALLBACK_APP_ID;
+  const SECRET = process.env.SHOPEE_SECRET || process.env.SHOPEE_KEY || FALLBACK_SECRET;
 
   if (!shortUrl) return res.status(400).json({ ok: false, error: 'URL vazia' });
 
@@ -28,24 +44,25 @@ export default async function handler(req, res) {
 
   try {
     const url = `${FLY_ROBO_URL}/expand?url=${encodeURIComponent(shortUrl)}`;
-    console.log('[FINAL] Chamando:', url);
+    console.log('[V8] Chamando Fly:', url);
     const r = await fetch(url, { signal: AbortSignal.timeout(15000) });
     flyData = await r.json();
     if (flyData?.expanded) expanded = flyData.expanded;
     if (flyData?.final_url) expanded = flyData.final_url;
   } catch(e) {
     console.log('Erro Fly:', e.message);
-    try {
-      const proxy = `https://api.allorigins.win/raw?url=${encodeURIComponent(shortUrl)}`;
-      const r = await fetch(proxy, { signal: AbortSignal.timeout(10000) });
-      const text = await r.text();
-      const m = text.match(/https:\/\/shopee\.com\.br\/[^"'\s<>]+\-i\.\d+\.\d+[^"'\s<>]*/);
-      if (m) expanded = m[0];
-    } catch {}
   }
 
-  const ids = extractIds(expanded) || (flyData?.shopId ? { shopId: flyData.shopId, itemId: flyData.itemId } : null) || (flyData?.item_id ? { shopId: flyData.shop_id, itemId: flyData.item_id } : null);
+  // Tenta IDs da URL expandida, ou dos dados do Fly
+  let ids = extractIds(expanded);
+  if (!ids && flyData?.shopId && flyData?.itemId) ids = { shopId: flyData.shopId, itemId: flyData.itemId };
+  if (!ids && flyData?.shop_id && flyData?.item_id) ids = { shopId: flyData.shop_id, itemId: flyData.item_id };
+  if (!ids && flyData?.shopId) ids = { shopId: String(flyData.shopId), itemId: String(flyData.itemId) };
+
+  console.log('[V8] IDs extraidos:', ids, 'de', expanded);
+
   let product = null;
+  let debugApi = {};
 
   if (ids && APP_ID && SECRET) {
     try {
@@ -64,6 +81,7 @@ export default async function handler(req, res) {
         signal: AbortSignal.timeout(10000)
       });
       const data = await r.json();
+      debugApi = data;
       const node = data.data?.productOfferV2?.nodes?.[0];
       if (node) {
         product = {
@@ -75,31 +93,36 @@ export default async function handler(req, res) {
           commission: node.commissionRate
         };
       }
-    } catch(e) {}
+    } catch(e) {
+      debugApi.error = e.message;
+    }
   }
 
   if (!product && flyData?.ogTitle) {
     product = {
       name: flyData.ogTitle || flyData.title,
       image: flyData.ogImage || flyData.image_original || flyData.image,
-      price: flyData.preco_atual ? String(flyData.preco_atual) : null
+      price: flyData.preco_atual ? String(flyData.preco_atual) : null,
+      priceOld: flyData.preco_antes ? String(flyData.preco_antes) : null
     };
   }
 
+  const credStatus = !process.env.SHOPEE_APP_ID ? `USANDO FALLBACK ${FALLBACK_APP_ID} - ENV FALTA` : 'ENV OK';
+
   return res.status(200).json({
-    ok: true,
+    ok: !!product,
+    error: product ? undefined : 'não achou',
     original: shortUrl,
     expanded: expanded,
     affiliateLink: shortUrl,
-    isShort: expanded.includes('s.shopee.com.br'),
-    shouldSaveEvenIfShort: true,
     product: product,
-    message: product ? `✅ Puxado via https://criador-achadinhos-brasil.fly.dev + API oficial` : 'Expandido via Fly',
     debug: {
       expanded,
-      flyUrl: FLY_ROBO_URL,
       ids,
-      hasApiData: !!product
+      credencial: credStatus,
+      hasProduct: !!product,
+      flyData: flyData ? { title: flyData.title, hasImage: !!flyData.image_original, shop_id: flyData.shop_id, item_id: flyData.item_id } : null,
+      apiResponse: debugApi
     }
   });
 }
