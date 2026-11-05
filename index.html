@@ -169,217 +169,67 @@ body > *:first-child{
 
 </style>
 
-<style id="textura-pro-v4">
-/* === FUNDO MODERNO COM PROFUNDIDADE === */
+<style id="textura-pro-v3">
+/* TEXTURA RESTAURADA - MAIS VISÍVEL */
 body{
-  background-color:#f5f3f0 !important;
+  background-color:#faf9f7 !important;
   background-image:
-    radial-gradient(at 15% 10%, rgba(255,107,43,0.09) 0%, transparent 45%),
-    radial-gradient(at 90% 90%, rgba(0,0,0,0.05) 0%, transparent 40%),
-    radial-gradient(at 50% 50%, rgba(255,255,255,0.8) 0%, transparent 70%),
-    url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E") !important;
+    radial-gradient(at 20% 15%, rgba(255,107,43,0.12) 0%, transparent 50%),
+    radial-gradient(at 85% 85%, rgba(0,0,0,0.06) 0%, transparent 45%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E") !important;
 }
 main{
   background:#ffffff !important;
   background-image:
-    radial-gradient(at 50% 0%, rgba(0,0,0,0.02) 0%, transparent 70%),
-    url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E") !important;
-  box-shadow: 
-    inset 0 1px 0 rgba(255,255,255,1),
-    inset 0 -1px 0 rgba(0,0,0,0.02),
-    0 1px 3px rgba(0,0,0,0.03) !important;
-  border-left: 1px solid rgba(0,0,0,0.03);
-  border-right: 1px solid rgba(0,0,0,0.03);
+    radial-gradient(at 50% 0%, rgba(255,107,43,0.04) 0%, transparent 60%),
+    radial-gradient(at 0% 100%, rgba(0,0,0,0.03) 0%, transparent 50%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E") !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.8), 0 -1px 0 rgba(0,0,0,0.03);
 }
-
-/* === BOTÕES FILTRO - PROFUNDIDADE PREMIUM === */
 .cat{
-  background: #ffffff !important;
-  border: 1px solid rgba(0,0,0,0.06) !important;
-  box-shadow: 
-    0 1px 0 rgba(255,255,255,1) inset,
-    0 1px 2px rgba(0,0,0,0.04),
-    0 2px 6px rgba(0,0,0,0.04),
-    0 8px 16px rgba(0,0,0,0.03) !important;
-  transition: all 0.25s cubic-bezier(0.16,1,0.3,1) !important;
-}
-.cat:hover{
-  transform: translateY(-1.5px);
-  border-color: rgba(0,0,0,0.08) !important;
-  box-shadow: 
-    0 1px 0 rgba(255,255,255,1) inset,
-    0 2px 4px rgba(0,0,0,0.06),
-    0 4px 12px rgba(0,0,0,0.06),
-    0 12px 28px rgba(0,0,0,0.05) !important;
-}
-.cat:active{
-  transform: translateY(0px) scale(0.98);
-  box-shadow: 
-    inset 0 1px 2px rgba(0,0,0,0.08),
-    0 1px 2px rgba(0,0,0,0.04) !important;
-}
-.cat.bg-black, .cat.\!bg-black, button[data-cat].bg-black{
-  background: #111111 !important;
-  border: 1px solid rgba(255,255,255,0.08) !important;
-  box-shadow: 
-    0 1px 0 rgba(255,255,255,0.12) inset,
-    0 2px 8px rgba(0,0,0,0.3),
-    0 8px 24px rgba(0,0,0,0.2),
-    0 16px 40px rgba(0,0,0,0.12) !important;
-}
-
-/* === BOTÕES FEMININO / MASCULINO - MAIS PROFUNDOS === */
-#btn-feminino, #btn-masculino{
-  background: #ffffff !important;
-  border: 1px solid rgba(0,0,0,0.07) !important;
-  box-shadow: 
-    0 1px 0 rgba(255,255,255,1) inset,
-    0 1px 3px rgba(0,0,0,0.04),
-    0 4px 12px rgba(0,0,0,0.03) !important;
-  transition: all 0.25s cubic-bezier(0.16,1,0.3,1) !important;
-}
-#btn-feminino:hover, #btn-masculino:hover{
-  transform: translateY(-1px);
-  box-shadow: 
-    0 1px 0 rgba(255,255,255,1) inset,
-    0 2px 6px rgba(0,0,0,0.06),
-    0 8px 20px rgba(0,0,0,0.05) !important;
-}
-
-/* === BANNER - PROFUNDIDADE MAXIMA === */
-#banner-fundo > div{
-  border: 1px solid rgba(255,255,255,0.08) !important;
-  box-shadow: 
-    0 1px 0 rgba(255,255,255,0.12) inset,
-    0 4px 16px rgba(0,0,0,0.2),
-    0 12px 32px rgba(0,0,0,0.18),
-    0 24px 64px rgba(0,0,0,0.12) !important;
-}
-
-/* === CARDS PRODUTOS - ELEVAÇÃO MODERNA === */
-#grid > div{
-  background: #ffffff !important;
-  border: 1px solid rgba(0,0,0,0.04) !important;
-  box-shadow: 
-    0 1px 0 rgba(255,255,255,1) inset,
-    0 1px 2px rgba(0,0,0,0.03),
-    0 4px 12px rgba(0,0,0,0.04),
-    0 12px 24px rgba(0,0,0,0.03) !important;
-  transition: all 0.3s cubic-bezier(0.16,1,0.3,1) !important;
-}
-#grid > div:hover{
-  transform: translateY(-4px);
-  border-color: rgba(0,0,0,0.06) !important;
-  box-shadow: 
-    0 1px 0 rgba(255,255,255,1) inset,
-    0 4px 12px rgba(0,0,0,0.06),
-    0 12px 32px rgba(0,0,0,0.08),
-    0 24px 48px rgba(0,0,0,0.06) !important;
-}
-
-/* === BOTÃO VER OFERTA - DESTAQUE COM PROFUNDIDADE === */
-.btn-oferta{
-  background: linear-gradient(180deg, #ff7a3d 0%, #ff6b2b 100%) !important;
-  border: 1px solid rgba(0,0,0,0.04) !important;
-  box-shadow: 
-    0 1px 0 rgba(255,255,255,0.35) inset,
-    0 2px 6px rgba(255,107,43,0.35),
-    0 6px 16px rgba(255,107,43,0.25),
-    0 12px 24px rgba(255,107,43,0.15) !important;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.9) inset, 0 1px 2px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04) !important;
   transition: all 0.2s cubic-bezier(0.16,1,0.3,1) !important;
 }
+.cat:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.9) inset, 0 2px 4px rgba(0,0,0,0.08), 0 8px 20px rgba(0,0,0,0.06) !important;
+}
+.cat:active{
+  transform: translateY(0) scale(0.97);
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.04) !important;
+}
+.cat.bg-black, .cat.!bg-black{
+  box-shadow: 0 1px 0 rgba(255,255,255,0.15) inset, 0 2px 6px rgba(0,0,0,0.2), 0 8px 24px rgba(0,0,0,0.12) !important;
+}
+#banner-fundo > div{
+  box-shadow: 0 1px 0 rgba(255,255,255,0.1) inset, 0 8px 24px rgba(0,0,0,0.25), 0 20px 48px rgba(0,0,0,0.15) !important;
+}
+#grid > div{
+  box-shadow: 0 1px 0 rgba(255,255,255,0.8) inset, 0 1px 3px rgba(0,0,0,0.06), 0 6px 20px rgba(0,0,0,0.04) !important;
+  transition: all 0.25s cubic-bezier(0.16,1,0.3,1) !important;
+}
+#grid > div:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.8) inset, 0 4px 12px rgba(0,0,0,0.08), 0 12px 32px rgba(0,0,0,0.08) !important;
+}
+.btn-oferta{
+  box-shadow: 0 1px 0 rgba(255,255,255,0.25) inset, 0 2px 6px rgba(255,107,43,0.35), 0 4px 12px rgba(255,107,43,0.2) !important;
+}
 .btn-oferta:hover{
-  transform: translateY(-1.5px);
-  box-shadow: 
-    0 1px 0 rgba(255,255,255,0.35) inset,
-    0 4px 12px rgba(255,107,43,0.4),
-    0 10px 28px rgba(255,107,43,0.3),
-    0 16px 40px rgba(255,107,43,0.18) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.25) inset, 0 4px 10px rgba(255,107,43,0.4), 0 8px 20px rgba(255,107,43,0.25) !important;
 }
 .btn-oferta:active{
-  transform: translateY(0) scale(0.98);
-  box-shadow: 
-    inset 0 2px 4px rgba(0,0,0,0.15),
-    0 1px 3px rgba(255,107,43,0.2) !important;
+  transform: scale(0.97);
+  box-shadow: inset 0 1px 4px rgba(0,0,0,0.2) !important;
 }
-
-/* === HEADER - GLASS PROFUNDO === */
 header{
-  background: rgba(250,249,247,0.88) !important;
-  backdrop-filter: blur(20px) saturate(1.4) !important;
-  -webkit-backdrop-filter: blur(20px) saturate(1.4) !important;
-  border-bottom: 1px solid rgba(0,0,0,0.06) !important;
-  box-shadow: 
-    0 1px 0 rgba(255,255,255,0.9) inset,
-    0 1px 3px rgba(0,0,0,0.02),
-    0 8px 32px rgba(0,0,0,0.04) !important;
+  backdrop-filter: blur(12px) saturate(1.2) !important;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.8) inset, 0 4px 20px rgba(0,0,0,0.06) !important;
 }
-
-/* === BOTÕES TOPO - SEU NOME E SININHO === */
 #btn-cliente{
-  background: #ffffff !important;
-  border: 1px solid rgba(0,0,0,0.07) !important;
-  box-shadow: 
-    0 1px 0 rgba(255,255,255,1) inset,
-    0 1px 3px rgba(0,0,0,0.04),
-    0 4px 12px rgba(0,0,0,0.03),
-    0 8px 24px rgba(0,0,0,0.02) !important;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.8) inset, 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04) !important;
 }
-#bell-notif{
-  background: #ffffff !important;
-  border: 1px solid rgba(0,0,0,0.07) !important;
-  box-shadow: 
-    0 1px 0 rgba(255,255,255,1) inset,
-    0 1px 3px rgba(0,0,0,0.04),
-    0 4px 12px rgba(0,0,0,0.03) !important;
-}
-
-/* === BUSCA - INPUT COM PROFUNDIDADE === */
-#busca{
-  background: #ffffff !important;
-  border: 1px solid rgba(0,0,0,0.06) !important;
-  box-shadow: 
-    0 1px 0 rgba(255,255,255,1) inset,
-    inset 0 1px 2px rgba(0,0,0,0.02),
-    0 1px 3px rgba(0,0,0,0.02) !important;
-}
-#busca:focus{
-  border-color: rgba(0,0,0,0.12) !important;
-  box-shadow: 
-    0 1px 0 rgba(255,255,255,1) inset,
-    0 0 0 3px rgba(0,0,0,0.04),
-    0 4px 16px rgba(0,0,0,0.06) !important;
-}
-
-/* === WELCOME POPUP - MANTÉM CLEAN === */
-#welcome-popup{
-  box-shadow: 
-    0 1px 0 rgba(255,255,255,1) inset,
-    0 4px 16px rgba(0,0,0,0.06),
-    0 12px 40px rgba(0,0,0,0.08) !important;
-}
-
-/* === MODO SUPER LEVE - BADGE === */
-#badge-super-leve{
-  background: linear-gradient(135deg,#10b981,#059669);
-  color:white; font-size:10px; font-weight:900; letter-spacing:0.08em;
-  padding:4px 10px; border-radius:999px;
-  box-shadow:0 2px 8px rgba(16,185,129,0.3);
-}
-#paginacao-super-leve{
-  display:flex; justify-content:center; align-items:center; gap:8px;
-  margin:20px 0; padding:16px;
-}
-.btn-paginacao{
-  height:36px; padding:0 16px; border-radius:999px; font-weight:800; font-size:12px;
-  background:white; border:1px solid rgba(0,0,0,0.08);
-  box-shadow:0 2px 8px rgba(0,0,0,0.04);
-  transition:all 0.2s;
-}
-.btn-paginacao:hover{ transform:translateY(-1px); box-shadow:0 4px 16px rgba(0,0,0,0.08); }
-.btn-paginacao:disabled{ opacity:0.4; pointer-events:none; }
-.btn-paginacao.ativo{ background:black; color:white; border-color:black; }
-
 </style>
 
 <p></head><br>
@@ -394,13 +244,13 @@ header{
         <div class="absolute -top-1 -right-1 w-3 h-3 bg-[#ff6b2b] rounded-full grid place-items-center text-[7px]">✦</div><br>
       </div><br>
       <div class="flex flex-col leading-none"><br>
-        <b id="nome-loja" class="text-[16px] tracking-[-0.02em] font-black text-black leading-none">ACHADINHOS</b><span id="badge-super-leve" class="ml-2">SUPER LEVE • 1.000</span><br>
+        <b id="nome-loja" class="text-[16px] tracking-[-0.02em] font-black text-black leading-none">ACHADINHOS</b><br>
         <span class="text-[9px] font-bold tracking-[0.12em] text-zinc-500 leading-none mt-0.5">OFICIAL STORE</span><br>
       </div><br>
       <span id="tag-loja" class="hidden">MOBILE</span><br>
     </div><br>
     <div class="flex items-center gap-2 ml-auto"><br>
-      <button id="btn-cliente" class="h-8 px-3 rounded-full bg-white border border-zinc-200 flex items-center gap-1.5 font-bold text-[12px] text-black shadow-sm animate-pulse"><br>
+      <button id="btn-cliente" class="h-8 px-3 rounded-full bg-white border border-zinc-200 flex items-center gap-1.5 font-bold text-[12px] text-black shadow-sm"><br>
       <span id="btn-cliente-icon" class="w-5 h-5 rounded-full bg-black text-white grid place-items-center text-[10px] font-black">👤</span><br>
       <span id="btn-cliente-text">Seu nome</span><br>
     </button><br>
@@ -450,7 +300,7 @@ header{
       </p><h1 class="text-[22px] leading-[1.05] font-black mt-1 tracking-tight"><span id="banner-t1">Achadinhos que</span><br>
 <span id="banner-t2" class="text-[#ff6b2b]">valem cada centavo</span></h1><br>
       <div class="mt-3 flex items-center gap-2"><br>
-        <span class="text-[11px] bg-white text-black px-2.5 py-1 rounded-full font-bold" id="contador-top">19 achados • Super Leve</span><br>
+        <span class="text-[11px] bg-white text-black px-2.5 py-1 rounded-full font-bold" id="contador-top">19 achados</span><br>
         <span class="text-[11px] text-emerald-400">● <span id="online-top">0 on-line</span></span><br>
       </div><br>
     </div><br>
@@ -470,7 +320,6 @@ header{
     <div class="bg-white rounded-[14px] border border-zinc-200 overflow-hidden"><div class="aspect-square bg-zinc-100 skeleton"></div><div class="p-2 space-y-2"><div class="h-3 bg-zinc-100 rounded skeleton"></div><div class="h-3 bg-zinc-100 rounded w-3/4 skeleton"></div><div class="h-8 bg-zinc-100 rounded-full skeleton mt-2"></div></div></div><br>
   </div><br>
   <div id="grid" class="grid grid-cols-2 gap-2.5"><div onclick="abrirResumo('1')" class="produto-card bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col cursor-pointer active:scale-[0.98] transition"><div class="aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden"><span class="text-[42px]">🗄️</span><div class="absolute top-2 left-2 bg-[#ff6b2b] text-white text-[10px] font-black px-2 py-1 rounded-full">-49%</div><div class="absolute bottom-1 right-1 bg-black/70 text-white text-[9px] font-bold px-2 py-0.5 rounded-full">👁️ Ver resumo</div></div><div class="p-2 flex-1 flex flex-col"><p class="line-2 font-semibold text-[12.5px] min-h-[32px]">Organizador de Gaveta Acrílico Cristal 3 Divisórias</p><div class="mt-2"><div class="text-[10px] text-zinc-400 line-through">R\( 59,00&lt;/div&gt;&lt;div class=&quot;flex items-baseline gap-0.5&quot;&gt;&lt;span class=&quot;text-[11px] font-bold&quot;&gt;R\)</span><span class="text-[16px] font-black">29,90</span></div></div><div class="mt-1.5 flex items-center gap-1"><span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-[#ee4d2d] text-white">SHOPEE</span></div><a href="https://shopee.com.br" data-id="1" data-nome="Organizador de Gaveta Acrílico Cristal 3 Divisórias" target="_blank" onclick="event.stopPropagation()" class="btn-oferta mt-2 h-8 bg-[#ff6b2b] text-white rounded-full grid place-items-center font-extrabold text-[12px]">VER OFERTA</a></div></div><div onclick="abrirResumo('2')" class="produto-card bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col cursor-pointer active:scale-[0.98] transition"><div class="aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden"><span class="text-[42px]">🍟</span><div class="absolute top-2 left-2 bg-[#ff6b2b] text-white text-[10px] font-black px-2 py-1 rounded-full">-30%</div><div class="absolute bottom-1 right-1 bg-black/70 text-white text-[9px] font-bold px-2 py-0.5 rounded-full">👁️ Ver resumo</div></div><div class="p-2 flex-1 flex flex-col"><p class="line-2 font-semibold text-[12.5px] min-h-[32px]">Air Fryer 4.2L Digital Timer Antiaderente</p><div class="mt-2"><div class="text-[10px] text-zinc-400 line-through">R\( 399,00&lt;/div&gt;&lt;div class=&quot;flex items-baseline gap-0.5&quot;&gt;&lt;span class=&quot;text-[11px] font-bold&quot;&gt;R\)</span><span class="text-[16px] font-black">279,00</span></div></div><div class="mt-1.5 flex items-center gap-1"><span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-black text-white">AMAZON</span></div><a href="https://amazon.com.br" data-id="2" data-nome="Air Fryer 4.2L Digital Timer Antiaderente" target="_blank" onclick="event.stopPropagation()" class="btn-oferta mt-2 h-8 bg-[#ff6b2b] text-white rounded-full grid place-items-center font-extrabold text-[12px]">VER OFERTA</a></div></div><div onclick="abrirResumo('3')" class="produto-card bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col cursor-pointer active:scale-[0.98] transition"><div class="aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden"><span class="text-[42px]">💡</span><div class="absolute bottom-1 right-1 bg-black/70 text-white text-[9px] font-bold px-2 py-0.5 rounded-full">👁️ Ver resumo</div></div><div class="p-2 flex-1 flex flex-col"><p class="line-2 font-semibold text-[12.5px] min-h-[32px]">Luminária com Sensor de Presença LED Recarregável</p><div class="mt-2"><div class="flex items-baseline gap-0.5"><span class="text-[11px] font-bold">R\(&lt;/span&gt;&lt;span class=&quot;text-[16px] font-black&quot;&gt;34,90&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;mt-1.5 flex items-center gap-1&quot;&gt;&lt;span class=&quot;text-[9px] font-black px-2 py-0.5 rounded-full bg-[#ee4d2d] text-white&quot;&gt;SHOPEE&lt;/span&gt;&lt;/div&gt;&lt;a href=&quot;https://shopee.com.br&quot; data-id=&quot;3&quot; data-nome=&quot;Luminária com Sensor de Presença LED Recarregável&quot; target=&quot;_blank&quot; onclick=&quot;event.stopPropagation()&quot; class=&quot;btn-oferta mt-2 h-8 bg-[#ff6b2b] text-white rounded-full grid place-items-center font-extrabold text-[12px]&quot;&gt;VER OFERTA&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;div onclick=&quot;abrirResumo(&#39;4&#39;)&quot; class=&quot;produto-card bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col cursor-pointer active:scale-[0.98] transition&quot;&gt;&lt;div class=&quot;aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden&quot;&gt;&lt;span class=&quot;text-[42px]&quot;&gt;💇‍♀️&lt;/span&gt;&lt;div class=&quot;absolute bottom-1 right-1 bg-black/70 text-white text-[9px] font-bold px-2 py-0.5 rounded-full&quot;&gt;👁️ Ver resumo&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;p-2 flex-1 flex flex-col&quot;&gt;&lt;p class=&quot;line-2 font-semibold text-[12.5px] min-h-[32px]&quot;&gt;Escova Alisadora 3 em 1 Seca e Modela&lt;/p&gt;&lt;div class=&quot;mt-2&quot;&gt;&lt;div class=&quot;flex items-baseline gap-0.5&quot;&gt;&lt;span class=&quot;text-[11px] font-bold&quot;&gt;R\)</span><span class="text-[16px] font-black">89,90</span></div></div><div class="mt-1.5 flex items-center gap-1"><span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-[#ffe600] text-black text-black">MERCADO LIVRE</span></div><a href="https://mercadolivre.com.br" data-id="4" data-nome="Escova Alisadora 3 em 1 Seca e Modela" target="_blank" onclick="event.stopPropagation()" class="btn-oferta mt-2 h-8 bg-[#ff6b2b] text-white rounded-full grid place-items-center font-extrabold text-[12px]">VER OFERTA</a></div></div><div onclick="abrirResumo('5')" class="produto-card bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col cursor-pointer active:scale-[0.98] transition"><div class="aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden"><span class="text-[42px]">✨</span><div class="absolute bottom-1 right-1 bg-black/70 text-white text-[9px] font-bold px-2 py-0.5 rounded-full">👁️ Ver resumo</div></div><div class="p-2 flex-1 flex flex-col"><p class="line-2 font-semibold text-[12.5px] min-h-[32px]">Kit 10 Panos Mágicos Microfibra Limpeza</p><div class="mt-2"><div class="flex items-baseline gap-0.5"><span class="text-[11px] font-bold">R\(&lt;/span&gt;&lt;span class=&quot;text-[16px] font-black&quot;&gt;19,90&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;mt-1.5 flex items-center gap-1&quot;&gt;&lt;span class=&quot;text-[9px] font-black px-2 py-0.5 rounded-full bg-[#ee4d2d] text-white&quot;&gt;SHOPEE&lt;/span&gt;&lt;/div&gt;&lt;a href=&quot;https://shopee.com.br&quot; data-id=&quot;5&quot; data-nome=&quot;Kit 10 Panos Mágicos Microfibra Limpeza&quot; target=&quot;_blank&quot; onclick=&quot;event.stopPropagation()&quot; class=&quot;btn-oferta mt-2 h-8 bg-[#ff6b2b] text-white rounded-full grid place-items-center font-extrabold text-[12px]&quot;&gt;VER OFERTA&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;div onclick=&quot;abrirResumo(&#39;6&#39;)&quot; class=&quot;produto-card bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col cursor-pointer active:scale-[0.98] transition&quot;&gt;&lt;div class=&quot;aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden&quot;&gt;&lt;span class=&quot;text-[42px]&quot;&gt;📱&lt;/span&gt;&lt;div class=&quot;absolute bottom-1 right-1 bg-black/70 text-white text-[9px] font-bold px-2 py-0.5 rounded-full&quot;&gt;👁️ Ver resumo&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;p-2 flex-1 flex flex-col&quot;&gt;&lt;p class=&quot;line-2 font-semibold text-[12.5px] min-h-[32px]&quot;&gt;Suporte Celular Articulado Mesa e Cama 360°&lt;/p&gt;&lt;div class=&quot;mt-2&quot;&gt;&lt;div class=&quot;flex items-baseline gap-0.5&quot;&gt;&lt;span class=&quot;text-[11px] font-bold&quot;&gt;R\)</span><span class="text-[16px] font-black">26,90</span></div></div><div class="mt-1.5 flex items-center gap-1"><span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-black text-white">AMAZON</span></div><a href="https://amazon.com.br" data-id="6" data-nome="Suporte Celular Articulado Mesa e Cama 360°" target="_blank" onclick="event.stopPropagation()" class="btn-oferta mt-2 h-8 bg-[#ff6b2b] text-white rounded-full grid place-items-center font-extrabold text-[12px]">VER OFERTA</a></div></div><div onclick="abrirResumo('7')" class="produto-card bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col cursor-pointer active:scale-[0.98] transition"><div class="aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden"><span class="text-[42px]">📽️</span><div class="absolute top-2 left-2 bg-[#ff6b2b] text-white text-[10px] font-black px-2 py-1 rounded-full">-36%</div><div class="absolute bottom-1 right-1 bg-black/70 text-white text-[9px] font-bold px-2 py-0.5 rounded-full">👁️ Ver resumo</div></div><div class="p-2 flex-1 flex flex-col"><p class="line-2 font-semibold text-[12.5px] min-h-[32px]">Mini Projetor Portátil 4K WiFi</p><div class="mt-2"><div class="text-[10px] text-zinc-400 line-through">R\( 299,00&lt;/div&gt;&lt;div class=&quot;flex items-baseline gap-0.5&quot;&gt;&lt;span class=&quot;text-[11px] font-bold&quot;&gt;R\)</span><span class="text-[16px] font-black">189,90</span></div></div><div class="mt-1.5 flex items-center gap-1"><span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-[#ee4d2d] text-white">SHOPEE</span></div><a href="https://shopee.com.br" data-id="7" data-nome="Mini Projetor Portátil 4K WiFi" target="_blank" onclick="event.stopPropagation()" class="btn-oferta mt-2 h-8 bg-[#ff6b2b] text-white rounded-full grid place-items-center font-extrabold text-[12px]">VER OFERTA</a></div></div><div onclick="abrirResumo('8')" class="produto-card bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col cursor-pointer active:scale-[0.98] transition"><div class="aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden"><span class="text-[42px]">🎧</span><div class="absolute bottom-1 right-1 bg-black/70 text-white text-[9px] font-bold px-2 py-0.5 rounded-full">👁️ Ver resumo</div></div><div class="p-2 flex-1 flex flex-col"><p class="line-2 font-semibold text-[12.5px] min-h-[32px]">Fone Bluetooth TWS com Case Power Bank</p><div class="mt-2"><div class="flex items-baseline gap-0.5"><span class="text-[11px] font-bold">R\(&lt;/span&gt;&lt;span class=&quot;text-[16px] font-black&quot;&gt;49,90&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;mt-1.5 flex items-center gap-1&quot;&gt;&lt;span class=&quot;text-[9px] font-black px-2 py-0.5 rounded-full bg-black text-white&quot;&gt;AMAZON&lt;/span&gt;&lt;/div&gt;&lt;a href=&quot;https://amazon.com.br&quot; data-id=&quot;8&quot; data-nome=&quot;Fone Bluetooth TWS com Case Power Bank&quot; target=&quot;_blank&quot; onclick=&quot;event.stopPropagation()&quot; class=&quot;btn-oferta mt-2 h-8 bg-[#ff6b2b] text-white rounded-full grid place-items-center font-extrabold text-[12px]&quot;&gt;VER OFERTA&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;div onclick=&quot;abrirResumo(&#39;9&#39;)&quot; class=&quot;produto-card bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col cursor-pointer active:scale-[0.98] transition&quot;&gt;&lt;div class=&quot;aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden&quot;&gt;&lt;span class=&quot;text-[42px]&quot;&gt;👗&lt;/span&gt;&lt;div class=&quot;absolute top-2 left-2 bg-[#ff6b2b] text-white text-[10px] font-black px-2 py-1 rounded-full&quot;&gt;-40%&lt;/div&gt;&lt;div class=&quot;absolute bottom-1 right-1 bg-black/70 text-white text-[9px] font-bold px-2 py-0.5 rounded-full&quot;&gt;👁️ Ver resumo&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;p-2 flex-1 flex flex-col&quot;&gt;&lt;p class=&quot;line-2 font-semibold text-[12.5px] min-h-[32px]&quot;&gt;Vestido Feminino Longo Floral Verão&lt;/p&gt;&lt;div class=&quot;mt-2&quot;&gt;&lt;div class=&quot;text-[10px] text-zinc-400 line-through&quot;&gt;R\) 149,90</div><div class="flex items-baseline gap-0.5"><span class="text-[11px] font-bold">R\(&lt;/span&gt;&lt;span class=&quot;text-[16px] font-black&quot;&gt;89,90&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;mt-1.5 flex items-center gap-1&quot;&gt;&lt;span class=&quot;text-[9px] font-black px-2 py-0.5 rounded-full bg-[#ee4d2d] text-white&quot;&gt;SHOPEE&lt;/span&gt;&lt;/div&gt;&lt;a href=&quot;https://shopee.com.br&quot; data-id=&quot;9&quot; data-nome=&quot;Vestido Feminino Longo Floral Verão&quot; target=&quot;_blank&quot; onclick=&quot;event.stopPropagation()&quot; class=&quot;btn-oferta mt-2 h-8 bg-[#ff6b2b] text-white rounded-full grid place-items-center font-extrabold text-[12px]&quot;&gt;VER OFERTA&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;div onclick=&quot;abrirResumo(&#39;10&#39;)&quot; class=&quot;produto-card bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col cursor-pointer active:scale-[0.98] transition&quot;&gt;&lt;div class=&quot;aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden&quot;&gt;&lt;span class=&quot;text-[42px]&quot;&gt;💄&lt;/span&gt;&lt;div class=&quot;absolute bottom-1 right-1 bg-black/70 text-white text-[9px] font-bold px-2 py-0.5 rounded-full&quot;&gt;👁️ Ver resumo&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;p-2 flex-1 flex flex-col&quot;&gt;&lt;p class=&quot;line-2 font-semibold text-[12.5px] min-h-[32px]&quot;&gt;Kit Maquiagem Completo 12 Itens&lt;/p&gt;&lt;div class=&quot;mt-2&quot;&gt;&lt;div class=&quot;flex items-baseline gap-0.5&quot;&gt;&lt;span class=&quot;text-[11px] font-bold&quot;&gt;R\)</span><span class="text-[16px] font-black">59,90</span></div></div><div class="mt-1.5 flex items-center gap-1"><span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-[#ee4d2d] text-white">SHOPEE</span></div><a href="https://shopee.com.br" data-id="10" data-nome="Kit Maquiagem Completo 12 Itens" target="_blank" onclick="event.stopPropagation()" class="btn-oferta mt-2 h-8 bg-[#ff6b2b] text-white rounded-full grid place-items-center font-extrabold text-[12px]">VER OFERTA</a></div></div><div onclick="abrirResumo('11')" class="produto-card bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col cursor-pointer active:scale-[0.98] transition"><div class="aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden"><span class="text-[42px]">👜</span><div class="absolute top-2 left-2 bg-[#ff6b2b] text-white text-[10px] font-black px-2 py-1 rounded-full">-38%</div><div class="absolute bottom-1 right-1 bg-black/70 text-white text-[9px] font-bold px-2 py-0.5 rounded-full">👁️ Ver resumo</div></div><div class="p-2 flex-1 flex flex-col"><p class="line-2 font-semibold text-[12.5px] min-h-[32px]">Bolsa Feminina Transversal Couro</p><div class="mt-2"><div class="text-[10px] text-zinc-400 line-through">R\( 129,90&lt;/div&gt;&lt;div class=&quot;flex items-baseline gap-0.5&quot;&gt;&lt;span class=&quot;text-[11px] font-bold&quot;&gt;R\)</span><span class="text-[16px] font-black">79,90</span></div></div><div class="mt-1.5 flex items-center gap-1"><span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-black text-white">AMAZON</span></div><a href="https://amazon.com.br" data-id="11" data-nome="Bolsa Feminina Transversal Couro" target="_blank" onclick="event.stopPropagation()" class="btn-oferta mt-2 h-8 bg-[#ff6b2b] text-white rounded-full grid place-items-center font-extrabold text-[12px]">VER OFERTA</a></div></div><div onclick="abrirResumo('12')" class="produto-card bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col cursor-pointer active:scale-[0.98] transition"><div class="aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden"><span class="text-[42px]">👠</span><div class="absolute bottom-1 right-1 bg-black/70 text-white text-[9px] font-bold px-2 py-0.5 rounded-full">👁️ Ver resumo</div></div><div class="p-2 flex-1 flex flex-col"><p class="line-2 font-semibold text-[12.5px] min-h-[32px]">Sandália Salto Alto Feminina</p><div class="mt-2"><div class="flex items-baseline gap-0.5"><span class="text-[11px] font-bold">R\(&lt;/span&gt;&lt;span class=&quot;text-[16px] font-black&quot;&gt;99,90&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;mt-1.5 flex items-center gap-1&quot;&gt;&lt;span class=&quot;text-[9px] font-black px-2 py-0.5 rounded-full bg-[#ffe600] text-black text-black&quot;&gt;MERCADO LIVRE&lt;/span&gt;&lt;/div&gt;&lt;a href=&quot;https://mercadolivre.com.br&quot; data-id=&quot;12&quot; data-nome=&quot;Sandália Salto Alto Feminina&quot; target=&quot;_blank&quot; onclick=&quot;event.stopPropagation()&quot; class=&quot;btn-oferta mt-2 h-8 bg-[#ff6b2b] text-white rounded-full grid place-items-center font-extrabold text-[12px]&quot;&gt;VER OFERTA&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;div onclick=&quot;abrirResumo(&#39;13&#39;)&quot; class=&quot;produto-card bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col cursor-pointer active:scale-[0.98] transition&quot;&gt;&lt;div class=&quot;aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden&quot;&gt;&lt;span class=&quot;text-[42px]&quot;&gt;💖&lt;/span&gt;&lt;div class=&quot;absolute bottom-1 right-1 bg-black/70 text-white text-[9px] font-bold px-2 py-0.5 rounded-full&quot;&gt;👁️ Ver resumo&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;p-2 flex-1 flex flex-col&quot;&gt;&lt;p class=&quot;line-2 font-semibold text-[12.5px] min-h-[32px]&quot;&gt;Conjunto Lingerie Rendada&lt;/p&gt;&lt;div class=&quot;mt-2&quot;&gt;&lt;div class=&quot;flex items-baseline gap-0.5&quot;&gt;&lt;span class=&quot;text-[11px] font-bold&quot;&gt;R\)</span><span class="text-[16px] font-black">45,90</span></div></div><div class="mt-1.5 flex items-center gap-1"><span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-[#ee4d2d] text-white">SHOPEE</span></div><a href="https://shopee.com.br" data-id="13" data-nome="Conjunto Lingerie Rendada" target="_blank" onclick="event.stopPropagation()" class="btn-oferta mt-2 h-8 bg-[#ff6b2b] text-white rounded-full grid place-items-center font-extrabold text-[12px]">VER OFERTA</a></div></div><div onclick="abrirResumo('14')" class="produto-card bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col cursor-pointer active:scale-[0.98] transition"><div class="aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden"><span class="text-[42px]">✨</span><div class="absolute bottom-1 right-1 bg-black/70 text-white text-[9px] font-bold px-2 py-0.5 rounded-full">👁️ Ver resumo</div></div><div class="p-2 flex-1 flex flex-col"><p class="line-2 font-semibold text-[12.5px] min-h-[32px]">Kit Skincare Ácido Hialurônico</p><div class="mt-2"><div class="flex items-baseline gap-0.5"><span class="text-[11px] font-bold">R\(&lt;/span&gt;&lt;span class=&quot;text-[16px] font-black&quot;&gt;69,90&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;mt-1.5 flex items-center gap-1&quot;&gt;&lt;span class=&quot;text-[9px] font-black px-2 py-0.5 rounded-full bg-black text-white&quot;&gt;AMAZON&lt;/span&gt;&lt;/div&gt;&lt;a href=&quot;https://amazon.com.br&quot; data-id=&quot;14&quot; data-nome=&quot;Kit Skincare Ácido Hialurônico&quot; target=&quot;_blank&quot; onclick=&quot;event.stopPropagation()&quot; class=&quot;btn-oferta mt-2 h-8 bg-[#ff6b2b] text-white rounded-full grid place-items-center font-extrabold text-[12px]&quot;&gt;VER OFERTA&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;div onclick=&quot;abrirResumo(&#39;15&#39;)&quot; class=&quot;produto-card bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col cursor-pointer active:scale-[0.98] transition&quot;&gt;&lt;div class=&quot;aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden&quot;&gt;&lt;span class=&quot;text-[42px]&quot;&gt;👕&lt;/span&gt;&lt;div class=&quot;absolute top-2 left-2 bg-[#ff6b2b] text-white text-[10px] font-black px-2 py-1 rounded-full&quot;&gt;-40%&lt;/div&gt;&lt;div class=&quot;absolute bottom-1 right-1 bg-black/70 text-white text-[9px] font-bold px-2 py-0.5 rounded-full&quot;&gt;👁️ Ver resumo&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;p-2 flex-1 flex flex-col&quot;&gt;&lt;p class=&quot;line-2 font-semibold text-[12.5px] min-h-[32px]&quot;&gt;Camisa Masculina Oversized Street&lt;/p&gt;&lt;div class=&quot;mt-2&quot;&gt;&lt;div class=&quot;text-[10px] text-zinc-400 line-through&quot;&gt;R\) 99,90</div><div class="flex items-baseline gap-0.5"><span class="text-[11px] font-bold">R\(&lt;/span&gt;&lt;span class=&quot;text-[16px] font-black&quot;&gt;59,90&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;mt-1.5 flex items-center gap-1&quot;&gt;&lt;span class=&quot;text-[9px] font-black px-2 py-0.5 rounded-full bg-[#ee4d2d] text-white&quot;&gt;SHOPEE&lt;/span&gt;&lt;/div&gt;&lt;a href=&quot;https://shopee.com.br&quot; data-id=&quot;15&quot; data-nome=&quot;Camisa Masculina Oversized Street&quot; target=&quot;_blank&quot; onclick=&quot;event.stopPropagation()&quot; class=&quot;btn-oferta mt-2 h-8 bg-[#ff6b2b] text-white rounded-full grid place-items-center font-extrabold text-[12px]&quot;&gt;VER OFERTA&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;div onclick=&quot;abrirResumo(&#39;16&#39;)&quot; class=&quot;produto-card bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col cursor-pointer active:scale-[0.98] transition&quot;&gt;&lt;div class=&quot;aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden&quot;&gt;&lt;span class=&quot;text-[42px]&quot;&gt;🩳&lt;/span&gt;&lt;div class=&quot;absolute bottom-1 right-1 bg-black/70 text-white text-[9px] font-bold px-2 py-0.5 rounded-full&quot;&gt;👁️ Ver resumo&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;p-2 flex-1 flex flex-col&quot;&gt;&lt;p class=&quot;line-2 font-semibold text-[12.5px] min-h-[32px]&quot;&gt;Bermuda Moletom Masculina&lt;/p&gt;&lt;div class=&quot;mt-2&quot;&gt;&lt;div class=&quot;flex items-baseline gap-0.5&quot;&gt;&lt;span class=&quot;text-[11px] font-bold&quot;&gt;R\)</span><span class="text-[16px] font-black">49,90</span></div></div><div class="mt-1.5 flex items-center gap-1"><span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-black text-white">AMAZON</span></div><a href="https://amazon.com.br" data-id="16" data-nome="Bermuda Moletom Masculina" target="_blank" onclick="event.stopPropagation()" class="btn-oferta mt-2 h-8 bg-[#ff6b2b] text-white rounded-full grid place-items-center font-extrabold text-[12px]">VER OFERTA</a></div></div><div onclick="abrirResumo('17')" class="produto-card bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col cursor-pointer active:scale-[0.98] transition"><div class="aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden"><span class="text-[42px]">👟</span><div class="absolute top-2 left-2 bg-[#ff6b2b] text-white text-[10px] font-black px-2 py-1 rounded-full">-35%</div><div class="absolute bottom-1 right-1 bg-black/70 text-white text-[9px] font-bold px-2 py-0.5 rounded-full">👁️ Ver resumo</div></div><div class="p-2 flex-1 flex flex-col"><p class="line-2 font-semibold text-[12.5px] min-h-[32px]">Tênis Masculino Esportivo Corrida</p><div class="mt-2"><div class="text-[10px] text-zinc-400 line-through">R\( 199,90&lt;/div&gt;&lt;div class=&quot;flex items-baseline gap-0.5&quot;&gt;&lt;span class=&quot;text-[11px] font-bold&quot;&gt;R\)</span><span class="text-[16px] font-black">129,90</span></div></div><div class="mt-1.5 flex items-center gap-1"><span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-[#ffe600] text-black text-black">MERCADO LIVRE</span></div><a href="https://mercadolivre.com.br" data-id="17" data-nome="Tênis Masculino Esportivo Corrida" target="_blank" onclick="event.stopPropagation()" class="btn-oferta mt-2 h-8 bg-[#ff6b2b] text-white rounded-full grid place-items-center font-extrabold text-[12px]">VER OFERTA</a></div></div><div onclick="abrirResumo('18')" class="produto-card bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col cursor-pointer active:scale-[0.98] transition"><div class="aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden"><span class="text-[42px]">🧢</span><div class="absolute bottom-1 right-1 bg-black/70 text-white text-[9px] font-bold px-2 py-0.5 rounded-full">👁️ Ver resumo</div></div><div class="p-2 flex-1 flex flex-col"><p class="line-2 font-semibold text-[12.5px] min-h-[32px]">Boné Aba Reta Original</p><div class="mt-2"><div class="flex items-baseline gap-0.5"><span class="text-[11px] font-bold">R\(&lt;/span&gt;&lt;span class=&quot;text-[16px] font-black&quot;&gt;39,90&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;mt-1.5 flex items-center gap-1&quot;&gt;&lt;span class=&quot;text-[9px] font-black px-2 py-0.5 rounded-full bg-[#ee4d2d] text-white&quot;&gt;SHOPEE&lt;/span&gt;&lt;/div&gt;&lt;a href=&quot;https://shopee.com.br&quot; data-id=&quot;18&quot; data-nome=&quot;Boné Aba Reta Original&quot; target=&quot;_blank&quot; onclick=&quot;event.stopPropagation()&quot; class=&quot;btn-oferta mt-2 h-8 bg-[#ff6b2b] text-white rounded-full grid place-items-center font-extrabold text-[12px]&quot;&gt;VER OFERTA&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;div onclick=&quot;abrirResumo(&#39;19&#39;)&quot; class=&quot;produto-card bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col cursor-pointer active:scale-[0.98] transition&quot;&gt;&lt;div class=&quot;aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden&quot;&gt;&lt;span class=&quot;text-[42px]&quot;&gt;⌚&lt;/span&gt;&lt;div class=&quot;absolute top-2 left-2 bg-[#ff6b2b] text-white text-[10px] font-black px-2 py-1 rounded-full&quot;&gt;-47%&lt;/div&gt;&lt;div class=&quot;absolute bottom-1 right-1 bg-black/70 text-white text-[9px] font-bold px-2 py-0.5 rounded-full&quot;&gt;👁️ Ver resumo&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;p-2 flex-1 flex flex-col&quot;&gt;&lt;p class=&quot;line-2 font-semibold text-[12.5px] min-h-[32px]&quot;&gt;Relógio Masculino Esportivo Prova D&#39;água&lt;/p&gt;&lt;div class=&quot;mt-2&quot;&gt;&lt;div class=&quot;text-[10px] text-zinc-400 line-through&quot;&gt;R\) 149,90</div><div class="flex items-baseline gap-0.5"><span class="text-[11px] font-bold">R$</span><span class="text-[16px] font-black">79,90</span></div></div><div class="mt-1.5 flex items-center gap-1"><span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-black text-white">AMAZON</span></div><a href="https://amazon.com.br" data-id="19" data-nome="Relógio Masculino Esportivo Prova D'água" target="_blank" onclick="event.stopPropagation()" class="btn-oferta mt-2 h-8 bg-[#ff6b2b] text-white rounded-full grid place-items-center font-extrabold text-[12px]">VER OFERTA</a></div></div></div><br>
-  <div id="paginacao-super-leve" class="col-span-2"></div><br>
   <div id="empty-state" class="hidden col-span-2 py-12 text-center bg-white rounded-[14px] border border-dashed border-zinc-200 mt-2"><br>
     <p class="text-[28px]">🔍<br>
     </p><p class="font-black text-[14px] mt-2 text-black" id="empty-title">Nada por aqui ainda<br>
@@ -488,15 +337,9 @@ header{
   </p></div><br>
 </main></p>
 
-<div id="welcome-popup" class="fixed top-[18px] left-1/2 -translate-x-1/2 z-[90] bg-white text-zinc-900 px-[18px] py-[12px] rounded-[14px] shadow-[0_8px_32px_rgba(0,0,0,0.08)] max-w-[320px] w-[88%] border border-zinc-200/70 backdrop-blur-xl">
-  <div class="flex items-start gap-3">
-    <div class="w-[6px] h-[6px] rounded-full bg-zinc-900 mt-[6px] shrink-0"></div>
-    <div>
-      <p id="welcome-text" class="text-[13px] font-semibold leading-[1.35] tracking-[-0.01em] text-zinc-900">Bem-vindo aos Achadinhos</p>
-      <p class="text-[11px] text-zinc-500 mt-[2px] font-[500] leading-[1.3]">Os melhores achados em tempo real</p>
-    </div>
-  </div>
-</div>
+<div id="welcome-popup" class="fixed top-[16px] left-1/2 -translate-x-1/2 z-[90] bg-black text-white px-6 py-4 rounded-[20px] shadow-2xl max-w-[90%] text-center border border-zinc-800 hidden">
+  <p id="welcome-text" class="text-[14px] font-black leading-tight">Bem-vindo aos Achadinhos! 🛒🔥</p><p class="text-[11px] text-white/60 mt-1 font-medium">Os melhores achados em tempo real
+</p></div>
 <div id="toast" class="fixed bottom-[20px] left-1/2 -translate-x-1/2 bg-black text-white px-5 py-3 rounded-full text-[13px] font-bold shadow-2xl hidden z-[60] max-w-[90%] text-center"></div>
 
 <div id="modal-sininho" class="fixed inset-0 z-[80] bg-black/60 hidden">
@@ -678,30 +521,10 @@ const Ev=[
 {id:"18",nome:"Boné Aba Reta Original",precoNovo:39.9,loja:"Shopee",emoji:"🧢",categoria:"Bonés",affiliateLink:"https://shopee.com.br"},
 {id:"19",nome:"Relógio Masculino Esportivo Prova D'água",precoNovo:79.9,precoAntigo:149.9,loja:"Amazon",emoji:"⌚",categoria:"Acessórios",affiliateLink:"https://amazon.com.br"}
 ];
-let produtos=[...Ev]; let filtroCat="Todas"; let busca=""; let produtosPorPagina=24; let paginaAtual=1; const MODO_SUPER_LEVE=true;
+let produtos=[...Ev]; let filtroCat="Todas"; let busca="";
 function toast(m){const el=document.getElementById('toast'); if(!el) return; el.textContent=m; el.classList.remove('hidden'); setTimeout(()=>el.classList.add('hidden'),3000);}
-function mostrarBoasVindas(){const popup=document.getElementById('welcome-popup');const txt=document.getElementById('welcome-text');if(!popup||!txt)return;const nome=localStorage.getItem('cliente_nome');if(nome&&nome.trim()){const primeiro=nome.trim().split(' ')[0];txt.textContent=`Olá, ${primeiro}`;}else{txt.textContent=`Bem-vindo aos Achadinhos`;}popup.classList.remove('hidden');setTimeout(()=>{popup.classList.add('hidden');},4000);}
+function mostrarBoasVindas(){const popup=document.getElementById('welcome-popup');const txt=document.getElementById('welcome-text');if(!popup||!txt)return;const nome=localStorage.getItem('cliente_nome');if(nome&&nome.trim()){const primeiro=nome.trim().split(' ')[0];txt.innerHTML=`Olá, ${primeiro}! 👋 Bem-vinda de volta!`;}else{txt.innerHTML=`Bem-vindo aos Achadinhos! 🛒🔥`;}popup.classList.remove('hidden');setTimeout(()=>{popup.classList.add('hidden');},5000);}
 window.addEventListener('load',()=>{setTimeout(mostrarBoasVindas,800);});
-
-function atualizarPaginacao(totalFiltrado){
-  const cont = document.getElementById('paginacao-super-leve');
-  if(!cont) return;
-  const totalPaginas = Math.ceil(totalFiltrado / produtosPorPagina);
-  if(totalPaginas <= 1){ cont.innerHTML=''; return; }
-  let htmlPag = '';
-  htmlPag += '<button class="btn-paginacao" onclick="paginaAnterior()" '+(paginaAtual===1?'disabled':'')+'>◀ Anterior</button>';
-  htmlPag += '<span class="text-[11px] font-bold text-zinc-500 px-2">'+paginaAtual+' / '+totalPaginas+' • '+totalFiltrado+' achados</span>';
-  htmlPag += '<button class="btn-paginacao" onclick="proximaPagina()" '+(paginaAtual===totalPaginas?'disabled':'')+'>Próxima ▶</button>';
-  if(totalPaginas>3){
-    htmlPag += '<button class="btn-paginacao" style="background:#10b981;color:white;border-color:#10b981" onclick="carregarTudo()">Ver tudo ('+totalFiltrado+')</button>';
-  }
-  cont.innerHTML = htmlPag;
-}
-function paginaAnterior(){ if(paginaAtual>1){ paginaAtual--; render(); window.scrollTo({top:0,behavior:'smooth'}); } }
-function proximaPagina(){ paginaAtual++; render(); window.scrollTo({top:0,behavior:'smooth'}); }
-function carregarTudo(){ produtosPorPagina = 1000; paginaAtual=1; render(); toast("⚡ Mostrando tudo - modo 1.000 produtos ativo!"); }
-function resetarPaginacao(){ paginaAtual=1; produtosPorPagina=24; }
-
 function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
 function render(){
   const grid=document.getElementById('grid');
@@ -743,27 +566,11 @@ function render(){
     return matchBusca&&matchCat;
   });
   const elCont=document.getElementById('contador'); if(elCont) elCont.textContent=lista.length;
-  const elContTop=document.getElementById('contador-top'); if(elContTop) elContTop.textContent=produtos.length+" achados • Super Leve";
+  const elContTop=document.getElementById('contador-top'); if(elContTop) elContTop.textContent=produtos.length+" achados";
   const elTotal=document.getElementById('total'); if(elTotal) elTotal.textContent=produtos.length;
   const skeleton = document.getElementById('skeleton');
-  // PAGINACAO SUPER LEVE
-  const totalPaginas = Math.ceil(lista.length / produtosPorPagina);
-  if(paginaAtual > totalPaginas) paginaAtual = 1;
-  const inicio = (paginaAtual - 1) * produtosPorPagina;
-  const fim = inicio + produtosPorPagina;
-  const listaCompletaParaContador = lista.slice(); const listaPaginada = lista.slice(inicio, fim); lista = listaPaginada;
-  setTimeout(()=>{ try{ atualizarPaginacao(listaCompletaParaContador.length); }catch(e){} },50);
-  // sobrescreve lista para render
-  lista = listaPaginada;
-  setTimeout(()=>{ try{ atualizarPaginacao(listaCompletaParaContador.length); }catch(e){} },50);
-  window._listaTotalFiltrada = arguments[0] || lista;
-  // guarda lista completa para paginacao
-  window._listaCompleta = arguments[0] ? arguments[0] : null;
-
   const emptyState = document.getElementById('empty-state');
   if(skeleton) skeleton.classList.add('hidden');
-  // Guarda total filtrado antes de paginar
-  const totalFiltradoReal = typeof listaCompletaParaContador !== 'undefined' ? listaCompletaParaContador.length : lista.length + (window._totalFiltrado||0);
   grid.classList.remove('hidden');
   if(lista.length===0){
     grid.classList.add('hidden');
@@ -952,7 +759,7 @@ function atualizarAvatar(){
 window.atualizarAvatarGlobal = function(nome){ nomeCliente = nome; atualizarAvatar(); };
 atualizarAvatar();
 
-document.getElementById('busca')?.addEventListener('input',e=>{busca=e.target.value;resetarPaginacao();render();});
+document.getElementById('busca')?.addEventListener('input',e=>{busca=e.target.value;render();});
 // DROPDOWN - DOIS JUNTOS
 const btnFem=document.getElementById('btn-feminino');
 const btnMasc=document.getElementById('btn-masculino');
@@ -1015,7 +822,7 @@ document.querySelectorAll('.cat').forEach(btn=>{
     }else{
       btn.className='cat shrink-0 h-[30px] px-3 rounded-full text-[12px] font-bold bg-black text-white';
     }
-    filtroCat=btn.dataset.cat; resetarPaginacao(); render();
+    filtroCat=btn.dataset.cat; render();
   });
 });
 let clicks=[];
@@ -1098,26 +905,76 @@ const prevBox = document.getElementById('preview-img');
 const prevTag = document.getElementById('preview-img-tag');
 
 async function otimizarAoColar(valor){
-  // VERSAO SUPER LEVE - ZERO STORAGE - 100% LINK EXTERNO
-  const v = valor.trim();
-  if(!v){ prevBox?.classList.add('hidden'); imagemOtimizadaFinal=null; return; }
+  if(otimizandoAuto) return;
+  let v = valor.trim();
+  if(!v) return;
+  // FIX GOOGLE: se colou link do Google Lens/imgres, extrai o imgurl real
+  if(v.includes('google.com/imgres') && v.includes('imgurl=')){
+    try{
+      const urlObj = new URL(v);
+      const imgurl = urlObj.searchParams.get('imgurl');
+      if(imgurl){ v = decodeURIComponent(imgurl); toast("🔗 Link do Google convertido pro link direto!"); }
+    }catch(e){}
+  }
   const ehImagem = v.startsWith('http://')||v.startsWith('https://')||v.startsWith('data:image');
-  if(!ehImagem && v.length>4){ prevBox?.classList.add('hidden'); imagemOtimizadaFinal=null; return; }
-  if(v.length <= 4 && !ehImagem) return;
-  
-  prevBox?.classList.remove('hidden');
-  if(prevTag){ prevTag.style.display='block'; prevTag.src=v; }
-  
-  if(v.startsWith('data:image')){
-    toast("⚠️ Na versão super leve, use apenas link https:// da Shopee/Amazon. data:image gasta seu Storage!");
-    imagemOtimizadaFinal = v; // mantem mas avisa
+  if(!ehImagem) {
+    prevBox?.classList.add('hidden');
+    imagemOtimizadaFinal = null;
     return;
   }
-  if(v.startsWith('http')){
-    // NÃO COMPRIME, NÃO SOBE PRO STORAGE - USA LINK DIRETO = 0MB de Storage
+  if(v.length <= 4) return;
+  otimizandoAuto = true;
+  const btnSalvar = document.getElementById('f-salvar');
+  const txtBtnOriginal = btnSalvar ? btnSalvar.textContent : '';
+  try{
+    prevBox.classList.remove('hidden');
+    prevTag.src = v;
+    if(v.startsWith('data:image')){
+      if(btnSalvar){ btnSalvar.textContent = "🗜️ iPhone: comprimindo..."; btnSalvar.disabled = true; }
+      toast("📱 iPhone detectado, comprimindo pra 40KB...");
+      const blobOrig = await dataUrlParaBlobAuto(v);
+      const kbOrig = (blobOrig.size/1024).toFixed(0);
+      const blobComp = await comprimirAuto(v, 600, 0.70);
+      const kbComp = (blobComp.size/1024).toFixed(0);
+      if(btnSalvar) btnSalvar.textContent = "☁️ Subindo...";
+      const urlFinal = await uploadStorageAuto(blobComp);
+      imagemOtimizadaFinal = urlFinal;
+      inputImg.value = urlFinal;
+      prevTag.src = urlFinal;
+      toast("✅ iPhone OK! De "+kbOrig+"KB pra "+kbComp+"KB!");
+    } else if(v.startsWith('http')){
+      // SUPER LEVE se for link direto da Shopee/ML/Amazon
+      const isSuperLeve = v.includes('mlstatic.com') || v.includes('shopee.com.br') || v.includes('m.media-amazon.com') || v.includes('http2.mlstatic') || v.includes('cf.shopee');
+      if(isSuperLeve){
+        imagemOtimizadaFinal = v;
+        inputImg.value = v;
+        prevTag.src = v;
+        toast("✅ SUPER LEVE! Link direto Shopee/ML/Amazon - 0MB Storage, aguenta 1.000 produtos!");
+      } else {
+        if(btnSalvar){ btnSalvar.textContent = "🗜️ Otimizando..."; btnSalvar.disabled = true; }
+        try{
+          const blobComp = await comprimirAuto(v, 600, 0.72);
+          const kbComp = (blobComp.size/1024).toFixed(0);
+          if(btnSalvar) btnSalvar.textContent = "☁️ Salvando...";
+          const urlFinal = await uploadStorageAuto(blobComp);
+          imagemOtimizadaFinal = urlFinal;
+          inputImg.value = urlFinal;
+          prevTag.src = urlFinal;
+          toast("✅ Convertido pra webp "+kbComp+"KB!");
+        }catch(eCors){
+          prevTag.src = v;
+          imagemOtimizadaFinal = v;
+          toast("✅ Link https:// super leve - 0,08KB no banco!");
+        }
+      }
+    }
+  }catch(err){
+    console.error(err);
+    toast("Erro, mas pode salvar - vou tentar como está");
     imagemOtimizadaFinal = v;
-    if(inputImg) inputImg.value = v;
-    toast("✅ MODO SUPER LEVE: link externo direto - 0MB de Storage, aguenta 1.000 produtos!");
+  }finally{
+    otimizandoAuto = false;
+    if(btnSalvar){ btnSalvar.textContent = txtBtnOriginal || "Salvar + 🔔 Notificar todo mundo"; btnSalvar.disabled = false; }
   }
 }
 
@@ -1204,7 +1061,7 @@ try{
   const meuClienteRef = ref(db,'clientes/'+visitorId);
   const meuOnlineRef=ref(db,'online/'+visitorId);
   function atualizaPresenca(){set(meuOnlineRef,{id:visitorId,online:true,ts:Date.now(),ua:navigator.userAgent.substring(0,120),hora:new Date().toLocaleTimeString('pt-BR')});}
-  atualizaPresenca(); setInterval(atualizaPresenca,300000) // SUPER LEVE: 5 min ao inves de 1 min; onDisconnect(meuOnlineRef).remove();
+  atualizaPresenca(); setInterval(atualizaPresenca,60000); onDisconnect(meuOnlineRef).remove();
 
   function mostrarSininhoAuto(){
     const permissao=Notification.permission;
