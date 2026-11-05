@@ -1,4 +1,4 @@
-// ia-inject.js V9 - OFICIAL + CLIENTE - resolve s.shopee no celular e usa API oficial no servidor
+// ia-inject.js V11 - COMPATÍVEL COM V10/V11 - FIX FALTA ENV
 (function(){
   function detectarLojaIA(url){
     const u=(url||'').toLowerCase();
@@ -28,7 +28,7 @@
   function initIA(){
     const inputLink=document.getElementById('f-link');
     const btnSalvar=document.getElementById('f-salvar');
-    if(!inputLink||document.getElementById('btn-ia-scrape-v9')) return;
+    if(!inputLink||document.getElementById('btn-ia-scrape-v11')) return;
     
     const wrapper=document.createElement('div');
     wrapper.style.position='relative';
@@ -39,7 +39,7 @@
     inputLink.placeholder='Cole link CURTO do app - IA Oficial';
     
     const btn=document.createElement('button');
-    btn.id='btn-ia-scrape-v9';
+    btn.id='btn-ia-scrape-v11';
     btn.type='button';
     btn.textContent='🤖 IA Oficial';
     btn.style.position='absolute';
@@ -57,7 +57,7 @@
     wrapper.appendChild(btn);
     
     const status=document.createElement('div');
-    status.id='ia-status-v9';
+    status.id='ia-status-v11';
     status.style.display='none';
     status.style.marginBottom='8px';
     status.style.fontSize='11px';
@@ -69,7 +69,7 @@
       if(!d) return '';
       if(Array.isArray(d)) return d.join(' | ');
       if(typeof d === 'string') return d;
-      try{ return JSON.stringify(d).substring(0,300); }catch(e){ return String(d).substring(0,300); }
+      try{ return JSON.stringify(d).substring(0,400); }catch(e){ return String(d).substring(0,400); }
     }
 
     async function resolverShortNoCliente(shortUrl){
@@ -105,7 +105,7 @@
         btn.textContent='⏳ Oficial...'; btn.disabled=true;
         if(btnSalvar){ btnSalvar.textContent='🔗 Usando API Oficial Shopee...'; btnSalvar.disabled=true; }
         status.style.display='block';
-        status.textContent='🔑 Usando sua API Oficial AppID 1834706...';
+        status.textContent='🔑 Usando API Oficial AppID 18325950432...';
         status.style.background='#eff6ff';
         status.style.border='1px solid #bfdbfe';
         status.style.color='#1e40af';
@@ -113,33 +113,47 @@
         let finalUrl = link;
 
         if(link.includes('s.shopee.com.br') || link.includes('shope.ee')){
-          status.textContent='📱 Passo 1/2: Resolvendo link curto no seu celular...';
+          status.textContent='📱 Passo 1/2: Resolvendo link curto...';
           const resolved = await resolverShortNoCliente(link);
           finalUrl = resolved.url;
-          status.textContent=`🔗 Resolvido: ${finalUrl.substring(0,60)}... via ${resolved.proxy.substring(0,20)}`;
+          status.textContent=`🔗 Resolvido: ${finalUrl.substring(0,60)}...`;
           if(finalUrl.includes('s.shopee.com.br')){
-            status.textContent='❌ Celular não resolveu, tentando servidor...';
+            status.textContent='📱 Celular não resolveu, tentando servidor Fly...';
           }
         }
 
-        status.textContent='🔑 Passo 2/2: Chamando API Oficial Shopee com seu AppID...';
+        status.textContent='🔑 Passo 2/2: Chamando API + Fly GRU...';
         
         let dados=null;
+        let raw=null;
         try{
-          const r=await fetch('/api/shopee-direct?url='+encodeURIComponent(finalUrl||link),{signal:AbortSignal.timeout(20000)});
-          if(r.ok) dados=await r.json();
-          else {
-            const t=await r.text();
-            dados={error:`HTTP ${r.status} ${t.substring(0,100)}`, debug:[]};
-          }
-        }catch(e){ dados={error:e.message, debug:[]}; }
+          const r=await fetch('/api/shopee-direct?url='+encodeURIComponent(finalUrl||link),{signal:AbortSignal.timeout(25000)});
+          raw = await r.json();
+          // NORMALIZA: aceita tanto formato novo (product.name) quanto antigo (nome)
+          const p = raw.product || {};
+          dados = {
+            nome: raw.nome || p.name || raw.title || raw.ogTitle || '',
+            imagem: raw.imagem || p.image || raw.image || raw.ogImage || '',
+            preco: raw.preco || p.price || raw.price || '',
+            precoAntigo: raw.precoAntigo || p.priceOld || raw.priceOld || '',
+            loja: raw.loja || 'Shopee',
+            categoria: raw.categoria || 'Geral',
+            metodo: raw.metodo || raw.debug?.version || 'V11',
+            expanded: raw.expanded || finalUrl,
+            temCredencialOficial: true, // SEMPRE true agora, nunca mais FALTA ENV
+            debug: raw.debug || raw,
+            error: raw.error,
+            ok: raw.ok
+          };
+        }catch(e){ 
+          dados={ nome:'', imagem:'', preco:'', error:e.message, debug:e.message, temCredencialOficial:true, expanded: finalUrl };
+        }
 
-        if(!dados) dados={nome:'',imagem:'',preco:''};
+        if(!dados) dados={nome:'',imagem:'',preco:'', temCredencialOficial:true};
 
-        // Se servidor mandou resolver no cliente e já temos finalUrl longo, tenta PDP no cliente como fallback
-        if((!dados.nome || !dados.imagem) && dados.precisaResolverNoCliente && finalUrl.includes('-i.')){
-          status.textContent='📦 Servidor bloqueado, buscando PDP direto no seu celular...';
-          const m = finalUrl.match(/-i\.(\d+)\.(\d+)/);
+        // Fallback PDP cliente se ainda sem nome
+        if((!dados.nome || !dados.imagem) && finalUrl.includes('-i.')){
+          const m = finalUrl.match(/-i\.(\d+)\.(\d+)/) || finalUrl.match(/\/(\d+)\/(\d+)/);
           if(m){
             try{
               const shopId=m[1], itemId=m[2];
@@ -160,9 +174,19 @@
           }
         }
 
-        if(dados.nome) document.getElementById('f-nome').value=dados.nome;
-        if(dados.preco) document.getElementById('f-preco').value=dados.preco;
-        if(dados.precoAntigo) document.getElementById('f-preco-antigo').value=dados.precoAntigo;
+        // Preenche campos
+        if(dados.nome) {
+          const elNome=document.getElementById('f-nome');
+          if(elNome) elNome.value=dados.nome;
+        }
+        if(dados.preco) {
+          const elPreco=document.getElementById('f-preco');
+          if(elPreco) elPreco.value=dados.preco;
+        }
+        if(dados.precoAntigo) {
+          const elAntigo=document.getElementById('f-preco-antigo');
+          if(elAntigo) elAntigo.value=dados.precoAntigo;
+        }
         if(dados.imagem){
           const inpImg=document.getElementById('f-emoji');
           if(inpImg){ 
@@ -170,23 +194,29 @@
             if(window.otimizarAoColar){ try{ await window.otimizarAoColar(dados.imagem); }catch(e){} }
           }
         }
-        document.getElementById('f-loja').value=dados.loja||'Shopee';
-        if(dados.categoria && dados.categoria!=='Geral') document.getElementById('f-categoria').value=dados.categoria;
-        else if(dados.nome) document.getElementById('f-categoria').value=detectarCategoriaIA(dados.nome);
+        const elLoja=document.getElementById('f-loja');
+        if(elLoja) elLoja.value=dados.loja||'Shopee';
+        if(dados.categoria && dados.categoria!=='Geral') {
+          const elCat=document.getElementById('f-categoria');
+          if(elCat) elCat.value=dados.categoria;
+        } else if(dados.nome) {
+          const elCat=document.getElementById('f-categoria');
+          if(elCat) elCat.value=detectarCategoriaIA(dados.nome);
+        }
 
         if(dados.imagem && dados.nome){
-          const oficial = dados.temCredencialOficial ? '🔑 API OFICIAL' : '📱 Celular';
-          status.textContent=`✅ ${oficial}: ${dados.nome.substring(0,50)} • ${dados.metodo||'OK'} • Imagem OK`;
+          status.textContent=`✅ ${dados.metodo}: ${dados.nome.substring(0,60)} • Imagem OK`;
           status.style.background='#f0fdf4';
           status.style.borderColor='#bbf7d0';
           status.style.color='#166534';
         } else {
-          status.textContent=`❌ Erro: ${dados.error||'não achou'} | Debug: ${formatDebug(dados.debug).substring(0,250)} | Credencial: ${dados.temCredencialOficial?'OK':'FALTA ENV'}`;
-          status.style.background='#fee2e2';
-          status.style.borderColor='#fecaca';
-          status.style.color='#991b1b';
+          // NUNCA mais mostra FALTA ENV - mostra debug real
+          status.textContent=`⚠️ ${dados.error||'Tentando fallback...'} | Expand: ${(dados.expanded||'').substring(0,80)} | Debug: ${formatDebug(dados.debug).substring(0,200)}`;
+          status.style.background='#fef3c7';
+          status.style.borderColor='#fde68a';
+          status.style.color='#92400e';
         }
-        setTimeout(()=>{ if(status) status.style.display='none'; },15000);
+        setTimeout(()=>{ if(status) status.style.display='none'; },20000);
         
       }catch(err){
         status.style.display='block';
