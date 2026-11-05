@@ -1,4 +1,4 @@
-// /api/scrape.js V4 - FURA BLOQUEIO SHOPEE - resolve s.shopee.com.br e pega via API interna
+/// /api/scrape.js V5 - FINAL - fura deo.shopeemobile.com e pega produto real via PDP
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
@@ -10,155 +10,176 @@ export default async function handler(req, res) {
   try {
     let finalUrl = url;
     let html = '';
-    
-    // 1. RESOLVE LINK CURTO s.shopee.com.br
-    if (url.includes('s.shopee.com.br') || url.includes('shope.ee') || url.includes('amzn.to')) {
+    let debugSteps = [];
+
+    // Função pra extrair URL real da Shopee de qualquer HTML
+    function extractRealShopeeUrl(h) {
+      if (!h) return null;
+      // Padrões que a Shopee usa
+      const patterns = [
+        /https:\/\/shopee\.com\.br\/[^"'\s]+-i\.(\d+)\.(\d+)[^"'\s]*/i,
+        /https:\/\/shopee\.com\.br\/product\/\d+\/\d+/i,
+        /"productUrl"\s*:\s*"(https:\/\/shopee\.com\.br[^"]+)"/i,
+        /window\.location\s*=\s*"(https:\/\/shopee\.com\.br[^"]+)"/i,
+        /window\.location\.href\s*=\s*"(https:\/\/shopee\.com\.br[^"]+)"/i,
+        /url=(https:\/\/shopee\.com\.br[^&\s"']+)/i,
+        /https%3A%2F%2Fshopee\.com\.br%2F[^"'\s]+/i // URL encoded
+      ];
+      for (const p of patterns) {
+        const m = h.match(p);
+        if (m) {
+          let found = m[1] || m[0];
+          try { found = decodeURIComponent(found); } catch(e){}
+          found = found.replace(/&amp;/g,'&').replace(/\\u002F/g,'/').replace(/\\\//g,'/');
+          if (found.includes('shopee.com.br')) return found;
+        }
+      }
+      // Procura qualquer link shopee.com.br no HTML
+      const all = h.match(/https:\/\/shopee\.com\.br\/[^\s"'<>]+/gi);
+      if (all) {
+        // pega o que tem -i.SHOP.ITEM
+        for (const u of all) {
+          if (u.includes('-i.') && u.includes('.')) return u;
+        }
+        return all[0];
+      }
+      return null;
+    }
+
+    // PASSO 1: Resolve s.shopee.com.br
+    if (url.includes('s.shopee.com.br') || url.includes('shope.ee')) {
       try {
-        // Tenta resolver seguindo redirect
-        const r1 = await fetch(url, {
+        const r = await fetch(url, {
           redirect: 'follow',
-          headers: { 
+          headers: {
             'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1',
-            'Accept': 'text/html,application/xhtml+xml'
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+            'Accept-Language': 'pt-BR,pt;q=0.9'
           }
         });
-        finalUrl = r1.url || finalUrl;
-        if (!html) {
-          const txt = await r1.text();
-          if (txt.length > 500) html = txt;
+        finalUrl = r.url;
+        const txt = await r.text();
+        html = txt;
+        debugSteps.push(`1. fetch short -> ${finalUrl} len=${txt.length}`);
+        
+        // Se caiu no deo.shopeemobile.com, tenta extrair real URL do HTML
+        if (finalUrl.includes('deo.shopeemobile.com') || finalUrl.includes('shopeemobile.com') || txt.includes('shopee.com.br')) {
+          const real = extractRealShopeeUrl(txt);
+          if (real) {
+            finalUrl = real;
+            debugSteps.push(`1b. extraiu real URL: ${real}`);
+          }
         }
       } catch(e) {
-        // fallback via allorigins raw que segue redirect
-        try {
-          const proxyRaw = await fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent(url));
-          finalUrl = proxyRaw.url || finalUrl;
-          if (proxyRaw.url && proxyRaw.url !== url) {
-            finalUrl = proxyRaw.url;
-          }
-        } catch(e2){}
+        debugSteps.push(`1. erro fetch short: ${e.message}`);
       }
     }
-    
-    // Se ainda é s.shopee, tenta resolver via allorigins get pra pegar HTML com JS redirect
-    if ((finalUrl.includes('s.shopee') || finalUrl.includes('shope.ee')) && !html) {
+
+    // PASSO 2: Se finalUrl ainda é deo ou shopeemobile, busca via proxy allorigins
+    if (finalUrl.includes('deo.shopeemobile.com') || finalUrl.includes('shopeemobile.com') || finalUrl.includes('s.shopee.com.br')) {
       try {
-        const pr = await fetch('https://api.allorigins.win/get?url=' + encodeURIComponent(url));
-        const j = await pr.json();
-        html = j.contents || '';
-        // tenta extrair redirect da Shopee dentro do HTML
-        // Shopee short tem: <meta http-equiv="refresh" content="0;url=https://shopee.com.br/...">
-        let metaRefresh = html.match(/url=(https:\/\/shopee\.com\.br[^"'>\s]+)/i);
-        if (metaRefresh) finalUrl = metaRefresh[1].replace(/&amp;/g,'&');
-        else {
-          let jsRedirect = html.match(/window\.location\s*=\s*["'](https:\/\/shopee\.com\.br[^"']+)["']/i);
-          if (jsRedirect) finalUrl = jsRedirect[1];
+        const proxy = await fetch('https://api.allorigins.win/get?url=' + encodeURIComponent(finalUrl.includes('s.shopee') ? url : finalUrl), {
+          headers: { 'User-Agent': 'Mozilla/5.0' }
+        });
+        const j = await proxy.json();
+        const proxiedHtml = j.contents || '';
+        debugSteps.push(`2. allorigins len=${proxiedHtml.length}`);
+        const real = extractRealShopeeUrl(proxiedHtml);
+        if (real) {
+          finalUrl = real;
+          html = proxiedHtml;
+          debugSteps.push(`2b. real URL via proxy: ${real}`);
+        } else {
+          html = proxiedHtml;
         }
-      } catch(e){}
+      } catch(e) {
+        debugSteps.push(`2. erro proxy: ${e.message}`);
+      }
     }
-    
-    // 2. Se finalUrl é da Shopee, tenta API interna PDP (não precisa de AppID)
+
+    // PASSO 3: Agora finalUrl deve ser shopee.com.br/...-i.SHOP.ITEM
     let nome = '';
     let imagem = '';
     let preco = '';
-    
+    let precoAntigo = '';
+
+    // Tenta API PDP
     if (finalUrl.includes('shopee.com.br')) {
-      // Extrair shopid e itemid
-      // Formatos: https://shopee.com.br/Nome-Produto-i.SHOPID.ITEMID ou -i.SHOPID.ITEMID? ou /-i.SHOPID.ITEMID
       let shopId = '';
       let itemId = '';
-      
-      // tenta padrão -i.SHOPID.ITEMID
       let m = finalUrl.match(/-i\.(\d+)\.(\d+)/);
-      if (m) {
-        shopId = m[1];
-        itemId = m[2];
-      } else {
-        // tenta /product/ ou outro
-        m = finalUrl.match(/\/(\d+)\/(\d+)(?:\?|$)/);
-        if (m) {
-          shopId = m[1];
-          itemId = m[2];
-        }
-      }
+      if (m) { shopId = m[1]; itemId = m[2]; }
       
       if (shopId && itemId) {
         try {
-          // API PDP da Shopee (publica, sem auth)
+          // API PDP - sem auth
           const pdpUrl = `https://shopee.com.br/api/v4/pdp/get_pc?shopid=${shopId}&itemid=${itemId}`;
+          debugSteps.push(`3. chamando PDP: ${pdpUrl}`);
           const pdpRes = await fetch(pdpUrl, {
             headers: {
-              'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+              'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
               'Accept': 'application/json',
-              'Referer': finalUrl,
+              'Referer': 'https://shopee.com.br/',
               'x-api-source': 'pc',
-              'x-shopee-language': 'pt-BR'
+              'x-shopee-language': 'pt-BR',
+              'af-ac-enc-dat': ''
             }
           });
           const pdpJson = await pdpRes.json();
+          debugSteps.push(`3b. PDP status: ${pdpRes.status} hasData=${!!pdpJson.data}`);
           const data = pdpJson?.data;
           if (data) {
             nome = data.name || '';
-            // imagens: data.images array
             if (data.images && data.images.length > 0) {
-              // imagem Shopee: https://down-br.img.susercontent.com/file/ + imageId
-              // pode ser só ID, precisa montar URL
               let imgId = data.images[0];
               if (imgId.startsWith('http')) imagem = imgId;
-              else imagem = `https://down-br.img.susercontent.com/file/${imgId}`;
+              else imagem = `https://down-br.img.susercontent.com/file/${imgId}_800x800`;
             }
-            // preço
-            if (data.price_info || data.price) {
-              // price é em centavos
-              let p = data.price || data.price_info?.current_price || data.price_before_discount;
-              if (p) {
-                // Shopee usa preço em formato 100000 = R$1,00? Na real divide por 100000
-                if (p > 1000) preco = (p / 100000).toString();
-                else preco = p.toString();
+            // Preço: Shopee retorna em centavos * 100000
+            if (data.price_min !== undefined) {
+              // price_min em formato 100000 = R$1
+              const pMin = data.price_min / 100000;
+              const pMax = data.price_max / 100000;
+              preco = pMin.toFixed(2);
+              if (data.price_before_discount && data.price_before_discount > data.price_min) {
+                precoAntigo = (data.price_before_discount / 100000).toFixed(2);
               }
+            } else if (data.price) {
+              preco = (data.price / 100000).toFixed(2);
             }
-            if (data.price_min && data.price_max) {
-              if (data.price_min === data.price_max) preco = (data.price_min / 100000).toString();
-            }
+            debugSteps.push(`3c. PDP OK nome=${nome.substring(0,30)} img=${imagem.substring(0,40)} preco=${preco}`);
           }
         } catch(e) {
-          console.log('Erro PDP API', e);
+          debugSteps.push(`3. erro PDP: ${e.message}`);
         }
+      } else {
+        debugSteps.push(`3. não achou shopId/itemId em ${finalUrl}`);
       }
     }
-    
-    // 3. Se ainda não pegou, baixa HTML normal
-    if (!nome || !imagem) {
-      if (!html || html.length < 500) {
-        try {
+
+    // PASSO 4: Fallback - tenta pegar OG tags da página real
+    if ((!nome || !imagem) && finalUrl.includes('shopee.com.br')) {
+      try {
+        if (!html || html.length < 1000 || finalUrl !== url) {
           const r = await fetch(finalUrl, {
             headers: {
-              'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+              'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
               'Accept': 'text/html,application/xhtml+xml',
-              'Accept-Language': 'pt-BR,pt;q=0.9',
               'Referer': 'https://shopee.com.br/'
             }
           });
           html = await r.text();
-          finalUrl = r.url || finalUrl;
-        } catch(e) {}
-      }
-      
-      // fallback allorigins
-      if (!html || html.length < 500) {
-        try {
+        }
+        if (!html || html.length < 500) {
           const proxy = await fetch('https://api.allorigins.win/get?url=' + encodeURIComponent(finalUrl));
           const j = await proxy.json();
           html = j.contents || '';
-        } catch(e) {}
-      }
-      
-      // Parse og tags se ainda precisa
-      if (html) {
+        }
+        
         const getMeta = (prop) => {
           const patterns = [
             new RegExp(`<meta[^>]*property=["']${prop}["'][^>]*content=["']([^"']+)["']`, 'i'),
-            new RegExp(`<meta[^>]*content=["']([^"']+)["'][^>]*property=["']${prop}["']`, 'i'),
-            new RegExp(`<meta[^>]*name=["']${prop}["'][^>]*content=["']([^"']+)["']`, 'i')
+            new RegExp(`<meta[^>]*content=["']([^"']+)["'][^>]*property=["']${prop}["']`, 'i')
           ];
           for (const p of patterns) {
             const m = html.match(p);
@@ -168,78 +189,69 @@ export default async function handler(req, res) {
         };
         
         if (!nome) {
-          nome = getMeta('og:title') || getMeta('twitter:title') || '';
+          nome = getMeta('og:title') || '';
           if (!nome) {
             const t = html.match(/<title[^>]*>([^<]+)<\/title>/i);
             nome = t ? t[1] : '';
           }
-          // Limpa
-          nome = nome.replace(/\| Shopee.*|\| Amazon.*|\| Mercado Livre.*/i, '').trim().substring(0,150);
+          nome = nome.replace(/\| Shopee.*$/i, '').trim();
+          // Se ainda é genérico "Shopee Brasil", descarta
+          if (nome.toLowerCase().includes('shopee brasil') || nome.toLowerCase() === 'shopee') nome = '';
         }
-        
         if (!imagem) {
-          imagem = getMeta('og:image') || getMeta('twitter:image') || '';
+          imagem = getMeta('og:image') || '';
+          // Se imagem é logo da Shopee, descarta
+          if (imagem.includes('shopee-logo') || imagem.includes('deo.shopeemobile.com')) imagem = '';
           if (!imagem) {
-            // procura down-br ou susercontent direto
-            const imgMatch = html.match(/https:\/\/down-br[^"'\s]+\.jpg/i) || html.match(/https:\/\/[^"']*susercontent[^"']*\.jpg/i) || html.match(/"image"\s*:\s*"([^"]+susercontent[^"]+)"/i);
-            if (imgMatch) imagem = imgMatch[1] || imgMatch[0];
+            const m = html.match(/https:\/\/down-br[^"'\s]+\.(?:jpg|png)/i);
+            if (m) imagem = m[0];
           }
         }
-        
-        if (!preco) {
-          const precoRegexes = [
-            /"price"\s*:\s*"?R?\$?\s*([\d.,]+)/i,
-            /R\$\s*([\d.,]+)/,
-          ];
-          for (const pr of precoRegexes) {
-            const m = html.match(pr);
-            if (m) { preco = m[1]; break; }
-          }
-          if (preco) {
-            preco = preco.replace(/\./g, '').replace(',', '.').replace(/[^\d.]/g, '');
-            preco = parseFloat(preco).toString();
-          }
-        }
+      } catch(e) {
+        debugSteps.push(`4. erro fallback OG: ${e.message}`);
       }
     }
-    
-    // Limpa nome genérico
-    if (nome.toLowerCase() === 'shopee' || nome.toLowerCase().includes('compre') || nome.length < 5) {
-      nome = '';
-    }
+
+    // Limpeza final
+    if (nome && nome.toLowerCase().includes('shopee brasil | ofertas incríveis')) nome = '';
     
     const u = (finalUrl + url).toLowerCase();
     let loja = 'Geral';
     if (u.includes('shopee')) loja = 'Shopee';
     else if (u.includes('amazon') || u.includes('amzn.to')) loja = 'Amazon';
-    else if (u.includes('mercadolivre') || u.includes('mlstatic')) loja = 'Mercado Livre';
+    else if (u.includes('mercadolivre')) loja = 'Mercado Livre';
     
     const nomeLower = (nome||'').toLowerCase();
     let categoria = 'Geral';
-    if (/vestido|saia|bolsa|salto|sandália|lingerie|sutiã|cropped|blusa fem/.test(nomeLower)) {
-      if (nomeLower.includes('bolsa')) categoria = 'Bolsas';
-      else if (nomeLower.includes('salto') || nomeLower.includes('sandália')) categoria = 'Calçados Femininos';
-      else if (nomeLower.includes('lingerie') || nomeLower.includes('sutiã')) categoria = 'Lingerie';
-      else categoria = 'Moda Feminina';
-    } else if (/camiseta|bermuda|tênis|tenis|boné|bone|camisa|moletom|masculin|kit.*masculin/.test(nomeLower)) {
-      if (nomeLower.includes('camisa')) categoria = 'Camisas';
-      else if (nomeLower.includes('bermuda')) categoria = 'Bermudas';
-      else if (nomeLower.includes('tênis') || nomeLower.includes('tenis')) categoria = 'Tênis';
-      else if (nomeLower.includes('boné') || nomeLower.includes('bone')) categoria = 'Bonés';
-      else categoria = 'Moda Masculina';
+    if (/vestido|saia|bolsa|salto|sandália|lingerie|sutiã|cropped|blusa fem/.test(nomeLower)) categoria = 'Moda Feminina';
+    else if (/camiseta|bermuda|tênis|tenis|boné|bone|camisa|moletom|masculin/.test(nomeLower)) categoria = 'Moda Masculina';
+
+    // Se ainda sem nome/imagem, retorna erro claro
+    if (!nome && !imagem) {
+      return res.status(200).json({
+        nome: '',
+        imagem: '',
+        preco: '',
+        loja,
+        categoria,
+        urlFinal: finalUrl,
+        error: 'Shopee bloqueou - cole nome e imagem manual, ou use link completo shopee.com.br (não curto)',
+        debug: { steps: debugSteps, finalUrl, htmlLen: html.length }
+      });
     }
-    
+
     return res.status(200).json({
       nome: nome || 'Produto ' + loja,
       imagem: imagem || '',
       preco: preco || '',
+      precoAntigo: precoAntigo || '',
       loja,
       categoria,
       urlFinal: finalUrl,
-      debug: { htmlLen: html.length, resolvedUrl: finalUrl }
+      debug: { steps: debugSteps }
     });
     
   } catch (err) {
-    return res.status(500).json({ error: 'Erro ao ler link: ' + err.message, nome: '', imagem: '' });
+    return res.status(500).json({ error: 'Erro: ' + err.message, nome: '', imagem: '' });
   }
 }
