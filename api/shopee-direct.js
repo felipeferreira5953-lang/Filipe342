@@ -1,145 +1,221 @@
-// /api/shopee-direct.js - FINAL CORRIGIDO usando sua API oficial
-// AppID: 18347061257 - use ENV na Vercel: SHOPEE_APP_ID e SHOPEE_SECRET
-
+// /api/shopee-direct.js - V3 COMPLETA - Puxa nome, preço real e imagem leve mantendo seu afiliado
 import crypto from 'crypto';
 
 const ENDPOINT = 'https://open-api.affiliate.shopee.com.br/graphql';
 
 function makeSignature(appId, timestamp, payload, secret) {
-  // Documentação oficial: Signature = SHA256(AppId + Timestamp + Payload + Secret)
-  const factor = `${appId}${timestamp}${payload}${secret}`;
-  return crypto.createHash('sha256').update(factor).digest('hex');
+  return crypto.createHash('sha256').update(`${appId}${timestamp}${payload}${secret}`).digest('hex');
 }
 
-async function expandShortUrl(shortUrl) {
-  let current = shortUrl;
-  for (let i = 0; i < 5; i++) {
-    try {
-      const res = await fetch(current, {
-        method: 'HEAD',
-        redirect: 'manual',
-        headers: {
-          'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1',
-          'Accept': 'text/html',
-          'Referer': 'https://shopee.com.br/'
+// Extrai shopId e itemId de qualquer URL da Shopee
+function extractIds(url) {
+  // Formato -i.shopId.itemId
+  let m = url.match(/-i\.(\d+)\.(\d+)/);
+  if (m) return { shopId: m[1], itemId: m[2] };
+  // Formato /product/shopId/itemId
+  m = url.match(/\/product\/(\d+)\/(\d+)/);
+  if (m) return { shopId: m[1], itemId: m[2] };
+  // query ?shopid=&itemid=
+  try {
+    const u = new URL(url);
+    const shop = u.searchParams.get('shopid') || u.searchParams.get('shopId');
+    const item = u.searchParams.get('itemid') || u.searchParams.get('itemId');
+    if (shop && item) return { shopId: shop, itemId: item };
+  } catch {}
+  return null;
+}
+
+async function expandShopeeShort(shortUrl) {
+  // Método 1: tenta via allorigins (IP não é da Vercel)
+  try {
+    const proxy = `https://api.allorigins.win/get?url=${encodeURIComponent(shortUrl)}`;
+    const r = await fetch(proxy, { signal: AbortSignal.timeout(8000) });
+    const j = await r.json();
+    if (j.contents) {
+      // Procura link longo dentro do HTML
+      const m1 = j.contents.match(/https:\/\/shopee\.com\.br\/[^"'\s<>]+-i\.\d+\.\d+[^"'\s<>]*/);
+      if (m1) return m1[0];
+      const m2 = j.contents.match(/https:\/\/shopee\.com\.br\/product\/\d+\/\d+[^"'\s<>]*/);
+      if (m2) return m2[0];
+      // window.location
+      const m3 = j.contents.match(/location\.href\s*=\s*["'](https:\/\/shopee\.com\.br[^"']+)["']/);
+      if (m3) return m3[1];
+    }
+  } catch(e){ console.log('allorigins fail', e.message); }
+
+  // Método 2: fetch direto na Vercel (geralmente falha mas tenta)
+  try {
+    const r = await fetch(shortUrl, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1',
+        'Accept': 'text/html',
+        'Accept-Language': 'pt-BR,pt;q=0.9'
+      },
+      redirect: 'follow',
+      signal: AbortSignal.timeout(8000)
+    });
+    if (r.url && r.url.includes('shopee.com.br') && !r.url.includes('s.shopee.com.br')) {
+      return r.url;
+    }
+    const text = await r.text();
+    const m = text.match(/https:\/\/shopee\.com\.br\/[^"'\s<>]+/);
+    if (m) return m[0];
+  } catch(e){}
+
+  return shortUrl; // fallback
+}
+
+async function scrapeProduct(url) {
+  try {
+    // Tenta via allorigins pra não ser bloqueado
+    const proxy = `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
+    const r = await fetch(proxy, { signal: AbortSignal.timeout(10000) });
+    const j = await r.json();
+    const html = j.contents || '';
+
+    // Extrai dados OG
+    const titleMatch = html.match(/<meta[^>]*property="og:title"[^>]*content="([^"]+)"/i) || 
+                       html.match(/<title>([^<]+)<\/title>/i);
+    const imageMatch = html.match(/<meta[^>]*property="og:image"[^>]*content="([^"]+)"/i);
+    const descMatch = html.match(/<meta[^>]*property="og:description"[^>]*content="([^"]+)"/i);
+
+    let title = titleMatch ? titleMatch[1] : '';
+    let image = imageMatch ? imageMatch[1] : '';
+    let description = descMatch ? descMatch[1] : '';
+
+    // Limpa título
+    title = title.replace(/ \| Shopee Brasil.*/, '').trim();
+
+    // Tenta pegar preço no HTML - vários padrões da Shopee
+    let price = null;
+    let oldPrice = null;
+
+    const pricePatterns = [
+      /"priceMin"\s*:\s*"(\d+)"/,
+      /"price"\s*:\s*(\d+)/,
+      /R\$\s*([\d.,]+)/,
+      /"current_price":\s*(\d+)/,
+      /priceMin.*?(\d{2,})/
+    ];
+
+    for (let pat of pricePatterns) {
+      const m = html.match(pat);
+      if (m) {
+        let p = m[1].replace(/\./g, '').replace(',', '.');
+        // Se for centavos (ex: 9784 = 97.84)
+        if (!p.includes('.') && p.length > 2) {
+          price = (parseInt(p) / 100).toFixed(2);
+        } else {
+          price = p;
         }
-      });
-      const loc = res.headers.get('location');
-      if (loc) {
-        current = new URL(loc, current).toString();
-        if (!current.includes('s.shopee.com.br') && !current.includes('shope.ee')) break;
-      } else {
-        // Tenta GET com follow
-        const res2 = await fetch(current, {
-          redirect: 'follow',
-          headers: {
-            'User-Agent': 'Mozilla/5.0 (Linux; Android 10) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Mobile Safari/537.36'
-          }
-        });
-        if (res2.url && res2.url !== current) current = res2.url;
         break;
       }
-    } catch (e) {
-      break;
     }
+
+    return { title, image, description, price, oldPrice, htmlLength: html.length };
+  } catch(e) {
+    console.log('scrape fail', e.message);
+    return null;
   }
-  return current;
+}
+
+async function getProductOfferViaApi(shopId, itemId, originUrl, appId, secret) {
+  if (!appId || !secret) return null;
+  try {
+    const timestamp = Math.floor(Date.now() / 1000);
+    // Query que funciona no Brasil - tenta productOfferV2
+    const payload = JSON.stringify({
+      query: `query { productOfferV2(input: { shopId: ${shopId}, itemId: ${itemId} }) { nodes { itemId shopId productName imageUrl priceMin priceMax offerLink productLink commissionRate } } }`
+    });
+    const signature = makeSignature(appId, timestamp, payload, secret);
+
+    const r = await fetch(ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `SHA256 Credential=${appId}, Timestamp=${timestamp}, Signature=${signature}`
+      },
+      body: payload,
+      signal: AbortSignal.timeout(10000)
+    });
+    const data = await r.json();
+    if (data.data?.productOfferV2?.nodes?.[0]) {
+      return data.data.productOfferV2.nodes[0];
+    }
+  } catch(e){ console.log('API productOfferV2 fail', e.message); }
+  return null;
 }
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   if (req.method === 'OPTIONS') return res.status(200).end();
 
   const shortUrl = req.query.url || req.query.link || req.body?.url;
   if (!shortUrl) return res.status(400).json({ ok: false, error: 'URL não enviada' });
 
-  const APP_ID = process.env.SHOPEE_APP_ID || '18347061257';
-  const SECRET = process.env.SHOPEE_SECRET; // COLOQUE NO VERCEL ENV, não no código!
+  const APP_ID = process.env.SHOPEE_APP_ID;
+  const SECRET = process.env.SHOPEE_SECRET;
 
-  console.log('[shopee-direct] Input:', shortUrl);
+  console.log('[V3] Input:', shortUrl);
 
   let expanded = shortUrl;
-  let debug = [];
-
-  try {
-    // 1. Expande s.shopee.com.br
-    if (shortUrl.includes('s.shopee.com.br') || shortUrl.includes('shope.ee')) {
-      expanded = await expandShortUrl(shortUrl);
-      debug.push(`Expandido: ${shortUrl} -> ${expanded}`);
-    }
-
-    // 2. Se for link de produto Shopee e tiver credencial, tenta gerar link afiliado oficial + pegar oferta
-    let affiliateData = null;
-    if (expanded.includes('shopee.com.br') && SECRET) {
-      try {
-        // Query para gerar shortLink afiliado oficial (com sua comissão)
-        const payload = JSON.stringify({
-          query: `mutation {
-            generateShortLink(input: {
-              originLink: "${expanded}",
-              subIds: ["achadinhos"]
-            }) {
-              shortLink
-              originLink
-            }
-          }`
-        });
-
-        const timestamp = Math.floor(Date.now() / 1000).toString();
-        const signature = makeSignature(APP_ID, timestamp, payload, SECRET);
-
-        const apiRes = await fetch(ENDPOINT, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `SHA256 Credential=${APP_ID}, Timestamp=${timestamp}, Signature=${signature}`
-          },
-          body: payload
-        });
-
-        const apiJson = await apiRes.json();
-        debug.push(`Shopee API resposta: ${JSON.stringify(apiJson).substring(0,500)}`);
-        
-        if (apiJson.data?.generateShortLink?.shortLink) {
-          affiliateData = apiJson.data.generateShortLink;
-        }
-      } catch (e) {
-        debug.push(`Erro API Shopee (não crítico): ${e.message}`);
-      }
-    }
-
-    const aindaCurto = expanded.includes('s.shopee.com.br') || expanded.includes('shope.ee');
-
-    return res.status(200).json({
-      ok: true,
-      original: shortUrl,
-      expanded: expanded,
-      affiliateLink: affiliateData?.shortLink || expanded, // link final pra salvar
-      isShort: aindaCurto,
-      warning: aindaCurto ? 'Shopee bloqueou expansão no servidor, mas link curto já vale comissão. Resolvendo no cliente.' : null,
-      debug: {
-        env: {
-          APP_ID: APP_ID ? APP_ID.substring(0,4)+'***' : 'AUSENTE',
-          SECRET: SECRET ? `OK ${SECRET.length} chars` : 'AUSENTE (coloque no Vercel)',
-          Credencial: SECRET ? 'OK' : 'FALTA SECRET'
-        },
-        steps: debug,
-        affiliate: affiliateData
-      }
-    });
-
-  } catch (e) {
-    console.error(e);
-    return res.status(200).json({
-      ok: true,
-      original: shortUrl,
-      expanded: expanded,
-      affiliateLink: expanded,
-      isShort: true,
-      error: e.message,
-      debug
-    });
+  if (shortUrl.includes('s.shopee.com.br') || shortUrl.includes('shope.ee')) {
+    expanded = await expandShopeeShort(shortUrl);
   }
+
+  const ids = extractIds(expanded);
+  let productData = null;
+  let apiData = null;
+
+  if (ids) {
+    apiData = await getProductOfferViaApi(ids.shopId, ids.itemId, expanded, APP_ID, SECRET);
+  }
+
+  // Se não conseguiu via API, tenta scrape HTML
+  if (!apiData) {
+    productData = await scrapeProduct(expanded);
+  }
+
+  // Monta resposta final mantendo SEU link curto como afiliado
+  const response = {
+    ok: true,
+    original: shortUrl,
+    expanded: expanded,
+    affiliateLink: shortUrl, // SEU LINK CURTO JÁ É AFILIADO E DÁ COMISSÃO
+    isShort: expanded.includes('s.shopee.com.br'),
+    shouldSaveEvenIfShort: true,
+    product: apiData ? {
+      name: apiData.productName,
+      image: apiData.imageUrl,
+      price: (parseInt(apiData.priceMin) / 100).toFixed(2),
+      offerLink: apiData.offerLink, // link afiliado novo gerado pela API (também válido)
+      commission: apiData.commissionRate,
+      shopId: apiData.shopId,
+      itemId: apiData.itemId
+    } : productData ? {
+      name: productData.title,
+      image: productData.image,
+      price: productData.price,
+      description: productData.description,
+      // imagem já vai ser comprimida pra webp 600px pelo seu sistema automático
+    } : null,
+    message: apiData ? 'Produto puxado via API oficial com seu afiliado' : 
+             productData?.title ? 'Produto puxado via scrape + seu afiliado mantido' :
+             'Link curto mantido (afiliado OK) - preencha nome/preço ou tente de novo',
+    debug: {
+      env: {
+        APP_ID: APP_ID ? 'OK' : 'FALTA',
+        SECRET: SECRET ? `OK ${SECRET.length} chars` : 'FALTA',
+        Credencial: APP_ID && SECRET ? 'OK' : 'FALTA'
+      },
+      expanded,
+      ids,
+      hasApiData: !!apiData,
+      hasScrapeData: !!productData?.title
+    }
+  };
+
+  return res.status(200).json(response);
 }
