@@ -337,7 +337,7 @@ header{
   </p></div><br>
 </main></p>
 
-<div id="welcome-popup" class="fixed top-[16px] left-1/2 -translate-x-1/2 z-[90] bg-zinc-900 text-white px-5 py-3.5 rounded-[16px] shadow-2xl max-w-[90%] text-center border border-zinc-800">
+<div id="welcome-popup" class="fixed top-[16px] left-1/2 -translate-x-1/2 z-[90] bg-zinc-900 text-white px-5 py-3.5 rounded-[16px] shadow-2xl max-w-[90%] text-center border border-zinc-800 hidden">
   <p id="welcome-text" class="text-[13px] font-semibold leading-tight tracking-tight">Bem-vindo aos Achadinhos</p><p class="text-[11px] text-white/60 mt-1 font-medium">Seleção em tempo real</p></div>
 <div id="toast" class="fixed bottom-[20px] left-1/2 -translate-x-1/2 bg-black text-white px-5 py-3 rounded-full text-[13px] font-bold shadow-2xl hidden z-[60] max-w-[90%] text-center"></div>
 
@@ -952,13 +952,23 @@ async function otimizarAoColar(valor){
   if(otimizandoAuto) return;
   let v = valor.trim();
   if(!v) return;
-  // FIX GOOGLE: se colou link do Google Lens/imgres, extrai o imgurl real
-  if(v.includes('google.com/imgres') && v.includes('imgurl=')){
+  // FIX GOOGLE: se colou link do Google Lens/imgres/url, extrai o imgurl real automaticamente
+  if(v.includes('google.com')){
     try{
       const urlObj = new URL(v);
-      const imgurl = urlObj.searchParams.get('imgurl');
-      if(imgurl){ v = decodeURIComponent(imgurl); toast("🔗 Link do Google convertido pro link direto!"); }
-    }catch(e){}
+      let imgurl = urlObj.searchParams.get('imgurl') || urlObj.searchParams.get('q') || urlObj.searchParams.get('url');
+      if(imgurl && imgurl.startsWith('http')){ v = decodeURIComponent(imgurl); toast("🔗 Link do Google convertido pro link direto!"); }
+      else if(v.includes('imgurl=')){
+        const match = v.match(/imgurl=([^&]+)/);
+        if(match && match[1]){ v = decodeURIComponent(match[1]); toast("🔗 Link do Google convertido pro link direto!"); }
+      }
+    }catch(e){
+      // fallback regex se URL falhar
+      try{
+        const m = valor.match(/imgurl=([^&]+)/);
+        if(m && m[1]){ v = decodeURIComponent(m[1]); toast("🔗 Link do Google convertido pro link direto!"); }
+      }catch(e2){}
+    }
   }
   const ehImagem = v.startsWith('http://')||v.startsWith('https://')||v.startsWith('data:image');
   if(!ehImagem) {
@@ -987,8 +997,8 @@ async function otimizarAoColar(valor){
       prevTag.src = urlFinal;
       toast("✅ iPhone OK! De "+kbOrig+"KB pra "+kbComp+"KB!");
     } else if(v.startsWith('http')){
-      // SUPER LEVE se for link direto da Shopee/ML/Amazon
-      const isSuperLeve = v.includes('mlstatic.com') || v.includes('shopee.com.br') || v.includes('m.media-amazon.com') || v.includes('http2.mlstatic') || v.includes('cf.shopee');
+      // SUPER LEVE se for link direto da Shopee/ML/Amazon - inclui todos CDNs
+      const isSuperLeve = v.includes('mlstatic.com') || v.includes('shopee.com.br') || v.includes('m.media-amazon.com') || v.includes('http2.mlstatic') || v.includes('cf.shopee') || v.includes('susercontent.com') || v.includes('shopee') || v.includes('mlstatic') || v.includes('amazon') || v.includes('down-br') || v.includes('up-tl');
       if(isSuperLeve){
         imagemOtimizadaFinal = v;
         inputImg.value = v;
