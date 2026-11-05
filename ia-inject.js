@@ -1,4 +1,4 @@
-// ia-inject.js V7 FINAL - LINK CURTO DIRETO DO APP - usa /api/shopee-direct oficial
+// ia-inject.js V7 FIX - corrige bug dados.debug.join
 (function(){
   function detectarLojaIA(url){
     const u=(url||'').toLowerCase();
@@ -65,6 +65,13 @@
     status.style.padding='8px';
     wrapper.parentNode.insertBefore(status,wrapper.nextSibling);
 
+    function formatDebug(d){
+      if(!d) return '';
+      if(Array.isArray(d)) return d.join(' | ');
+      if(typeof d === 'string') return d;
+      try{ return JSON.stringify(d).substring(0,200); }catch(e){ return String(d).substring(0,200); }
+    }
+
     async function scrapeComIA(urlAfiliado){
       let link=(urlAfiliado||'').trim();
       if(!link.startsWith('http')){ alert('Cole um link https://'); return; }
@@ -95,9 +102,11 @@
           } else {
             const txt=await r.text();
             console.log('Erro API:', txt);
+            dados={ error: 'HTTP '+r.status+' '+txt.substring(0,100), debug: txt.substring(0,200) };
           }
         }catch(e){ 
           console.log('api oficial falhou',e);
+          dados={ error: e.message, debug: e.message };
           // Fallback pra antiga
           try{
             const r2=await fetch('/api/scrape?url='+encodeURIComponent(link));
@@ -151,19 +160,20 @@
           status.style.borderColor='#bbf7d0';
           status.style.color='#166534';
         } else if(dados.nome){
-          status.textContent='⚠️ IA pegou nome mas Shopee bloqueou imagem. Nome: '+(dados.nome||'ok')+' - Debug: '+JSON.stringify(dados.debug||[]).substring(0,100);
+          status.textContent='⚠️ IA pegou nome mas Shopee bloqueou imagem. Nome: '+(dados.nome||'ok')+' - Debug: '+formatDebug(dados.debug).substring(0,150);
           status.style.background='#fef9c3';
           status.style.borderColor='#fde68a';
           status.style.color='#854d0e';
         } else {
-          status.textContent='❌ Shopee bloqueou. Erro: '+(dados.error||'desconhecido')+' - Debug: '+(dados.debug?dados.debug.join(' | ').substring(0,150):'');
+          const debugTxt = formatDebug(dados.debug);
+          status.textContent='❌ Shopee bloqueou. Erro: '+(dados.error||'desconhecido')+' - Debug: '+debugTxt.substring(0,200);
           status.style.background='#fee2e2';
           status.style.borderColor='#fecaca';
           status.style.color='#991b1b';
           status.style.border='1px solid #fecaca';
         }
         
-        setTimeout(()=>{ if(status) status.style.display='none'; },12000);
+        setTimeout(()=>{ if(status) status.style.display='none'; },15000);
         
       }catch(err){
         status.style.display='block';
@@ -171,6 +181,7 @@
         status.style.background='#fee2e2';
         status.style.border='1px solid #fecaca';
         status.style.color='#991b1b';
+        console.error(err);
       }finally{ 
         btn.textContent='🤖 IA'; 
         btn.disabled=false;
