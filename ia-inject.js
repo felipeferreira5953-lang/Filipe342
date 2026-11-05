@@ -1,142 +1,121 @@
-// ia-inject.js V18 CERTEZA TOTAL - Shopee + ML + Amazon + Shein + TikTok
+// ia-inject.js V20 ULTRA 3/3 - Anti corrida de foto + 0% margem + usa resolve-js.js no backend
 (function(){
-  function setCampo(id, valor){
-    const el = document.getElementById(id);
-    if(!el || !valor) return false;
-    if(el.tagName === 'SELECT'){
-      const opts = Array.from(el.options);
-      const lower = String(valor).toLowerCase();
-      let found = opts.find(o => o.text.toLowerCase().includes(lower) || o.value.toLowerCase().includes(lower));
-      if(found) el.value = found.value; else el.value = valor;
-    } else el.value = valor;
-    el.dispatchEvent(new Event('change', {bubbles:true}));
-    el.dispatchEvent(new Event('input', {bubbles:true}));
-    return true;
-  }
+  const API = '/api/shopee-direct';
+  let currentAbort = null;
+  let lastUrl = '';
 
-  function initIA(){
-    const inputLink=document.getElementById('f-link');
-    if(!inputLink||document.getElementById('btn-ia-v18')) return;
-    
-    const wrapper=document.createElement('div');
-    wrapper.style.position='relative';
-    wrapper.style.marginBottom='8px';
-    inputLink.parentNode.insertBefore(wrapper,inputLink);
-    wrapper.appendChild(inputLink);
-    inputLink.style.paddingRight='110px';
-    inputLink.placeholder='Shopee, meli.la, Amazon, Shein, TikTok - auto';
-    
-    const btn=document.createElement('button');
-    btn.id='btn-ia-v18';
-    btn.type='button';
-    btn.textContent='🤖 IA Certeza Total';
-    btn.style.position='absolute';
-    btn.style.right='4px';
-    btn.style.top='4px';
-    btn.style.height='34px';
-    btn.style.padding='0 12px';
-    btn.style.background='#000';
-    btn.style.color='#fff';
-    btn.style.borderRadius='999px';
-    btn.style.fontSize='11px';
-    btn.style.fontWeight='bold';
-    btn.style.border='none';
-    btn.style.zIndex='2';
-    wrapper.appendChild(btn);
-    
-    const status=document.createElement('div');
-    status.id='ia-status-v18';
-    status.style.display='none';
-    status.style.marginBottom='8px';
-    status.style.fontSize='11px';
-    status.style.borderRadius='10px';
-    status.style.padding='8px';
-    wrapper.parentNode.insertBefore(status,wrapper.nextSibling);
-
-    let processando = false;
-
-    async function scrapeComIA(urlAfiliado){
-      let link=(urlAfiliado||'').trim();
-      if(!link.startsWith('http') || processando) return;
-      processando = true;
-      
-      try{
-        btn.textContent='⏳'; btn.disabled=true;
-        status.style.display='block';
-        status.textContent=`⚡ Certeza total: resolvendo e puxando API oficial...`;
-        status.style.background='#eff6ff';
-        status.style.border='1px solid #bfdbfe';
-        status.style.color='#1e40af';
-        
-        const r=await fetch('/api/shopee-direct?url='+encodeURIComponent(link),{signal:AbortSignal.timeout(25000)});
-        const dados=await r.json();
-        
-        if(!dados.ok && !dados.product){
-          status.textContent=`❌ ${dados.error} - ${dados.platform||''}`;
-          status.style.background='#fee2e2';
-          status.style.color='#991b1b';
-          return;
-        }
-
-        const p = dados.product || {};
-        const nomeFinal = dados.nome || p.name || '';
-        const imagemFinal = dados.imagem || p.image || '';
-        const precoFinal = dados.preco || p.price || '';
-        const precoAntigoFinal = dados.precoAntigo || p.priceOld || '';
-        const lojaFinal = dados.loja || 'Loja';
-        const categoriaFinal = dados.categoria || 'Geral';
-
-        if(nomeFinal) setCampo('f-nome', nomeFinal);
-        if(precoFinal) setCampo('f-preco', precoFinal.replace('.', ','));
-        if(precoAntigoFinal) setCampo('f-preco-antigo', precoAntigoFinal.replace('.', ','));
-        if(imagemFinal){
-          setCampo('f-emoji', imagemFinal);
-          if(window.otimizarAoColar){
-            (async()=>{
-              try{
-                const timeout = new Promise((_,rej)=>setTimeout(()=>rej(), 12000));
-                await Promise.race([window.otimizarAoColar(imagemFinal), timeout]);
-              }catch(e){}
-            })();
-          }
-        }
-        setCampo('f-loja', lojaFinal);
-        setCampo('f-categoria', categoriaFinal);
-
-        status.textContent=`✅ ${lojaFinal} (${dados.metodo}) - ${dados.certeza||''}: ${nomeFinal.substring(0,60)} R$${precoFinal}`;
-        status.style.background='#f0fdf4';
-        status.style.borderColor='#bbf7d0';
-        status.style.color='#166534';
-        setTimeout(()=>{ status.style.display='none'; },10000);
-        
-      }catch(err){
-        status.textContent='❌ Erro: '+err.message;
-        status.style.background='#fee2e2';
-        status.style.color='#991b1b';
-      }finally{ 
-        btn.textContent='🤖 IA Certeza Total'; 
-        btn.disabled=false;
-        processando = false;
-        const b=document.getElementById('f-salvar');
-        if(b){ b.disabled=false; if(b.textContent.includes('Salvando')) b.textContent='Adicionar produto + notifica todos'; }
-      }
+  function $(id){ return document.getElementById(id); }
+  function showStatus(msg, type='info'){
+    let el = $('ia-status');
+    if(!el){
+      el = document.createElement('div');
+      el.id = 'ia-status';
+      el.style.cssText = 'margin:12px 0;padding:10px;border-radius:8px;font-size:13px;';
+      const container = $('resultado') || document.body;
+      container.parentNode.insertBefore(el, container);
     }
-    
-    btn.addEventListener('click',()=>{ const v=inputLink.value.trim(); if(v) scrapeComIA(v); });
-    inputLink.addEventListener('paste',()=>{ setTimeout(()=>{ const v=inputLink.value.trim(); if(v.startsWith('http')) scrapeComIA(v); },150); });
-    inputLink.addEventListener('input',()=>{
-      const v=inputLink.value.trim().toLowerCase();
-      if((v.includes('shopee')||v.includes('meli.la')||v.includes('mercadolivre')||v.includes('amazon')||v.includes('amzn.to')||v.includes('tiktok')||v.includes('shein')||v.includes('shain')) && v.length>15){
-        clearTimeout(window._iaDebounce);
-        window._iaDebounce = setTimeout(()=>scrapeComIA(v),600);
-      }
-    });
-    
-    setTimeout(()=>{
-      const b=document.getElementById('f-salvar');
-      if(b && b.textContent.includes('Salvando')){ b.disabled=false; b.textContent='Adicionar produto + notifica todos'; }
-    },1000);
+    el.textContent = msg;
+    el.style.background = type==='error'?'#fee':type==='success'?'#efe':'#eef';
+    el.style.display = 'block';
   }
-  
-  let t=0; const iv=setInterval(()=>{ initIA(); t++; if(t>20) clearInterval(iv); },500); initIA();
+
+  async function gerar(){
+    const input = $('link-produto') || $('shopee-link') || document.querySelector('input[type="text"]');
+    const btn = $('btn-gerar') || $('gerar-btn') || document.querySelector('button');
+    const resultado = $('resultado');
+    const previewImg = $('preview-imagem') || $('imagem-preview');
+    const previewNome = $('preview-nome') || $('nome-preview');
+    const previewPreco = $('preview-preco') || $('preco-preview');
+
+    const url = (input?.value || '').trim();
+    if(!url){ showStatus('Cole o link Shopee/ML/Amazon/Shein/TikTok', 'error'); return; }
+    if(url === lastUrl && resultado && resultado.style.display !== 'none'){
+      showStatus('Link já gerado', 'info');
+      return;
+    }
+
+    lastUrl = url;
+    
+    if(currentAbort) currentAbort.abort();
+    currentAbort = new AbortController();
+
+    if(btn){ btn.disabled = true; btn.textContent = 'Gerando...'; }
+    
+    // LIMPA TUDO antes - anti corrida
+    if(resultado){
+      resultado.style.display = 'none';
+      resultado.innerHTML = '';
+    }
+    if(previewImg){ previewImg.src = ''; previewImg.style.display = 'none'; }
+    if(previewNome) previewNome.textContent = '';
+    if(previewPreco) previewPreco.textContent = '';
+    
+    showStatus('Resolvendo link com resolve-js.js + API oficial...', 'info');
+
+    try{
+      const res = await fetch(`${API}?url=${encodeURIComponent(url)}`, { signal: currentAbort.signal });
+      const data = await res.json();
+      
+      if(!data.ok){
+        throw new Error(data.error || 'Não conseguiu resolver');
+      }
+
+      showStatus(`✅ ${data.metodo} | Certeza: ${data.certeza}`, 'success');
+
+      const produto = data.product || { name: data.nome, image: data.imagem, price: data.preco, priceOld: data.precoAntigo };
+      
+      // Preenche campos se existirem
+      if($('nome-produto')) $('nome-produto').value = produto.name || '';
+      if($('preco-produto')) $('preco-produto').value = produto.price || '';
+      if($('preco-antigo')) $('preco-antigo').value = produto.priceOld || '';
+      if($('imagem-produto')) $('imagem-produto').value = produto.image || '';
+      if($('link-afiliado')) $('link-afiliado').value = data.affiliateLink || url;
+      if($('categoria')) $('categoria').value = data.categoria || 'Geral';
+      if($('loja')) $('loja').value = data.loja || '';
+
+      // Preview anti corrida - só mostra se for do URL atual
+      if(previewImg && produto.image){
+        previewImg.src = produto.image;
+        previewImg.style.display = 'block';
+        previewImg.onerror = () => { previewImg.style.display = 'none'; };
+      }
+      if(previewNome) previewNome.textContent = produto.name || '';
+      if(previewPreco) previewPreco.textContent = produto.price ? `R$ ${produto.price}` : '';
+
+      if(resultado){
+        resultado.style.display = 'block';
+        resultado.innerHTML = `
+          <div style="border:1px solid #ddd;border-radius:12px;padding:12px;display:flex;gap:12px;align-items:center">
+            <img src="${produto.image}" style="width:80px;height:80px;object-fit:cover;border-radius:8px" onerror="this.style.display='none'">
+            <div style="flex:1">
+              <div style="font-weight:bold;font-size:14px;line-height:1.2">${produto.name||''}</div>
+              <div style="color:#e63946;font-weight:bold;margin-top:4px">R$ ${produto.price||''} <span style="text-decoration:line-through;color:#888;font-weight:normal;font-size:12px">R$ ${produto.priceOld||''}</span></div>
+              <div style="font-size:11px;color:#555;margin-top:4px">${data.loja} • ${data.categoria} • ${data.metodo}</div>
+            </div>
+          </div>
+        `;
+      }
+
+      // Auto copy prompt ou legenda se tiver
+      if(window.gerarLegenda) window.gerarLegenda(data);
+      
+    }catch(e){
+      if(e.name === 'AbortError') return;
+      showStatus('Erro: '+e.message, 'error');
+      console.error(e);
+    }finally{
+      if(btn){ btn.disabled = false; btn.textContent = 'Gerar Achadinho'; }
+      currentAbort = null;
+    }
+  }
+
+  // Liga botão
+  document.addEventListener('DOMContentLoaded', ()=>{
+    const btn = $('btn-gerar') || $('gerar-btn') || document.querySelector('#gerar');
+    if(btn) btn.addEventListener('click', gerar);
+    const input = $('link-produto') || $('shopee-link');
+    if(input) input.addEventListener('keydown', (e)=>{ if(e.key==='Enter') gerar(); });
+  });
+
+  window.gerarAchadinho = gerar;
 })();
