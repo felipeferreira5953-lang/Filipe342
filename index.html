@@ -399,7 +399,7 @@ header{
       <span id="tag-loja" class="hidden">MOBILE</span><br>
     </div><br>
     <div class="flex items-center gap-2 ml-auto"><br>
-      <button id="btn-cliente" class="h-8 px-3 rounded-full bg-white border border-zinc-200 flex items-center gap-1.5 font-bold text-[12px] text-black shadow-sm animate-pulse"><br>
+      <button id="btn-cliente" class="h-8 px-3 rounded-full bg-white border border-zinc-200 flex items-center gap-1.5 font-bold text-[12px] text-black shadow-sm"><br>
       <span id="btn-cliente-icon" class="w-5 h-5 rounded-full bg-black text-white grid place-items-center text-[10px] font-black">👤</span><br>
       <span id="btn-cliente-text">Seu nome</span><br>
     </button><br>
@@ -486,7 +486,7 @@ header{
   </p></div><br>
 </main><p></p></p>
 
-<div id="welcome-popup" class="fixed top-[18px] left-1/2 -translate-x-1/2 z-[90] bg-white text-zinc-900 px-[18px] py-[12px] rounded-[14px] shadow-[0_8px_32px_rgba(0,0,0,0.08)] max-w-[320px] w-[88%] border border-zinc-200/70 backdrop-blur-xl">
+<div id="welcome-popup" class="fixed top-[18px] left-1/2 -translate-x-1/2 z-[90] bg-white text-zinc-900 px-[18px] py-[12px] rounded-[14px] shadow-[0_8px_32px_rgba(0,0,0,0.08)] max-w-[320px] w-[88%] border border-zinc-200/70 backdrop-blur-xl hidden">
   <div class="flex items-start gap-3">
     <div class="w-[6px] h-[6px] rounded-full bg-zinc-900 mt-[6px] shrink-0"></div>
     <div>
@@ -599,6 +599,7 @@ header{
 <button id="f-salvar" class="w-full h-[42px] bg-[#ff6b2b] text-white rounded-full font-bold">Salvar + 🔔 Notificar todo mundo</button>
       <p class="text-[10px] text-zinc-400 mt-2 text-center">⚡ Automático: ao colar o link da imagem, já comprimo via wsrv.nl pra webp 600px (~40KB) e NÃO subo pro seu Storage. No banco fica só link wsrv.nl, 0KB no Firebase!
     </p></div>
+    <button id="btn-carregar-mais" onclick="carregarMaisProdutos()" style="display:none" class="w-full mt-4 h-[48px] bg-white border-2 border-zinc-900 rounded-full font-bold text-[14px]">Ver mais 20 produtos ↓</button>
     <div id="lista" class="mt-4 space-y-2"><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">🗄️</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Organizador de Gaveta Acrílico Cristal 3 Divisórias</p><p class="text-[11px] text-zinc-500">R$ 29.9 • Shopee</p></div><button onclick="apagarFirebase('1')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">🍟</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Air Fryer 4.2L Digital Timer Antiaderente</p><p class="text-[11px] text-zinc-500">R$ 279 • Amazon</p></div><button onclick="apagarFirebase('2')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">💡</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Luminária com Sensor de Presença LED Recarregável</p><p class="text-[11px] text-zinc-500">R$ 34.9 • Shopee</p></div><button onclick="apagarFirebase('3')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">💇‍♀️</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Escova Alisadora 3 em 1 Seca e Modela</p><p class="text-[11px] text-zinc-500">R$ 89.9 • Mercado Livre</p></div><button onclick="apagarFirebase('4')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">✨</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Kit 10 Panos Mágicos Microfibra Limpeza</p><p class="text-[11px] text-zinc-500">R$ 19.9 • Shopee</p></div><button onclick="apagarFirebase('5')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">📱</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Suporte Celular Articulado Mesa e Cama 360°</p><p class="text-[11px] text-zinc-500">R$ 26.9 • Amazon</p></div><button onclick="apagarFirebase('6')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">📽️</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Mini Projetor Portátil 4K WiFi</p><p class="text-[11px] text-zinc-500">R$ 189.9 • Shopee</p></div><button onclick="apagarFirebase('7')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">🎧</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Fone Bluetooth TWS com Case Power Bank</p><p class="text-[11px] text-zinc-500">R$ 49.9 • Amazon</p></div><button onclick="apagarFirebase('8')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">👗</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Vestido Feminino Longo Floral Verão</p><p class="text-[11px] text-zinc-500">R$ 89.9 • Shopee</p></div><button onclick="apagarFirebase('9')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">💄</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Kit Maquiagem Completo 12 Itens</p><p class="text-[11px] text-zinc-500">R$ 59.9 • Shopee</p></div><button onclick="apagarFirebase('10')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">👜</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Bolsa Feminina Transversal Couro</p><p class="text-[11px] text-zinc-500">R$ 79.9 • Amazon</p></div><button onclick="apagarFirebase('11')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">👠</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Sandália Salto Alto Feminina</p><p class="text-[11px] text-zinc-500">R$ 99.9 • Mercado Livre</p></div><button onclick="apagarFirebase('12')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">💖</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Conjunto Lingerie Rendada</p><p class="text-[11px] text-zinc-500">R$ 45.9 • Shopee</p></div><button onclick="apagarFirebase('13')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">✨</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Kit Skincare Ácido Hialurônico</p><p class="text-[11px] text-zinc-500">R$ 69.9 • Amazon</p></div><button onclick="apagarFirebase('14')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">👕</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Camisa Masculina Oversized Street</p><p class="text-[11px] text-zinc-500">R$ 59.9 • Shopee</p></div><button onclick="apagarFirebase('15')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">🩳</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Bermuda Moletom Masculina</p><p class="text-[11px] text-zinc-500">R$ 49.9 • Amazon</p></div><button onclick="apagarFirebase('16')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">👟</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Tênis Masculino Esportivo Corrida</p><p class="text-[11px] text-zinc-500">R$ 129.9 • Mercado Livre</p></div><button onclick="apagarFirebase('17')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">🧢</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Boné Aba Reta Original</p><p class="text-[11px] text-zinc-500">R$ 39.9 • Shopee</p></div><button onclick="apagarFirebase('18')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">⌚</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Relógio Masculino Esportivo Prova D'água</p><p class="text-[11px] text-zinc-500">R$ 79.9 • Amazon</p></div><button onclick="apagarFirebase('19')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div></div>
   </div>
 
@@ -1235,7 +1236,7 @@ document.getElementById('sininho-depois')?.addEventListener('click',()=>{documen
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-import { getDatabase, ref, onValue, push, remove, set, onDisconnect } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js";
+import { getDatabase, ref, onValue, push, remove, set, query, orderByChild, limitToLast, endBefore, get, orderByKey, onDisconnect } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js";
 let storage, sRef, uploadBytes, getDownloadURL;
 let storageLoading = null;
 async function ensureStorage(){
@@ -1344,28 +1345,80 @@ try{
 
   let produtosAnteriores=new Set();
   let primeiraCarga=true;
-  onValue(produtosRef,snap=>{
-    const data=snap.val();
-    if(data){
-      const isImg = (s)=>{ if(!s) return false; s=s.trim(); return s.startsWith('http://')||s.startsWith('https://')||s.startsWith('data:image')||s.startsWith('//'); };
-      const lista=Object.entries(data).map(([id,v])=>({id,nome:v.nome,precoNovo:v.preco||v.precoNovo||0,precoAntigo:v.precoOriginal||v.precoAntigo||0,loja:v.loja||"Shopee",categoria:v.categoria||v.cat||"Geral",emoji:!isImg(v.imagem)?v.imagem:"🎁",imagemUrl:isImg(v.imagem)?v.imagem:null,affiliateLink:v.linkAfiliado||v.affiliateLink||"#"} )).reverse();
-      if(lista.length>0){
-        if(!primeiraCarga){
-          lista.forEach(p=>{
-            if(!produtosAnteriores.has(p.id)){
-              if(Notification.permission==='granted'){
-                try{ new Notification("🔥 Achadinho novo!",{body:p.nome.substring(0,60)+" - R$ "+p.precoNovo, icon:"https://cdn-icons-png.flaticon.com/512/263/263142.png"}); }catch(e){}
-              }
-            }
-          });
-        }
-        produtos=lista;
-        produtosAnteriores=new Set(lista.map(p=>p.id));
-        render();
-        primeiraCarga=false;
+  // === PAGINAÇÃO DE VERDADE - economiza 100x no Firebase ===
+  let oldestTimestamp = null;
+  let hasMore = true;
+  let carregandoPagina = false;
+  let totalProdutosCache = 0;
+
+  function parseProduto(id, v){
+    const isImg = (s)=>{ if(!s) return false; s=s.trim(); return s.startsWith('http://')||s.startsWith('https://')||s.startsWith('data:image')||s.startsWith('//'); };
+    return {id,nome:v.nome,precoNovo:v.preco||v.precoNovo||0,precoAntigo:v.precoOriginal||v.precoAntigo||0,loja:v.loja||"Shopee",categoria:v.categoria||v.cat||"Geral",emoji:!isImg(v.imagem)?v.imagem:"🎁",imagemUrl:isImg(v.imagem)?v.imagem:null,affiliateLink:v.linkAfiliado||v.affiliateLink||"#", addedAt: v.addedAt || 0};
+  }
+
+  async function carregarPagina(inicial=false){
+    if(carregandoPagina) return;
+    carregandoPagina=true;
+    const btnMais = document.getElementById('btn-carregar-mais');
+    if(btnMais) btnMais.textContent='Carregando...';
+    
+    try{
+      let q;
+      if(inicial || oldestTimestamp===null){
+        q = query(produtosRef, orderByChild('addedAt'), limitToLast(20));
+      } else {
+        q = query(produtosRef, orderByChild('addedAt'), endBefore(oldestTimestamp), limitToLast(20));
       }
-    }
+      const snap = await get(q);
+      const data = snap.val();
+      if(!data){
+        hasMore=false;
+        if(inicial){ produtos=[]; render(); }
+        if(btnMais) btnMais.style.display='none';
+        return;
+      }
+      let lista = Object.entries(data).map(([id,v])=>parseProduto(id,v)).sort((a,b)=>b.addedAt - a.addedAt);
+      if(lista.length===0){ hasMore=false; if(btnMais) btnMais.style.display='none'; return; }
+      
+      // atualiza oldest
+      const oldest = lista[lista.length-1].addedAt;
+      oldestTimestamp = oldest;
+      
+      if(inicial){
+        produtos = lista;
+        produtosAnteriores = new Set(lista.map(p=>p.id));
+      } else {
+        // evita duplicado
+        const idsExistentes = new Set(produtos.map(p=>p.id));
+        const novos = lista.filter(p=>!idsExistentes.has(p.id));
+        produtos = produtos.concat(novos);
+        novos.forEach(p=>produtosAnteriores.add(p.id));
+        if(novos.length<20) hasMore=false;
+      }
+      render();
+      primeiraCarga=false;
+      if(btnMais){
+        btnMais.style.display = hasMore ? 'block' : 'none';
+        btnMais.textContent = 'Ver mais 20 produtos ↓';
+      }
+    }catch(e){ console.error('erro paginacao', e); toast('Erro ao carregar'); }
+    carregandoPagina=false;
+  }
+
+  // primeira carga - só 20 do banco (economiza 100x)
+  carregarPagina(true);
+
+  // listener leve só pra contar total e notificar novos (não baixa tudo)
+  onValue(ref(db,'produtos'), snap=>{
+    const data=snap.val();
+    totalProdutosCache = data ? Object.keys(data).length : 0;
+    const elTotal = document.getElementById('total-produtos-count');
+    if(elTotal) elTotal.textContent = totalProdutosCache;
   });
+
+  // carregar mais ao clicar
+  window.carregarMaisProdutos = ()=>carregarPagina(false);
+  
   window.apagarFirebase=(id)=>{if(!confirm("Apagar definitivo?"))return;if(id&&id.length<=2){produtos=produtos.filter(p=>p.id!==id);render();toast("Apagado local");return;} remove(ref(db,'produtos/'+id)).then(()=>toast("✅ Apagado!"));};
   window.apagar=window.apagarFirebase;
 
