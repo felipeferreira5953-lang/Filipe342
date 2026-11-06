@@ -399,7 +399,7 @@ header{
       <span id="tag-loja" class="hidden">MOBILE</span><br>
     </div><br>
     <div class="flex items-center gap-2 ml-auto"><br>
-      <button id="btn-cliente" class="h-8 px-3 rounded-full bg-white border border-zinc-200 flex items-center gap-1.5 font-bold text-[12px] text-black shadow-sm"><br>
+      <button id="btn-cliente" class="h-8 px-3 rounded-full bg-white border border-zinc-200 flex items-center gap-1.5 font-bold text-[12px] text-black shadow-sm animate-pulse"><br>
       <span id="btn-cliente-icon" class="w-5 h-5 rounded-full bg-black text-white grid place-items-center text-[10px] font-black">👤</span><br>
       <span id="btn-cliente-text">Seu nome</span><br>
     </button><br>
@@ -469,6 +469,7 @@ header{
     <div class="bg-white rounded-[14px] border border-zinc-200 overflow-hidden"><div class="aspect-square bg-zinc-100 skeleton"></div><div class="p-2 space-y-2"><div class="h-3 bg-zinc-100 rounded skeleton"></div><div class="h-3 bg-zinc-100 rounded w-3/4 skeleton"></div><div class="h-8 bg-zinc-100 rounded-full skeleton mt-2"></div></div></div><br>
   </div><br>
   <div id="paginacao" style="display:flex;justify-content:space-between;align-items:center;padding:12px;border-top:1px solid #e4e4e7;margin-top:8px"></div><div id="grid" class="grid grid-cols-2 gap-2.5 hidden"></div><br>
+  <button id="btn-carregar-mais" onclick="carregarMaisProdutos()" style="display:none" class="w-full mt-4 h-[48px] bg-white border-2 border-zinc-900 rounded-full font-bold text-[14px] shadow-sm">Ver mais produtos ↓</button><br>
   <div id="empty-state" class="col-span-2 py-12 text-center bg-white rounded-[14px] border border-dashed border-zinc-200 mt-2"><br>
     <p class="text-[28px]">🔍<br>
     </p><p class="font-black text-[14px] mt-2 text-black" id="empty-title">Nada em Todas ainda</p><p class="text-[11px] text-zinc-500 mt-1 px-6" id="empty-desc">Ainda não adicionamos achados em Todas. Que tal ver todos?</p></div><br>
@@ -483,7 +484,7 @@ header{
   </p></div><br>
 </main><p></p></p>
 
-<div id="welcome-popup" class="fixed top-[18px] left-1/2 -translate-x-1/2 z-[90] bg-white text-zinc-900 px-[18px] py-[12px] rounded-[14px] shadow-[0_8px_32px_rgba(0,0,0,0.08)] max-w-[320px] w-[88%] border border-zinc-200/70 backdrop-blur-xl hidden">
+<div id="welcome-popup" class="fixed top-[18px] left-1/2 -translate-x-1/2 z-[90] bg-white text-zinc-900 px-[18px] py-[12px] rounded-[14px] shadow-[0_8px_32px_rgba(0,0,0,0.08)] max-w-[320px] w-[88%] border border-zinc-200/70 backdrop-blur-xl">
   <div class="flex items-start gap-3">
     <div class="w-[6px] h-[6px] rounded-full bg-zinc-900 mt-[6px] shrink-0"></div>
     <div>
@@ -596,7 +597,6 @@ header{
 <button id="f-salvar" class="w-full h-[42px] bg-[#ff6b2b] text-white rounded-full font-bold">Salvar + 🔔 Notificar todo mundo</button>
       <p class="text-[10px] text-zinc-400 mt-2 text-center">⚡ Automático: ao colar o link da imagem, já comprimo via wsrv.nl pra webp 600px (~40KB) e NÃO subo pro seu Storage. No banco fica só link wsrv.nl, 0KB no Firebase!
     </p></div>
-    <button id="btn-carregar-mais" onclick="carregarMaisProdutos()" style="display:none" class="w-full mt-4 h-[48px] bg-white border-2 border-zinc-900 rounded-full font-bold text-[14px]">Ver mais produtos ↓</button>
     <div id="lista" class="mt-4 space-y-2"></div>
 
   <div id="conteudo-editar" class="p-4 hidden">
