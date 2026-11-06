@@ -399,7 +399,7 @@ header{
       <span id="tag-loja" class="hidden">MOBILE</span><br>
     </div><br>
     <div class="flex items-center gap-2 ml-auto"><br>
-      <button id="btn-cliente" class="h-8 px-3 rounded-full bg-white border border-zinc-200 flex items-center gap-1.5 font-bold text-[12px] text-black shadow-sm animate-pulse"><br>
+      <button id="btn-cliente" class="h-8 px-3 rounded-full bg-white border border-zinc-200 flex items-center gap-1.5 font-bold text-[12px] text-black shadow-sm"><br>
       <span id="btn-cliente-icon" class="w-5 h-5 rounded-full bg-black text-white grid place-items-center text-[10px] font-black">👤</span><br>
       <span id="btn-cliente-text">Seu nome</span><br>
     </button><br>
@@ -486,7 +486,7 @@ header{
   </p></div><br>
 </main><p></p></p>
 
-<div id="welcome-popup" class="fixed top-[18px] left-1/2 -translate-x-1/2 z-[90] bg-white text-zinc-900 px-[18px] py-[12px] rounded-[14px] shadow-[0_8px_32px_rgba(0,0,0,0.08)] max-w-[320px] w-[88%] border border-zinc-200/70 backdrop-blur-xl">
+<div id="welcome-popup" class="fixed top-[18px] left-1/2 -translate-x-1/2 z-[90] bg-white text-zinc-900 px-[18px] py-[12px] rounded-[14px] shadow-[0_8px_32px_rgba(0,0,0,0.08)] max-w-[320px] w-[88%] border border-zinc-200/70 backdrop-blur-xl hidden">
   <div class="flex items-start gap-3">
     <div class="w-[6px] h-[6px] rounded-full bg-zinc-900 mt-[6px] shrink-0"></div>
     <div>
@@ -599,7 +599,6 @@ header{
 <button id="f-salvar" class="w-full h-[42px] bg-[#ff6b2b] text-white rounded-full font-bold">Salvar + 🔔 Notificar todo mundo</button>
       <p class="text-[10px] text-zinc-400 mt-2 text-center">⚡ Automático: ao colar o link da imagem, já comprimo via wsrv.nl pra webp 600px (~40KB) e NÃO subo pro seu Storage. No banco fica só link wsrv.nl, 0KB no Firebase!
     </p></div>
-    <button id="btn-carregar-mais" onclick="carregarMaisProdutos()" style="display:none" class="w-full mt-4 h-[48px] bg-white border-2 border-zinc-900 rounded-full font-bold text-[14px]">Ver mais produtos ↓</button>
     <div id="lista" class="mt-4 space-y-2"><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">🗄️</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Organizador de Gaveta Acrílico Cristal 3 Divisórias</p><p class="text-[11px] text-zinc-500">R$ 29.9 • Shopee</p></div><button onclick="apagarFirebase('1')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">🍟</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Air Fryer 4.2L Digital Timer Antiaderente</p><p class="text-[11px] text-zinc-500">R$ 279 • Amazon</p></div><button onclick="apagarFirebase('2')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">💡</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Luminária com Sensor de Presença LED Recarregável</p><p class="text-[11px] text-zinc-500">R$ 34.9 • Shopee</p></div><button onclick="apagarFirebase('3')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">💇‍♀️</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Escova Alisadora 3 em 1 Seca e Modela</p><p class="text-[11px] text-zinc-500">R$ 89.9 • Mercado Livre</p></div><button onclick="apagarFirebase('4')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">✨</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Kit 10 Panos Mágicos Microfibra Limpeza</p><p class="text-[11px] text-zinc-500">R$ 19.9 • Shopee</p></div><button onclick="apagarFirebase('5')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">📱</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Suporte Celular Articulado Mesa e Cama 360°</p><p class="text-[11px] text-zinc-500">R$ 26.9 • Amazon</p></div><button onclick="apagarFirebase('6')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">📽️</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Mini Projetor Portátil 4K WiFi</p><p class="text-[11px] text-zinc-500">R$ 189.9 • Shopee</p></div><button onclick="apagarFirebase('7')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">🎧</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Fone Bluetooth TWS com Case Power Bank</p><p class="text-[11px] text-zinc-500">R$ 49.9 • Amazon</p></div><button onclick="apagarFirebase('8')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">👗</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Vestido Feminino Longo Floral Verão</p><p class="text-[11px] text-zinc-500">R$ 89.9 • Shopee</p></div><button onclick="apagarFirebase('9')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">💄</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Kit Maquiagem Completo 12 Itens</p><p class="text-[11px] text-zinc-500">R$ 59.9 • Shopee</p></div><button onclick="apagarFirebase('10')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">👜</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Bolsa Feminina Transversal Couro</p><p class="text-[11px] text-zinc-500">R$ 79.9 • Amazon</p></div><button onclick="apagarFirebase('11')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">👠</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Sandália Salto Alto Feminina</p><p class="text-[11px] text-zinc-500">R$ 99.9 • Mercado Livre</p></div><button onclick="apagarFirebase('12')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">💖</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Conjunto Lingerie Rendada</p><p class="text-[11px] text-zinc-500">R$ 45.9 • Shopee</p></div><button onclick="apagarFirebase('13')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">✨</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Kit Skincare Ácido Hialurônico</p><p class="text-[11px] text-zinc-500">R$ 69.9 • Amazon</p></div><button onclick="apagarFirebase('14')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">👕</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Camisa Masculina Oversized Street</p><p class="text-[11px] text-zinc-500">R$ 59.9 • Shopee</p></div><button onclick="apagarFirebase('15')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">🩳</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Bermuda Moletom Masculina</p><p class="text-[11px] text-zinc-500">R$ 49.9 • Amazon</p></div><button onclick="apagarFirebase('16')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">👟</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Tênis Masculino Esportivo Corrida</p><p class="text-[11px] text-zinc-500">R$ 129.9 • Mercado Livre</p></div><button onclick="apagarFirebase('17')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">🧢</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Boné Aba Reta Original</p><p class="text-[11px] text-zinc-500">R$ 39.9 • Shopee</p></div><button onclick="apagarFirebase('18')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div><div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">⌚</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">Relógio Masculino Esportivo Prova D'água</p><p class="text-[11px] text-zinc-500">R$ 79.9 • Amazon</p></div><button onclick="apagarFirebase('19')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div></div>
   </div>
 
@@ -1234,323 +1233,271 @@ inputImg?.addEventListener('input', (e)=>{
 document.getElementById('sininho-depois')?.addEventListener('click',()=>{document.getElementById('modal-sininho').classList.add('hidden');localStorage.setItem('sininho_adiado',Date.now());});
 </script>
 
-<p><script type="module"><br>
-import { initializeApp } from <q><a href="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js">https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js</a></q>;<br>
-import { getDatabase, ref, onValue, push, remove, set, query, orderByKey, limitToLast, endBefore, get, onDisconnect } from <q><a href="https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js">https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js</a></q>;<br>
-let storage, sRef, uploadBytes, getDownloadURL;<br>
-let storageLoading = null;<br>
-async function ensureStorage(){<br>
-  if(storage) return {storage, sRef, uploadBytes, getDownloadURL};<br>
-  if(storageLoading) return storageLoading;<br>
-  storageLoading = import(<q><a href="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js">https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js</a></q>).then(mod=&gt;{<br>
-    const st = mod.getStorage(app);<br>
-    storage = st;<br>
-    sRef = mod.ref;<br>
-    uploadBytes = mod.uploadBytes;<br>
-    getDownloadURL = mod.getDownloadURL;<br>
-    window.storage=storage; window.sRef=sRef; window.uploadBytes=uploadBytes; window.getDownloadURL=getDownloadURL;<br>
-    return {storage, sRef, uploadBytes, getDownloadURL};<br>
-  });<br>
-  return storageLoading;<br>
-}<br>
-window.ensureStorage = ensureStorage;</p>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+import { getDatabase, ref, onValue, push, remove, set, onDisconnect } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js";
+let storage, sRef, uploadBytes, getDownloadURL;
+let storageLoading = null;
+async function ensureStorage(){
+  if(storage) return {storage, sRef, uploadBytes, getDownloadURL};
+  if(storageLoading) return storageLoading;
+  storageLoading = import("https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js").then(mod=>{
+    const st = mod.getStorage(app);
+    storage = st;
+    sRef = mod.ref;
+    uploadBytes = mod.uploadBytes;
+    getDownloadURL = mod.getDownloadURL;
+    window.storage=storage; window.sRef=sRef; window.uploadBytes=uploadBytes; window.getDownloadURL=getDownloadURL;
+    return {storage, sRef, uploadBytes, getDownloadURL};
+  });
+  return storageLoading;
+}
+window.ensureStorage = ensureStorage;
 
-<p>const firebaseConfig={apiKey:<q>AIzaSyAqkpuZamU05yXVGiQMtmyMmL68_Op-r88</q>,authDomain:<q>achadinhos-loja.firebaseapp.com</q>,databaseURL:<q><a href="https://achadinhos-loja-default-rtdb.firebaseio.com">https://achadinhos-loja-default-rtdb.firebaseio.com</a></q>,projectId:<q>achadinhos-loja</q>,storageBucket:<q>achadinhos-loja.firebasestorage.app</q>,messagingSenderId:<q>114449338702</q>,appId:<q>1:114449338702:web:78ae8c8c5b792e0a6fce1f</q>};<br>
-let app, db;<br>
-try{<br>
-  app=initializeApp(firebaseConfig);<br>
-  db=getDatabase(app);<br>
-  window.app=app; window.db=db;<br>
-  // storage lazy - só no ADM via ensureStorage()<br>
-  const produtosRef=ref(db,&#39;produtos&#39;);<br>
-  const onlineRef=ref(db,&#39;online&#39;);<br>
-  const cliquesRef=ref(db,&#39;cliques&#39;);<br>
-  const configRef=ref(db,&#39;config/loja&#39;);<br>
-  const notifRef=ref(db,&#39;notificacoes&#39;);<br>
-  const inscritosRef=ref(db,&#39;inscritos_sininho&#39;);</p>
+const firebaseConfig={apiKey:"AIzaSyAqkpuZamU05yXVGiQMtmyMmL68_Op-r88",authDomain:"achadinhos-loja.firebaseapp.com",databaseURL:"https://achadinhos-loja-default-rtdb.firebaseio.com",projectId:"achadinhos-loja",storageBucket:"achadinhos-loja.firebasestorage.app",messagingSenderId:"114449338702",appId:"1:114449338702:web:78ae8c8c5b792e0a6fce1f"};
+let app, db;
+try{
+  app=initializeApp(firebaseConfig);
+  db=getDatabase(app);
+  window.app=app; window.db=db;
+  // storage lazy - só no ADM via ensureStorage()
+  const produtosRef=ref(db,'produtos');
+  const onlineRef=ref(db,'online');
+  const cliquesRef=ref(db,'cliques');
+  const configRef=ref(db,'config/loja');
+  const notifRef=ref(db,'notificacoes');
+  const inscritosRef=ref(db,'inscritos_sininho');
 
-<p>let visitorId=localStorage.getItem(&#39;achadinhos<u>visitor&#39;);<br>
-  if(!visitorId){visitorId=&#39;vis</u>&#39;+Math.random().toString(36).substr(2,9);localStorage.setItem(&#39;achadinhos<u>visitor&#39;,visitorId);}<br>
-  let nomeClienteLocal = localStorage.getItem(&#39;cliente</u>nome&#39;) || &#39;&#39;;<br>
-  const clientesRef = ref(db,&#39;clientes&#39;);<br>
-  const meuClienteRef = ref(db,&#39;clientes/&#39;+visitorId);<br>
-  const meuOnlineRef=ref(db,&#39;online/&#39;+visitorId);<br>
-  function atualizaPresenca(){set(meuOnlineRef,{id:visitorId,online:true,ts:Date.now(),ua:navigator.userAgent.substring(0,120),hora:new Date().toLocaleTimeString(&#39;pt-BR&#39;)});}<br>
-  atualizaPresenca(); setInterval(atualizaPresenca,60000); onDisconnect(meuOnlineRef).remove();</p>
+  let visitorId=localStorage.getItem('achadinhos_visitor');
+  if(!visitorId){visitorId='vis_'+Math.random().toString(36).substr(2,9);localStorage.setItem('achadinhos_visitor',visitorId);}
+  let nomeClienteLocal = localStorage.getItem('cliente_nome') || '';
+  const clientesRef = ref(db,'clientes');
+  const meuClienteRef = ref(db,'clientes/'+visitorId);
+  const meuOnlineRef=ref(db,'online/'+visitorId);
+  function atualizaPresenca(){set(meuOnlineRef,{id:visitorId,online:true,ts:Date.now(),ua:navigator.userAgent.substring(0,120),hora:new Date().toLocaleTimeString('pt-BR')});}
+  atualizaPresenca(); setInterval(atualizaPresenca,60000); onDisconnect(meuOnlineRef).remove();
 
-<p>function mostrarSininhoAuto(){<br>
-    const permissao=Notification.permission;<br>
-    const jaAtivou=localStorage.getItem(&#39;sininho<u>ativado&#39;);<br>
-    const adiado=localStorage.getItem(&#39;sininho</u>adiado&#39;);<br>
-    const tempoAdiado=adiado?Date.now()-parseInt(adiado):Infinity;<br>
-    if(permissao!==&#39;default&#39;) return;<br>
-    if(jaAtivou) return;<br>
-    if(tempoAdiado&lt; 24<em>60</em>60*1000) return;<br>
-    setTimeout(()=&gt;{document.getElementById(&#39;modal-sininho&#39;).classList.remove(&#39;hidden&#39;);}, 6500);<br>
-  }<br>
-  mostrarSininhoAuto();</p>
+  function mostrarSininhoAuto(){
+    const permissao=Notification.permission;
+    const jaAtivou=localStorage.getItem('sininho_ativado');
+    const adiado=localStorage.getItem('sininho_adiado');
+    const tempoAdiado=adiado?Date.now()-parseInt(adiado):Infinity;
+    if(permissao!=='default') return;
+    if(jaAtivou) return;
+    if(tempoAdiado< 24*60*60*1000) return;
+    setTimeout(()=>{document.getElementById('modal-sininho').classList.remove('hidden');}, 6500);
+  }
+  mostrarSininhoAuto();
 
-<p>function ativarSininho(){<br>
-    if(!(&#39;Notification&#39; in window)){toast(<q>Seu navegador não suporta notificação</q>);return;}<br>
-    Notification.requestPermission().then(perm=&gt;{<br>
-      document.getElementById(&#39;modal-sininho&#39;).classList.add(&#39;hidden&#39;);<br>
-      if(perm===&#39;granted&#39;){<br>
-        localStorage.setItem(&#39;sininho<u>ativado&#39;,&#39;1&#39;);<br>
-        document.getElementById(&#39;bell-dot&#39;).classList.add(&#39;hidden&#39;);<br>
-        set(inscritosRef,{});<br>
-        set(ref(db,&#39;inscritos</u>sininho/&#39;+visitorId),{id:visitorId,ts:Date.now(),hora:new Date().toLocaleString(&#39;pt-BR&#39;),ua:navigator.userAgent.substring(0,80)});<br>
-        toast(<q>🔔 Sininho ativado! Você vai receber ofertas!</q>);<br>
-        new Notification(<q>🔔 Sininho ativado!</q>,{body:<q>Você vai receber achadinhos novos na hora!</q>});<br>
-        document.getElementById(&#39;card-permissao&#39;).textContent=<q>Ativo ✅</q>;<br>
-      } else {<br>
-        toast(<q>Sininho não ativado</q>);<br>
-        document.getElementById(&#39;card-permissao&#39;).textContent=<q>Bloqueado ❌</q>;<br>
-      }<br>
-    });<br>
-  }<br>
-  document.getElementById(&#39;sininho-ativar&#39;)?.addEventListener(&#39;click&#39;,ativarSininho);</p>
+  function ativarSininho(){
+    if(!('Notification' in window)){toast("Seu navegador não suporta notificação");return;}
+    Notification.requestPermission().then(perm=>{
+      document.getElementById('modal-sininho').classList.add('hidden');
+      if(perm==='granted'){
+        localStorage.setItem('sininho_ativado','1');
+        document.getElementById('bell-dot').classList.add('hidden');
+        set(inscritosRef,{});
+        set(ref(db,'inscritos_sininho/'+visitorId),{id:visitorId,ts:Date.now(),hora:new Date().toLocaleString('pt-BR'),ua:navigator.userAgent.substring(0,80)});
+        toast("🔔 Sininho ativado! Você vai receber ofertas!");
+        new Notification("🔔 Sininho ativado!",{body:"Você vai receber achadinhos novos na hora!"});
+        document.getElementById('card-permissao').textContent="Ativo ✅";
+      } else {
+        toast("Sininho não ativado");
+        document.getElementById('card-permissao').textContent="Bloqueado ❌";
+      }
+    });
+  }
+  document.getElementById('sininho-ativar')?.addEventListener('click',ativarSininho);
+  
+  function salvarNomeClienteFirebase(nome){
+    if(!nome) return;
+    set(meuClienteRef,{id:visitorId,nome:nome,ts:Date.now(),hora:new Date().toLocaleString('pt-BR'),ua:navigator.userAgent.substring(0,80),sininho: Notification.permission});
+    set(meuOnlineRef,{id:visitorId,nome:nome,online:true,ts:Date.now(),ua:navigator.userAgent.substring(0,120),hora:new Date().toLocaleTimeString('pt-BR')});
+  }
+  document.getElementById('salvar-nome-cliente')?.addEventListener('click',()=>{
+    const nome = document.getElementById('input-nome-cliente').value.trim();
+    if(!nome){toast("Digite seu nome");return;}
+    if(nome.length<2){toast("Nome muito curto");return;}
+    localStorage.setItem('cliente_nome', nome);
+    nomeClienteLocal = nome;
+    if(window.atualizarAvatarGlobal) window.atualizarAvatarGlobal(nome);
+    salvarNomeClienteFirebase(nome);
+    document.getElementById('modal-cliente').classList.add('hidden');
+    toast("✅ Olá, "+nome+"! Nome salvo");
+  });
+  if(nomeClienteLocal){ setTimeout(()=>salvarNomeClienteFirebase(nomeClienteLocal), 1000); }
 
-<p>function salvarNomeClienteFirebase(nome){<br>
-    if(!nome) return;<br>
-    set(meuClienteRef,{id:visitorId,nome:nome,ts:Date.now(),hora:new Date().toLocaleString(&#39;pt-BR&#39;),ua:navigator.userAgent.substring(0,80),sininho: Notification.permission});<br>
-    set(meuOnlineRef,{id:visitorId,nome:nome,online:true,ts:Date.now(),ua:navigator.userAgent.substring(0,120),hora:new Date().toLocaleTimeString(&#39;pt-BR&#39;)});<br>
-  }<br>
-  document.getElementById(&#39;salvar-nome-cliente&#39;)?.addEventListener(&#39;click&#39;,()=&gt;{<br>
-    const nome = document.getElementById(&#39;input-nome-cliente&#39;).value.trim();<br>
-    if(!nome){toast(<q>Digite seu nome</q>);return;}<br>
-    if(nome.length<2){toast("Nome muito curto");return;}<br>
-    localStorage.setItem('cliente_nome', nome);<br>
-    nomeClienteLocal = nome;<br>
-    if(window.atualizarAvatarGlobal) window.atualizarAvatarGlobal(nome);<br>
-    salvarNomeClienteFirebase(nome);<br>
-    document.getElementById('modal-cliente').classList.add('hidden');<br>
-    toast("✅ Olá, "+nome+"! Nome salvo");<br>
-  });<br>
-  if(nomeClienteLocal){ setTimeout(()=>salvarNomeClienteFirebase(nomeClienteLocal), 1000); }</p>
+  onValue(clientesRef, snap=>{
+    const data=snap.val()||{};
+    const lista=Object.values(data).reverse().slice(0,50);
+    const listaClientesDiv = document.getElementById('lista-clientes-nomes');
+    if(listaClientesDiv){
+      if(lista.length===0) listaClientesDiv.innerHTML='<p class="text-zinc-400">Ninguém salvou nome ainda...';
+      else listaClientesDiv.innerHTML=lista.map(c=>'<div class="flex justify-between p-2 bg-zinc-50 rounded-[10px]"><div><p class="font-bold text-[11px]">👤 '+(c.nome||'Sem nome')+' • '+c.id.substring(0,6)+'...<p class="text-[10px] text-zinc-500">'+c.hora+'</div><span class="text-[10px] '+(c.sininho==='granted'?'text-emerald-600':'text-zinc-400')+'">'+(c.sininho==='granted'?'🔔':'')+'</span></div>').join('');
+    }
+  });
 
-<p>onValue(clientesRef, snap=&gt;{<br>
-    const data=snap.val()||{};<br>
-    const lista=Object.values(data).reverse().slice(0,50);<br>
-    const listaClientesDiv = document.getElementById(&#39;lista-clientes-nomes&#39;);<br>
-    if(listaClientesDiv){<br>
-      if(lista.length=<mark>0) listaClientesDiv.innerHTML=&#39;<p class="text-zinc-400">Ninguém salvou nome ainda...&#39;;<br>
-      else listaClientesDiv.innerHTML=lista.map(c=&gt;&#39;<div class="flex justify-between p-2 bg-zinc-50 rounded-[10px]"><div><p class="font-bold text-[11px]">👤 &#39;+(c.nome||&#39;Sem nome&#39;)+&#39; • &#39;+c.id.substring(0,6)+&#39;...<p class="text-[10px] text-zinc-500">&#39;+c.hora+&#39;</div>&lt;span class=&quot;text-[10px] &#39;+(c.sininho</mark>=&#39;granted&#39;?&#39;text-emerald-600&#39;:&#39;text-zinc-400&#39;)+&#39;&quot;&gt;&#39;+(c.sininho===&#39;granted&#39;?&#39;🔔&#39;:&#39;&#39;)+&#39;</span></div>&#39;).join(&#39;&#39;);<br>
-    }<br>
-  });</p>
+  document.getElementById('notif-testar')?.addEventListener('click',()=>{
+    if(Notification.permission!=='granted'){Notification.requestPermission().then(p=>{if(p==='granted') new Notification("🔔 Teste",{body:"Sininho funcionando!"}); else toast("Permita notificações");});}
+    else new Notification("🔔 Teste",{body:"Sininho funcionando! Quando adicionar produto novo, chega pra todo mundo!"});
+  });
 
-<p>document.getElementById(&#39;notif-testar&#39;)?.addEventListener(&#39;click&#39;,()=&gt;{<br>
-    if(Notification.permission!<mark>&#39;granted&#39;){Notification.requestPermission().then(p=&gt;{if(p</mark>=&#39;granted&#39;) new Notification(<q>🔔 Teste</q>,{body:<q>Sininho funcionando!</q>}); else toast(<q>Permita notificações</q>);});}<br>
-    else new Notification(<q>🔔 Teste</q>,{body:<q>Sininho funcionando! Quando adicionar produto novo, chega pra todo mundo!</q>});<br>
-  });</p>
+  let produtosAnteriores=new Set();
+  let primeiraCarga=true;
+  onValue(produtosRef,snap=>{
+    const data=snap.val();
+    if(data){
+      const isImg = (s)=>{ if(!s) return false; s=s.trim(); return s.startsWith('http://')||s.startsWith('https://')||s.startsWith('data:image')||s.startsWith('//'); };
+      const lista=Object.entries(data).map(([id,v])=>({id,nome:v.nome,precoNovo:v.preco||v.precoNovo||0,precoAntigo:v.precoOriginal||v.precoAntigo||0,loja:v.loja||"Shopee",categoria:v.categoria||v.cat||"Geral",emoji:!isImg(v.imagem)?v.imagem:"🎁",imagemUrl:isImg(v.imagem)?v.imagem:null,affiliateLink:v.linkAfiliado||v.affiliateLink||"#"} )).reverse();
+      if(lista.length>0){
+        if(!primeiraCarga){
+          lista.forEach(p=>{
+            if(!produtosAnteriores.has(p.id)){
+              if(Notification.permission==='granted'){
+                try{ new Notification("🔥 Achadinho novo!",{body:p.nome.substring(0,60)+" - R$ "+p.precoNovo, icon:"https://cdn-icons-png.flaticon.com/512/263/263142.png"}); }catch(e){}
+              }
+            }
+          });
+        }
+        produtos=lista;
+        produtosAnteriores=new Set(lista.map(p=>p.id));
+        render();
+        primeiraCarga=false;
+      }
+    }
+  });
+  window.apagarFirebase=(id)=>{if(!confirm("Apagar definitivo?"))return;if(id&&id.length<=2){produtos=produtos.filter(p=>p.id!==id);render();toast("Apagado local");return;} remove(ref(db,'produtos/'+id)).then(()=>toast("✅ Apagado!"));};
+  window.apagar=window.apagarFirebase;
 
-<p>let produtosAnteriores=new Set();<br>
-  let primeiraCarga=true;<br>
-  let oldestKey=null;<br>
-  let hasMore=true;<br>
-  let carregandoPagina=false;</p>
+  document.getElementById('f-salvar')?.addEventListener('click',()=>{
+    const nome=document.getElementById('f-nome').value.trim(); const preco=document.getElementById('f-preco').value;
+    if(!nome||!preco){toast("Preencha nome e preço");return;}
+    if(otimizandoAuto){toast("Aguarde terminar a otimização automática...");return;}
+    const imagemParaSalvar = imagemOtimizadaFinal || document.getElementById('f-emoji').value||"🎁";
+    const novo={nome,preco:parseFloat(preco),precoOriginal:parseFloat(document.getElementById('f-preco-antigo').value)||0,imagem:imagemParaSalvar,linkAfiliado:document.getElementById('f-link').value||"https://shopee.com.br",loja:document.getElementById('f-loja').value,categoria:document.getElementById('f-categoria')?.value||"Geral",addedAt:Date.now()};
+    push(produtosRef,novo).then((snap)=>{
+      const deveNotificar = document.getElementById('f-notificar')?.checked;
+      if(deveNotificar){
+        const titulo="🔥 Achadinho novo: "+nome.substring(0,30);
+        const msg="R$ "+preco+" • "+document.getElementById('f-loja').value+" • Corre que acaba rápido!";
+        push(notifRef,{titulo,mensagem:msg,produtoNome:nome,timestamp:Date.now(),hora:new Date().toLocaleString('pt-BR')});
+        toast("✅ Salvo e sininho enviado pra todo mundo!");
+      } else {
+        toast("✅ Salvo silencioso (sem sininho)!");
+      }
+      document.getElementById('f-nome').value="";document.getElementById('f-preco').value="";document.getElementById('f-preco-antigo').value="";document.getElementById('f-emoji').value="";document.getElementById('f-link').value="";
+      imagemOtimizadaFinal = null;
+      document.getElementById('preview-img')?.classList.add('hidden');
+    });
+  });
 
-<p>function parseProdutoPagina(id, v){<br>
-    const isImg = (s)=&gt;{ if(!s) return false; s=s.trim(); return s.startsWith(&#39;http://&#39;)||s.startsWith(&#39;https://&#39;)||s.startsWith(&#39;data:image&#39;)||s.startsWith(&#39;//&#39;); };<br>
-    return {id,nome:v.nome,precoNovo:v.preco||v.precoNovo||0,precoAntigo:v.precoOriginal||v.precoAntigo||0,loja:v.loja||<q>Shopee</q>,categoria:v.categoria||v.cat||<q>Geral</q>,emoji:!isImg(v.imagem)?v.imagem:<q>🎁</q>,imagemUrl:isImg(v.imagem)?v.imagem:null,affiliateLink:v.linkAfiliado||v.affiliateLink||<q>#</q>, addedAt: v.addedAt || 0};<br>
-  }</p>
+  const defaultConfig={nome:"ACHADINHOS",tag:"MOBILE",badge:"🔥 NOVO • SININHO AUTOMÁTICO",t1:"Achadinhos que",t2:"valem cada centavo",cor:"#ff6b2b",rodapeTitulo:"ACHADINHOS OFICIAL 🛒",rodapeZap:"Zap: 81 99802-8998 • Bonito-PE",rodapeInsta:"https://instagram.com/filipe_ferreira12",grupoZap:"https://chat.whatsapp.com/I7XYYOFpDsCLWrowi7xg1J?s=cl&p=i&mlu=4&ilr=4&iam=2"};
+  onValue(configRef,snap=>{
+    const cfg=snap.val()||defaultConfig;
+    document.getElementById('nome-loja').textContent=cfg.nome||defaultConfig.nome;
+    document.getElementById('tag-loja').textContent=cfg.tag||defaultConfig.tag;
+    document.getElementById('banner-badge').textContent=cfg.badge||defaultConfig.badge;
+    document.getElementById('banner-t1').textContent=cfg.t1||defaultConfig.t1;
+    document.getElementById('banner-t2').textContent=cfg.t2||defaultConfig.t2;
+    document.getElementById('banner-t2').style.color=cfg.cor||defaultConfig.cor;
+    document.getElementById('banner-bola').style.background=cfg.cor||defaultConfig.cor;
+    document.getElementById('rodape-titulo').textContent=cfg.rodapeTitulo||defaultConfig.rodapeTitulo;
+    document.getElementById('rodape-zap').textContent=cfg.rodapeZap||defaultConfig.rodapeZap;
+    const instaEl=document.getElementById('rodape-insta');
+    if(instaEl){ instaEl.href=cfg.rodapeInsta||defaultConfig.rodapeInsta; }
+    const grupoLinks=[document.getElementById('btn-grupo-zap-top'),document.getElementById('rodape-grupo')];
+    grupoLinks.forEach(el=>{if(el)el.href=cfg.grupoZap||defaultConfig.grupoZap;});
+    if(!document.getElementById('edit-nome').value){
+      document.getElementById('edit-nome').value=cfg.nome||"";
+      document.getElementById('edit-tag').value=cfg.tag||"";
+      document.getElementById('edit-badge').value=cfg.badge||"";
+      document.getElementById('edit-t1').value=cfg.t1||"";
+      document.getElementById('edit-t2').value=cfg.t2||"";
+      document.getElementById('edit-cor').value=cfg.cor||"#ff6b2b";
+      document.getElementById('edit-cor-txt').value=cfg.cor||"#ff6b2b";
+      document.getElementById('edit-rodape-titulo').value=cfg.rodapeTitulo||"";
+      document.getElementById('edit-rodape-zap').value=cfg.rodapeZap||"";
+      document.getElementById('edit-rodape-insta').value=cfg.rodapeInsta||"https://instagram.com/filipe_ferreira12";
+    }
+  });
+  document.getElementById('edit-salvar')?.addEventListener('click',()=>{
+    const novoCfg={
+      nome:document.getElementById('edit-nome').value||"ACHADINHOS",
+      tag:document.getElementById('edit-tag').value||"MOBILE",
+      badge:document.getElementById('edit-badge').value||"🔥 NOVO",
+      t1:document.getElementById('edit-t1').value||"Achadinhos que",
+      t2:document.getElementById('edit-t2').value||"valem cada centavo",
+      cor:document.getElementById('edit-cor-txt').value||"#ff6b2b",
+      rodapeTitulo:document.getElementById('edit-rodape-titulo').value||"ACHADINHOS OFICIAL 🛒",
+      rodapeZap:document.getElementById('edit-rodape-zap').value||"Zap: 81 99802-8998",
+      rodapeInsta:document.getElementById('edit-rodape-insta').value||"https://instagram.com/filipe_ferreira12"
+    };
+    set(configRef,novoCfg).then(()=>toast("✅ Loja atualizada ao vivo! Instagram salvo!"));
+  });
 
-<p>// fallback: se paginação falhar, carrega simples e nunca fica 0<br>
-  function carregarSimplesFallback(){<br>
-    onValue(produtosRef, snap=&gt;{<br>
-      const data=snap.val();<br>
-      if(!data){ produtos=[]; render(); return; }<br>
-      const lista=Object.entries(data).map(([id,v])=&gt;parseProdutoPagina(id,v)).sort((a,b)=&gt; (b.addedAt||0)-(a.addedAt||0) || b.id.localeCompare(a.id));<br>
-      produtos=lista;<br>
-      produtosAnteriores=new Set(lista.map(p=&gt;p.id));<br>
-      primeiraCarga=false; hasMore=false; render();<br>
-    });<br>
-  }</p>
+  onValue(onlineRef,snap=>{
+    const data=snap.val()||{}; const lista=Object.values(data); const recentes=lista.filter(v=>Date.now()-v.ts<120000);
+    document.getElementById('online-top').textContent=recentes.length+" on-line";
+    document.getElementById('online-painel').textContent=recentes.length+" on-line";
+    document.getElementById('card-online').textContent=recentes.length;
+    const div=document.getElementById('lista-online');
+    if(recentes.length===0) div.innerHTML='<p class="text-zinc-400">Ninguém...';
+    else div.innerHTML=recentes.map(v=>'<div class="flex justify-between p-2 bg-zinc-50 rounded-[10px]"><div><p class="font-bold text-[11px]">'+(v.nome? '👤 '+v.nome+' • ' : '')+v.id.substring(0,8)+'... • '+v.hora+'<p class="text-[10px] text-zinc-500 truncate w-[200px]">'+v.ua.substring(0,60)+'</div><span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span></div>').join('');
+  });
+  function registrarClique(id,nome){push(cliquesRef,{produtoId:id,produtoNome:nome,visitorId:visitorId,ts:Date.now(),hora:new Date().toLocaleString('pt-BR'),data:new Date().toLocaleDateString('pt-BR')});}
+  document.getElementById('grid')?.addEventListener('click',e=>{const btn=e.target.closest('.btn-oferta');if(btn) registrarClique(btn.getAttribute('data-id'),btn.getAttribute('data-nome'));});
+  onValue(cliquesRef,snap=>{
+    const data=snap.val()||{}; const lista=Object.values(data).reverse().slice(0,50); const hoje=new Date().toLocaleDateString('pt-BR'); const hojeLista=lista.filter(c=>c.data===hoje);
+    document.getElementById('card-cliques').textContent=hojeLista.length; document.getElementById('card-total-geral').textContent=lista.length+" total";
+    const div=document.getElementById('lista-cliques');
+    if(lista.length===0) div.innerHTML='<p class="text-zinc-400 text-[12px]">Nenhum clique...';
+    else div.innerHTML=lista.map(c=>'<div class="p-2 bg-zinc-50 rounded-[10px] border border-zinc-100"><p class="font-bold text-[11px]">🛒 '+ (c.produtoNome||c.produtoId).substring(0,35)+'<p class="text-[10px] text-zinc-500">'+c.hora+' • '+c.visitorId.substring(0,8)+'...</div>').join('');
+  });
+  document.getElementById('limpar-cliques')?.addEventListener('click',()=>{if(confirm("Limpar cliques?")) remove(cliquesRef).then(()=>toast("Limpos"));});
 
-<p>async function carregarPagina(inicial=false){<br>
-    if(carregandoPagina) return;<br>
-    carregandoPagina=true;<br>
-    const btnMais=document.getElementById(&#39;btn-carregar-mais&#39;);<br>
-    if(btnMais) btnMais.textContent=&#39;Carregando...&#39;;<br>
-    try{<br>
-      let q;<br>
-      if(inicial || oldestKey=<mark>null){<br>
-        q=query(produtosRef, orderByKey(), limitToLast(20));<br>
-      } else {<br>
-        q=query(produtosRef, orderByKey(), endBefore(oldestKey), limitToLast(20));<br>
-      }<br>
-      const snap=await get(q);<br>
-      const data=snap.val();<br>
-      if(!data || Object.keys(data).length</mark>=0){<br>
-        if(inicial){ carregarSimplesFallback(); }<br>
-        hasMore=false;<br>
-        if(btnMais) btnMais.style.display=&#39;none&#39;;<br>
-        carregandoPagina=false;<br>
-        return;<br>
-      }<br>
-      let lista=Object.entries(data).map(([id,v])=&gt;parseProdutoPagina(id,v));<br>
-      lista.sort((a,b)=&gt; (b.addedAt||0)-(a.addedAt||0) || b.id.localeCompare(a.id));<br>
-      oldestKey=lista[lista.length-1].id;<br>
-      if(inicial){<br>
-        produtos=lista;<br>
-        produtosAnteriores=new Set(lista.map(p=&gt;p.id));<br>
-        if(lista.length<20) hasMore=false;<br>
-      } else {<br>
-        const idsExist=new Set(produtos.map(p=>p.id));<br>
-        const novos=lista.filter(p=&gt;!idsExist.has(p.id));<br>
-        produtos=produtos.concat(novos);<br>
-        novos.forEach(p=&gt;produtosAnteriores.add(p.id));<br>
-        if(novos.length<20) hasMore=false;<br>
-      }<br>
-      // notifica novos só na primeira carga<br>
-      if(!primeiraCarga){<br>
-        produtos.forEach(p=>{ if(!produtosAnteriores.has(p.id)){} });<br>
-      }<br>
-      render();<br>
-      primeiraCarga=false;<br>
-      if(btnMais){<br>
-        btnMais.style.display=hasMore ? &#39;block&#39; : &#39;none&#39;;<br>
-        btnMais.textContent=&#39;Ver mais produtos ↓&#39;;<br>
-      }<br>
-    }catch(e){<br>
-      console.error(&#39;paginacao erro, fallback&#39;, e);<br>
-      if(inicial) carregarSimplesFallback();<br>
-      else toast(&#39;Erro: &#39;+e.message);<br>
-    }<br>
-    carregandoPagina=false;<br>
-  }</p>
+  let notificacoesAnteriores=new Set(); let primeiraNotif=true;
+  onValue(notifRef,snap=>{
+    const data=snap.val()||{};
+    const lista=Object.entries(data).map(([id,v])=>({id,...v})).reverse();
+    const div=document.getElementById('historico-notif'); const div2=document.getElementById('historico-notif-2');
+    if(div) div.innerHTML=lista.slice(0,5).map(n=>'<div class="p-2 bg-zinc-50 rounded-[10px]"><p class="text-[11px] font-bold">'+n.titulo+'<p class="text-[10px] text-zinc-500">'+n.mensagem+'<p class="text-[9px] text-zinc-400">'+(n.hora||"")+'</div>').join('')||'<p class="text-zinc-400 text-[12px]">Nenhuma enviada';
+    if(div2) div2.innerHTML=div.innerHTML;
+    document.getElementById('card-notif-enviadas').textContent=lista.length;
+    if(!primeiraNotif){
+      lista.forEach(n=>{
+        if(!notificacoesAnteriores.has(n.id)){
+          if(Notification.permission==='granted'){
+            try{ new Notification(n.titulo,{body:n.mensagem}); }catch(e){}
+          }
+        }
+      });
+    }
+    notificacoesAnteriores=new Set(lista.map(n=>n.id));
+    primeiraNotif=false;
+  });
+  onValue(inscritosRef,snap=>{
+    const data=snap.val()||{}; const lista=Object.values(data);
+    document.getElementById('card-inscritos').textContent=lista.length;
+    document.getElementById('inscritos-total').textContent=lista.length+" inscritos";
+    const div=document.getElementById('lista-inscritos');
+    if(lista.length===0) div.innerHTML='<p class="text-zinc-400">Ninguém ativou ainda...';
+    else div.innerHTML=lista.reverse().slice(0,20).map(v=>'<div class="flex justify-between p-2 bg-zinc-50 rounded-[10px]"><p class="text-[11px] font-bold">'+v.id.substring(0,8)+'...<p class="text-[10px] text-zinc-500">'+v.hora+'</div>').join('');
+  });
 
-<p>carregarPagina(true);<br>
-  window.carregarMaisProdutos=()=&gt;carregarPagina(false);<br>
-  window.apagarFirebase=(id)=&gt;{if(!confirm(<q>Apagar definitivo?</q>))return;if(id&amp;&amp;id.length&lt;=2){produtos=produtos.filter(p=&gt;p.id!==id);render();toast(<q>Apagado local</q>);return;} remove(ref(db,&#39;produtos/&#39;+id)).then(()=&gt;toast(<q>✅ Apagado!</q>));};<br>
-  window.apagar=window.apagarFirebase;</p>
+  document.getElementById('card-permissao').textContent=Notification.permission==='granted'?'Ativo ✅':Notification.permission==='denied'?'Bloqueado ❌':'Pendente';
+  if(Notification.permission==='granted') document.getElementById('bell-dot').classList.add('hidden');
 
-<p>document.getElementById(&#39;f-salvar&#39;)?.addEventListener(&#39;click&#39;,()=&gt;{<br>
-    const nome=document.getElementById(&#39;f-nome&#39;).value.trim(); const preco=document.getElementById(&#39;f-preco&#39;).value;<br>
-    if(!nome||!preco){toast(<q>Preencha nome e preço</q>);return;}<br>
-    if(otimizandoAuto){toast(<q>Aguarde terminar a otimização automática...</q>);return;}<br>
-    const imagemParaSalvar = imagemOtimizadaFinal || document.getElementById(&#39;f-emoji&#39;).value||<q>🎁</q>;<br>
-    const novo={nome,preco:parseFloat(preco),precoOriginal:parseFloat(document.getElementById(&#39;f-preco-antigo&#39;).value)||0,imagem:imagemParaSalvar,linkAfiliado:document.getElementById(&#39;f-link&#39;).value||<q><a href="https://shopee.com.br">https://shopee.com.br</a></q>,loja:document.getElementById(&#39;f-loja&#39;).value,categoria:document.getElementById(&#39;f-categoria&#39;)?.value||<q>Geral</q>,addedAt:Date.now()};<br>
-    push(produtosRef,novo).then((snap)=&gt;{<br>
-      const deveNotificar = document.getElementById(&#39;f-notificar&#39;)?.checked;<br>
-      if(deveNotificar){<br>
-        const titulo=<q>🔥 Achadinho novo:</q>+nome.substring(0,30);<br>
-        const msg=<q>R$</q>+preco+<q>•</q>+document.getElementById(&#39;f-loja&#39;).value+<q>• Corre que acaba rápido!</q>;<br>
-        push(notifRef,{titulo,mensagem:msg,produtoNome:nome,timestamp:Date.now(),hora:new Date().toLocaleString(&#39;pt-BR&#39;)});<br>
-        toast(<q>✅ Salvo e sininho enviado pra todo mundo!</q>);<br>
-      } else {<br>
-        toast(<q>✅ Salvo silencioso (sem sininho)!</q>);<br>
-      }<br>
-      document.getElementById(&#39;f-nome&#39;).value=<q>;document.getElementById(&#39;f-preco&#39;).value=</q>;document.getElementById(&#39;f-preco-antigo&#39;).value=<q>;document.getElementById(&#39;f-emoji&#39;).value=</q>;document.getElementById(&#39;f-link&#39;).value=&quot;&quot;;<br>
-      imagemOtimizadaFinal = null;<br>
-      document.getElementById(&#39;preview-img&#39;)?.classList.add(&#39;hidden&#39;);<br>
-    });<br>
-  });</p>
+  function enviarNotificacaoManual(){
+    const titulo=document.getElementById('notif-titulo').value.trim()||document.getElementById('notif-titulo-2').value.trim();
+    const msg=document.getElementById('notif-msg').value.trim()||document.getElementById('notif-msg-2').value.trim();
+    if(!titulo||!msg){toast("Preencha título e mensagem");return;}
+    push(notifRef,{titulo,mensagem:msg,timestamp:Date.now(),hora:new Date().toLocaleString('pt-BR')}).then(()=>toast("📢 Enviada pra todos que ativaram o sininho!"));
+  }
+  document.getElementById('notif-enviar-todos')?.addEventListener('click',enviarNotificacaoManual);
+  document.getElementById('notif-enviar-todos-2')?.addEventListener('click',enviarNotificacaoManual);
 
-<p>const defaultConfig={nome:<q>ACHADINHOS</q>,tag:<q>MOBILE</q>,badge:<q>🔥 NOVO • SININHO AUTOMÁTICO</q>,t1:<q>Achadinhos que</q>,t2:<q>valem cada centavo</q>,cor:<q>#ff6b2b</q>,rodapeTitulo:<q>ACHADINHOS OFICIAL 🛒</q>,rodapeZap:<q>Zap: 81 99802-8998 • Bonito-PE</q>,rodapeInsta:<q><a href="https://instagram.com/filipe_ferreira12">https://instagram.com/filipe_ferreira12</a></q>,grupoZap:<q><a href="https://chat.whatsapp.com/I7XYYOFpDsCLWrowi7xg1J?s=cl&amp;p=i&amp;mlu=4&amp;ilr=4&amp;iam=2">https://chat.whatsapp.com/I7XYYOFpDsCLWrowi7xg1J?s=cl&amp;p=i&amp;mlu=4&amp;ilr=4&amp;iam=2</a></q>};<br>
-  onValue(configRef,snap=&gt;{<br>
-    const cfg=snap.val()||defaultConfig;<br>
-    document.getElementById(&#39;nome-loja&#39;).textContent=cfg.nome||defaultConfig.nome;<br>
-    document.getElementById(&#39;tag-loja&#39;).textContent=cfg.tag||defaultConfig.tag;<br>
-    document.getElementById(&#39;banner-badge&#39;).textContent=cfg.badge||defaultConfig.badge;<br>
-    document.getElementById(&#39;banner-t1&#39;).textContent=cfg.t1||defaultConfig.t1;<br>
-    document.getElementById(&#39;banner-t2&#39;).textContent=cfg.t2||defaultConfig.t2;<br>
-    document.getElementById(&#39;banner-t2&#39;).style.color=cfg.cor||defaultConfig.cor;<br>
-    document.getElementById(&#39;banner-bola&#39;).style.background=cfg.cor||defaultConfig.cor;<br>
-    document.getElementById(&#39;rodape-titulo&#39;).textContent=cfg.rodapeTitulo||defaultConfig.rodapeTitulo;<br>
-    document.getElementById(&#39;rodape-zap&#39;).textContent=cfg.rodapeZap||defaultConfig.rodapeZap;<br>
-    const instaEl=document.getElementById(&#39;rodape-insta&#39;);<br>
-    if(instaEl){ instaEl.href=cfg.rodapeInsta||defaultConfig.rodapeInsta; }<br>
-    const grupoLinks=[document.getElementById(&#39;btn-grupo-zap-top&#39;),document.getElementById(&#39;rodape-grupo&#39;)];<br>
-    grupoLinks.forEach(el=&gt;{if(el)el.href=cfg.grupoZap||defaultConfig.grupoZap;});<br>
-    if(!document.getElementById(&#39;edit-nome&#39;).value){<br>
-      document.getElementById(&#39;edit-nome&#39;).value=cfg.nome||<q>;<br>
-      document.getElementById(&#39;edit-tag&#39;).value=cfg.tag||</q>;<br>
-      document.getElementById(&#39;edit-badge&#39;).value=cfg.badge||<q>;<br>
-      document.getElementById(&#39;edit-t1&#39;).value=cfg.t1||</q>;<br>
-      document.getElementById(&#39;edit-t2&#39;).value=cfg.t2||<q>;<br>
-      document.getElementById(&#39;edit-cor&#39;).value=cfg.cor||<q>#ff6b2b</q>;<br>
-      document.getElementById(&#39;edit-cor-txt&#39;).value=cfg.cor||<q>#ff6b2b</q>;<br>
-      document.getElementById(&#39;edit-rodape-titulo&#39;).value=cfg.rodapeTitulo||</q>;<br>
-      document.getElementById(&#39;edit-rodape-zap&#39;).value=cfg.rodapeZap||&quot;<q>;<br>
-      document.getElementById(&#39;edit-rodape-insta&#39;).value=cfg.rodapeInsta||</q><a href="https://instagram.com/filipe_ferreira12">https://instagram.com/filipe_ferreira12</a><q>;<br>
-    }<br>
-  });<br>
-  document.getElementById(&#39;edit-salvar&#39;)?.addEventListener(&#39;click&#39;,()=&gt;{<br>
-    const novoCfg={<br>
-      nome:document.getElementById(&#39;edit-nome&#39;).value||</q>ACHADINHOS<q>,<br>
-      tag:document.getElementById(&#39;edit-tag&#39;).value||</q>MOBILE<q>,<br>
-      badge:document.getElementById(&#39;edit-badge&#39;).value||</q>🔥 NOVO<q>,<br>
-      t1:document.getElementById(&#39;edit-t1&#39;).value||</q>Achadinhos que<q>,<br>
-      t2:document.getElementById(&#39;edit-t2&#39;).value||</q>valem cada centavo<q>,<br>
-      cor:document.getElementById(&#39;edit-cor-txt&#39;).value||</q>#ff6b2b<q>,<br>
-      rodapeTitulo:document.getElementById(&#39;edit-rodape-titulo&#39;).value||</q>ACHADINHOS OFICIAL 🛒<q>,<br>
-      rodapeZap:document.getElementById(&#39;edit-rodape-zap&#39;).value||</q>Zap: 81 99802-8998<q>,<br>
-      rodapeInsta:document.getElementById(&#39;edit-rodape-insta&#39;).value||</q><a href="https://instagram.com/filipe_ferreira12">https://instagram.com/filipe_ferreira12</a><q><br>
-    };<br>
-    set(configRef,novoCfg).then(()=&gt;toast(</q>✅ Loja atualizada ao vivo! Instagram salvo!&quot;));<br>
-  });</p>
+}catch(e){console.log(e);}
+</script>
 
-<p>onValue(onlineRef,snap=&gt;{<br>
-    const data=snap.val()||{}; const lista=Object.values(data); const recentes=lista.filter(v=&gt;Date.now()-v.ts<120000);<br>
-    document.getElementById('online-top').textContent=recentes.length+" on-line";<br>
-    document.getElementById('online-painel').textContent=recentes.length+" on-line";<br>
-    document.getElementById('card-online').textContent=recentes.length;<br>
-    const div=document.getElementById('lista-online');<br>
-    if(recentes.length===0) div.innerHTML='<p class="text-zinc-400">Ninguém...&#39;;<br>
-    else div.innerHTML=recentes.map(v=&gt;&#39;<div class="flex justify-between p-2 bg-zinc-50 rounded-[10px]"><div><p class="font-bold text-[11px]">&#39;+(v.nome? &#39;👤 &#39;+v.nome+&#39; • &#39; : &#39;&#39;)+v.id.substring(0,8)+&#39;... • &#39;+v.hora+&#39;<p class="text-[10px] text-zinc-500 truncate w-[200px]">&#39;+v.ua.substring(0,60)+&#39;</div><span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span></div>&#39;).join(&#39;&#39;);<br>
-  });<br>
-  function registrarClique(id,nome){push(cliquesRef,{produtoId:id,produtoNome:nome,visitorId:visitorId,ts:Date.now(),hora:new Date().toLocaleString(&#39;pt-BR&#39;),data:new Date().toLocaleDateString(&#39;pt-BR&#39;)});}<br>
-  document.getElementById(&#39;grid&#39;)?.addEventListener(&#39;click&#39;,e=&gt;{const btn=e.target.closest(&#39;.btn-oferta&#39;);if(btn) registrarClique(btn.getAttribute(&#39;data-id&#39;),btn.getAttribute(&#39;data-nome&#39;));});<br>
-  onValue(cliquesRef,snap=&gt;{<br>
-    const data=snap.val()||{}; const lista=Object.values(data).reverse().slice(0,50); const hoje=new Date().toLocaleDateString(&#39;pt-BR&#39;); const hojeLista=lista.filter(c=&gt;c.data=<mark>hoje);<br>
-    document.getElementById(&#39;card-cliques&#39;).textContent=hojeLista.length; document.getElementById(&#39;card-total-geral&#39;).textContent=lista.length+<q>total</q>;<br>
-    const div=document.getElementById(&#39;lista-cliques&#39;);<br>
-    if(lista.length</mark>=0) div.innerHTML=&#39;<p class="text-zinc-400 text-[12px]">Nenhum clique...&#39;;<br>
-    else div.innerHTML=lista.map(c=&gt;&#39;<div class="p-2 bg-zinc-50 rounded-[10px] border border-zinc-100"><p class="font-bold text-[11px]">🛒 &#39;+ (c.produtoNome||c.produtoId).substring(0,35)+&#39;<p class="text-[10px] text-zinc-500">&#39;+c.hora+&#39; • &#39;+c.visitorId.substring(0,8)+&#39;...</div>&#39;).join(&#39;&#39;);<br>
-  });<br>
-  document.getElementById(&#39;limpar-cliques&#39;)?.addEventListener(&#39;click&#39;,()=&gt;{if(confirm(<q>Limpar cliques?</q>)) remove(cliquesRef).then(()=&gt;toast(<q>Limpos</q>));});</p>
-
-<p>let notificacoesAnteriores=new Set(); let primeiraNotif=true;<br>
-  onValue(notifRef,snap=&gt;{<br>
-    const data=snap.val()||{};<br>
-    const lista=Object.entries(data).map(([id,v])=&gt;({id,...v})).reverse();<br>
-    const div=document.getElementById(&#39;historico-notif&#39;); const div2=document.getElementById(&#39;historico-notif-2&#39;);<br>
-    if(div) div.innerHTML=lista.slice(0,5).map(n=&gt;&#39;<div class="p-2 bg-zinc-50 rounded-[10px]"><p class="text-[11px] font-bold">&#39;+n.titulo+&#39;<p class="text-[10px] text-zinc-500">&#39;+n.mensagem+&#39;<p class="text-[9px] text-zinc-400">&#39;+(n.hora||&quot;<q>)+&#39;</div>&#39;).join(&#39;&#39;)||&#39;&lt;p class=</q>text-zinc-400 text-[12px]<q>&gt;Nenhuma enviada&#39;;<br>
-    if(div2) div2.innerHTML=div.innerHTML;<br>
-    document.getElementById(&#39;card-notif-enviadas&#39;).textContent=lista.length;<br>
-    if(!primeiraNotif){<br>
-      lista.forEach(n=&gt;{<br>
-        if(!notificacoesAnteriores.has(n.id)){<br>
-          if(Notification.permission===&#39;granted&#39;){<br>
-            try{ new Notification(n.titulo,{body:n.mensagem}); }catch(e){}<br>
-          }<br>
-        }<br>
-      });<br>
-    }<br>
-    notificacoesAnteriores=new Set(lista.map(n=&gt;n.id));<br>
-    primeiraNotif=false;<br>
-  });<br>
-  onValue(inscritosRef,snap=&gt;{<br>
-    const data=snap.val()||{}; const lista=Object.values(data);<br>
-    document.getElementById(&#39;card-inscritos&#39;).textContent=lista.length;<br>
-    document.getElementById(&#39;inscritos-total&#39;).textContent=lista.length+</q> inscritos<q>;<br>
-    const div=document.getElementById(&#39;lista-inscritos&#39;);<br>
-    if(lista.length===0) div.innerHTML=&#39;&lt;p class=</q>text-zinc-400<q>&gt;Ninguém ativou ainda...&#39;;<br>
-    else div.innerHTML=lista.reverse().slice(0,20).map(v=&gt;&#39;&lt;div class=</q>flex justify-between p-2 bg-zinc-50 rounded-[10px]<q>&gt;&lt;p class=</q>text-[11px] font-bold<q>&gt;&#39;+v.id.substring(0,8)+&#39;...&lt;p class=</q>text-[10px] text-zinc-500&quot;&gt;&#39;+v.hora+&#39;</div>&#39;).join(&#39;&#39;);<br>
-  });</p>
-
-<p>document.getElementById(&#39;card-permissao&#39;).textContent=Notification.permission=<mark>&#39;granted&#39;?&#39;Ativo ✅&#39;:Notification.permission</mark>=&#39;denied&#39;?&#39;Bloqueado ❌&#39;:&#39;Pendente&#39;;<br>
-  if(Notification.permission===&#39;granted&#39;) document.getElementById(&#39;bell-dot&#39;).classList.add(&#39;hidden&#39;);</p>
-
-<p>function enviarNotificacaoManual(){<br>
-    const titulo=document.getElementById(&#39;notif-titulo&#39;).value.trim()||document.getElementById(&#39;notif-titulo-2&#39;).value.trim();<br>
-    const msg=document.getElementById(&#39;notif-msg&#39;).value.trim()||document.getElementById(&#39;notif-msg-2&#39;).value.trim();<br>
-    if(!titulo||!msg){toast(<q>Preencha título e mensagem</q>);return;}<br>
-    push(notifRef,{titulo,mensagem:msg,timestamp:Date.now(),hora:new Date().toLocaleString(&#39;pt-BR&#39;)}).then(()=&gt;toast(<q>📢 Enviada pra todos que ativaram o sininho!</q>));<br>
-  }<br>
-  document.getElementById(&#39;notif-enviar-todos&#39;)?.addEventListener(&#39;click&#39;,enviarNotificacaoManual);<br>
-  document.getElementById(&#39;notif-enviar-todos-2&#39;)?.addEventListener(&#39;click&#39;,enviarNotificacaoManual);</p>
-
-<p>}catch(e){console.log(e);}<br>
-</script><script>(function(){var loc=location.href.replace(/#.<em>\(/,&quot;&quot;);var ATTR_NAMES=[&quot;data-product-id&quot;,&quot;data-productid&quot;,&quot;data-product_id&quot;,&quot;product-id&quot;,&quot;productid&quot;,&quot;product_id&quot;,&quot;data-source-entity-id&quot;,&quot;source-entity-id&quot;,&quot;source_entity_id&quot;,&quot;data-product&quot;,&quot;data-metadata&quot;,&quot;data-meta&quot;];var DATASET_KEYS=[&quot;productId&quot;,&quot;productid&quot;,&quot;product_id&quot;,&quot;sourceEntityId&quot;,&quot;sourceentityid&quot;,&quot;source_entity_id&quot;,&quot;product&quot;,&quot;metadata&quot;,&quot;meta&quot;];function readProductId(value){if(typeof value!==&quot;string&quot;||value.length===0)return null;if(/^[0-9]{6,}\)/.test(value))return value;var match=value.match(/(?:product(?:<u>|-)?id|source(?:</u>|-)?entity(?:<u>|-)?id)[&quot;&#39;=:\s]+([0-9]{6,})/i);return match?match[1]:null}function extractProductId(start){for(var node=start;node&amp;&amp;node!==document.body;node=node.parentElement){for(var i=0;i&lt;ATTR</u>NAMES.length;i++){var attrValue=node.getAttribute&amp;&amp;node.getAttribute(ATTR<u>NAMES[i]);var attrProductId=readProductId(attrValue);if(attrProductId)return attrProductId}var dataset=node.dataset||null;if(dataset){for(var j=0;j&lt;DATASET</u>KEYS.length;j++){var dataValue=dataset[DATASET<u>KEYS[j]];var dataProductId=readProductId(dataValue);if(dataProductId)return dataProductId}}}return null}function isInlineMediaSlotElement(node){return !!(node&amp;&amp;node.getAttribute&amp;&amp;node.getAttribute(<q>data-clippy-inline-media-slot</q>)!<mark>null)}function findInlineMediaSlot(start){for(var node=start;node&amp;&amp;node!</mark>document.body;node=node.parentElement){if(isInlineMediaSlotElement(node))return node}return null}function readInlineMediaUrl(node){if(!node)return null;return node.getAttribute&amp;&amp;((node.getAttribute(<q>data-clippy-inline-media-url</q>)||node.getAttribute(<q>data-url</q>)||node.getAttribute(&quot;data</u>url&quot;)))||node.href||null}function stripHash(url){return String(url).replace(/#.</em>\(/,&quot;&quot;)}function urlsMatch(a,b){if(!a||!b)return false;try{return stripHash(new URL(a,loc).href)===stripHash(new URL(b,loc).href)}catch(_){return stripHash(a)===stripHash(b)}}function isFirstPartyReelUrl(value){try{var url=new URL(value,loc);if(url.protocol!==&quot;https:&quot;)return false;var host=url.hostname.toLowerCase();var supported=host===&quot;instagram.com&quot;||host.endsWith(&quot;.instagram.com&quot;)||host===&quot;facebook.com&quot;||host.endsWith(&quot;.facebook.com&quot;);return supported&amp;&amp;/\/reels?\//i.test(url.pathname)}catch(_){return false}}function isInlineMediaUrlClick(node,href){var slot=findInlineMediaSlot(node);if(!slot)return false;var slotUrl=readInlineMediaUrl(slot);if(slotUrl)return urlsMatch(href,slotUrl);return isFirstPartyReelUrl(href)}function findDataHref(start){for(var node=start;node&amp;&amp;node!==document.body;node=node.parentElement){if(node.getAttribute){var href=node.getAttribute(&quot;data-href&quot;)||node.getAttribute(&quot;data-url&quot;);if(href)return{href:href,node:node}}}return null}var nativeOpen=window.open;window.open=function(url){if(parent!==window&amp;&amp;typeof url===&quot;string&quot;&amp;&amp;/^https?:\/\//.test(url)){parent.postMessage({type:&quot;ecto:usercontent-link-click&quot;,href:url},&quot;*&quot;);return null}return nativeOpen?nativeOpen.apply(window,arguments):null};document.addEventListener(&quot;click&quot;,function(e){var target=e.target instanceof Element?e.target:null;if(!target)return;if(parent===window)return;var a=target.closest?target.closest(&quot;a[href]&quot;):null;if(a&amp;&amp;a.href&amp;&amp;/^https?:\/\//.test(a.href)&amp;&amp;a.href.replace(/#.*\)/,<q>)!==loc){if(isInlineMediaUrlClick(a,a.href))return;var productId=extractProductId(target)||extractProductId(a);if(productId){e.preventDefault();parent.postMessage({type:<q>ecto-artifact-link-click</q>,productId:productId},<q>*</q>);return}e.preventDefault();parent.postMessage({type:<q>ecto:usercontent-link-click</q>,href:a.href},<q>*</q>);return}var dataHref=findDataHref(target);if(dataHref&amp;&amp;/<sup>https?:\/\//.test(dataHref.href)&amp;&amp;dataHref.href.replace(/#.*$/,</sup></q>)!<mark>loc){if(isInlineMediaUrlClick(dataHref.node,dataHref.href))return;e.preventDefault();parent.postMessage({type:<q>ecto:usercontent-link-click</q>,href:dataHref.href},<q>*</q>)}},true)})();</script><script>(function(){var FOCUS<u>TYPE=<q>ecto:artifact-focus-request</q>;var CLOSE</u>TYPE=<q>ecto:artifact-close-request</q>;function focusArtifactDocument(){var body=document.body;if(!body)return;try{window.focus();}catch(e){}if(!body.hasAttribute(<q>tabindex</q>))body.setAttribute(<q>tabindex</q>,<q>-1</q>);try{body.focus({preventScroll:true});}catch(e){try{body.focus();}catch(e2){}}}window.addEventListener(<q>message</q>,function(event){if(event.source!</mark>window.parent)return;var data=event.data;if(!data||typeof data!<mark><q>object</q>||data.type!</mark>FOCUS<u>TYPE)return;if(document.readyState=<mark><q>loading</q>){document.addEventListener(<q>DOMContentLoaded</q>,focusArtifactDocument,{once:true});return;}focusArtifactDocument();});window.addEventListener(<q>keydown</q>,function(event){if(event.key!</mark><q>Escape</q>)return;window.setTimeout(function(){if(event.defaultPrevented)return;window.parent.postMessage({type:CLOSE</u>TYPE},<q>*</q>);},0);});})();</script></body></html></p>
+<p><script>(function(){var loc=location.href.replace(/#.<em>\(/,&quot;&quot;);var ATTR_NAMES=[&quot;data-product-id&quot;,&quot;data-productid&quot;,&quot;data-product_id&quot;,&quot;product-id&quot;,&quot;productid&quot;,&quot;product_id&quot;,&quot;data-source-entity-id&quot;,&quot;source-entity-id&quot;,&quot;source_entity_id&quot;,&quot;data-product&quot;,&quot;data-metadata&quot;,&quot;data-meta&quot;];var DATASET_KEYS=[&quot;productId&quot;,&quot;productid&quot;,&quot;product_id&quot;,&quot;sourceEntityId&quot;,&quot;sourceentityid&quot;,&quot;source_entity_id&quot;,&quot;product&quot;,&quot;metadata&quot;,&quot;meta&quot;];function readProductId(value){if(typeof value!==&quot;string&quot;||value.length===0)return null;if(/^[0-9]{6,}\)/.test(value))return value;var match=value.match(/(?:product(?:<u>|-)?id|source(?:</u>|-)?entity(?:<u>|-)?id)[&quot;&#39;=:\s]+([0-9]{6,})/i);return match?match[1]:null}function extractProductId(start){for(var node=start;node&amp;&amp;node!==document.body;node=node.parentElement){for(var i=0;i&lt;ATTR</u>NAMES.length;i++){var attrValue=node.getAttribute&amp;&amp;node.getAttribute(ATTR<u>NAMES[i]);var attrProductId=readProductId(attrValue);if(attrProductId)return attrProductId}var dataset=node.dataset||null;if(dataset){for(var j=0;j&lt;DATASET</u>KEYS.length;j++){var dataValue=dataset[DATASET<u>KEYS[j]];var dataProductId=readProductId(dataValue);if(dataProductId)return dataProductId}}}return null}function isInlineMediaSlotElement(node){return !!(node&amp;&amp;node.getAttribute&amp;&amp;node.getAttribute(<q>data-clippy-inline-media-slot</q>)!<mark>null)}function findInlineMediaSlot(start){for(var node=start;node&amp;&amp;node!</mark>document.body;node=node.parentElement){if(isInlineMediaSlotElement(node))return node}return null}function readInlineMediaUrl(node){if(!node)return null;return node.getAttribute&amp;&amp;((node.getAttribute(<q>data-clippy-inline-media-url</q>)||node.getAttribute(<q>data-url</q>)||node.getAttribute(&quot;data</u>url&quot;)))||node.href||null}function stripHash(url){return String(url).replace(/#.</em>\(/,&quot;&quot;)}function urlsMatch(a,b){if(!a||!b)return false;try{return stripHash(new URL(a,loc).href)===stripHash(new URL(b,loc).href)}catch(_){return stripHash(a)===stripHash(b)}}function isFirstPartyReelUrl(value){try{var url=new URL(value,loc);if(url.protocol!==&quot;https:&quot;)return false;var host=url.hostname.toLowerCase();var supported=host===&quot;instagram.com&quot;||host.endsWith(&quot;.instagram.com&quot;)||host===&quot;facebook.com&quot;||host.endsWith(&quot;.facebook.com&quot;);return supported&amp;&amp;/\/reels?\//i.test(url.pathname)}catch(_){return false}}function isInlineMediaUrlClick(node,href){var slot=findInlineMediaSlot(node);if(!slot)return false;var slotUrl=readInlineMediaUrl(slot);if(slotUrl)return urlsMatch(href,slotUrl);return isFirstPartyReelUrl(href)}function findDataHref(start){for(var node=start;node&amp;&amp;node!==document.body;node=node.parentElement){if(node.getAttribute){var href=node.getAttribute(&quot;data-href&quot;)||node.getAttribute(&quot;data-url&quot;);if(href)return{href:href,node:node}}}return null}var nativeOpen=window.open;window.open=function(url){if(parent!==window&amp;&amp;typeof url===&quot;string&quot;&amp;&amp;/^https?:\/\//.test(url)){parent.postMessage({type:&quot;ecto:usercontent-link-click&quot;,href:url},&quot;*&quot;);return null}return nativeOpen?nativeOpen.apply(window,arguments):null};document.addEventListener(&quot;click&quot;,function(e){var target=e.target instanceof Element?e.target:null;if(!target)return;if(parent===window)return;var a=target.closest?target.closest(&quot;a[href]&quot;):null;if(a&amp;&amp;a.href&amp;&amp;/^https?:\/\//.test(a.href)&amp;&amp;a.href.replace(/#.*\)/,<q>)!==loc){if(isInlineMediaUrlClick(a,a.href))return;var productId=extractProductId(target)||extractProductId(a);if(productId){e.preventDefault();parent.postMessage({type:<q>ecto-artifact-link-click</q>,productId:productId},<q>*</q>);return}e.preventDefault();parent.postMessage({type:<q>ecto:usercontent-link-click</q>,href:a.href},<q>*</q>);return}var dataHref=findDataHref(target);if(dataHref&amp;&amp;/<sup>https?:\/\//.test(dataHref.href)&amp;&amp;dataHref.href.replace(/#.*$/,</sup></q>)!<mark>loc){if(isInlineMediaUrlClick(dataHref.node,dataHref.href))return;e.preventDefault();parent.postMessage({type:<q>ecto:usercontent-link-click</q>,href:dataHref.href},<q>*</q>)}},true)})();</script><script>(function(){var FOCUS<u>TYPE=<q>ecto:artifact-focus-request</q>;var CLOSE</u>TYPE=<q>ecto:artifact-close-request</q>;function focusArtifactDocument(){var body=document.body;if(!body)return;try{window.focus();}catch(e){}if(!body.hasAttribute(<q>tabindex</q>))body.setAttribute(<q>tabindex</q>,<q>-1</q>);try{body.focus({preventScroll:true});}catch(e){try{body.focus();}catch(e2){}}}window.addEventListener(<q>message</q>,function(event){if(event.source!</mark>window.parent)return;var data=event.data;if(!data||typeof data!<mark><q>object</q>||data.type!</mark>FOCUS<u>TYPE)return;if(document.readyState=<mark><q>loading</q>){document.addEventListener(<q>DOMContentLoaded</q>,focusArtifactDocument,{once:true});return;}focusArtifactDocument();});window.addEventListener(<q>keydown</q>,function(event){if(event.key!</mark><q>Escape</q>)return;window.setTimeout(function(){if(event.defaultPrevented)return;window.parent.postMessage({type:CLOSE</u>TYPE},<q>*</q>);},0);});})();</script></body></html></p>
 <script>window.webkit.messageHandlers.TextLoaded.postMessage('TextLoaded')</script></body></html>
