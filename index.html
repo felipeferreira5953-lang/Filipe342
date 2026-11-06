@@ -468,14 +468,11 @@ header{
     <div class="bg-white rounded-[14px] border border-zinc-200 overflow-hidden"><div class="aspect-square bg-zinc-100 skeleton"></div><div class="p-2 space-y-2"><div class="h-3 bg-zinc-100 rounded skeleton"></div><div class="h-3 bg-zinc-100 rounded w-3/4 skeleton"></div><div class="h-8 bg-zinc-100 rounded-full skeleton mt-2"></div></div></div><br>
     <div class="bg-white rounded-[14px] border border-zinc-200 overflow-hidden"><div class="aspect-square bg-zinc-100 skeleton"></div><div class="p-2 space-y-2"><div class="h-3 bg-zinc-100 rounded skeleton"></div><div class="h-3 bg-zinc-100 rounded w-3/4 skeleton"></div><div class="h-8 bg-zinc-100 rounded-full skeleton mt-2"></div></div></div><br>
   </div><br>
-  <div id="paginacao" style="display:flex;justify-content:space-between;align-items:center;padding:12px;border-top:1px solid #e4e4e7;margin-top:8px"></div><div id="grid" class="grid grid-cols-2 gap-2.5"></div><br>
-  <button id="btn-carregar-mais" onclick="carregarMaisProdutos()" style="display:none" class="w-full mt-4 h-[48px] bg-white border-2 border-zinc-900 rounded-full font-bold text-[14px] shadow-sm">Ver mais produtos ↓</button><br>
-  <div id="empty-state" class="hidden col-span-2 py-12 text-center bg-white rounded-[14px] border border-dashed border-zinc-200 mt-2"><br>
+  <div id="paginacao" style="display:flex;justify-content:space-between;align-items:center;padding:12px;border-top:1px solid #e4e4e7;margin-top:8px"></div><div id="grid" class="grid grid-cols-2 gap-2.5 hidden"></div><br>
+  <button id="btn-carregar-mais" onclick="carregarMaisProdutos()" style="display:none" class="w-full mt-4 h-[48px] bg-white border-2 border-zinc-900 rounded-full font-bold text-[14px]">Ver mais produtos ↓</button><br>
+  <div id="empty-state" class="col-span-2 py-12 text-center bg-white rounded-[14px] border border-dashed border-zinc-200 mt-2"><br>
     <p class="text-[28px]">🔍<br>
-    </p><p class="font-black text-[14px] mt-2 text-black" id="empty-title">Nada por aqui ainda<br>
-    </p><p class="text-[11px] text-zinc-500 mt-1 px-6" id="empty-desc">Ainda não temos achados nessa categoria<br>
-    <button id="empty-btn" class="mt-4 h-9 px-5 rounded-full bg-black text-white font-bold text-[12px]">Ver todos os achados</button><br>
-  </p></div><br>
+    </p><p class="font-black text-[14px] mt-2 text-black" id="empty-title">Nada em Todas ainda</p><p class="text-[11px] text-zinc-500 mt-1 px-6" id="empty-desc">Ainda não adicionamos achados em Todas. Que tal ver todos?</p></div><br>
   <div class="mt-4 p-3 rounded-[12px] bg-[#fafafa] border border-zinc-100 text-center"><br>
     <p id="rodape-titulo" class="font-black text-[12px] tracking-wide text-black">ACHADINHOS OFICIAL 🛒<br>
     </p><p id="rodape-zap" class="text-[11px] text-zinc-500 mt-1">Zap: 81 99802-8998 • Bonito-PE<br>
@@ -551,7 +548,7 @@ header{
 
 <div id="painel" class="fixed inset-0 z-50 bg-[#fafafa] hidden overflow-auto">
   <div class="sticky top-0 bg-white border-b border-zinc-100 px-4 h-[56px] flex items-center justify-between z-10">
-    <div><b class="text-[16px]">ADM • Notificação Automática 🔔</b><p class="text-[11px] text-zinc-500"><span id="online-painel">0 on-line</span> • <span id="total">19</span> produtos • <span id="inscritos-total">0 inscritos</span></p></div>
+    <div><b class="text-[16px]">ADM • Notificação Automática 🔔</b><p class="text-[11px] text-zinc-500"><span id="online-painel">0 on-line</span> • <span id="total">0</span> produtos • <span id="inscritos-total">0 inscritos</span></p></div>
     <button id="fechar-painel" class="w-10 h-10 rounded-full bg-zinc-100 grid place-items-center font-bold">✕</button>
   </div>
   <div class="px-4 py-3 flex gap-2 bg-white border-b border-zinc-100 sticky top-[56px] z-10">
@@ -662,7 +659,8 @@ header{
 </div>
 
 <script>
-let produtos=[]; // só seus produtos do Firebase, sem exemplo
+let produtos=[];
+window.produtosADM=[]; // ADM vê TODOS, vitrine vê 20 por vez
 
 let paginaAtual = 1;
 const porPagina = 20;
@@ -712,7 +710,7 @@ function render(){
   });
   const elCont=document.getElementById('contador'); if(elCont) elCont.textContent=lista.length;
   const elContTop=document.getElementById('contador-top'); if(elContTop) elContTop.textContent=produtos.length+" achados";
-  const elTotal=document.getElementById('total'); if(elTotal && produtosADM.length>0) elTotal.textContent=produtosADM.length;
+  const elTotal=document.getElementById('total'); if(elTotal) elTotal.textContent=(window.produtosADM && window.produtosADM.length>0) ? window.produtosADM.length : produtos.length;
   const skeleton = document.getElementById('skeleton');
   const emptyState = document.getElementById('empty-state');
   if(skeleton) skeleton.classList.add('hidden');
@@ -739,7 +737,7 @@ function render(){
     const txtCor=p.loja==="Mercado Livre"?"text-black":"text-white";
     return '<div onclick="abrirResumo(\''+p.id+'\')" class="produto-card bg-white rounded-[14px] border border-zinc-200 overflow-hidden flex flex-col cursor-pointer active:scale-[0.98] transition"><div class="aspect-square bg-[#fff7ed] grid place-items-center relative overflow-hidden">'+img+off+'<div class="absolute bottom-1 right-1 bg-black/70 text-white text-[9px] font-bold px-2 py-0.5 rounded-full">👁️ Ver resumo</div></div><div class="p-2 flex-1 flex flex-col"><p class="line-2 font-semibold text-[12.5px] min-h-[32px]">'+esc(p.nome)+'<div class="mt-2">'+antigo+'<div class="flex items-baseline gap-0.5"><span class="text-[11px] font-bold">R$</span><span class="text-[16px] font-black">'+Number(p.precoNovo).toFixed(2).replace(".",",")+'</span></div></div><div class="mt-1.5 flex items-center gap-1"><span class="text-[9px] font-black px-2 py-0.5 rounded-full '+cor+' '+txtCor+'">'+esc(p.loja.toUpperCase())+'</span></div><a href="'+p.affiliateLink+'" data-id="'+p.id+'" data-nome="'+esc(p.nome)+'" target="_blank" onclick="event.stopPropagation()" class="btn-oferta mt-2 h-8 bg-[#ff6b2b] text-white rounded-full grid place-items-center font-extrabold text-[12px]">VER OFERTA</a></div></div>';
   }).join('');
-  const elLista=document.getElementById('lista'); if(elLista && produtosADM.length>0) elLista.innerHTML=produtosADM.map(p=>{
+  const elLista=document.getElementById('lista'); if(elLista) elLista.innerHTML=(window.produtosADM && window.produtosADM.length>0 ? window.produtosADM : produtos).map(p=>{
     const thumb = p.imagemUrl ? '<img src="'+p.imagemUrl+'" loading="lazy" class="w-full h-full object-cover rounded-[10px]" onerror="this.parentElement.textContent=\''+(p.emoji||'🎁')+'\'">' : esc(p.emoji||'🎁');
     return '<div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">'+thumb+'</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">'+esc(p.nome)+'<p class="text-[11px] text-zinc-500">R$ '+p.precoNovo+' • '+esc(p.loja)+'</div><button onclick="apagarFirebase(\''+p.id+'\')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div>';
   }).join('');
@@ -1327,9 +1325,6 @@ try{
   let hasMore=true;
   let carregandoPagina=false;
 
-  // PAGINAÇÃO REAL - puxa do seu Firebase achadinhos-loja > produtos
-  // 20 primeiros, depois o restante quando clicar em Ver mais
-
   function parseProdutoPagina(id, v){
     const isImg = (s)=>{ if(!s) return false; s=s.trim(); return s.startsWith('http://')||s.startsWith('https://')||s.startsWith('data:image')||s.startsWith('//'); };
     return {id,nome:v.nome,precoNovo:v.preco||v.precoNovo||0,precoAntigo:v.precoOriginal||v.precoAntigo||0,loja:v.loja||"Shopee",categoria:v.categoria||v.cat||"Geral",emoji:!isImg(v.imagem)?v.imagem:"🎁",imagemUrl:isImg(v.imagem)?v.imagem:null,affiliateLink:v.linkAfiliado||v.affiliateLink||"#", addedAt: v.addedAt || 0};
@@ -1342,68 +1337,34 @@ try{
     if(btnMais) btnMais.textContent='Carregando...';
     try{
       let q;
-      if(inicial || oldestKey===null){
-        q=query(produtosRef, orderByKey(), limitToLast(20));
-      } else {
-        q=query(produtosRef, orderByKey(), endBefore(oldestKey), limitToLast(20));
-      }
+      if(inicial || oldestKey===null){ q=query(produtosRef, orderByKey(), limitToLast(20)); }
+      else { q=query(produtosRef, orderByKey(), endBefore(oldestKey), limitToLast(20)); }
       const snap=await get(q);
       const data=snap.val();
-      if(!data){
-        hasMore=false;
-        if(inicial){ produtos=[]; render(); }
-        if(btnMais) btnMais.style.display='none';
-        carregandoPagina=false;
-        return;
-      }
+      if(!data){ hasMore=false; if(inicial){ produtos=[]; render(); } if(btnMais) btnMais.style.display='none'; carregandoPagina=false; return; }
       let lista=Object.entries(data).map(([id,v])=>parseProdutoPagina(id,v));
       lista.sort((a,b)=> (b.addedAt||0)-(a.addedAt||0) || b.id.localeCompare(a.id));
       oldestKey=lista[lista.length-1].id;
-      if(inicial){
-        produtos=lista;
-        produtosAnteriores=new Set(lista.map(p=>p.id));
-        if(lista.length<20) hasMore=false;
-      } else {
-        const idsExist=new Set(produtos.map(p=>p.id));
-        const novos=lista.filter(p=>!idsExist.has(p.id));
-        produtos=produtos.concat(novos);
-        if(novos.length<20) hasMore=false;
-      }
+      if(inicial){ produtos=lista; produtosAnteriores=new Set(lista.map(p=>p.id)); if(lista.length<20) hasMore=false; }
+      else { const ids=new Set(produtos.map(p=>p.id)); const novos=lista.filter(p=>!ids.has(p.id)); produtos=produtos.concat(novos); if(novos.length<20) hasMore=false; }
       render();
       primeiraCarga=false;
-      if(btnMais){
-        btnMais.style.display=hasMore ? 'block' : 'none';
-        btnMais.textContent='Ver mais produtos ↓';
-      }
-    }catch(e){
-      console.error(e);
-      toast('Erro ao carregar: '+e.message);
-    }
+      if(btnMais){ btnMais.style.display=hasMore ? 'block' : 'none'; btnMais.textContent='Ver mais produtos ↓'; }
+    }catch(e){ console.error(e); toast('Erro ao carregar: '+e.message); }
     carregandoPagina=false;
   }
 
-  // ADM: carrega TODOS os produtos, sem paginação - só na parte de ADM
-  let produtosADM=[];
+  // ADM: TODOS os produtos, sem paginação - usa window pra render() enxergar
   async function carregarADM(){
     try{
       const snap=await get(query(produtosRef, orderByKey()));
       const data=snap.val();
-      if(!data){ produtosADM=[]; renderADM(); return; }
-      produtosADM=Object.entries(data).map(([id,v])=>parseProdutoPagina(id,v)).sort((a,b)=> (b.addedAt||0)-(a.addedAt||0) || b.id.localeCompare(a.id));
-      renderADM();
-    }catch(e){ console.error('ADM erro', e); }
+      if(!data){ window.produtosADM=[]; render(); return; }
+      window.produtosADM=Object.entries(data).map(([id,v])=>parseProdutoPagina(id,v)).sort((a,b)=> (b.addedAt||0)-(a.addedAt||0) || b.id.localeCompare(a.id));
+      render();
+    }catch(e){ console.error('ADM', e); }
   }
-  function renderADM(){
-    const elLista=document.getElementById('lista');
-    if(elLista){
-      elLista.innerHTML=produtosADM.map(p=>{
-        const thumb = p.imagemUrl ? '<img src="'+p.imagemUrl+'" loading="lazy" class="w-full h-full object-cover rounded-[10px]" onerror="this.parentElement.textContent=\''+(p.emoji||'🎁')+'\'">' : esc(p.emoji||'🎁');
-        return '<div class="bg-white border border-zinc-200 rounded-[12px] p-3 flex gap-2 items-center"><div class="w-11 h-11 bg-[#fff7ed] rounded-[10px] grid place-items-center text-[20px] shrink-0 overflow-hidden">'+thumb+'</div><div class="flex-1 min-w-0"><p class="text-[13px] font-semibold truncate">'+esc(p.nome)+'</p><p class="text-[11px] text-zinc-500">R$ '+p.precoNovo+' • '+esc(p.loja)+'</p></div><button onclick="apagarFirebase(\''+p.id+'\')" class="w-9 h-9 rounded-full border border-red-200 text-red-600">🗑️</button></div>';
-      }).join('');
-    }
-    const elTotal=document.getElementById('total');
-    if(elTotal) elTotal.textContent=produtosADM.length;
-  }
+
   carregarPagina(true);
   carregarADM();
   window.carregarMaisProdutos=()=>carregarPagina(false);
